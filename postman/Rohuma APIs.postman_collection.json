@@ -1,0 +1,786 @@
+{
+	"info": {
+		"_postman_id": "608a0d3d-7986-428a-8e3b-9994657bf23a",
+		"name": "Rohuma APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Generate Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gull@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Change With Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NH0.Md3CagYSFro6G4nttMxRtWjTvlaJzzD-A_BtmNmPr_E\",\n    \"password\": \"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SKILLIT_SERVER_URL}}/api/auth/change-password/token",
+							"host": [
+								"{{SKILLIT_SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"change-password",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/me/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"me",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USERS Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FORGET PASSWORD",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"afateh009@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SKILLIT_SERVER_URL}}/api/auth/forgot",
+							"host": [
+								"{{SKILLIT_SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"gull\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignUp",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gull2@gmail.com\",\n    \"password\": \"123456\",\n    \"phone_number\": \"03468590722\",\n    \"city\": \"Gujrat\",\n    \"address\": \"P-O-Box langay\",\n    \"dob\": \"2021-12-02\",\n    \"gender\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Records",
+			"item": [
+				{
+					"name": "SubRecods",
+					"item": [
+						{
+							"name": "ADD Record",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"subrecord\",\n    \"category\": \"cat4\",\n    \"accepted\": false,\n    \"price\": 200,\n    \"max_quantity\": 10,\n    \"max_weight\": 20,\n    \"record\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/sub-records/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"sub-records",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD List of SubRecord",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\n    \"name\": \"subrecord3\",\n    \"category\": \"cat4\",\n    \"accepted\": false,\n    \"price\": 200,\n    \"max_quantity\": 10,\n    \"max_weight\": 20,\n    \"record\": 1\n},\n{\n    \"name\": \"subrecord4\",\n    \"category\": \"cat4\",\n    \"accepted\": false,\n    \"price\": 200,\n    \"max_weight\": 20,\n    \"record\": 1\n},\n{\n    \"name\": \"subrecord5\",\n    \"category\": \"cat4\",\n    \"accepted\": false,\n    \"price\": 200,\n    \"max_quantity\": 10,\n    \"max_weight\": 20,\n    \"record\": 1\n}\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/sub-records/bulk",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"sub-records",
+										"bulk"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Record",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"subrecord\",\n    \"category\": \"cat4\",\n    \"accepted\": false,\n    \"price\": 200,\n    \"max_quantity\": 10,\n    \"max_weight\": 20,\n    \"record\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/sub-records/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"sub-records",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/sub-records/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"sub-records",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Records",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/sub-records/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"sub-records",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ADD Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\"],\n    \"created_by\": 1,\n    \"children\": [\n        {\n            \"name\": \"subrecord2\",\n            \"category\": \"cat1\",\n            \"accepted\": false,\n            \"price\": 200,\n            \"max_quantity\": 10,\n            \"max_weight\": 20        \n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/records/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"records",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Record",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/records/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"records",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/records/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"records",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Records",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/records/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"records",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Propositions",
+			"item": [
+				{
+					"name": "Proposition Items",
+					"item": [
+						{
+							"name": "ADD PropositionItem",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"proposition\": 1,\n    \"name\": \"item1\",\n    \"unit\": 1,\n    \"weight\": 20,\n    \"price\": 30,\n    \"state\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/proposition-items/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"proposition-items",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update PropositionItem",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"proposition\": 1,\n    \"name\": \"item1\",\n    \"unit\": 1,\n    \"weight\": 20,\n    \"price\": 30,\n    \"state\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/proposition-items/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"proposition-items",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete PropositionItem",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/proposition-items/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"proposition-items",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get PropositionItem",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/proposition-items/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"proposition-items",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ADD Proposition",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"record\": 1,\n   \"address_state\": true,\n   \"paid\": false,\n   \"date_of_meeting\": \"2021-02-12T12:12\",\n   \"address\": \"address 1\",\n   \"meeting_code\": \"FVDS258D\",\n   \"delivery_code\": \"DF81F8E\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/propositions/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"propositions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Proposition",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"record\": 1,\n   \"address_state\": false,\n   \"paid\": false,\n   \"date_of_meeting\": \"2021-02-12T12:12\",\n   \"address\": \"address 1\",\n   \"meeting_code\": \"FVDS258D\",\n   \"delivery_code\": \"DF81F8E\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/propositions/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"propositions",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Proposition",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/propositions/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"propositions",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Proposition",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2021-02-02\",\n    \"moyen_de_transport\": \"Tayara\",\n    \"city_destination\":\"Lahore\",\n    \"city_arrival\": \"Gujrat\",\n    \"min_price\": 200,\n    \"max_weight\": 5,\n    \"max_volume\": \"10\",\n    \"description\": \"Description in 250 words\",\n    \"categories\": [\"cat1\", \"cat2\", \"cat3\"],\n    \"created_by\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/propositions/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"propositions",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+
+.MuiOutlinedInput-notchedOutline legend {
+    opacity: 0;
+    visibility: collapse;
+}
+
+.customize-inputField+fieldset {
+    top: 0 !important;
+}
+
+.customize-inputButton {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.minInputWidth {
+    min-width: 75px !important;
+}
+
+.currentInputWidth {
+    width: 75px !important;
+}

@@ -1,0 +1,20 @@
+.page-header {
+    position: relative;
+    height: 375px;
+    border-bottom-left-radius: 50% 25% !important;
+    border-bottom-right-radius: 50% 25% !important;
+    margin-bottom: 265px;
+}
+
+
+.MuiOutlinedInput-notchedOutline legend {
+    opacity: 0;
+    visibility: collapse;
+}
+
+
+@media (max-width: 480px)  {
+    .page-header {
+        border-radius: 0 !important;
+    }
+}

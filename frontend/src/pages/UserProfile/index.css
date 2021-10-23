@@ -1,0 +1,9 @@
+.hide-password {
+    -webkit-text-security: disc;
+    text-security: disc;
+}
+
+.show-password {
+    -webkit-text-security: none;
+    text-security: none;
+}

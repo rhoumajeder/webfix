@@ -1,0 +1,13 @@
+
+.MuiOutlinedInput-notchedOutline legend {
+    opacity: 0;
+    visibility: collapse;
+}
+
+.MuiOutlinedInput-inputMultiline, .MuiOutlinedInput-inputMultiline:focus {
+    box-shadow: none !important;
+}
+
+.MuiSlider-markLabel {
+    font-size: .825em !important;
+}

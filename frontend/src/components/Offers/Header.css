@@ -1,0 +1,8 @@
+.customize-inputField+fieldset {
+    top: 0 !important;
+}
+
+.customize-inputButton {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}

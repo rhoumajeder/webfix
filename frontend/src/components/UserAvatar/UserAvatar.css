@@ -1,0 +1,9 @@
+
+.person-card-image {
+    height: 100px !important;
+    width: 100px !important;
+}
+
+.MuiRating-root {
+    color: rgba(0, 0, 0, 0.54) !important;
+}

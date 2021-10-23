@@ -1,0 +1,23 @@
+.user-luggage-info {
+    top: 35px;
+    right: 25px;
+}
+
+
+@media (max-width: 480px)  {
+    .user-luggage-info {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+.user-info {
+    border-right-width: 1px;
+    border-right-style: groove;
+}
+
+@media (max-width: 550px)  {
+    .user-info {
+        border: none !important;
+    }
+}

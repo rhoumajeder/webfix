@@ -1,0 +1,13 @@
+.MuiStepConnector-active .MuiStepConnector-line,
+.MuiStepConnector-completed .MuiStepConnector-line {
+    background-color: rgba(92, 184, 92, 255) !important;
+}
+
+.MuiStepLabel-label {
+    color: rgba(153, 162, 168, 255) !important;
+    font-size: 13px !important;
+}
+
+.MuiStepLabel-active, .MuiStepLabel-completed {
+    color: rgba(92, 184, 92, 255) !important;
+}

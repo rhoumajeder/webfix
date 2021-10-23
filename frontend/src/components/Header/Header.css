@@ -1,0 +1,13 @@
+.user-options .MuiPopover-paper {
+  min-width: 10rem;
+}
+
+.text-link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.text-link:hover {
+  text-decoration: inherit;
+  color: inherit;
+}
