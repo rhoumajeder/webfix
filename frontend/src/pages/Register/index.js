@@ -15,7 +15,7 @@ const Index = () => {
     email: "",
     password: "",
     password2: "",
-    phone_number: "",
+    phone_number: null,
   };
   const [formData, setForm] = useState(FormRecord);
   const [isValid, setValidForm] = useState(false);
@@ -39,7 +39,8 @@ const Index = () => {
       .oneOf([yup.ref("password")], "Passwords must match"),
     phone_number: yup
       .string()
-      .required("Phone number is required")
+      .notRequired()
+      .nullable()
       .matches(phoneRegExp, "Phone number is not valid"),
   });
 

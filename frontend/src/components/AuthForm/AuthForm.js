@@ -150,7 +150,6 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                     fullWidth
                   />
                   <TextField
-                    required
                     id="phone_number"
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}

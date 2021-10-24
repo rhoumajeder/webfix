@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   Grid,
@@ -34,9 +34,12 @@ import cities from "../../helpers/cities";
 
 import { IoArrowBack } from "react-icons/io5";
 
+import { AuthContext } from "../../context/auth";
+
 const CreateAskRecord = (props) => {
   let history = useHistory();
   const { addToast } = useToasts();
+  const [user, setUser] = useContext(AuthContext)
 
   // Ask record state holder
   const [askRecord, setAskRecord] = useState({
@@ -45,6 +48,7 @@ const CreateAskRecord = (props) => {
     date: moment(new Date()).format("YYYY-MM-DD"),
     description: "",
     type: "Ask",
+    phone_number: user.phone_number ? user.phone_number : null
   });
 
   // Ask record items state holder
@@ -62,6 +66,9 @@ const CreateAskRecord = (props) => {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   // Validation schema for ask record
   let askRecordSchema = yup.object().shape({
@@ -83,6 +90,11 @@ const CreateAskRecord = (props) => {
       .string()
       .required("Please enter a short description")
       .max(400, "Description can not be more than 400 characters"),
+    phone_number: yup
+      .string()
+      .notRequired()
+      .nullable()
+      .matches(phoneRegExp, "Phone number is not valid"),
   });
 
   // Validation schema for record item
@@ -174,7 +186,7 @@ const CreateAskRecord = (props) => {
                           history.go();
                         })
                         .catch((err) => {
-                          addToast(err.response.data, { appearance: "error" });
+                          addToast(err.response, { appearance: "error" });
                           console.log(err.response);
                         });
                     }
@@ -268,6 +280,33 @@ const CreateAskRecord = (props) => {
                     name={"city_destination"}
                     placeholder={"Ville De Destination"}
                     onChange={handleSelectChange}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+            <Box component={"div"} className={"my-2"}>
+              <Grid container direction="row" alignItems="center" spacing={1}>
+                <Grid item xs={4} className="my-2">
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Phone Number
+                  </Typography>
+                  <TextField
+                    id="phone_number"
+                    InputLabelProps={{ shrink: false }}
+
+                    placeholder={"Enter Phone Number"}
+                    value={askRecord.phone_number}
+                    type="text"
+                    size={"small"}
+                    variant="outlined"
+                    name={"phone_number"}
+                    onChange={handleInputChange}
+
+                    fullWidth
                   />
                 </Grid>
               </Grid>

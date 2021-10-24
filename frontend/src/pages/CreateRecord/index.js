@@ -48,6 +48,9 @@ const Index = (props) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
   let recordSchema = yup.object().shape({
     date: yup
       .date()
@@ -96,6 +99,11 @@ const Index = (props) => {
       .array()
       .of(yup.string())
       .min(1, "Please select at least 1 category"),
+    phone_number: yup
+      .string()
+      .notRequired()
+      .nullable()
+      .matches(phoneRegExp, "Phone number is not valid"),
   });
 
   let subRecordSchema = yup
@@ -134,6 +142,7 @@ const Index = (props) => {
     description: "",
     categories: [],
     type: "Propose",
+    phone_number: user.phone_number ? user.phone_number : null
   };
 
   const [record, setRecord] = React.useState(Records);
@@ -593,6 +602,28 @@ const Index = (props) => {
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}
                     placeholder={"Max. Weight"}
+                  />
+                </Grid>
+                <Grid item md={4} sm={6} xs={12} className="my-2">
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Phone Number:
+                  </Typography>
+                  <TextField
+                    id="phone_number"
+                    InputLabelProps={{ shrink: false }}
+                    placeholder={"Enter Phone Number"}
+                    value={record.phone_number}
+                    type="text"
+                    size={"small"}
+                    variant="outlined"
+                    name={"phone_number"}
+                    onChange={handleRecordChange}
+
+                    fullWidth
                   />
                 </Grid>
               </Grid>
