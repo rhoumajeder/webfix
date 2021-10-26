@@ -223,10 +223,18 @@ const Search = (props) => {
             <Grid item md={12} sm={12} xs={12} className="my-2">
               <Menu
                 anchorEl={anchorEl}
-                getContentAnchorEl={null}
                 open={filtersOpen}
                 onClose={handleCloseMenu}
                 style={{ zIndex: 0 }}
+                anchorOrigin={{
+                  vertical: 'center',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'center',
+                  horizontal: 'left',
+                }}
+
               >
                 <div className="p-4">
                   <div className="my-2">
@@ -284,9 +292,9 @@ const Search = (props) => {
                     value={
                       props.filters.moyen_de_transport
                         ? transportOptions.filter(
-                            (option) =>
-                              props.filters.moyen_de_transport === option.value
-                          )
+                          (option) =>
+                            props.filters.moyen_de_transport === option.value
+                        )
                         : ""
                     }
                   />
@@ -295,7 +303,7 @@ const Search = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-        <CardActions>
+        <CardActions className="d-flex justify-content-center">
           <Button color="primary" onClick={handleMenu}>
             Show Advanced Filters
           </Button>

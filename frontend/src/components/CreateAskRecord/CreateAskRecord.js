@@ -186,7 +186,7 @@ const CreateAskRecord = (props) => {
                           history.go();
                         })
                         .catch((err) => {
-                          addToast(err.response, { appearance: "error" });
+                          addToast("There was an error", { appearance: "error" });
                           console.log(err.response);
                         });
                     }

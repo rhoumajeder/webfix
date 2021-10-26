@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
   Button,
@@ -29,6 +29,8 @@ import { useToasts } from "react-toast-notifications";
 
 import { useHistory } from "react-router";
 
+import { AuthContext } from "../../context/auth";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -40,6 +42,7 @@ const style = {
 };
 
 const AskRecordDetails = () => {
+  const [user, setUser] = useContext(AuthContext)
   let history = useHistory();
   const { addToast } = useToasts();
   const { id } = useParams();
@@ -105,9 +108,8 @@ const AskRecordDetails = () => {
             item
             md={8}
             xs={12}
-            className={`my-2 ${
-              screen.width <= 768 ? "order-last" : "order-first"
-            }`}
+            className={`my-2 ${screen.width <= 768 ? "order-last" : "order-first"
+              }`}
           >
             {record && (
               <TravelCard
@@ -154,6 +156,7 @@ const AskRecordDetails = () => {
                 className="ms-auto my-2"
                 variant="outlined"
                 color={"primary"}
+                disabled={user.username ? false : true}
                 size="large"
                 onClick={handleModal}
               >
@@ -161,7 +164,7 @@ const AskRecordDetails = () => {
               </Button>
             </Box>
           </Grid>
-          <RecordDetailsSideBar record={record} />
+          <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
         </Grid>
         <Modal
           open={modalOpen}

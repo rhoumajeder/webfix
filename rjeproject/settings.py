@@ -28,8 +28,8 @@ SECRET_KEY = 'django-insecure-mo3_)7aertv6&%yd8ju$rr&$#l07-nc$6lkazort)(jexk^q!x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://rjeapp.herokuapp.com','rjeapp.herokuapp.com','rjeapptest.herokuapp.com','https://rjeapptest.herokuapp.com']
-
+ALLOWED_HOSTS = ['https://rjeapp.herokuapp.com', 'rjeapp.herokuapp.com',
+                 'rjeapptest.herokuapp.com', 'https://rjeapptest.herokuapp.com', "127.0.0.1"]
 
 
 # Application definition
@@ -94,14 +94,21 @@ WSGI_APPLICATION = 'rjeproject.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd4s8c3maqc7ns3',
+#         'USER': 'ootghrhgmqkrki',
+#         'PASSWORD': '565cad5bff673a2e8995cda603cd101012cf73056cdb2d8b51bb2851a9de3b91',
+#         'HOST': 'ec2-176-34-105-15.eu-west-1.compute.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4s8c3maqc7ns3',
-        'USER':'ootghrhgmqkrki',
-        'PASSWORD':'565cad5bff673a2e8995cda603cd101012cf73056cdb2d8b51bb2851a9de3b91',
-        'HOST':'ec2-176-34-105-15.eu-west-1.compute.amazonaws.com',
-        'PORT':'5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -151,13 +158,11 @@ MEDIA_URL = '/media/'
 # STATIC_URL = '/static/'
 
 # for database setup rje
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-#end rj
-
-
+# end rj
 
 
 REST_FRAMEWORK = {

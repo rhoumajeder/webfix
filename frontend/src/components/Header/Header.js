@@ -19,7 +19,7 @@ import { RiAdvertisementFill, RiShoppingCartFill } from "react-icons/ri";
 import { BsPersonFill } from "react-icons/bs";
 import { MdMail, MdLocalOffer } from "react-icons/md";
 import { FaListAlt, FaPowerOff, FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { BiShuffle } from "react-icons/bi";
+import { BiInfinite, BiShuffle } from "react-icons/bi";
 import { Notifications, Close, FiberManualRecord } from "@material-ui/icons";
 
 import objectInArray from "../../helpers/objectInArray";
@@ -32,8 +32,28 @@ import { AuthContext } from "../../context/auth";
 
 import axiosInstance from "../../helpers/axios";
 
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  animatedBadge: {
+    "& span": {
+      animation: "$pulse 0.60s alternate infinite"
+    }
+
+  },
+  "@keyframes pulse": {
+    "0%": {
+      transform: "scale(0.5)"
+    },
+    "100%": {
+      transform: "scale(1.5)"
+    }
+  }
+}))
+
 const Header = () => {
   let history = useHistory();
+  const classes = useStyles()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElNotification, setAnchorElNotification] = React.useState(null);
@@ -322,6 +342,7 @@ const Header = () => {
                 variant={
                   objectInArray(notifications, "is_read", false) ? "dot" : ""
                 }
+                className={objectInArray(notifications, "is_read", false) ? classes.animatedBadge : ""}
               >
                 <Notifications />
               </Badge>
@@ -351,7 +372,7 @@ const Header = () => {
 
                     link.pathname =
                       prop_notification.proposition.user.username ===
-                      user.username
+                        user.username
                         ? `/my-request-state/${notification.proposition_notification.proposition.id}`
                         : `/my-offer-state/${notification.proposition_notification.proposition.id}`;
 

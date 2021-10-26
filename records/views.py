@@ -17,6 +17,8 @@ from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 from notifications.utils import create_notification
 
+import datetime
+
 
 class SubRecordViewSet(viewsets.ModelViewSet):
     queryset = SubRecord.objects.all()
@@ -67,7 +69,6 @@ def create_record(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def get_record(request, pk):
     record = get_object_or_404(Record, id=pk)
     serializer = RecordDetailSerializer(record)
@@ -100,6 +101,7 @@ def get_all_records(request):
     records = Record.objects.all().order_by('-updated_at')
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
+    date = request.GET.get("date", "")
 
     record_filter = RecordFilter(request.GET, queryset=records)
     records = record_filter.qs
@@ -109,6 +111,12 @@ def get_all_records(request):
 
     if max_volume != "":
         records = records.filter(max_volume__gte=int(max_volume))
+
+    if date != "":
+        records = records.filter(
+            date__gte=datetime.datetime.now().date(), date__lte=datetime.datetime.strptime(date, "%Y-%m-%d").date())
+    else:
+        records = records.filter(date__gte=datetime.datetime.now().date())
 
     serializer = RecordDetailSerializer(records, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)

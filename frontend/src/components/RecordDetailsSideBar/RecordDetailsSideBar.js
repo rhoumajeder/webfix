@@ -70,6 +70,7 @@ const RecordDetailsSideBar = (props) => {
                   color="primary"
                   className="text-center me-auto ms-auto"
                   variant="contained"
+                  disabled={props.disabled}
                 >
                   Message
                 </Button>

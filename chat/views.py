@@ -45,6 +45,7 @@ def get_rooms(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def create_message(request, room_id):
+
     room = get_object_or_404(ChatRoom, id=room_id)
     serializer = MessageSerializer(data=request.data)
 
@@ -68,6 +69,7 @@ def create_message(request, room_id):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_messages(request, room_id):
+    print(room_id)
     room = get_object_or_404(ChatRoom, id=room_id)
     serializer = MessageSerializer(room.messages.all(), many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)

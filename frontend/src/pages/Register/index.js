@@ -75,20 +75,17 @@ const Index = () => {
                 })
                 .catch((err) => {
                   console.log(err.response);
-                  addToast(
-                    err?.response?.data?.detail || "Something went wrong",
-                    {
-                      appearance: "error",
-                    }
-                  );
+                  addToast("Unable to login user", { appearance: "error" })
                 });
             })
             .catch((err) => {
-              console.log(err.response);
-
-              addToast(err?.response?.data?.detail || "Something went wrong", {
-                appearance: "error",
-              });
+              console.log(err.response)
+              Object.keys(err.response.data.errors).forEach(key => {
+                console.log(key)
+                err.response.data.errors[key].forEach(error => {
+                  addToast(error, { appearance: "error" })
+                })
+              })
             });
         }
       })
