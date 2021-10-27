@@ -1,9 +1,7 @@
 import axios from "axios";
 console.log(process.env.NODE_ENV);
-const baseURL =
-  process.env.NODE_ENV === "production"
-    ? "https://rjeapptest.herokuapp.com/api/"
-    : "http://127.0.0.1:8000/api/";
+const baseURL = "https://rjeapptest.herokuapp.com/api/" ; 
+
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
