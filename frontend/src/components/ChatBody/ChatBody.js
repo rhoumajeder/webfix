@@ -75,7 +75,14 @@ const ChatBody = (props) => {
         console.log(res.data);
         setMessages(res.data);
         setLoading(false);
-      });
+      })
+        .catch(err => {
+          if (err.response.status === 404) {
+            localStorage.removeItem("currentRoom")
+            setLoading(false);
+            props.getRooms(null);
+          }
+        });
     } else {
       setLoading(false);
     }

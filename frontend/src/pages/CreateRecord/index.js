@@ -99,8 +99,7 @@ const Index = (props) => {
       .min(1, "Please select at least 1 category"),
     phone_number: yup
       .string()
-      .notRequired()
-      .nullable()
+      .required("Phone number for records is required")
       .matches(phoneRegExp, "Phone number is not valid"),
   });
 

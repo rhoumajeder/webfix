@@ -38,8 +38,13 @@ const useStyles = makeStyles(theme => ({
   animatedBadge: {
     "& span": {
       animation: "$pulse 0.60s alternate infinite"
+
     }
 
+  },
+  redBadge: {
+    backgroundColor: "red",
+    color: "white"
   },
   "@keyframes pulse": {
     "0%": {
@@ -338,7 +343,7 @@ const Header = () => {
           <Box>
             <IconButton onClick={handleNotificationMenu}>
               <Badge
-                color="secondary"
+                classes={{ badge: classes.redBadge }}
                 variant={
                   objectInArray(notifications, "is_read", false) ? "dot" : ""
                 }
@@ -383,7 +388,7 @@ const Header = () => {
                   } else if (notification.type === "Message") {
                     link.pathname = "/chat";
                     link.state = {
-                      currentPropRoom: notification.room_notification.room,
+                      currentPropRoom: notification.room_notification ? notification.room_notification.room : null,
                     };
                   }
 

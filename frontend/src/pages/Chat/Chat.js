@@ -38,11 +38,20 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     marginBottom: "20px",
   },
+  previewArea: {
+    height: "70vh",
+    overflowY: "auto",
+
+  },
 });
 
 const Chat = (props) => {
   const location = useLocation();
-  const { currentPropRoom } = location.state;
+  let currentPropRoom = "";
+
+  if (location.state) {
+    currentPropRoom = location.state.currentPropRoom
+  }
 
   const storageRoom = localStorage.getItem("currentRoom");
 
@@ -60,10 +69,10 @@ const Chat = (props) => {
   const [loading, setLoading] = useState(true);
   const [ownedRooms, setOwnedRooms] = useState([]);
   const [userRooms, setUserRooms] = useState([]);
-  const [currentRoom, setCurrentRoom] = useState(parseInt(actualRoom));
+  const [currentRoom, setCurrentRoom] = useState(actualRoom ? parseInt(actualRoom) : null);
 
   // Get rooms for current user
-  const getRooms = () => {
+  const getRooms = (currentRoom) => {
     axiosInstance
       .get("chat/get-rooms/")
       .then((res) => {
@@ -75,8 +84,10 @@ const Chat = (props) => {
         if (!currentRoom) {
           if (res.data["owner_rooms"].length > 0) {
             setCurrentRoom(res.data["owner_rooms"][0].id);
+            localStorage.setItem("currentRoom", res.data["owner_rooms"][0].id);
           } else if (res.data["user_rooms"].length > 0) {
             setCurrentRoom(res.data["user_rooms"][0].id);
+            localStorage.setItem("currentRoom", res.data["user_rooms"][0].id);
           } else {
             setCurrentRoom(null);
           }
@@ -86,17 +97,18 @@ const Chat = (props) => {
       })
       .catch((err) => {
         console.log(err.response);
+
       });
   };
 
   useEffect(() => {
-    getRooms();
+    getRooms(currentRoom);
   }, []);
 
   // Change the current room user is in
   const changeCurrentRoom = (room) => {
     setCurrentRoom(room);
-    getRooms();
+    getRooms(currentRoom);
     localStorage.setItem("currentRoom", room);
   };
 
@@ -125,7 +137,7 @@ const Chat = (props) => {
           }}
         >
           <Grid item xs={5} className={classes.borderRight500}>
-            <List>
+            <List className={classes.previewArea} >
               {ownedRooms.map((room) => {
                 return (
                   <ChatPreview

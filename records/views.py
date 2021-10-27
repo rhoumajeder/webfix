@@ -51,12 +51,6 @@ class SubRecordBulkInsertView(APIView):
 def create_record(request):
     record_count = Record.objects.filter(user=request.user).count()
 
-    phone_number = request.data["phone_number"]
-
-    if phone_number and phone_number != request.user.phone_number:
-        request.user.phone_number = phone_number
-        request.user.save()
-
     if record_count > 1:
         return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
 
@@ -115,8 +109,6 @@ def get_all_records(request):
     if date != "":
         records = records.filter(
             date__gte=datetime.datetime.now().date(), date__lte=datetime.datetime.strptime(date, "%Y-%m-%d").date())
-    else:
-        records = records.filter(date__gte=datetime.datetime.now().date())
 
     serializer = RecordDetailSerializer(records, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)

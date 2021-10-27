@@ -115,7 +115,7 @@ const ListItemCard = (props) => {
                           viewButton={
                             <Button
                               variant="contained"
-                              disabled={disabled}
+
                               color="primary"
                               style={{ marginTop: "10px" }}
                             >
@@ -220,7 +220,7 @@ const ListItemCard = (props) => {
                       <Button
                         variant="contained"
                         color="primary"
-                        disabled={disabled}
+
                         style={{ marginTop: "10px" }}
                       >
                         <Link

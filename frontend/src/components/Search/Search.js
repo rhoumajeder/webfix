@@ -35,18 +35,13 @@ const Search = (props) => {
   const [currentDate, setCurrentDate] = useState(
     moment(new Date()).format("YYYY-MM-DD")
   );
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
 
   const screen = React.useContext(ScreenContext);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const filtersOpen = Boolean(anchorEl);
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+  const handleAdvancedFilters = () => {
+    setShowAdvancedFilters(!showAdvancedFilters)
+  }
 
   const transportOptions = [
     {
@@ -221,29 +216,24 @@ const Search = (props) => {
               />
             </Grid>
             <Grid item md={12} sm={12} xs={12} className="my-2">
-              <Menu
-                anchorEl={anchorEl}
-                open={filtersOpen}
-                onClose={handleCloseMenu}
-                style={{ zIndex: 0 }}
-                anchorOrigin={{
-                  vertical: 'center',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'center',
-                  horizontal: 'left',
-                }}
 
-              >
-                <div className="p-4">
-                  <div className="my-2">
+              <Accordion expanded={showAdvancedFilters} onChange={handleAdvancedFilters}>
+                <AccordionSummary
+                  expandIcon={<ExpandMore />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>Advanced filters</Typography>
+                </AccordionSummary>
+                <AccordionDetails style={{ width: "80%" }}>
+                  <Grid item md={4} sm={6} xs={12} className="my-2">
                     <TextField
                       variant="outlined"
                       type={"number"}
                       id="outlined-start-adornment"
                       onChange={handleInputChange}
                       name="max_weight"
+                      size="small"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">kg</InputAdornment>
@@ -257,9 +247,10 @@ const Search = (props) => {
                       }
                     />
                     <FormHelperText>Weight</FormHelperText>
-                  </div>
-                  <div className="my-2">
+                  </Grid>
+                  <Grid item md={4} sm={6} xs={12} className="my-2">
                     <TextField
+                      size="small"
                       type={"number"}
                       variant="outlined"
                       id="outlined-start-adornment"
@@ -278,46 +269,53 @@ const Search = (props) => {
                       }
                     />
                     <FormHelperText>Volume</FormHelperText>
-                  </div>
+                  </Grid>
+                  <Grid item md={4} sm={6} xs={12}>
+                    <SelectBoxExtended
+                      style={{ zIndex: 100 }}
+                      labelId={"moyen-de-transport"}
+                      label={"Moyen de transport"}
+                      options={transportOptions}
+                      name={"moyen_de_transport"}
+                      placeholder={"Moyen de transport"}
+                      onChange={handleSelectChange}
+                      className="my-2"
+                      value={
+                        props.filters.moyen_de_transport
+                          ? transportOptions.filter(
+                            (option) =>
+                              props.filters.moyen_de_transport === option.value
+                          )
+                          : ""
+                      }
+                    />
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
 
-                  <SelectBoxExtended
-                    style={{ zIndex: 100 }}
-                    labelId={"moyen-de-transport"}
-                    label={"Moyen de transport"}
-                    options={transportOptions}
-                    name={"moyen_de_transport"}
-                    placeholder={"Moyen de transport"}
-                    onChange={handleSelectChange}
-                    className="my-2"
-                    value={
-                      props.filters.moyen_de_transport
-                        ? transportOptions.filter(
-                          (option) =>
-                            props.filters.moyen_de_transport === option.value
-                        )
-                        : ""
-                    }
-                  />
-                </div>
-              </Menu>
             </Grid>
           </Grid>
         </CardContent>
-        <CardActions className="d-flex justify-content-center">
-          <Button color="primary" onClick={handleMenu}>
-            Show Advanced Filters
-          </Button>
-          <Button
-            variant="outlined"
-            color={"primary"}
-            startIcon={<FaSearch />}
-            onClick={submitFilters}
-          >
-            Rechercher
-          </Button>
+        <CardActions style={{ display: "block" }}>
+
+          <div className="w-100 text-center">
+            <Button
+              variant="outlined"
+              color={"primary"}
+              startIcon={<FaSearch />}
+              onClick={submitFilters}
+            >
+              Rechercher
+            </Button>
+          </div>
+          <div className="w-100 text-center mt-2">
+            <Button color="primary" onClick={handleAdvancedFilters}>
+              Show Advanced Filters
+            </Button>
+          </div>
         </CardActions>
       </Card>
-    </Container>
+    </Container >
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import {
   Grid,
@@ -24,7 +24,7 @@ import moment from "moment";
 const RecordDetailsSideBar = (props) => {
   let history = useHistory();
   const [user, setUser] = useContext(AuthContext);
-  console.log(props);
+  const [showPhoneNumber, setShowPhoneNumber] = useState(false)
 
   // Open a new chat room when user messages new user
   const openChatRoom = () => {
@@ -37,7 +37,7 @@ const RecordDetailsSideBar = (props) => {
         history.push({
           pathname: "/chat",
           state: {
-            currentPropRoom: null,
+            currentPropRoom: res.data,
           },
         });
         history.go();
@@ -46,6 +46,10 @@ const RecordDetailsSideBar = (props) => {
         console.log(err.response);
       });
   };
+
+  const handleShowPhoneNumber = () => {
+    setShowPhoneNumber(true);
+  }
 
   return (
     <Grid
@@ -64,17 +68,30 @@ const RecordDetailsSideBar = (props) => {
                 name={props.record.user.username}
                 user={props.record.user}
               />
-              <div style={{ textAlign: "center" }} className="mb-2">
-                <Button
-                  onClick={openChatRoom}
-                  color="primary"
-                  className="text-center me-auto ms-auto"
-                  variant="contained"
-                  disabled={props.disabled}
-                >
-                  Message
-                </Button>
-              </div>
+              <Grid container style={{ textAlign: "center", width: "85%", marginRight: "auto", marginLeft: "auto" }} spacing={0} className="mb-2">
+                <Grid item xs={6}>
+                  <Button
+                    onClick={handleShowPhoneNumber}
+                    color="primary"
+                    className="text-center me-auto ms-auto mr-1 ml-auto"
+                    variant="outlined"
+                    disabled={props.disabled}
+                  >
+                    {showPhoneNumber ? props.record.phone_number : "See Number"}
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    onClick={openChatRoom}
+                    color="primary"
+                    className="text-center mr-auto ml-1"
+                    variant="contained"
+                    disabled={props.disabled}
+                  >
+                    Message
+                  </Button>
+                </Grid>
+              </Grid>
             </React.Fragment>
           ) : null}
           <Box component={"div"} className={"border-top border-2 py-3"}>
@@ -161,7 +178,7 @@ const RecordDetailsSideBar = (props) => {
           </Box>
         </CardContent>
       </Card>
-    </Grid>
+    </Grid >
   );
 };
 

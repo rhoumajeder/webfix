@@ -20,7 +20,7 @@ def chat_room(request, owner_email, user_email, record_id):
     user = get_object_or_404(CustomUser, email=user_email)
     record = get_object_or_404(Record, id=record_id)
 
-    new_room = ChatRoom.objects.get_or_create(
+    new_room, created = ChatRoom.objects.get_or_create(
         owner=owner, user=user, record=record)
 
     room_serializer = ChatRoomSerializer(new_room)

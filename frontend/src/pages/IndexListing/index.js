@@ -26,6 +26,8 @@ import CustomPagination from "../../components/Pagination/Pagination";
 import Spinner from "../../components/Spinner/Spinner";
 import { MdLiveTv } from "react-icons/md";
 
+import moment from "moment"
+
 const PAGE_SIZE = 3;
 
 const Index = () => {
@@ -153,7 +155,7 @@ const CardListing = (props) => {
                     className="fw-bold m-0"
                   >
                     {props.filters.city_arrival &&
-                    props.filters.city_destination ? (
+                      props.filters.city_destination ? (
                       <div>
                         {props.filters.city_arrival}{" "}
                         <IoAirplane className="mx-2" />{" "}
@@ -176,9 +178,15 @@ const CardListing = (props) => {
               </Grid>
             </Grid>
             {/*To add more customer cards duplicate this grid... */}
-            {recordToShow.map((row, index) => (
-              <Grid item lg={8} md={10} xs={12} className="my-2" key={index}>
+            {recordToShow.map((row, index) => {
+              const recordDateExpired = moment(row.date).isBefore(
+                new Date(),
+                "day"
+              );
+
+              return (<Grid item lg={8} md={10} xs={12} className="my-2" key={index}>
                 <TravelCard
+                  disabled={recordDateExpired}
                   recordInputInfo={row.type === "Propose" ? true : false}
                   itemTable={row.type === "Propose" ? false : true}
                   username={row.user.username}
@@ -192,6 +200,7 @@ const CardListing = (props) => {
                       variant="contained"
                       color="primary"
                       style={{ marginTop: "10px" }}
+                      disabled={recordDateExpired}
                     >
                       <Link
                         style={{
@@ -209,8 +218,9 @@ const CardListing = (props) => {
                     </Button>
                   }
                 />
-              </Grid>
-            ))}
+              </Grid>)
+            }
+            )}
             <Grid item lg={8} md={10} xs={12} className="my-2 text-center">
               <CustomPagination
                 itemCount={props.records.length}

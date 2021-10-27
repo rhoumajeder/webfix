@@ -92,8 +92,7 @@ const CreateAskRecord = (props) => {
       .max(400, "Description can not be more than 400 characters"),
     phone_number: yup
       .string()
-      .notRequired()
-      .nullable()
+      .required("Phone number for records is required")
       .matches(phoneRegExp, "Phone number is not valid"),
   });
 
@@ -138,14 +137,7 @@ const CreateAskRecord = (props) => {
 
   // Submit record to database
   const submitItems = () => {
-    const itemData = [...rows];
-    const itemFiles = [];
 
-    itemData.forEach((item) => {
-      delete item.id;
-      itemFiles.push(item.files);
-      delete item.files;
-    });
 
     askRecordSchema
       .validate(askRecord)
@@ -155,6 +147,15 @@ const CreateAskRecord = (props) => {
             .validate(rows)
             .then((valid) => {
               if (valid) {
+                const itemData = [...rows];
+                const itemFiles = [];
+
+                itemData.forEach((item) => {
+                  delete item.id;
+                  itemFiles.push(item.files);
+                  delete item.files;
+                });
+
                 axiosInstance
                   .post(`create-record/`, askRecord)
                   .then((res) => {
@@ -187,7 +188,7 @@ const CreateAskRecord = (props) => {
                         })
                         .catch((err) => {
                           addToast("There was an error", { appearance: "error" });
-                          console.log(err.response);
+                          console.log(err);
                         });
                     }
                   })
