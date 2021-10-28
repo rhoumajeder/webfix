@@ -85,15 +85,13 @@ const ListItemCard = (props) => {
             return (
               <Card
                 className={"shadow py-3 position-relative mt-4"}
-                style={{
-                  backgroundColor: disabled ? "#f9f9f9" : "inherit",
-                }}
+
               >
                 <CardContent className={"px-0"}>
                   <Box component={"div"} className={"my-2"}>
                     {record.type === "Propose" ? (
                       <TravelCard
-                        disabled={disabled}
+
                         recordInputInfo={true}
                         hasAvatar={true}
                         hasShadow={false}
@@ -106,7 +104,7 @@ const ListItemCard = (props) => {
                         <TravelCard
                           user={record.user}
                           itemTable={true}
-                          disabled={disabled}
+
                           hasAvatar={true}
                           hasShadow={false}
                           username={record.user.username}
