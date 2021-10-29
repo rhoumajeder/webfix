@@ -1,6 +1,6 @@
 import axios from "axios";
 console.log(process.env.NODE_ENV);
-const baseURL = "https://rjeapptest.herokuapp.com/api/" ; 
+const baseURL = "https://rjeapptest.herokuapp.com/api/";
 
 
 const axiosInstance = axios.create({

@@ -462,7 +462,7 @@ const ItemCard = (props) => {
       ) : (
         <TableContainer
           component={props.noShadow ? "div" : Paper}
-          style={{ backgroundColor: props.disabled ? "#f9f9f9" : "white" }}
+
         >
           <Table>
             <TableHead>
@@ -496,34 +496,34 @@ const ItemCard = (props) => {
                 <React.Fragment>
                   {!props.askProposition
                     ? props.item.proposition_items.map((item) => {
-                        return (
-                          <Row
-                            disabled={props.disabled}
-                            key={item.id}
-                            itemType={props.itemType}
-                            fetchItems={props.fetchItems}
-                            row={item}
-                            onlyDisplay={false}
-                            setShowImage={setShowImage}
-                            showImage={showImage}
-                          />
-                        );
-                      })
+                      return (
+                        <Row
+                          disabled={props.disabled}
+                          key={item.id}
+                          itemType={props.itemType}
+                          fetchItems={props.fetchItems}
+                          row={item}
+                          onlyDisplay={false}
+                          setShowImage={setShowImage}
+                          showImage={showImage}
+                        />
+                      );
+                    })
                     : props.item.record.ask_items.map((item) => {
-                        return (
-                          <Row
-                            disabled={props.disabled}
-                            key={item.id}
-                            itemType={props.itemType}
-                            fetchItems={props.fetchItems}
-                            row={item}
-                            onlyDisplay={false}
-                            askProposition={true}
-                            setShowImage={setShowImage}
-                            showImage={showImage}
-                          />
-                        );
-                      })}
+                      return (
+                        <Row
+                          disabled={props.disabled}
+                          key={item.id}
+                          itemType={props.itemType}
+                          fetchItems={props.fetchItems}
+                          row={item}
+                          onlyDisplay={false}
+                          askProposition={true}
+                          setShowImage={setShowImage}
+                          showImage={showImage}
+                        />
+                      );
+                    })}
                 </React.Fragment>
               )}
               {props.showTotal && (
