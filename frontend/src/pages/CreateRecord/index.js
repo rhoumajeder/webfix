@@ -41,12 +41,13 @@ const Index = (props) => {
   let history = useHistory();
   const { addToast } = useToasts();
   const screen = React.useContext(ScreenContext);
-  const [subRecords, setSubRecords] = React.useState([]);
-
   const [user, setUser] = useContext(AuthContext);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   let recordSchema = yup.object().shape({
     date: yup
@@ -96,6 +97,10 @@ const Index = (props) => {
       .array()
       .of(yup.string())
       .min(1, "Please select at least 1 category"),
+    phone_number: yup
+      .string()
+      .required("Phone number for records is required")
+      .matches(phoneRegExp, "Phone number is not valid"),
   });
 
   let subRecordSchema = yup
@@ -134,6 +139,7 @@ const Index = (props) => {
     description: "",
     categories: [],
     type: "Propose",
+    phone_number: user.phone_number ? user.phone_number : null
   };
 
   const [record, setRecord] = React.useState(Records);
@@ -215,7 +221,7 @@ const Index = (props) => {
     console.log(record);
   };
 
-  let CategoryList = {
+  const CategoryList = {
     Food: {
       state: false,
       name: "Food",
@@ -227,6 +233,7 @@ const Index = (props) => {
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Food"
         },
         {
           id: 2,
@@ -235,6 +242,7 @@ const Index = (props) => {
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Food"
         },
       ],
     },
@@ -243,56 +251,61 @@ const Index = (props) => {
       name: "Medicaments",
       items: [
         {
-          id: 1,
+          id: 3,
           accepted: false,
           name: "Medicaments",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Medicaments"
         },
       ],
     },
-    SmallElectronics: {
+    "Small Electronics": {
       state: false,
       name: "Small Electronics",
       items: [
         {
-          id: 1,
-          accepted: true,
+          id: 4,
+          accepted: false,
           name: "Portable",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Small Electronics"
         },
         {
-          id: 2,
+          id: 5,
           accepted: false,
           name: "HeartBeat",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Small Electronics"
         },
       ],
     },
-    SmallAccessories: {
+    "Small Accessories": {
       state: false,
       name: "Small Accessories",
       items: [
         {
-          id: 1,
+          id: 6,
           accepted: false,
           name: "Montre",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Small Accessories"
         },
         {
-          id: 2,
+          id: 7,
           accepted: false,
           name: "Braclet",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Small accessories"
         },
       ],
     },
@@ -301,72 +314,79 @@ const Index = (props) => {
       name: "Vetements",
       items: [
         {
-          id: 1,
+          id: 8,
           accepted: false,
           name: "Pantalon",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Vetements"
         },
         {
-          id: 2,
+          id: 9,
           accepted: false,
           name: "Robe",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Vetements"
         },
         {
-          id: 3,
+          id: 10,
           accepted: false,
           name: "Chaussure",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Vetements"
         },
       ],
     },
-    BigMechanical: {
+    "Big Mechanical": {
       state: false,
       name: "Big Mechanical",
       items: [
         {
-          id: 1,
+          id: 11,
           accepted: false,
           name: "Moteur",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Big Mechanical"
         },
         {
-          id: 2,
+          id: 12,
           accepted: false,
           name: "Trotinette",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Big Mechanical"
         },
       ],
     },
-    BigElectronics: {
+    "Big Electronics": {
       state: false,
       name: "Big Electronics",
       items: [
         {
-          id: 1,
-          accepted: true,
+          id: 13,
+          accepted: false,
           name: "Machine Cafe",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Big Electronics"
         },
         {
-          id: 2,
+          id: 14,
           accepted: false,
           name: "Machine à Laver",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Big Electronics"
         },
       ],
     },
@@ -375,40 +395,59 @@ const Index = (props) => {
       name: "Autres",
       items: [
         {
-          id: 1,
+          id: 15,
           accepted: false,
           name: "Autres",
           max_quantity: 0,
           max_weight: 0,
           price: 0,
+          category: "Autres"
         },
       ],
     },
   };
 
-  const [categories, setCategories] = React.useState(CategoryList);
-  const handleAvailableCategories = (event) => {
-    let chkName = CategoryList[event.target.name].name;
-    if (event.target.checked) {
-      let currentCat = record.categories;
-      currentCat.push(chkName);
-      setRecord({ ...record, ["categories"]: currentCat });
-    } else {
-      let array = [...record.categories]; // make a separate copy of the array
-      let index = array.indexOf(chkName);
-      if (index !== -1) {
-        array.splice(index, 1);
-        setRecord({ ...record, ["categories"]: array });
-      }
-    }
+  const [subRecords, setSubRecords] = React.useState([]);
+  const [categories, setCategories] = React.useState(CategoryList)
 
-    setCategories({
-      ...categories,
-      [event.target.name]: {
-        ...categories[event.target.name],
-        state: event.target.checked,
-      },
-    });
+  const handleAvailableCategories = (event) => {
+    if (event.target.checked) {
+      setRecord({ ...record, categories: [...record.categories, event.target.name] })
+
+      setCategories({
+        ...categories, [event.target.name]: {
+          ...categories[event.target.name],
+          state: true
+        }
+      })
+
+      setSubRecords([...subRecords, ...categories[event.target.name].items])
+
+    } else {
+      console.log(subRecords)
+      const newCategories = [...record.categories];
+      const index = newCategories.indexOf(event.target.name)
+      newCategories.splice(index, 1)
+      setRecord({ ...record, categories: newCategories })
+
+      setCategories({
+        ...categories, [event.target.name]: {
+          ...categories[event.target.name],
+          state: false
+        }
+      })
+
+      const newSubRecords = [];
+
+
+      subRecords.forEach((subRecord, index, object) => {
+        if (subRecord.category !== event.target.name) {
+          newSubRecords.push(subRecord)
+        }
+      })
+      console.log(newSubRecords)
+      setSubRecords(newSubRecords)
+    }
   };
 
   const handleVolumeChange = (event, val) => {
@@ -428,12 +467,23 @@ const Index = (props) => {
   };
 
   const handleRecordSubmission = () => {
+    const validationSubRecords = [...subRecords];
+
+    validationSubRecords.forEach((subRecord, index, object) => {
+      if (!subRecord.accepted) {
+        object.splice(index, 1)
+      }
+    })
+
+    console.log("Submitted")
+    console.log(validationSubRecords)
+
     recordSchema
       .validate(record)
       .then(function (valid) {
         if (valid) {
           subRecordSchema
-            .validate(subRecords)
+            .validate(validationSubRecords)
             .then(function (valid) {
               if (valid) {
                 axiosInstance
@@ -442,7 +492,7 @@ const Index = (props) => {
                     console.log(res);
                     if (res.data.id) {
                       const recordId = res.data.id;
-                      let subRec = subRecords.map((v) => ({
+                      let subRec = validationSubRecords.map((v) => ({
                         ...v,
                         record: recordId,
                       }));
@@ -461,14 +511,16 @@ const Index = (props) => {
                           history.go();
                         })
                         .catch((err) => {
-                          addToast(err.response, { appearance: "error" });
                           console.log(err.response);
+                          addToast("There was an error", { appearance: "error" });
+
                         });
                     }
                   })
                   .catch((err) => {
-                    addToast(err.response, { appearance: "error" });
-                    console.log(err.response);
+                    console.log(err.response.data);
+                    addToast(err.response.data, { appearance: "error" });
+
                   });
               }
             })
@@ -595,6 +647,28 @@ const Index = (props) => {
                     placeholder={"Max. Weight"}
                   />
                 </Grid>
+                <Grid item md={4} sm={6} xs={12} className="my-2">
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Phone Number:
+                  </Typography>
+                  <TextField
+                    id="phone_number"
+                    InputLabelProps={{ shrink: false }}
+                    placeholder={"Enter Phone Number"}
+                    value={record.phone_number}
+                    type="text"
+                    size={"small"}
+                    variant="outlined"
+                    name={"phone_number"}
+                    onChange={handleRecordChange}
+
+                    fullWidth
+                  />
+                </Grid>
               </Grid>
             </Box>
 
@@ -697,8 +771,8 @@ const Index = (props) => {
                     control={
                       <Checkbox
                         color="primary"
-                        checked={categories.SmallElectronics.state}
-                        name="SmallElectronics"
+                        checked={categories["Small Electronics"].state}
+                        name="Small Electronics"
                         onChange={handleAvailableCategories}
                       />
                     }
@@ -710,8 +784,8 @@ const Index = (props) => {
                     control={
                       <Checkbox
                         color="primary"
-                        checked={categories.SmallAccessories.state}
-                        name="SmallAccessories"
+                        checked={categories["Small Accessories"].state}
+                        name="Small Accessories"
                         onChange={handleAvailableCategories}
                       />
                     }
@@ -737,8 +811,8 @@ const Index = (props) => {
                       <Checkbox
                         disabled={record.moyen_de_transport === "Avion"}
                         color="primary"
-                        checked={categories.BigMechanical.state}
-                        name="BigMechanical"
+                        checked={categories["Big Mechanical"].state}
+                        name="Big Mechanical"
                         onChange={handleAvailableCategories}
                       />
                     }
@@ -751,8 +825,8 @@ const Index = (props) => {
                       <Checkbox
                         disabled={record.moyen_de_transport === "Avion"}
                         color="primary"
-                        checked={categories.BigElectronics.state}
-                        name="BigElectronics"
+                        checked={categories["Big Electronics"].state}
+                        name="Big Electronics"
                         onChange={handleAvailableCategories}
                       />
                     }
@@ -779,7 +853,8 @@ const Index = (props) => {
               {record.categories.length > 0 &&
                 record.categories.map((data, index) => {
                   if (data !== "Autres") {
-                    let rows = categories[data.replace(/\s/g, "")].items;
+                    const rows = subRecords.filter(subRecord => subRecord.category === data);
+                    console.log(rows)
 
                     return (
                       <Box component={"div"} key={index} className={"my-2"}>
@@ -795,6 +870,7 @@ const Index = (props) => {
                           isQuantityEdited={true}
                           isWeightEdited={true}
                           isPriceEdited={true}
+                          getCheckedValFromCol={true}
                         />
                       </Box>
                     );

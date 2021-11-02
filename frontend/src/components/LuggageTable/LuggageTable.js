@@ -31,65 +31,52 @@ const LuggageTable = (props) => {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const [rows, setRows] = React.useState(props.rows);
+  const rows = props.rows
 
   const handleClick = (event, rowID) => {
     if (props.isCheckboxDisabled === false) {
-      let object = props.rows.find((item) => item.id === rowID);
-      let isChecked = event.target.checked;
+      const newRows = [...props.selected];
+      const isChecked = event.target.checked;
 
       if (isChecked) {
-        object = {
-          ...object,
-          accepted: true,
-          category: props.title,
-        };
-        props.setSelected(
-          produce((draft) => {
-            draft.push(object);
-          }),
-          props.selected
-        );
+        newRows.forEach(row => {
+          if (row.id === rowID) {
+            row.accepted = true
+          }
+        })
+
+        props.setSelected(newRows);
       } else {
-        props.setSelected(
-          produce((draft) => {
-            let index = props.selected.findIndex(
-              (obj) => object.id === obj.id && obj.category === props.title
-            );
-            draft.splice(index /*the index */, 1);
-          }),
-          props.selected
-        );
+        newRows.forEach(row => {
+          if (row.id === rowID) {
+            row.accepted = false
+          }
+        })
+
+        props.setSelected(newRows);
       }
     }
   };
 
   const handleInputChange = (event, rowId) => {
-    let object = props.selected.find((item) => item.id === rowId);
-    if (!object) {
-      console.log(object);
-      return;
-    }
-
-    props.setSelected(
-      produce((draft) => {
-        let index = props.selected.findIndex(
-          (obj) => rowId === obj.id && obj.category === props.title
-        );
-        draft[index][event.target.name] = event.target.value * 1;
-      }),
-      props.selected
-    );
+    const newRows = [...props.selected];
+    newRows.forEach(row => {
+      if (row.id === rowId) {
+        row[event.target.name] = event.target.value;
+      }
+    })
+    console.log(newRows)
+    props.setSelected(newRows);
   };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
 
   const isSelected = (row) => {
     return (
@@ -110,7 +97,7 @@ const LuggageTable = (props) => {
           title={props.title}
           screen={screen}
           record={props.rows}
-          setRows={setRows}
+        // setRows={setRows}
         />
       )}
       <TableContainer>
@@ -204,9 +191,11 @@ const LuggageTable = (props) => {
                       InputLabelProps={{ shrink: false }}
                       className={`minInputWidth`}
                       name={"max_quantity"}
+                      disabled={row.accepted ? false : true}
                       InputProps={{
                         classes: { input: "py-2 customize-inputField" },
                       }}
+                      disabled={row.accepted ? false : true}
                       placeholder={"Max. Quantity"}
                       defaultValue={row.max_quantity}
                       onChange={(event) => handleInputChange(event, row.id)}
@@ -229,6 +218,7 @@ const LuggageTable = (props) => {
                       InputProps={{
                         classes: { input: "py-2 customize-inputField" },
                       }}
+                      disabled={row.accepted ? false : true}
                       placeholder={"Max. Weight"}
                       defaultValue={row.max_weight}
                       onChange={(event) => handleInputChange(event, row.id)}
@@ -250,14 +240,14 @@ const LuggageTable = (props) => {
                         variant="outlined"
                         type={"number"}
                         inputProps={{ min: 0 }}
-                        className={`minInputWidth ${
-                          props.Decide && "currentInputWidth"
-                        }`}
+                        className={`minInputWidth ${props.Decide && "currentInputWidth"
+                          }`}
                         InputLabelProps={{ shrink: false }}
                         name={"price"}
                         InputProps={{
                           classes: { input: "py-2 customize-inputField" },
                         }}
+                        disabled={row.accepted ? false : true}
                         placeholder={"Price"}
                         defaultValue={row.price}
                         onChange={(event) => handleInputChange(event, row.id)}

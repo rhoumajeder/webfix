@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import {
   Box,
@@ -37,7 +37,10 @@ import * as yup from "yup";
 
 import Spinner from "../../components/Spinner/Spinner";
 
+import { AuthContext } from "../../context/auth";
+
 const Index = ({ match }) => {
+  const [user, setUser] = useContext(AuthContext)
   const { addToast } = useToasts();
   let history = useHistory();
   const [record, setRecord] = useState({ created_by: null });
@@ -205,9 +208,8 @@ const Index = ({ match }) => {
             item
             md={8}
             xs={12}
-            className={`my-2 ${
-              screen.width <= 768 ? "order-last" : "order-first"
-            }`}
+            className={`my-2 ${screen.width <= 768 ? "order-last" : "order-first"
+              }`}
           >
             {record.user ? (
               <TravelCard
@@ -365,6 +367,7 @@ const Index = ({ match }) => {
                     className="ms-auto my-2"
                     variant="outlined"
                     color={"primary"}
+                    disabled={user.username ? false : true}
                     onClick={openInteractionTable}
                     size="large"
                   >
@@ -374,7 +377,7 @@ const Index = ({ match }) => {
               </Box>
             )}
           </Grid>
-          <RecordDetailsSideBar record={record} />
+          <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
         </Grid>
       </Container>
     </Box>

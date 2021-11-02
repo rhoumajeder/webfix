@@ -132,11 +132,11 @@ const App = () => {
                     component={UserProfile}
                     isAuthenticated={isAuthenticated}
                   />
-                  <PrivateRoute
+                  <Route
                     exact
                     path={"/record-details/:id"}
                     component={RecordDetails}
-                    isAuthenticated={isAuthenticated}
+
                   />
                   <PrivateRoute
                     exact
@@ -170,11 +170,11 @@ const App = () => {
                     isAuthenticated={isAuthenticated}
                     otherProps={{ itemType: "offer" }}
                   />
-                  <PrivateRoute
+                  <Route
                     exact
                     path={"/ask-record-details/:id"}
                     component={AskRecordDetails}
-                    isAuthenticated={isAuthenticated}
+
                   />
                   <PrivateRoute
                     exact
@@ -182,11 +182,11 @@ const App = () => {
                     component={Chat}
                     isAuthenticated={isAuthenticated}
                   />
-                  <PrivateRoute
+                  <Route
                     exact
                     path={"/shop"}
                     component={ShoppingPage}
-                    isAuthenticated={isAuthenticated}
+
                   />
                   <Route
                     exact

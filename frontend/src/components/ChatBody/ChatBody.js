@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 
 import {
   Grid,
@@ -23,6 +23,10 @@ import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Spinner from "../Spinner/Spinner";
+
+import Messages from "./Messages/Messages";
+
+import "./ChatBody.css"
 
 const useStyles = makeStyles({
   table: {
@@ -56,6 +60,7 @@ const useStyles = makeStyles({
 });
 
 const ChatBody = (props) => {
+
   const classes = useStyles();
 
   const [user, setUser] = useContext(AuthContext);
@@ -70,7 +75,14 @@ const ChatBody = (props) => {
         console.log(res.data);
         setMessages(res.data);
         setLoading(false);
-      });
+      })
+        .catch(err => {
+          if (err.response.status === 404) {
+            localStorage.removeItem("currentRoom")
+            setLoading(false);
+            props.getRooms(null);
+          }
+        });
     } else {
       setLoading(false);
     }
@@ -111,37 +123,7 @@ const ChatBody = (props) => {
     <React.Fragment>
       <List className={classes.messageArea}>
         {props.room ? (
-          messages.map((message, index) => {
-            const userIsOwner = user.email === message.user.email;
-
-            return (
-              <ListItem key={index}>
-                <Grid container>
-                  <Grid item xs={12}>
-                    <ListItemText
-                      align={userIsOwner ? "right" : "left"}
-                      style={{
-                        marginLeft: userIsOwner ? "auto" : "0px",
-                        backgroundColor: userIsOwner ? "#d9e6f7" : "#F4F6F7",
-                        color: userIsOwner ? "#537EAB" : "black",
-                        wordWrap: "break-word",
-                      }}
-                      primary={message.content}
-                      className={classes.message}
-                    ></ListItemText>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <ListItemText
-                      align={
-                        user.email === message.user.email ? "right" : "left"
-                      }
-                      secondary={moment(message.timestamp).format("hh:mm")}
-                    ></ListItemText>
-                  </Grid>
-                </Grid>
-              </ListItem>
-            );
-          })
+          <Messages messages={messages} />
         ) : (
           <ListItem>
             <Grid container>
@@ -156,6 +138,7 @@ const ChatBody = (props) => {
             </Grid>
           </ListItem>
         )}
+
       </List>
 
       {props.room && (
@@ -164,13 +147,14 @@ const ChatBody = (props) => {
           <form onSubmit={submitMessage}>
             <Grid spacing={2} container style={{ padding: "20px" }}>
               <Grid item xs={10}>
-                <TextField
-                  id="outlined-basic-email"
+                <textarea
                   placeholder="Message"
-                  fullWidth
                   value={text}
                   onChange={handleTextChange}
-                />
+                  className="form-control rounded-0"
+                  rows={1}
+                  style={{ height: "auto" }}
+                ></textarea>
               </Grid>
               <Grid xs={2} align="right">
                 <Fab

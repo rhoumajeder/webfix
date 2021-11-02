@@ -45,7 +45,7 @@ const Propositions = (props) => {
                   <Button
                     variant="contained"
                     color="primary"
-                    disabled={props.disabled}
+
                     style={{ marginTop: "10px" }}
                   >
                     <Link

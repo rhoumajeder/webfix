@@ -15,7 +15,7 @@ const Index = () => {
     email: "",
     password: "",
     password2: "",
-    phone_number: "",
+    phone_number: null,
   };
   const [formData, setForm] = useState(FormRecord);
   const [isValid, setValidForm] = useState(false);
@@ -39,7 +39,8 @@ const Index = () => {
       .oneOf([yup.ref("password")], "Passwords must match"),
     phone_number: yup
       .string()
-      .required("Phone number is required")
+      .notRequired()
+      .nullable()
       .matches(phoneRegExp, "Phone number is not valid"),
   });
 
@@ -74,20 +75,17 @@ const Index = () => {
                 })
                 .catch((err) => {
                   console.log(err.response);
-                  addToast(
-                    err?.response?.data?.detail || "Something went wrong",
-                    {
-                      appearance: "error",
-                    }
-                  );
+                  addToast("Unable to login user", { appearance: "error" })
                 });
             })
             .catch((err) => {
-              console.log(err.response);
-
-              addToast(err?.response?.data?.detail || "Something went wrong", {
-                appearance: "error",
-              });
+              console.log(err.response)
+              Object.keys(err.response.data.errors).forEach(key => {
+                console.log(key)
+                err.response.data.errors[key].forEach(error => {
+                  addToast(error, { appearance: "error" })
+                })
+              })
             });
         }
       })
