@@ -345,7 +345,7 @@ const Header = () => {
               <Badge
                 classes={{ badge: classes.redBadge }}
                 variant={
-                  objectInArray(notifications, "is_read", false) ? "dot" : ""
+                  objectInArray(notifications, "is_read", false) ? "dot" : "standard"
                 }
                 className={objectInArray(notifications, "is_read", false) ? classes.animatedBadge : ""}
               >
@@ -392,34 +392,33 @@ const Header = () => {
                     };
                   }
 
-                  return (
-                    <React.Fragment>
-                      <MenuItem>
-                        <div
-                          className="d-flex align-items-center"
-                          onClick={() =>
-                            redirectWithNotification(link, notification.id)
-                          }
-                        >
-                          <Avatar style={{ marginRight: "10px" }} />{" "}
-                          {notification.message}
-                        </div>
+                  return [(
+                    <MenuItem key={`menu-item-${notification.id}`}>
+                      <div
+                        className="d-flex align-items-center"
+                        onClick={() =>
+                          redirectWithNotification(link, notification.id)
+                        }
+                      >
+                        <Avatar style={{ marginRight: "10px" }} />{" "}
+                        {notification.message}
+                      </div>
+                      <IconButton
+                        onClick={() => deleteNotification(notification.id)}
+                      >
+                        <Close color="action" />
+                      </IconButton>
+                      {!notification.is_read && (
                         <IconButton
-                          onClick={() => deleteNotification(notification.id)}
+                          onClick={() => markAsRead(notification.id)}
                         >
-                          <Close color="action" />
+                          <FiberManualRecord color="primary" />
                         </IconButton>
-                        {!notification.is_read && (
-                          <IconButton
-                            onClick={() => markAsRead(notification.id)}
-                          >
-                            <FiberManualRecord color="primary" />
-                          </IconButton>
-                        )}
-                      </MenuItem>
-                      <Divider />
-                    </React.Fragment>
-                  );
+                      )}
+                    </MenuItem>
+                  ), (
+                    <Divider key={`divider-${notification.id}`} />
+                  )]
                 })
               ) : (
                 <MenuItem>You have no notifications</MenuItem>
