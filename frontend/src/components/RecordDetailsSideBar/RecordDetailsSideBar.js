@@ -96,12 +96,6 @@ const RecordDetailsSideBar = (props) => {
           ) : null}
           <Box component={"div"} className={"border-top border-2 py-3"}>
             <LuggageCheck
-              check={props.record.user.checked_billet}
-              size={"h6"}
-              text="Billet de Voyage"
-              className={"fw-medium"}
-            />
-            <LuggageCheck
               check={props.record.user.checked_phone}
               size={"h6"}
               text="Téléphone vérifié"
