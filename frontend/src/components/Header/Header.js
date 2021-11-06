@@ -250,16 +250,6 @@ const Header = () => {
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link to="/home" className="text-link">
-                    <Box
-                      component="span"
-                      className="d-flex align-items-center justify-content-evenly"
-                    >
-                      <FaListAlt className="me-2 fs-5" /> My Records
-                    </Box>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
                   <Link to="/list-offers" className="text-link">
                     <Box
                       component="span"
