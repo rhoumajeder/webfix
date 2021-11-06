@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/auth";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import Header from "../../components/Header/Header";
 import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
+import ReportModal from "../../components/ReportModal/ReportModal";
 import ProfileFeedback from "../../components/Feedback/ProfileFeedback";
 
 
@@ -36,7 +37,13 @@ const Index = () => {
 	const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
 
 	const openFeedbackModal = () => {
-		setFeedbackModalOpen(true);
+        setFeedbackModalOpen(true);
+    };
+
+
+    const [reportModalOpen, setReportModalOpen] = useState(false);
+	const openReportModal = () => {
+		setReportModalOpen(true);
 	};
 
     const classes = useStyles()
@@ -132,6 +139,11 @@ const Index = () => {
                                         </Typography>
                                     </Box>
                                 </Box>
+                                <Box>
+                                    <Typography onClick={openReportModal} variant="h6" align="right" className={`text-primary ${classes.feedback}`}>
+                                        Signalez ce membre
+                                    </Typography>
+                                </Box>
                             </CardContent>
                         </Card>
 
@@ -175,6 +187,12 @@ const Index = () => {
                 receiver={record}
                 feedbackModalOpen={feedbackModalOpen}
                 setFeedbackModalOpen={setFeedbackModalOpen}
+            />
+            <ReportModal
+                writer={record}
+                receiver={record}
+                reportModalOpen={reportModalOpen}
+                setReportModalOpen={setReportModalOpen}
             />
         </Box>
     );

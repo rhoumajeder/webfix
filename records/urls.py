@@ -39,5 +39,7 @@ urlpatterns = [
     path('get-ask-record-item-images/<str:pk>/',
          views.get_ask_record_item_images),
     path('create-feedback/<str:receiver_email>/',
-         views.create_feedback)
+         views.create_feedback),
+    path('report-user/<str:receiver_email>/',
+         views.report_user)
 ]

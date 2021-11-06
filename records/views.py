@@ -9,10 +9,11 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser
 
 from .filters import RecordFilter
-from records.models import Record, SubRecord, Proposition, PropositionItem, AskRecordItem, AskRecordItemImage, Feedback
+from records.models import Record, SubRecord, Proposition, PropositionItem, AskRecordItem, AskRecordItemImage, Feedback, Report
 from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, SubRecordSerializer, PropositionSerializer,
-    PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer)
+    PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
+    ReportSerializer)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 from notifications.utils import create_notification
@@ -293,6 +294,22 @@ def create_feedback(request, receiver_email):
         return Response("You have already left feedback for this user", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = FeedbackSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save(writer=request.user, receiver=receiver)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def report_user(request, receiver_email):
+    receiver = get_object_or_404(CustomUser, email=receiver_email)
+
+    if Report.objects.filter(writer=request.user, receiver=receiver).exists():
+        return Response("You have already left report for this user", status=status.HTTP_400_BAD_REQUEST)
+
+    serializer = ReportSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save(writer=request.user, receiver=receiver)

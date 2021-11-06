@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
-from records.models import Record, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback
+from records.models import Record, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
 from users.serializers import UserSerializer
 
 
@@ -100,4 +100,13 @@ class FeedbackSerializer(ModelSerializer):
 
     class Meta:
         model = Feedback
+        fields = "__all__"
+
+
+class ReportSerializer(ModelSerializer):
+    writer = UserSerializer(read_only=True)
+    receiver = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Report
         fields = "__all__"
