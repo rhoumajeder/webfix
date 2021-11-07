@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react';
 import {Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles} from "@material-ui/core";
 import {GiCheckMark} from "react-icons/gi";
 import {HiEye, HiEyeOff} from "react-icons/hi";
+import moment from 'moment';
 
 import "./index.css";
 import { AuthContext } from "../../context/auth";
@@ -48,6 +49,15 @@ const Index = () => {
 
     const classes = useStyles()
 
+    const publishedRecords = (
+        (record ? record.records.length : 0)
+        + ' record'
+        + ((record && record.records.length > 1) ? 's' : '' )
+        + ' published'
+    )
+
+    const startDate = record ? moment(record.start_date).format('YYYY') : null
+
 
     return (
         <Box component={"div"}>
@@ -60,25 +70,35 @@ const Index = () => {
 
                         <Card className={"shadow"}>
                             <CardContent>
-                                <UserAvatar profile={record.photo} name={record.first_name} />
+                                <UserAvatar profile={record.photo} name={`${record.first_name} ${record.last_name}`} />
                                 <Box className="border-top border-2 bg-light p-2">
                                     <Box className="bg-white p-2">
                                         <Typography component="h6" variant="body2" display="inline">
-                                            {record.intro}
+                                            {record && record.intro}
                                         </Typography>
                                     </Box>
                                 </Box>
                                 <Box className={'border-top border-2 py-3'}>
-                                    <Typography variant="h6" component="h6" color="textPrimary" gutterBottom
+                                    <Typography variant="h6" component="h6" gutterBottom
                                                 className={`m-0 me-1 fw-medium`}>
                                         Contact Information
                                     </Typography>
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
+                                            Username
+                                        </Typography>
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                                    className={`m-0 ps-2 fw-normal`}>
+                                            {record && record.username}
+                                        </Typography>
+                                    </Box>
+                                    <Box className="my-1">
+                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
+                                                    className={`m-0 fw-bold`}>
                                             Email Address
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" color="textPrimary" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.email}
                                         </Typography>
@@ -92,7 +112,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Phone Number
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" color="textPrimary" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.phone_number}
                                         </Typography>
@@ -106,7 +126,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Current Address
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" color="textPrimary" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.address}
                                         </Typography>
@@ -117,7 +137,7 @@ const Index = () => {
                                     </Box>
                                 </Box>
                                 <Box className={'border-top border-2 py-3'}>
-                                    <Typography variant="h6" component="h6" color="textPrimary" gutterBottom
+                                    <Typography variant="h6" component="h6" gutterBottom
                                                 className={`m-0 me-1 fw-medium`}>
                                         Other Details
                                     </Typography>
@@ -126,7 +146,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Current Password
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" color="textPrimary" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
                                                     className={`m-0 ps-2 fw-normal ${togglePassword ? 'show-password' : 'hide-password'}`}>
                                             tSHH6@g+F+r_6fvTXy_WQGL
                                             <IconButton color="secondary" aria-label="show-hide-password" className={`mx-2`} component="span" size={'small'}
@@ -140,11 +160,30 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Date Of Birth
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" color="textPrimary" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.dob}
                                         </Typography>
                                     </Box>
+                                    <Box className="my-1">
+                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
+                                            {publishedRecords}
+                                        </Typography>
+                                    </Box>
+                                    {record && record.is_pro && (
+                                        <Box className="my-1">
+                                            <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
+                                                This member is professional
+                                            </Typography>
+                                        </Box>
+                                    )}
+                                    {startDate && (
+                                        <Box className="my-1">
+                                            <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
+                                                Registered since {startDate}
+                                            </Typography>
+                                        </Box>
+                                    )}
                                 </Box>
                                 <Box>
                                     <Typography onClick={openReportModal} variant="h6" align="right" className={`text-primary ${classes.feedback}`}>

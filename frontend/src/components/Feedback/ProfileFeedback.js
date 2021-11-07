@@ -24,9 +24,9 @@ const starStatus = [{
 const Feedback = ({user, text, star}) => {
   return (
     <Paper style={{border: 'unset'}} variant="outlined" className="my2 p-2">
-      <Box component="div" className="comment d-flex">
+      <Box className="comment d-flex">
         <Box width="12%" component="div" className="flex-shrink-0">
-          <Box component="div" className="avatar avatar-sm rounded-circle">
+          <Box className="avatar avatar-sm rounded-circle">
             <Avatar
               alt="Remy Sharp"
               src={
@@ -47,27 +47,26 @@ const Feedback = ({user, text, star}) => {
             </Typography>
           </Box>
         </Box>
-        <Box component="div" className="flex-shrink-1 ms-2">
+        <Box className="flex-shrink-1 ms-2">
           <Box
             component="div"
             className="comment-meta d-flex align-items-center"
           >
             <GiSevenPointedStar style={{color: starStatus[star - 1].color}} className="small me-1" />
             <Typography
-              variant="subtitle2"
+              variant="h6"
               color="textPrimary"
               gutterBottom
-              className="fw-bold m-0 me-2"
+              className="fw-bold m-0"
             >
               {starStatus[star - 1].text}
             </Typography>
           </Box>
-          <Box component="div" className="comment-body">
+          <Box>
             <Typography
-              variant="caption"
+              variant="h6"
               color="textPrimary"
-              gutterBottom
-              className="fw-normal m-0"
+              className="fw-lighter m-0"
             >
               {text}
             </Typography>
