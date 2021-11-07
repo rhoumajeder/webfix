@@ -61,12 +61,19 @@ const Index = () => {
                         <Card className={"shadow"}>
                             <CardContent>
                                 <UserAvatar profile={record.photo} name={record.first_name} />
-                                <Box component={'div'} className={'border-top border-2 py-3'}>
+                                <Box className="border-top border-2 bg-light p-2">
+                                    <Box className="bg-white p-2">
+                                        <Typography component="h6" variant="body2" display="inline">
+                                            {record.intro}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                                <Box className={'border-top border-2 py-3'}>
                                     <Typography variant="h6" component="h6" color="textPrimary" gutterBottom
                                                 className={`m-0 me-1 fw-medium`}>
                                         Contact Information
                                     </Typography>
-                                    <Box component={"div"} className={"my-3"}>
+                                    <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
                                             Email Address
@@ -80,7 +87,7 @@ const Index = () => {
                                             {record && record.checked_email && <GiCheckMark className="text-success" /> }
                                         </Typography>
                                     </Box>
-                                    <Box component={"div"} className={"my-3"}>
+                                    <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
                                             Phone Number
@@ -94,7 +101,7 @@ const Index = () => {
                                             {record && record.checked_phone && <GiCheckMark className="text-success" /> }
                                         </Typography>
                                     </Box>
-                                    <Box component={"div"} className={"my-3"}>
+                                    <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
                                             Current Address
@@ -109,12 +116,12 @@ const Index = () => {
                                         </Typography>
                                     </Box>
                                 </Box>
-                                <Box component={'div'} className={'border-top border-2 py-3'}>
+                                <Box className={'border-top border-2 py-3'}>
                                     <Typography variant="h6" component="h6" color="textPrimary" gutterBottom
                                                 className={`m-0 me-1 fw-medium`}>
                                         Other Details
                                     </Typography>
-                                    <Box component={"div"} className={"my-3"}>
+                                    <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
                                             Current Password
@@ -128,7 +135,7 @@ const Index = () => {
                                             </IconButton>
                                         </Typography>
                                     </Box>
-                                    <Box component={"div"} className={"my-3"}>
+                                    <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
                                             Date Of Birth
