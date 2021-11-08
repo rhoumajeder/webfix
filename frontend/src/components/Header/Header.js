@@ -56,6 +56,21 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
+const markAsSeen = (notifications) => {
+  localStorage.setItem('seenNotifications', JSON.stringify(notifications))
+}
+
+const hasNewNotification = (notifications) => {
+  const oldNotifications = JSON.parse(
+    localStorage.getItem('seenNotifications')
+  ) || []
+
+  return (notifications.findIndex(notification => !(
+    oldNotifications.includes(notification)
+  ))) !== -1
+}
+
 const Header = () => {
   let history = useHistory();
   const classes = useStyles()
@@ -67,6 +82,13 @@ const Header = () => {
   const notificationOpen = Boolean(anchorElNotification);
 
   const [user, setUser] = useContext(AuthContext);
+
+  const [isSeen, setSeenStatus] = React.useState(false);
+
+  const getAttention = objectInArray(notifications, "is_read", false) && hasNewNotification(
+    notifications.map(notification => notification.id)
+  ) && !isSeen
+
 
   // Get notifications for current user
   const getNotifications = () => {
@@ -130,6 +152,8 @@ const Header = () => {
 
   const handleNotificationMenu = (e) => {
     setAnchorElNotification(e.currentTarget);
+    setSeenStatus(true)
+    markAsSeen(notifications.map(notification => notification.id))
   };
 
   const handleClose = () => {
@@ -334,10 +358,10 @@ const Header = () => {
             <IconButton onClick={handleNotificationMenu}>
               <Badge
                 classes={{ badge: classes.redBadge }}
-                variant={
-                  objectInArray(notifications, "is_read", false) ? "dot" : "standard"
-                }
-                className={objectInArray(notifications, "is_read", false) ? classes.animatedBadge : ""}
+                {...(getAttention ? {
+                  variant: 'dot',
+                  className: classes.animatedBadge,
+                } : {})}
               >
                 <Notifications />
               </Badge>
