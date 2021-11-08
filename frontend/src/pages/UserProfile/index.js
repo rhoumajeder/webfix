@@ -1,7 +1,8 @@
 import React, {useState, useContext} from 'react';
-import {Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles} from "@material-ui/core";
+import {Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles, ButtonBase} from "@material-ui/core";
 import {GiCheckMark} from "react-icons/gi";
 import {HiEye, HiEyeOff} from "react-icons/hi";
+import {BiEdit} from "react-icons/bi";
 import moment from 'moment';
 
 import "./index.css";
@@ -11,6 +12,7 @@ import Header from "../../components/Header/Header";
 import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
 import ReportModal from "../../components/ReportModal/ReportModal";
 import ProfileFeedback from "../../components/Feedback/ProfileFeedback";
+import UserProfileModal from '../../components/UserProfileModal/UserProfileModal';
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +43,7 @@ const Index = () => {
         setFeedbackModalOpen(true);
     };
 
+    const [isUserProfileModalOpen, setUserProfileModalOpen] = useState(false);
 
     const [reportModalOpen, setReportModalOpen] = useState(false);
 	const openReportModal = () => {
@@ -57,6 +60,12 @@ const Index = () => {
     )
 
     const startDate = record ? moment(record.start_date).format('YYYY') : null
+    const fullName = `${record.first_name} ${record.last_name}`
+
+
+    const onSubmitUserFrom = (data) => {
+        setRecord(data)
+    }
 
 
     return (
@@ -70,19 +79,33 @@ const Index = () => {
 
                         <Card className={"shadow"}>
                             <CardContent>
-                                <UserAvatar profile={record.photo} name={`${record.first_name} ${record.last_name}`} />
-                                <Box className="border-top border-2 bg-light p-2">
-                                    <Box className="bg-white p-2">
-                                        <Typography component="h6" variant="body2" display="inline">
-                                            {record && record.intro}
-                                        </Typography>
+                                <UserAvatar profile={record.photo} name={fullName} />
+                                {record && record.intro && (
+                                    <Box className="border-top border-2 bg-light p-2">
+                                        <Box className="bg-white p-2">
+                                            <Typography component="h6" variant="body2" display="inline">
+                                                {record.intro}
+                                            </Typography>
+                                        </Box>
                                     </Box>
-                                </Box>
+                                )}
                                 <Box className={'border-top border-2 py-3'}>
-                                    <Typography variant="h6" component="h6" gutterBottom
-                                                className={`m-0 me-1 fw-medium`}>
-                                        Contact Information
-                                    </Typography>
+                                    <Grid container direction="row" justify="space-between">
+                                        <Grid item>
+                                            <Typography variant="h6" component="h6" gutterBottom
+                                                        className={`m-0 me-1 fw-medium`}>
+                                                Contact Information
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <IconButton
+                                                size="small"
+                                                onClick={() => setUserProfileModalOpen(true)}
+                                            >
+                                                <BiEdit />
+                                            </IconButton>
+                                        </Grid>
+                                    </Grid>
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
@@ -185,10 +208,15 @@ const Index = () => {
                                         </Box>
                                     )}
                                 </Box>
-                                <Box>
-                                    <Typography onClick={openReportModal} variant="h6" align="right" className={`text-primary ${classes.feedback}`}>
-                                        Signalez ce membre
-                                    </Typography>
+                                <Box align="right">
+                                    <ButtonBase>
+                                        <Typography
+                                            variant="h6"
+                                            onClick={openReportModal}
+                                            className="text-primary text-decoration-underline fw-bold">
+                                            Signalez ce membre
+                                        </Typography>
+                                    </ButtonBase>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -210,9 +238,16 @@ const Index = () => {
                                         <Grid item xs={12}>
                                             <Grid container alignItems="flex-end" direction="column">
                                                 <Grid item>
-                                                    <Typography onClick={openFeedbackModal} variant="h6" component="span" className={classes.feedback}>
-                                                        Add Feedbacks
-                                                    </Typography>
+                                                    <ButtonBase>
+                                                        <Typography
+                                                            variant="h6"
+                                                            component="span"
+                                                            onClick={openFeedbackModal}
+                                                            className="text-decoration-underline fw-bold"
+                                                        >
+                                                            Add Feedbacks
+                                                        </Typography>
+                                                    </ButtonBase>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -240,6 +275,11 @@ const Index = () => {
                 reportModalOpen={reportModalOpen}
                 setReportModalOpen={setReportModalOpen}
             />
+            <UserProfileModal
+                profile={record}
+                onSuccess={onSubmitUserFrom}
+                isModalOpen={isUserProfileModalOpen}
+                setModalOpen={setUserProfileModalOpen} />
         </Box>
     );
 };

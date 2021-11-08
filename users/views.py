@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from users.errors import UserAlreadyExistsError
 from users.models import CustomUser
 from users.serializers import (
-    CustomUserSerializer, UserSerializer, UserDetailSerializer)
+    CustomUserSerializer, UserSerializer, UserDetailSerializer, UserUpdateSerializer)
 from users.utils import send_reset_email
 
 
@@ -75,6 +75,13 @@ def change_password(request):
     user.save()
 
     return HttpResponse(status=status.HTTP_200_OK)
+
+@api_view(['PUT', 'PATCH'])
+def update_profile(request):
+    serializer = UserUpdateSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.update(request.user, serializer.validated_data)
+    return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

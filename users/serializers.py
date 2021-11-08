@@ -72,9 +72,19 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ["id", "intro", "email", "username", "first_name", "last_name", "records", "phone_number",
+        fields = ["id", "intro", "photo", "email", "username", "first_name", "last_name", "records", "phone_number",
                   "checked_email", "checked_phone", "checked_billet", "start_date", "received_feedback",
                   "address", "dob", "is_pro"]
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(validators=[])
+    phone_number = serializers.CharField(validators=[])
+
+    class Meta:
+        model = CustomUser
+        fields = ["id", "intro", "email", "first_name", "phone_number", "address", "photo"]
+        optional_fields = ["photo"]
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
