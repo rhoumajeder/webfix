@@ -79,7 +79,7 @@ const Index = () => {
 
                         <Card className={"shadow"}>
                             <CardContent>
-                                <UserAvatar profile={record.photo} name={fullName} />
+                                <UserAvatar profile={record.photo} name={record.username} />
                                 {record && record.intro && (
                                     <Box className="border-top border-2 bg-light p-2">
                                         <Box className="bg-white p-2">
@@ -109,11 +109,21 @@ const Index = () => {
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
-                                            Username
+                                            Name
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6" gutterBottom
                                                     className={`m-0 ps-2 fw-normal`}>
-                                            {record && record.username}
+                                            {record && record.first_name}
+                                        </Typography>
+                                    </Box>
+                                    <Box className="my-1">
+                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
+                                                    className={`m-0 fw-bold`}>
+                                            Last Name
+                                        </Typography>
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                                    className={`m-0 ps-2 fw-normal`}>
+                                            {record && record.last_name}
                                         </Typography>
                                     </Box>
                                     <Box className="my-1">
@@ -147,6 +157,30 @@ const Index = () => {
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                                     className={`m-0 fw-bold`}>
+                                            Date Of Birth
+                                        </Typography>
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                                    className={`m-0 ps-2 fw-normal`}>
+                                            {record && record.dob}
+                                        </Typography>
+                                    </Box>
+                                    <Box className="my-1">
+                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
+                                                    className={`m-0 fw-bold`}>
+                                            Current Password
+                                        </Typography>
+                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                                    className={`m-0 ps-2 fw-normal ${togglePassword ? 'show-password' : 'hide-password'}`}>
+                                            tSHH6@g+F+r_6fvTXy_WQGL
+                                            <IconButton color="secondary" aria-label="show-hide-password" className={`mx-2`} component="span" size={'small'}
+                                            onClick={() => setPassword(!togglePassword)}>
+                                                { togglePassword ? <HiEyeOff /> : <HiEye /> }
+                                            </IconButton>
+                                        </Typography>
+                                    </Box>
+                                    <Box className="my-1">
+                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
+                                                    className={`m-0 fw-bold`}>
                                             Current Address
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6" gutterBottom
@@ -165,41 +199,10 @@ const Index = () => {
                                         Other Details
                                     </Typography>
                                     <Box className="my-1">
-                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
-                                            Current Password
-                                        </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
-                                                    className={`m-0 ps-2 fw-normal ${togglePassword ? 'show-password' : 'hide-password'}`}>
-                                            tSHH6@g+F+r_6fvTXy_WQGL
-                                            <IconButton color="secondary" aria-label="show-hide-password" className={`mx-2`} component="span" size={'small'}
-                                            onClick={() => setPassword(!togglePassword)}>
-                                                { togglePassword ? <HiEyeOff /> : <HiEye /> }
-                                            </IconButton>
-                                        </Typography>
-                                    </Box>
-                                    <Box className="my-1">
-                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
-                                            Date Of Birth
-                                        </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
-                                                    className={`m-0 ps-2 fw-normal`}>
-                                            {record && record.dob}
-                                        </Typography>
-                                    </Box>
-                                    <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
                                             {publishedRecords}
                                         </Typography>
                                     </Box>
-                                    {record && record.is_pro && (
-                                        <Box className="my-1">
-                                            <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
-                                                This member is professional
-                                            </Typography>
-                                        </Box>
-                                    )}
                                     {startDate && (
                                         <Box className="my-1">
                                             <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
@@ -207,6 +210,14 @@ const Index = () => {
                                             </Typography>
                                         </Box>
                                     )}
+                                    <Box className="my-1">
+                                        <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
+                                            {(record && record.is_pro)
+                                                ? 'This member is professional'
+                                                : 'This member is not professional'
+                                            }
+                                        </Typography>
+                                    </Box>
                                 </Box>
                                 <Box align="right">
                                     <ButtonBase>
