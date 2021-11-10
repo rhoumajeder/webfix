@@ -69,14 +69,21 @@ export const useVolumeSlider = (defaultValue) => {
     marks.findIndex((mark) => mark.value === defaultValue)
   );
 
-  const handleVolumeChange = (event, val) => {
+  const setMaxVolume = (value) => {
     setSelectionIndex(
-      marks.findIndex((mark) => mark.value === val)
+      marks.findIndex((mark) => mark.value === value)
     )
   };
 
+
+  const handleVolumeChange = (event, val) => {
+    setMaxVolume(val)
+  };
+
   return {
+    setMaxVolume,
     selectedIndex,
+    setSelectionIndex,
     handleVolumeChange,
     sliderMarks: marks,
     maxVolume: marks[selectedIndex].value,

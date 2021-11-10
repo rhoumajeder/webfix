@@ -9,6 +9,8 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import Slider from "@material-ui/core/Slider";
+import useVolumeSlider from "../../hooks/useVolumeSlider";
 import TravelCard from "../../components/TravelCard/TravelCard";
 import { ScreenContext } from "../../helpers/context";
 import LuggageCheck from "../../components/LuggageCheck/LuggageCheck";
@@ -49,6 +51,8 @@ const Index = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const screen = React.useContext(ScreenContext);
 
+  const {maxVolume, sliderMarks, setSelectionIndex} = useVolumeSlider(0);
+
   useEffect(() => {
     axiosInstance
       .get(`get-record/${match.params.id}/`)
@@ -68,6 +72,7 @@ const Index = ({ match }) => {
 
         res.data.sub_records = Object.values(group);
         setRecord(res.data);
+        setSelectionIndex(res.data.max_volume - 1)
         setLoading(false);
       })
       .catch((err) => console.log(err.response));
@@ -223,24 +228,47 @@ const Index = ({ match }) => {
 
             <Card className={"shadow py-2 my-3"}>
               <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h6"
-                  color="textPrimary"
-                  gutterBottom
-                  className={`m-0 me-1 fw-medium`}
-                >
-                  Description
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  component="h6"
-                  color="textPrimary"
-                  gutterBottom
-                  className={`m-0 me-1 fw-normal`}
-                >
-                  {record && record.description}
-                </Typography>
+                <Box>
+                  <Typography
+                    variant="h6"
+                    component="h6"
+                    color="textPrimary"
+                    gutterBottom
+                    className={`m-0 me-1 fw-medium`}
+                  >
+                    Description
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    component="h6"
+                    color="textPrimary"
+                    gutterBottom
+                    className={`m-0 me-1 fw-normal`}
+                  >
+                    {record && record.description}
+                  </Typography>
+                </Box>
+                <hr/>
+                <Box>
+                  <Typography
+                    variant="h6"
+                    component="h6"
+                    color="textPrimary"
+                    gutterBottom
+                    className={`m-0 me-1 fw-medium`}
+                  >
+                    Max Volume
+                  </Typography>
+                  <Box className="px-3 pb-5 mb-5">
+                    <Slider
+                      step={null}
+                      valueLabelDisplay="off"
+                      marks={sliderMarks}
+                      name={"max_volume"}
+                      value={maxVolume}
+                    />
+                  </Box>
+                </Box>
               </CardContent>
             </Card>
 
