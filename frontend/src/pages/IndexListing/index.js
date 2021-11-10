@@ -208,9 +208,9 @@ const CardListing = (props) => {
                   viewButton={
                     <Button
                       variant="contained"
-                      color="primary"
                       style={{ marginTop: "10px" }}
-                      disabled={recordDateExpired}
+                      // disabled={recordDateExpired}
+                      {...(!recordDateExpired ? {color: 'primary'} : {})}
                     >
                       <Link
                         style={{
