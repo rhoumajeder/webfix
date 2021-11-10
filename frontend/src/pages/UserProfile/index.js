@@ -160,10 +160,6 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Current Password
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal show-password`}>
-                                            tSHH6@g+F+r_6fvTXy_WQGL
-                                        </Typography>
                                     </Box>
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
