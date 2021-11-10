@@ -1,11 +1,12 @@
 import React, {useState, useContext} from 'react';
 import {Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles, ButtonBase} from "@material-ui/core";
 import {GiCheckMark} from "react-icons/gi";
-import {HiEye, HiEyeOff} from "react-icons/hi";
 import {BiEdit} from "react-icons/bi";
 import moment from 'moment';
 
 import "./index.css";
+import usePagination from "../../hooks/usePagination";
+import CustomPagination from "../../components/Pagination/Pagination";
 import { AuthContext } from "../../context/auth";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import Header from "../../components/Header/Header";
@@ -15,24 +16,17 @@ import ProfileFeedback from "../../components/Feedback/ProfileFeedback";
 import UserProfileModal from '../../components/UserProfileModal/UserProfileModal';
 
 
-const useStyles = makeStyles(theme => ({
-    gridItem: {
-        backgroundColor: theme.palette.background.paper
-    },
-    feedback: {
-        textDecoration: "underline",
-        fontWeight: "bold",
-        "&:hover": {
-            cursor: 'pointer',
-        }
-    }
-}))
+const PAGE_SIZE = 5;
 
 const Index = () => {
-
-    const [togglePassword, setPassword] = React.useState(false);
     const [tab, setTab] = React.useState(0);
     const [record, setRecord] = useContext(AuthContext)
+    const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
+        record.received_feedback,
+        PAGE_SIZE
+    );
+    const feedbackToShow = getCurrentData();
+    const onPageChange = (event, value) => changePage(value);
 
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -50,8 +44,6 @@ const Index = () => {
 		setReportModalOpen(true);
 	};
 
-    const classes = useStyles()
-
     const publishedRecords = (
         (record ? record.records.length : 0)
         + ' record'
@@ -60,7 +52,6 @@ const Index = () => {
     )
 
     const startDate = record ? moment(record.start_date).format('YYYY') : null
-    const fullName = `${record.first_name} ${record.last_name}`
 
 
     const onSubmitUserFrom = (data) => {
@@ -111,7 +102,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Name
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6"
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.first_name}
                                         </Typography>
@@ -121,7 +112,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Last Name
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6"
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.last_name}
                                         </Typography>
@@ -131,7 +122,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Email Address
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6"
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.email}
                                         </Typography>
@@ -145,7 +136,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Phone Number
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6"
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.phone_number}
                                         </Typography>
@@ -159,7 +150,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Date Of Birth
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6"
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.dob}
                                         </Typography>
@@ -169,13 +160,9 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Current Password
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
-                                                    className={`m-0 ps-2 fw-normal ${togglePassword ? 'show-password' : 'hide-password'}`}>
+                                        <Typography display="inline" variant="body2" component="h6"
+                                                    className={`m-0 ps-2 fw-normal show-password`}>
                                             tSHH6@g+F+r_6fvTXy_WQGL
-                                            <IconButton color="secondary" aria-label="show-hide-password" className={`mx-2`} component="span" size={'small'}
-                                            onClick={() => setPassword(!togglePassword)}>
-                                                { togglePassword ? <HiEyeOff /> : <HiEye /> }
-                                            </IconButton>
                                         </Typography>
                                     </Box>
                                     <Box className="my-1">
@@ -183,7 +170,7 @@ const Index = () => {
                                                     className={`m-0 fw-bold`}>
                                             Current Address
                                         </Typography>
-                                        <Typography display="inline" variant="body2" component="h6" gutterBottom
+                                        <Typography display="inline" variant="body2" component="h6"
                                                     className={`m-0 ps-2 fw-normal`}>
                                             {record && record.address}
                                         </Typography>
@@ -262,13 +249,22 @@ const Index = () => {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        {record && record.received_feedback.map(feedback => (
+                                        {record && feedbackToShow.map(feedback => (
                                             <Grid item sm={9} xs={12} className="w-100" key={feedback.id}>
                                                 <ProfileFeedback star={feedback.note} text={feedback.text} user={feedback.writer.username} />
                                             </Grid>
                                         ))}
                                     </Grid>
                                 </TabPanel>
+                                <Box align='center' className="pt-4">
+                                    <CustomPagination
+                                        itemCount={record.received_feedback.length}
+                                        itemsPerPage={PAGE_SIZE}
+                                        onPageChange={onPageChange}
+                                        currentPage={currentPage}
+                                        pageCount={pageCount}
+                                    />
+                                </Box>
                             </CardContent>
                         </Card>
                     </Grid>
