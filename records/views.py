@@ -50,10 +50,10 @@ class SubRecordBulkInsertView(APIView):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def create_record(request):
-    record_count = Record.objects.filter(user=request.user).count()
+    # record_count = Record.objects.filter(user=request.user).count()
 
-    if record_count > 1:
-        return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
+    # if record_count > 1:
+    #     return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = RecordSerializer(data=request.data)
 
@@ -93,7 +93,9 @@ def delete_record(request, pk):
 
 @api_view(["GET"])
 def get_all_records(request):
-    records = Record.objects.all().order_by('-updated_at')
+    records = Record.objects.filter(
+        approved=True
+    ).order_by('-updated_at')
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
     date = request.GET.get("date", "")
