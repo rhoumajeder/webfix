@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 import UserAvatar from "../UserAvatar/UserAvatar";
 import TravelCard from "../TravelCard/TravelCard";
@@ -34,6 +35,15 @@ import { useParams } from "react-router";
 import moment from "moment";
 
 const PAGE_SIZE = 3;
+
+const Toggler = ({children}) => {
+  const [isVisiable, setVisiable] = useState(true)
+  return children({
+    isVisiable,
+    setVisiable
+  })
+}
+
 
 const ListItemCard = (props) => {
   const [user, setUser] = useContext(AuthContext);
@@ -87,78 +97,93 @@ const ListItemCard = (props) => {
                 className={"shadow py-3 position-relative mt-4"}
 
               >
-                <CardContent className={"px-0"}>
-                  <Box component={"div"} className={"my-2"}>
-                    {record.type === "Propose" ? (
-                      <TravelCard
+                <Toggler>
+                  {({isVisiable, setVisiable}) => (
+                    <CardContent className={"px-0"}>
+                      <Box component={"div"} className={"my-2"}>
+                        {record.type === "Propose" ? (
+                          <TravelCard
 
-                        recordInputInfo={true}
-                        hasAvatar={true}
-                        hasShadow={false}
-                        username={record.user.username}
-                        record={record}
-                        user={record.user}
-                      />
-                    ) : (
-                      <div>
-                        <TravelCard
-                          user={record.user}
-                          itemTable={true}
+                            recordInputInfo={true}
+                            hasAvatar={true}
+                            hasShadow={false}
+                            username={record.user.username}
+                            record={record}
+                            user={record.user}
+                          />
+                        ) : (
+                          <div>
+                            <TravelCard
+                              user={record.user}
+                              itemTable={true}
 
-                          hasAvatar={true}
-                          hasShadow={false}
-                          username={record.user.username}
-                          record={record}
-                          hasViewButton={true}
-                          viewButton={
-                            <Button
-                              variant="contained"
+                              hasAvatar={true}
+                              hasShadow={false}
+                              username={record.user.username}
+                              record={record}
+                              hasViewButton={true}
+                              viewButton={
+                                <Button
+                                  variant="contained"
 
-                              color="primary"
-                              style={{ marginTop: "10px" }}
+                                  color="primary"
+                                  style={{ marginTop: "10px" }}
+                                >
+                                  <Link
+                                    style={{
+                                      textDecoration: "inherit",
+                                      color: "inherit",
+                                    }}
+                                    to={`/ask-record-details/${record.id}`}
+                                  >
+                                    View
+                                  </Link>
+                                </Button>
+                              }
+                            />
+                          </div>
+                        )}
+
+                        <Grid container direction="row" justify="space-between" className="border-top border-bottom py-2 my-2">
+                          <Grid item>
+                            <Typography
+                              variant="subtitle1"
+                              component="h6"
+                              color="textSecondary"
+                              className="fw-bold m-0 my-2 px-3"
                             >
-                              <Link
-                                style={{
-                                  textDecoration: "inherit",
-                                  color: "inherit",
-                                }}
-                                to={`/ask-record-details/${record.id}`}
+                              {record.propositions.length}{" "}
+                              {props.itemType === "offer"
+                                ? "Offers Disponibles"
+                                : "Requests Disponibles"}
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <ButtonBase onClick={() => setVisiable(!isVisiable)}>
+                              <Typography
+                                variant="subtitle1"
+                                component="h6"
+                                className="fw-bold m-0 my-2 px-3 text-decoration-underline text-primary"
                               >
-                                View
-                              </Link>
-                            </Button>
-                          }
+                                Hide/Show
+                              </Typography>
+                            </ButtonBase>
+                          </Grid>
+                        </Grid>
+                      </Box>
+
+                      {isVisiable && (
+                        <Propositions
+                          askProposition={record.type === "Propose" ? false : true}
+                          propositions={record.propositions}
+                          itemType={"offer"}
+                          fetchItems={fetchItems}
+                          disabled={disabled}
                         />
-                      </div>
-                    )}
-
-                    <Box
-                      component={"div"}
-                      className={"border-top border-bottom py-2 my-2"}
-                    >
-                      <Typography
-                        variant="subtitle1"
-                        component="h6"
-                        color="textSecondary"
-                        gutterBottom
-                        className="fw-bold m-0 my-2 px-3"
-                      >
-                        {record.propositions.length}{" "}
-                        {props.itemType === "offer"
-                          ? "Offers Disponibles"
-                          : "Requests Disponibles"}
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Propositions
-                    askProposition={record.type === "Propose" ? false : true}
-                    propositions={record.propositions}
-                    itemType={"offer"}
-                    fetchItems={fetchItems}
-                    disabled={disabled}
-                  />
-                </CardContent>
+                      )}
+                    </CardContent>
+                  )}
+                </Toggler>
               </Card>
             );
           })

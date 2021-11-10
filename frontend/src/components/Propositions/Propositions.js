@@ -11,7 +11,7 @@ import CustomPagination from "../Pagination/Pagination";
 
 import { Link } from "react-router-dom";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 4;
 
 const Propositions = (props) => {
   const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
