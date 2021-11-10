@@ -34,7 +34,9 @@ const UserProfileModal = ({profile, onSuccess, ...props}) => {
 
   const [profilePic, setProfilePic] = useState(profileImage)
 
-  const [dobValue, setDobValue] = useState(moment(profile.dob).format("YYYY-MM-DD"))
+  const [dobValue, setDobValue] = useState(moment(
+    profile.dob || (new Date())
+  ).format("YYYY-MM-DD"))
 
 
   const [isPassDirty, setPassDirty] = useState(false)
