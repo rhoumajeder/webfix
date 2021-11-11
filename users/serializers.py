@@ -82,15 +82,20 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         write_only=True, required=False, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True, required=False)
+    old_password = serializers.CharField(write_only=True, required=False)
 
     def validate(self, attrs):
         if ('password' in attrs) and ('confirm_password' in attrs):
+            if 'old_password' not in attrs:
+                raise serializers.ValidationError(
+                    {"old_passwrd": "Old Password fields is required."})
             if attrs['password'] != attrs['confirm_password']:
                 raise serializers.ValidationError(
                     {"password": "Password fields didn't match."})
         return attrs
 
     def update(self, instance, validated_data, *args, **kwargs):
+        old_pass = validated_data.pop('old_password', None)
         password = validated_data.pop('password', None)
         password2 = validated_data.pop("confirm_password", None)
         photo = validated_data.get("photo", None)
@@ -106,14 +111,16 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         instance.dob = validated_data.get('dob', instance.dob)
 
         if password is not None:
-            instance.set_password(password)
+            if instance.check_password(old_pass):
+                instance.set_password(password)
         instance.save()
         return instance
 
     class Meta:
         model = CustomUser
-        fields = ["id", "intro", "last_name", "first_name", "phone_number", "address", "photo", 'dob', 'password', 'confirm_password']
-        optional_fields = ["photo", 'password', 'confirm_password']
+        fields = ["id", "intro", "last_name", "first_name", "phone_number", "address", "photo",
+            'dob', 'password', 'confirm_password', 'old_password']
+        optional_fields = ["photo", 'password', 'confirm_password', 'old_password']
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
