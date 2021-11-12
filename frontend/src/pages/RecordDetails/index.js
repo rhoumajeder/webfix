@@ -99,6 +99,13 @@ const Index = ({ match }) => {
   };
 
   const openInteractionTable = () => {
+    if(!user.username){
+      const qs = new URLSearchParams(
+        `next=${history.location.pathname}`
+      )
+      history.push(`/login/?${qs.toString()}`)
+      return
+    }
     setDynamicRows((prevState) => {
       const newTableData = [...prevState];
       console.log(newTableData);
@@ -412,9 +419,7 @@ const Index = ({ match }) => {
                       className="ms-auto my-2"
                       variant="outlined"
                       color={"primary"}
-                      disabled={user.username ? (
-                        recordDateExpired ? true : false
-                      ) : true}
+                      disabled={recordDateExpired}
                       onClick={openInteractionTable}
                       size="large"
                     >
