@@ -34,7 +34,7 @@ import { useParams } from "react-router";
 
 import moment from "moment";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 4;
 
 const Toggler = ({children}) => {
   const [isVisiable, setVisiable] = useState(true)
@@ -58,6 +58,19 @@ const ListItemCard = (props) => {
 
   const onPageChange = (event, value) => changePage(value);
 
+
+  const {
+    currentPage: recordsCurrentPage,
+    getCurrentData: getRecordsCurrentData,
+    changePage: changeRecordsPage,
+    pageCount: countRecordsPage
+  } = usePagination(
+    records,
+    PAGE_SIZE
+  );
+
+  const recordsData = getRecordsCurrentData()
+
   // Fetch all records for user
   const fetchItems = () => {
     if (props.itemType === "offer") {
@@ -79,9 +92,9 @@ const ListItemCard = (props) => {
 
   if (props.itemType === "offer") {
     return (
-      <div>
+      <Card className="shadow">
         {records.length > 0 ? (
-          records.map((record) => {
+          recordsData.map((record) => {
             let disabled = false;
             const recordDateExpired = moment(record.date).isBefore(
               new Date(),
@@ -165,7 +178,7 @@ const ListItemCard = (props) => {
                                 component="h6"
                                 className="fw-bold m-0 my-2 px-3 text-decoration-underline text-primary"
                               >
-                                Hide/Show
+                                {isVisiable ? "Hide" : "Show"}
                               </Typography>
                             </ButtonBase>
                           </Grid>
@@ -201,7 +214,16 @@ const ListItemCard = (props) => {
             </CardContent>
           </Card>
         )}
-      </div>
+        <Box className="border-top mt-5 py-3">
+          <CustomPagination
+            itemCount={records.length}
+            itemsPerPage={PAGE_SIZE}
+            onPageChange={(e, value) => changeRecordsPage(value)}
+            currentPage={recordsCurrentPage}
+            pageCount={countRecordsPage}
+          />
+        </Box>
+      </Card>
     );
   } else {
     return (
