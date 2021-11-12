@@ -84,7 +84,7 @@ const Propositions = (props) => {
           </Box>
         );
       })}
-      <div style={{ marginTop: "20px", marginLeft: "20px" }}>
+      <div style={{ marginTop: "20px" }}>
         <CustomPagination
           itemCount={props.propositions.length}
           itemsPerPage={PAGE_SIZE}

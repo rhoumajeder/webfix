@@ -8,6 +8,7 @@ import {
   Grid,
   TextField,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -18,8 +19,20 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 import { ScreenContext } from "../../helpers/context";
 import { Link } from "react-router-dom";
 
+
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    [theme.breakpoints.up('md')]: {
+      minHeight: '100vh'
+    },
+  }
+}))
+
+
 const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
   const screen = React.useContext(ScreenContext);
+  const classes = useStyles()
 
   const validateEmail = () => {
     if (formData.email.length < 1) return false;
@@ -57,9 +70,9 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
         spacing={0}
         alignItems="center"
         justify="center"
-        style={{ minHeight: "100vh" }}
+        className={classes.root}
       >
-        <Grid item md={4} sm={6} xs={10}>
+        <Grid item xs={12} md={10}>
           <Card className={"my-5"}>
             <CardContent>
               {type === "Login" && (
@@ -83,7 +96,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
               {type === "Register" ? (
                 <TextField
                   required
-                  id="username"
+                  id={`${type}_username`}
                   name={"username"}
                   InputLabelProps={{ shrink: false }}
                   style={{ minWidth: "100px" }}
@@ -98,7 +111,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
               ) : null}
               <TextField
                 required
-                id="email"
+                id={`${type}_email`}
                 name={"email"}
                 InputLabelProps={{ shrink: false }}
                 style={{ minWidth: "100px" }}
@@ -115,7 +128,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
 
               <TextField
                 required
-                id="password"
+                id={`${type}_password`}
                 InputLabelProps={{ shrink: false }}
                 style={{ minWidth: "100px" }}
                 placeholder={"Enter Password"}
@@ -134,7 +147,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                 <React.Fragment>
                   <TextField
                     required
-                    id="password2"
+                    id={`${type}_password2`}
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}
                     placeholder={"Confirm Password"}
@@ -150,7 +163,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                     fullWidth
                   />
                   <TextField
-                    id="phone_number"
+                    id={`${type}_phone_number`}
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}
                     placeholder={"Enter Phone Number"}
@@ -165,7 +178,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                   />
                   {/* <TextField
                                         required
-                                        id="city"
+                                        id={"${type}_city"}
                                         InputLabelProps={{shrink: false}}
                                         style={{minWidth: '100px'}}
                                         placeholder={"Enter City Name"}
@@ -177,7 +190,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                                         fullWidth/>
                                     <TextField
                                         required
-                                        id="address"
+                                        id={"${type}_address"}
                                         InputLabelProps={{shrink: false}}
                                         style={{minWidth: '100px'}}
                                         placeholder={"Enter Complete Address"}
@@ -193,7 +206,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                                         format="DD MMM, yyyy"
                                         margin="normal"
                                         fullWidth
-                                        id="dob"
+                                        id={"${type}_dob"}
                                         placeholder="Date Of Birth"
                                         value={formData.dob}
                                         color={"primary"}
@@ -216,7 +229,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
             </CardContent>
             <CardActions className={"px-3 d-block text-center"}>
               <Button
-                id="btn_login"
+                id={`${type}_btn_login`}
                 type={"submit"}
                 disabled={isValid !== true}
                 color="primary"
@@ -227,33 +240,15 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                 {type === "Register" ? "Register" : "Login"}
               </Button>
               <Box component={"div"} className={"my-3"}>
-                {type === "Register" && (
+                {type === "Login" && (
                   <Typography
                     variant={"body1"}
                     color={"textSecondary"}
                     className={"fw-normal my-2"}
                   >
-                    Already a member? <Link to="/login"> Login </Link>
+                    Forgot your password?{" "}
+                    <Link to="/reset-password"> Reset password </Link>
                   </Typography>
-                )}
-                {type === "Login" && (
-                  <React.Fragment>
-                    <Typography
-                      variant={"body1"}
-                      color={"textSecondary"}
-                      className={"fw-normal my-2"}
-                    >
-                      New on this site? <Link to="/register"> Register </Link>
-                    </Typography>
-                    <Typography
-                      variant={"body1"}
-                      color={"textSecondary"}
-                      className={"fw-normal my-2"}
-                    >
-                      Forgot your password?{" "}
-                      <Link to="/reset-password"> Reset password </Link>
-                    </Typography>
-                  </React.Fragment>
                 )}
               </Box>
             </CardActions>

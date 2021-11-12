@@ -333,21 +333,12 @@ const Header = () => {
               <Button
                 color="secondary"
                 variant="contained"
-                style={{ marginRight: "10px" }}
               >
                 <Link
                   style={{ color: "inherit", textDecoration: "inherit" }}
                   to="/login"
                 >
-                  Login
-                </Link>
-              </Button>
-              <Button color="primary" variant="contained">
-                <Link
-                  style={{ color: "inherit", textDecoration: "inherit" }}
-                  to="/register"
-                >
-                  Sign Up
+                  Login / Register
                 </Link>
               </Button>
             </React.Fragment>
