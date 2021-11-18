@@ -65,7 +65,7 @@ def create_record(request):
 
 @api_view(["GET"])
 def get_record(request, pk):
-    record = get_object_or_404(Record, id=pk)
+    record = get_object_or_404(Record, id=pk, deleted=False)
     serializer = RecordDetailSerializer(record)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -87,14 +87,16 @@ def update_record(request, pk):
 @permission_classes([IsAuthenticated])
 def delete_record(request, pk):
     record = get_object_or_404(Record, id=pk)
-    record.delete()
+    record.deleted = True
+    record.save()
     return Response("Record Deleted", status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
 def get_all_records(request):
     records = Record.objects.filter(
-        approved=True
+        approved=True,
+        deleted=False
     ).order_by('-updated_at')
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")

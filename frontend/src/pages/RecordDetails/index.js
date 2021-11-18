@@ -69,6 +69,14 @@ const Index = ({ match }) => {
     && (user.id === record.user.id)
   ))
 
+  const deleteRecord = () => {
+    axiosInstance
+      .delete(`delete-record/${record.id}/`)
+      .then((res) => {
+        history.goBack()
+      })
+  }
+
   useEffect(() => {
     axiosInstance
       .get(`get-record/${match.params.id}/`)
@@ -411,21 +419,30 @@ const Index = ({ match }) => {
                       );
                     })}
 
-                  <Box
-                    component={"div"}
-                    className={"d-flex align-items-center justify-content-end"}
-                  >
-                    <Button
-                      className="ms-auto my-2"
-                      variant="outlined"
-                      color={"primary"}
-                      disabled={recordDateExpired}
-                      onClick={openInteractionTable}
-                      size="large"
-                    >
-                      Interact
-                    </Button>
-                  </Box>
+                  <Grid container direction="row" justify="space-between">
+                    <Grid item>
+                      <Button
+                        size="large"
+                        variant="outlined"
+                        onClick={deleteRecord}
+                        className="ms-auto my-2 text-danger"
+                      >
+                        Delete
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        className="ms-auto my-2"
+                        variant="outlined"
+                        color={"primary"}
+                        disabled={recordDateExpired}
+                        onClick={openInteractionTable}
+                        size="large"
+                      >
+                        Interact
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Box>
               )}
             </Grid>
