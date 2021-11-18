@@ -1,5 +1,6 @@
 import jwt
 from django.conf import settings
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from jwt import DecodeError
 from rest_framework import generics, status
@@ -33,6 +34,14 @@ def sign_up(request):
 @permission_classes([IsAuthenticated])
 def get_user(request):
     user = request.user
+    serializer = UserSerializer(user)
+    return Response({"user": serializer.data})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_details(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
     serializer = UserSerializer(user)
     return Response({"user": serializer.data})
 

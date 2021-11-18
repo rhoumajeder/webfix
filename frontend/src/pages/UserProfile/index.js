@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles, ButtonBase} from "@material-ui/core";
 import {GiCheckMark} from "react-icons/gi";
 import {BiEdit} from "react-icons/bi";
@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import "./index.css";
 import usePagination from "../../hooks/usePagination";
+import axiosInstance from '../../helpers/axios';
 import CustomPagination from "../../components/Pagination/Pagination";
 import { AuthContext } from "../../context/auth";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
@@ -18,9 +19,25 @@ import UserProfileModal from '../../components/UserProfileModal/UserProfileModal
 
 const PAGE_SIZE = 5;
 
-const Index = () => {
+
+const Index = (props) => {
+    const targetUserId = isNaN(props.match.params.user) ? null : (
+        parseInt(props.match.params.user)
+    )
     const [tab, setTab] = React.useState(0);
-    const [record, setRecord] = useContext(AuthContext)
+    const [targetUser, setTargetUser] = useState()
+    const [authUser, setAuthUser] = useContext(AuthContext)
+    const record = targetUser || authUser
+    useEffect(() => {
+        if(targetUserId && (targetUserId != authUser.id)){
+            axiosInstance
+                .get(`auth/get-user/${targetUserId}`)
+                .then(res => {
+                    setTargetUser(res.data.user)
+                })
+        }
+    }, [targetUserId])
+
     const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
         record.received_feedback,
         PAGE_SIZE
@@ -55,7 +72,7 @@ const Index = () => {
 
 
     const onSubmitUserFrom = (data) => {
-        setRecord(data)
+        setAuthUser(data)
     }
 
 
@@ -88,14 +105,16 @@ const Index = () => {
                                                 Contact Information
                                             </Typography>
                                         </Grid>
-                                        <Grid item>
-                                            <IconButton
-                                                size="small"
-                                                onClick={() => setUserProfileModalOpen(true)}
-                                            >
-                                                <BiEdit />
-                                            </IconButton>
-                                        </Grid>
+                                        {(!targetUserId || (targetUserId == authUser.id)) && (
+                                            <Grid item>
+                                                <IconButton
+                                                    size="small"
+                                                    onClick={() => setUserProfileModalOpen(true)}
+                                                >
+                                                    <BiEdit />
+                                                </IconButton>
+                                            </Grid>
+                                        )}
                                     </Grid>
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
@@ -307,6 +326,9 @@ const TabPanel = (props) => {
         </div>
     );
 }
+
+
+export const UserProfileDetails = (props) => <Index {...props} />
 
 
 export default Index;

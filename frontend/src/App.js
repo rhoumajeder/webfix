@@ -11,7 +11,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 
 import IndexListing from "./pages/IndexListing";
-import UserProfile from "./pages/UserProfile";
+import UserProfile, {UserProfileDetails} from "./pages/UserProfile";
 import RecordDetails from "./pages/RecordDetails";
 import CreateRecord from "./pages/CreateRecord";
 import ListRequests from "./pages/ListRequests";
@@ -130,6 +130,12 @@ const App = () => {
                     exact
                     path={"/user-profile"}
                     component={UserProfile}
+                    isAuthenticated={isAuthenticated}
+                  />
+                  <PrivateRoute
+                    exact
+                    path={"/user-profile/:user"}
+                    component={UserProfileDetails}
                     isAuthenticated={isAuthenticated}
                   />
                   <Route

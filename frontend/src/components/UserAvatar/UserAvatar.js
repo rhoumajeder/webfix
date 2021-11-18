@@ -1,10 +1,12 @@
 import React from "react";
-import { Avatar, Box, Typography } from "@material-ui/core";
+import { Avatar, Box, Typography, ButtonBase } from "@material-ui/core";
+import {Link} from 'react-router-dom';
 import Rating from "@material-ui/lab/Rating";
 
 import "./UserAvatar.css";
 
 const UserAvatar = (props) => {
+  const user = props.user
   const getAverageRating = () => {
     let totalRating = 0;
 
@@ -40,7 +42,16 @@ const UserAvatar = (props) => {
         className="fw-bold m-0"
       >
         {" "}
-        {props.name ? props.name : "Unknown"}{" "}
+        {user && user.id && (
+          <Link to={`/user-profile/${user.id}`}>
+            <ButtonBase>
+              {props.name ? props.name : "Unknown"}
+            </ButtonBase>
+          </Link>
+        ) || (
+          props.name ? props.name : "Unknown"
+        )}
+        {" "}
       </Typography>
       {props.hasRating && (
         <Box
