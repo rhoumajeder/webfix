@@ -225,8 +225,9 @@ const Header = () => {
                 <Avatar
                   alt="Remy Sharp"
                   src={
-                    require("../../assets/images/placeholder-avatar.png")
-                      .default
+                    user.photo ? user.photo : require(
+                      "../../assets/images/placeholder-avatar.png"
+                    ).default
                   }
                 />
                 {open ? (
