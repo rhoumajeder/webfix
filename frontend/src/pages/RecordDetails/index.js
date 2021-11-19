@@ -9,6 +9,9 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import moment from "moment"
+import Slider from "@material-ui/core/Slider";
+import useVolumeSlider from "../../hooks/useVolumeSlider";
 import TravelCard from "../../components/TravelCard/TravelCard";
 import { ScreenContext } from "../../helpers/context";
 import LuggageCheck from "../../components/LuggageCheck/LuggageCheck";
@@ -44,10 +47,35 @@ const Index = ({ match }) => {
   const { addToast } = useToasts();
   let history = useHistory();
   const [record, setRecord] = useState({ created_by: null });
+  const recordDateExpired = moment(record.date).isBefore(
+    new Date(),
+    "day"
+  );
   const [categories, setCategories] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
   const [loading, setLoading] = useState(true);
   const screen = React.useContext(ScreenContext);
+
+  const {maxVolume, sliderMarks, setSelectionIndex} = useVolumeSlider(0);
+
+  const isRecordVisiable = (record.approved || (
+    user
+    && (user.id !== null)
+    && (user.id !== undefined)
+    && record
+    && record.user
+    && (record.user.id !== null)
+    && (record.user.id !== undefined)
+    && (user.id === record.user.id)
+  ))
+
+  const deleteRecord = () => {
+    axiosInstance
+      .delete(`delete-record/${record.id}/`)
+      .then((res) => {
+        history.goBack()
+      })
+  }
 
   useEffect(() => {
     axiosInstance
@@ -68,6 +96,7 @@ const Index = ({ match }) => {
 
         res.data.sub_records = Object.values(group);
         setRecord(res.data);
+        setSelectionIndex(res.data.max_volume - 1)
         setLoading(false);
       })
       .catch((err) => console.log(err.response));
@@ -78,6 +107,13 @@ const Index = ({ match }) => {
   };
 
   const openInteractionTable = () => {
+    if(!user.username){
+      const qs = new URLSearchParams(
+        `next=${history.location.pathname}`
+      )
+      history.push(`/login/?${qs.toString()}`)
+      return
+    }
     setDynamicRows((prevState) => {
       const newTableData = [...prevState];
       console.log(newTableData);
@@ -203,182 +239,220 @@ const Index = ({ match }) => {
       <Header />
 
       <Container className="py-5">
-        <Grid container direction="row" justify="center" spacing={1}>
-          <Grid
-            item
-            md={8}
-            xs={12}
-            className={`my-2 ${screen.width <= 768 ? "order-last" : "order-first"
-              }`}
-          >
-            {record.user ? (
-              <TravelCard
-                recordInputInfo={true}
-                username={record.user.username}
-                user={record.user}
-                record={record}
-                hasShadow={true}
-              />
-            ) : null}
+        {isRecordVisiable ? (
+          <Grid container direction="row" justify="center" spacing={1}>
+            <Grid
+              item
+              md={8}
+              xs={12}
+              className={`my-2 ${screen.width <= 768 ? "order-last" : "order-first"
+                }`}
+            >
+              {record.user ? (
+                <TravelCard
+                  recordInputInfo={true}
+                  username={record.user.username}
+                  user={record.user}
+                  record={record}
+                  hasShadow={true}
+                />
+              ) : null}
 
-            <Card className={"shadow py-2 my-3"}>
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="h6"
-                  color="textPrimary"
-                  gutterBottom
-                  className={`m-0 me-1 fw-medium`}
-                >
-                  Description
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  component="h6"
-                  color="textPrimary"
-                  gutterBottom
-                  className={`m-0 me-1 fw-normal`}
-                >
-                  {record && record.description}
-                </Typography>
-              </CardContent>
-            </Card>
-
-            {categories ? (
-              <Card className={`shadow py-2 my-3`}>
+              <Card className={"shadow py-2 my-3"}>
                 <CardContent>
-                  <Box
-                    component={"div"}
-                    className={
-                      "d-flex align-items-center justify-content-between"
-                    }
-                  >
-                    <Button
-                      onClick={handleCategories}
-                      color="default"
-                      startIcon={<IoArrowBack />}
-                    >
-                      Back
-                    </Button>
-                  </Box>
-                  {record &&
-                    record.sub_records &&
-                    record.sub_records.map((value, index) => {
-                      if (
-                        objectInArray(dynamicRows, "category", value.category)
-                      ) {
-                        return (
-                          <div>
-                            <ItemTable
-                              inputTable={true}
-                              setDynamicRows={setDynamicRows}
-                              rows={dynamicRows}
-                              title={value.category}
-                              isCheckboxDisabled={true}
-                              hasCheckbox={false}
-                              hasTitle={true}
-                              // hasPagination={true}
-                              headings={[
-                                {
-                                  text: "Name",
-                                  isTextInput: false,
-                                  default: "name",
-                                },
-                                {
-                                  text: "Quantity",
-                                  isTextInput: true,
-                                  default: "quantity",
-                                  inputType: "number",
-                                },
-                                {
-                                  text: "Weight",
-                                  isTextInput: true,
-                                  default: "weight",
-                                  inputType: "number",
-                                },
-                                {
-                                  text: "Price",
-                                  isTextInput: false,
-                                  default: "price",
-                                },
-                              ]}
-                            />
-                          </div>
-                        );
-                      }
-                    })}
-
                   <Box>
-                    <CreateItemTable
-                      setRows={setDynamicRows}
-                      rows={dynamicRows}
-                      submitItems={submitItems}
-                      priceRequired={false}
-                    />
+                    <Typography
+                      variant="h6"
+                      component="h6"
+                      color="textPrimary"
+                      gutterBottom
+                      className={`m-0 me-1 fw-medium`}
+                    >
+                      Description
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      component="h6"
+                      color="textPrimary"
+                      gutterBottom
+                      className={`m-0 me-1 fw-normal`}
+                    >
+                      {record && record.description}
+                    </Typography>
+                  </Box>
+                  <hr/>
+                  <Box>
+                    <Typography
+                      variant="h6"
+                      component="h6"
+                      color="textPrimary"
+                      gutterBottom
+                      className={`m-0 me-1 fw-medium`}
+                    >
+                      Max Volume
+                    </Typography>
+                    <Box className="px-3 pb-5 mb-5">
+                      <Slider
+                        step={null}
+                        valueLabelDisplay="off"
+                        marks={sliderMarks}
+                        name={"max_volume"}
+                        value={maxVolume}
+                      />
+                    </Box>
                   </Box>
                 </CardContent>
               </Card>
-            ) : (
-              <Box component={"div"}>
-                {record &&
-                  record.sub_records &&
-                  record.sub_records.map((value, index) => {
-                    return (
-                      <div style={{ marginTop: "10px" }}>
-                        <ItemTable
-                          inputTable={false}
-                          title={value.category}
-                          headings={[
-                            {
-                              text: "Name",
-                              isTextInput: false,
-                              default: "name",
-                            },
-                            {
-                              text: "Quantity",
-                              isTextInput: false,
-                              default: "max_quantity",
-                            },
-                            {
-                              text: "Weight",
-                              isTextInput: false,
-                              default: "max_weight",
-                            },
-                            {
-                              text: "Price",
-                              isTextInput: false,
-                              default: "price",
-                            },
-                          ]}
-                          rows={value.items}
-                          hasCheckbox={true}
-                          setDynamicRows={setDynamicRows}
-                          dynamicRows={dynamicRows}
-                        />
-                      </div>
-                    );
-                  })}
 
-                <Box
-                  component={"div"}
-                  className={"d-flex align-items-center justify-content-end"}
-                >
-                  <Button
-                    className="ms-auto my-2"
-                    variant="outlined"
-                    color={"primary"}
-                    disabled={user.username ? false : true}
-                    onClick={openInteractionTable}
-                    size="large"
-                  >
-                    Interact
-                  </Button>
+              {categories ? (
+                <Card className={`shadow py-2 my-3`}>
+                  <CardContent>
+                    <Box
+                      component={"div"}
+                      className={
+                        "d-flex align-items-center justify-content-between"
+                      }
+                    >
+                      <Button
+                        onClick={handleCategories}
+                        color="default"
+                        startIcon={<IoArrowBack />}
+                      >
+                        Back
+                      </Button>
+                    </Box>
+                    {record &&
+                      record.sub_records &&
+                      record.sub_records.map((value, index) => {
+                        if (
+                          objectInArray(dynamicRows, "category", value.category)
+                        ) {
+                          return (
+                            <div>
+                              <ItemTable
+                                inputTable={true}
+                                setDynamicRows={setDynamicRows}
+                                rows={dynamicRows}
+                                title={value.category}
+                                isCheckboxDisabled={true}
+                                hasCheckbox={false}
+                                hasTitle={true}
+                                // hasPagination={true}
+                                headings={[
+                                  {
+                                    text: "Name",
+                                    isTextInput: false,
+                                    default: "name",
+                                  },
+                                  {
+                                    text: "Quantity",
+                                    isTextInput: true,
+                                    default: "quantity",
+                                    inputType: "number",
+                                  },
+                                  {
+                                    text: "Weight",
+                                    isTextInput: true,
+                                    default: "weight",
+                                    inputType: "number",
+                                  },
+                                  {
+                                    text: "Price",
+                                    isTextInput: false,
+                                    default: "price",
+                                  },
+                                ]}
+                              />
+                            </div>
+                          );
+                        }
+                      })}
+
+                    <Box>
+                      <CreateItemTable
+                        setRows={setDynamicRows}
+                        rows={dynamicRows}
+                        submitItems={submitItems}
+                        priceRequired={false}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Box component={"div"}>
+                  {record &&
+                    record.sub_records &&
+                    record.sub_records.map((value, index) => {
+                      return (
+                        <div style={{ marginTop: "10px" }}>
+                          <ItemTable
+                            inputTable={false}
+                            title={value.category}
+                            headings={[
+                              {
+                                text: "Name",
+                                isTextInput: false,
+                                default: "name",
+                              },
+                              {
+                                text: "Quantity",
+                                isTextInput: false,
+                                default: "max_quantity",
+                              },
+                              {
+                                text: "Weight",
+                                isTextInput: false,
+                                default: "max_weight",
+                              },
+                              {
+                                text: "Price",
+                                isTextInput: false,
+                                default: "price",
+                              },
+                            ]}
+                            rows={value.items}
+                            hasCheckbox={true}
+                            setDynamicRows={setDynamicRows}
+                            dynamicRows={dynamicRows}
+                          />
+                        </div>
+                      );
+                    })}
+
+                  <Grid container direction="row" justify="space-between">
+                    <Grid item>
+                      <Button
+                        size="large"
+                        variant="outlined"
+                        onClick={deleteRecord}
+                        className="ms-auto my-2 text-danger"
+                      >
+                        Delete
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        className="ms-auto my-2"
+                        variant="outlined"
+                        color={"primary"}
+                        disabled={recordDateExpired}
+                        onClick={openInteractionTable}
+                        size="large"
+                      >
+                        Interact
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Box>
-              </Box>
-            )}
+              )}
+            </Grid>
+            <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
           </Grid>
-          <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
-        </Grid>
+        ) : (
+          <Box className="translate-middle position-absolute top-50 start-50">
+            <Typography variant="h2">Page not found</Typography>
+          </Box>
+        )}
       </Container>
     </Box>
   );

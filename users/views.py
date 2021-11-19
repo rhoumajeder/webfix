@@ -1,5 +1,6 @@
 import jwt
 from django.conf import settings
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from jwt import DecodeError
 from rest_framework import generics, status
@@ -12,7 +13,7 @@ from rest_framework.views import APIView
 from users.errors import UserAlreadyExistsError
 from users.models import CustomUser
 from users.serializers import (
-    CustomUserSerializer, UserSerializer, UserDetailSerializer)
+    CustomUserSerializer, UserSerializer, UserDetailSerializer, UserUpdateSerializer)
 from users.utils import send_reset_email
 
 
@@ -33,6 +34,14 @@ def sign_up(request):
 @permission_classes([IsAuthenticated])
 def get_user(request):
     user = request.user
+    serializer = UserSerializer(user)
+    return Response({"user": serializer.data})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_details(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
     serializer = UserSerializer(user)
     return Response({"user": serializer.data})
 
@@ -75,6 +84,13 @@ def change_password(request):
     user.save()
 
     return HttpResponse(status=status.HTTP_200_OK)
+
+@api_view(['PUT', 'PATCH'])
+def update_profile(request):
+    serializer = UserUpdateSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.update(request.user, serializer.validated_data)
+    return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

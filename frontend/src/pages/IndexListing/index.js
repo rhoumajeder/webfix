@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Box, Container, Paper } from "@material-ui/core";
+import { Box, Container, Paper, makeStyles } from "@material-ui/core";
 
 import Header from "../../components/Header/Header";
 import Typography from "@material-ui/core/Typography";
@@ -30,7 +30,19 @@ import moment from "moment"
 
 const PAGE_SIZE = 3;
 
+
+const useStyles = makeStyles(theme => ({
+  pageHeader: {
+    height: 'unset',
+    borderBottomLeftRadius: '10% 15% !important',
+    borderBottomRightRadius: '10% 15% !important',
+  }
+}))
+
+
+
 const Index = () => {
+  const classes = useStyles()
   // State for tracking active record type
   const [recordType, setRecordType] = useState({
     propose: true,
@@ -76,7 +88,7 @@ const Index = () => {
     <Box component="div">
       <Header />
 
-      <Box component={Paper} className="page-header shadow">
+      <Box component={Paper} className={`page-header shadow pb-5 mb-5 ${classes.pageHeader}`}>
         <Box component={"div"}>
           <Typography
             variant="h5"
@@ -137,8 +149,6 @@ const CardListing = (props) => {
               <Grid
                 container
                 direction="row"
-                justify="left"
-                alignItems="left"
                 spacing={3}
               >
                 <Grid
@@ -198,9 +208,9 @@ const CardListing = (props) => {
                   viewButton={
                     <Button
                       variant="contained"
-                      color="primary"
                       style={{ marginTop: "10px" }}
-                      disabled={recordDateExpired}
+                      // disabled={recordDateExpired}
+                      {...(!recordDateExpired ? {color: 'primary'} : {})}
                     >
                       <Link
                         style={{

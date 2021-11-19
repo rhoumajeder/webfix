@@ -56,6 +56,21 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
+const markAsSeen = (notifications) => {
+  localStorage.setItem('seenNotifications', JSON.stringify(notifications))
+}
+
+const hasNewNotification = (notifications) => {
+  const oldNotifications = JSON.parse(
+    localStorage.getItem('seenNotifications')
+  ) || []
+
+  return (notifications.findIndex(notification => !(
+    oldNotifications.includes(notification)
+  ))) !== -1
+}
+
 const Header = () => {
   let history = useHistory();
   const classes = useStyles()
@@ -67,6 +82,13 @@ const Header = () => {
   const notificationOpen = Boolean(anchorElNotification);
 
   const [user, setUser] = useContext(AuthContext);
+
+  const [isSeen, setSeenStatus] = React.useState(false);
+
+  const getAttention = objectInArray(notifications, "is_read", false) && hasNewNotification(
+    notifications.map(notification => notification.id)
+  ) && !isSeen
+
 
   // Get notifications for current user
   const getNotifications = () => {
@@ -130,6 +152,8 @@ const Header = () => {
 
   const handleNotificationMenu = (e) => {
     setAnchorElNotification(e.currentTarget);
+    setSeenStatus(true)
+    markAsSeen(notifications.map(notification => notification.id))
   };
 
   const handleClose = () => {
@@ -201,8 +225,9 @@ const Header = () => {
                 <Avatar
                   alt="Remy Sharp"
                   src={
-                    require("../../assets/images/placeholder-avatar.png")
-                      .default
+                    user.photo ? user.photo : require(
+                      "../../assets/images/placeholder-avatar.png"
+                    ).default
                   }
                 />
                 {open ? (
@@ -246,16 +271,6 @@ const Header = () => {
                       className="d-flex align-items-center justify-content-evenly"
                     >
                       <MdMail className="me-2 fs-5" /> Boite de réception
-                    </Box>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link to="/home" className="text-link">
-                    <Box
-                      component="span"
-                      className="d-flex align-items-center justify-content-evenly"
-                    >
-                      <FaListAlt className="me-2 fs-5" /> My Records
                     </Box>
                   </Link>
                 </MenuItem>
@@ -319,21 +334,12 @@ const Header = () => {
               <Button
                 color="secondary"
                 variant="contained"
-                style={{ marginRight: "10px" }}
               >
                 <Link
                   style={{ color: "inherit", textDecoration: "inherit" }}
                   to="/login"
                 >
-                  Login
-                </Link>
-              </Button>
-              <Button color="primary" variant="contained">
-                <Link
-                  style={{ color: "inherit", textDecoration: "inherit" }}
-                  to="/register"
-                >
-                  Sign Up
+                  Login / Register
                 </Link>
               </Button>
             </React.Fragment>
@@ -344,10 +350,10 @@ const Header = () => {
             <IconButton onClick={handleNotificationMenu}>
               <Badge
                 classes={{ badge: classes.redBadge }}
-                variant={
-                  objectInArray(notifications, "is_read", false) ? "dot" : ""
-                }
-                className={objectInArray(notifications, "is_read", false) ? classes.animatedBadge : ""}
+                {...(getAttention ? {
+                  variant: 'dot',
+                  className: classes.animatedBadge,
+                } : {})}
               >
                 <Notifications />
               </Badge>
@@ -392,34 +398,33 @@ const Header = () => {
                     };
                   }
 
-                  return (
-                    <React.Fragment>
-                      <MenuItem>
-                        <div
-                          className="d-flex align-items-center"
-                          onClick={() =>
-                            redirectWithNotification(link, notification.id)
-                          }
-                        >
-                          <Avatar style={{ marginRight: "10px" }} />{" "}
-                          {notification.message}
-                        </div>
+                  return [(
+                    <MenuItem key={`menu-item-${notification.id}`}>
+                      <div
+                        className="d-flex align-items-center"
+                        onClick={() =>
+                          redirectWithNotification(link, notification.id)
+                        }
+                      >
+                        <Avatar style={{ marginRight: "10px" }} />{" "}
+                        {notification.message}
+                      </div>
+                      <IconButton
+                        onClick={() => deleteNotification(notification.id)}
+                      >
+                        <Close color="action" />
+                      </IconButton>
+                      {!notification.is_read && (
                         <IconButton
-                          onClick={() => deleteNotification(notification.id)}
+                          onClick={() => markAsRead(notification.id)}
                         >
-                          <Close color="action" />
+                          <FiberManualRecord color="primary" />
                         </IconButton>
-                        {!notification.is_read && (
-                          <IconButton
-                            onClick={() => markAsRead(notification.id)}
-                          >
-                            <FiberManualRecord color="primary" />
-                          </IconButton>
-                        )}
-                      </MenuItem>
-                      <Divider />
-                    </React.Fragment>
-                  );
+                      )}
+                    </MenuItem>
+                  ), (
+                    <Divider key={`divider-${notification.id}`} />
+                  )]
                 })
               ) : (
                 <MenuItem>You have no notifications</MenuItem>

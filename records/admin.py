@@ -1,11 +1,12 @@
 from django.contrib import admin
-from records.models import Record, CustomUser, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback
+from records.models import Record, CustomUser, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
 
 # Register your models here.
 admin.site.register(SubRecord)
 admin.site.register(PropositionItemImage)
 admin.site.register(AskRecordItemImage)
 admin.site.register(Feedback)
+admin.site.register(Report)
 
 
 class SubRecordInline(admin.TabularInline):

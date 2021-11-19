@@ -9,10 +9,11 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser
 
 from .filters import RecordFilter
-from records.models import Record, SubRecord, Proposition, PropositionItem, AskRecordItem, AskRecordItemImage, Feedback
+from records.models import Record, SubRecord, Proposition, PropositionItem, AskRecordItem, AskRecordItemImage, Feedback, Report
 from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, SubRecordSerializer, PropositionSerializer,
-    PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer)
+    PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
+    ReportSerializer)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 from notifications.utils import create_notification
@@ -49,10 +50,10 @@ class SubRecordBulkInsertView(APIView):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def create_record(request):
-    record_count = Record.objects.filter(user=request.user).count()
+    # record_count = Record.objects.filter(user=request.user).count()
 
-    if record_count > 1:
-        return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
+    # if record_count > 1:
+    #     return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = RecordSerializer(data=request.data)
 
@@ -64,7 +65,7 @@ def create_record(request):
 
 @api_view(["GET"])
 def get_record(request, pk):
-    record = get_object_or_404(Record, id=pk)
+    record = get_object_or_404(Record, id=pk, deleted=False)
     serializer = RecordDetailSerializer(record)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -86,13 +87,17 @@ def update_record(request, pk):
 @permission_classes([IsAuthenticated])
 def delete_record(request, pk):
     record = get_object_or_404(Record, id=pk)
-    record.delete()
+    record.deleted = True
+    record.save()
     return Response("Record Deleted", status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
 def get_all_records(request):
-    records = Record.objects.all().order_by('-updated_at')
+    records = Record.objects.filter(
+        approved=True,
+        deleted=False
+    ).order_by('-updated_at')
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
     date = request.GET.get("date", "")
@@ -293,6 +298,22 @@ def create_feedback(request, receiver_email):
         return Response("You have already left feedback for this user", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = FeedbackSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save(writer=request.user, receiver=receiver)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def report_user(request, receiver_email):
+    receiver = get_object_or_404(CustomUser, email=receiver_email)
+
+    if Report.objects.filter(writer=request.user, receiver=receiver).exists():
+        return Response("You have already left report for this user", status=status.HTTP_400_BAD_REQUEST)
+
+    serializer = ReportSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save(writer=request.user, receiver=receiver)

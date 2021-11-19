@@ -37,6 +37,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(_("email address"), unique=True)
     first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+    intro = models.TextField(blank=True, null=True)
     phone_number = models.CharField(
         _("phone number"), unique=True, max_length=20, null=True, blank=True)
     city = models.CharField(max_length=50, blank=True, null=True)
@@ -44,6 +46,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     photo = models.FileField(null=True, blank=True)
     gender = models.BooleanField(null=True, blank=True)
     dob = models.DateField(null=True, blank=True)
+    is_pro = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     start_date = models.DateTimeField(auto_now_add=True)

@@ -19,8 +19,9 @@ import {
   TextField,
   InputAdornment,
   FormHelperText,
-  Select,
-  Menu,
+  makeStyles,
+  Box,
+  Slider,
 } from "@material-ui/core";
 import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
 import { FaSearch } from "react-icons/fa";
@@ -29,8 +30,25 @@ import { ExpandMore } from "@material-ui/icons";
 import moment from "moment";
 
 import cities from "../../helpers/cities";
+import useVolumeSlider from "../../hooks/useVolumeSlider";
+
+
+const useStyles = makeStyles(theme => ({
+  positionFix: {
+    marginTop: '5px !important',
+  }
+}))
 
 const Search = (props) => {
+  const {maxVolume, sliderMarks, handleVolumeChange: setVolume} = useVolumeSlider(0);
+  const handleVolumeChange = (e, value) => {
+    props.setFilters({
+      ...props.filters,
+      max_volume: sliderMarks.findIndex(marks => marks.value === value) + 1
+    })
+    setVolume(e, value)
+  }
+  const classes = useStyles()
   const { propose, ask } = props.recordType;
   const [currentDate, setCurrentDate] = useState(
     moment(new Date()).format("YYYY-MM-DD")
@@ -173,7 +191,7 @@ const Search = (props) => {
                 </div>
               </FormControl>
             </Grid>
-            <Grid item md={4} sm={6} xs={12} className="my-2">
+            <Grid item md={4} sm={6} xs={12}>
               <SelectBoxExtended
                 labelId={"ville-de-depart"}
                 options={cities}
@@ -183,7 +201,7 @@ const Search = (props) => {
                 onChange={handleSelectChange}
               />
             </Grid>
-            <Grid item md={4} sm={6} xs={12} className="my-2">
+            <Grid item md={4} sm={6} xs={12}>
               <SelectBoxExtended
                 labelId={"ville-de-destination"}
                 label={"Ville De Destination"}
@@ -193,7 +211,7 @@ const Search = (props) => {
                 onChange={handleSelectChange}
               />
             </Grid>
-            <Grid item md={4} xs={12} className="my-2">
+            <Grid item md={4} xs={12}>
               <KeyboardDatePicker
                 disableToolbar
                 autoOk
@@ -215,8 +233,7 @@ const Search = (props) => {
                 }}
               />
             </Grid>
-            <Grid item md={12} sm={12} xs={12} className="my-2">
-
+            <Grid item xs={12} className="my-2">
               <Accordion expanded={showAdvancedFilters} onChange={handleAdvancedFilters}>
                 <AccordionSummary
                   expandIcon={<ExpandMore />}
@@ -225,70 +242,74 @@ const Search = (props) => {
                 >
                   <Typography>Advanced filters</Typography>
                 </AccordionSummary>
-                <AccordionDetails style={{ width: "80%" }}>
-                  <Grid item md={4} sm={6} xs={12} className="my-2">
-                    <TextField
-                      variant="outlined"
-                      type={"number"}
-                      id="outlined-start-adornment"
-                      onChange={handleInputChange}
-                      name="max_weight"
-                      size="small"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">kg</InputAdornment>
-                        ),
-                        inputProps: {
-                          min: 0,
-                        },
-                      }}
-                      value={
-                        props.filters.max_weight ? props.filters.max_weight : 0
-                      }
-                    />
-                    <FormHelperText>Weight</FormHelperText>
-                  </Grid>
-                  <Grid item md={4} sm={6} xs={12} className="my-2">
-                    <TextField
-                      size="small"
-                      type={"number"}
-                      variant="outlined"
-                      id="outlined-start-adornment"
-                      name="max_volume"
-                      onChange={handleInputChange}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">L</InputAdornment>
-                        ),
-                        inputProps: {
-                          min: 0,
-                        },
-                      }}
-                      value={
-                        props.filters.max_volume ? props.filters.max_volume : 0
-                      }
-                    />
-                    <FormHelperText>Volume</FormHelperText>
-                  </Grid>
-                  <Grid item md={4} sm={6} xs={12}>
-                    <SelectBoxExtended
-                      style={{ zIndex: 100 }}
-                      labelId={"moyen-de-transport"}
-                      label={"Moyen de transport"}
-                      options={transportOptions}
-                      name={"moyen_de_transport"}
-                      placeholder={"Moyen de transport"}
-                      onChange={handleSelectChange}
-                      className="my-2"
-                      value={
-                        props.filters.moyen_de_transport
-                          ? transportOptions.filter(
-                            (option) =>
-                              props.filters.moyen_de_transport === option.value
-                          )
-                          : ""
-                      }
-                    />
+                <AccordionDetails>
+                  <Grid container spacing={1} alignItems="flex-start" direction="row">
+                    <Grid item sm={6} xs={12} className={classes.positionFix}>
+                      <TextField
+                        variant="outlined"
+                        type={"number"}
+                        id="outlined-start-adornment"
+                        onChange={handleInputChange}
+                        name="max_weight"
+                        size="small"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">kg</InputAdornment>
+                          ),
+                          inputProps: {
+                            min: 0,
+                          },
+                        }}
+                        value={
+                          props.filters.max_weight ? props.filters.max_weight : 0
+                        }
+                        fullWidth
+                      />
+                      <FormHelperText>Weight</FormHelperText>
+                    </Grid>
+                    <Grid item sm={6} xs={12}>
+                      <SelectBoxExtended
+                        style={{ zIndex: 100 }}
+                        labelId={"moyen-de-transport"}
+                        label={"Moyen de transport"}
+                        options={transportOptions}
+                        name={"moyen_de_transport"}
+                        placeholder={"Moyen de transport"}
+                        onChange={handleSelectChange}
+                        className="my-2"
+                        value={
+                          props.filters.moyen_de_transport
+                            ? transportOptions.filter(
+                              (option) =>
+                                props.filters.moyen_de_transport === option.value
+                            )
+                            : ""
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12} className="mb-5">
+                      <Typography
+                        variant={"subtitle2"}
+                        color={"textPrimary"}
+                        className={"fw-bold my-2"}
+                      >
+                        Max Volume:
+                      </Typography>
+                      <Box
+                        component={"div"}
+                        className={"px-3 pb-5 position-relative"}
+                      >
+                        <Slider
+                          step={null}
+                          valueLabelDisplay="off"
+                          marks={sliderMarks}
+                          defaultValue={0}
+                          name={"max_volume"}
+                          value={maxVolume}
+                          onChange={handleVolumeChange}
+                        />
+                      </Box>
+                    </Grid>
                   </Grid>
                 </AccordionDetails>
               </Accordion>

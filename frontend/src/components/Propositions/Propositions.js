@@ -11,7 +11,7 @@ import CustomPagination from "../Pagination/Pagination";
 
 import { Link } from "react-router-dom";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 4;
 
 const Propositions = (props) => {
   const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
@@ -84,7 +84,7 @@ const Propositions = (props) => {
           </Box>
         );
       })}
-      <div style={{ marginTop: "20px", marginLeft: "20px" }}>
+      <div style={{ marginTop: "20px" }}>
         <CustomPagination
           itemCount={props.propositions.length}
           itemsPerPage={PAGE_SIZE}

@@ -39,6 +39,8 @@ class Record(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="records", null=True, blank=True)
     disabled = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
     phone_number = models.CharField(max_length=20, null=True)
 
     def __str__(self):
@@ -167,3 +169,16 @@ class Feedback(models.Model):
 
     def __str__(self):
         return str(self.note)
+
+
+class Report(models.Model):
+    writer = models.ForeignKey(
+        CustomUser, related_name="written_report", on_delete=models.CASCADE, null=True)
+    receiver = models.ForeignKey(
+        CustomUser, related_name="received_report", on_delete=models.CASCADE, null=True)
+    text = models.TextField(max_length=400)
+    created_at = models.DateTimeField(auto_now_add=True)
+    validated = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.text)

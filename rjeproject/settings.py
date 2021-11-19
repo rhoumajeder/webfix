@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'rjeproject.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
 DATABASES = {
@@ -173,6 +173,15 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+
+AWS_S3_ACCESS_KEY_ID = 'AKIA2EUF2OOHLNMUS57O'
+AWS_S3_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'storage-test-rje'
+AWS_QUERYSTRING_AUTH = False
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
