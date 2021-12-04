@@ -40,6 +40,29 @@ const CreateItemTable = (props) => {
     });
   };
 
+  function getButton() {
+    if (props.isloading) {
+      return (
+        <Button
+        color="primary"
+        variant={"contained"}
+      >
+        Uploading...
+      </Button>
+      
+      );
+    }
+    else {
+      return (<Button
+        onClick={props.submitItems}
+        color="primary"
+        variant={"contained"}
+      >
+        Save changes
+      </Button>);
+    }
+  }
+
   return (
     <React.Fragment>
       <Box component={"div"} className={"my-3"}>
@@ -88,7 +111,7 @@ const CreateItemTable = (props) => {
       </Box>
       <Box
         component={"div"}
-        className={"d-flex align-items-center justify-content-end"}
+        className={"d-flex flex-column align-items-end justify-content-end"}
       >
         <Button
           color="primary"
@@ -97,20 +120,20 @@ const CreateItemTable = (props) => {
           onClick={addRow}
         >
           Add Item
+
         </Button>
-      </Box>
-      <Box
+        <Box
         component={"div"}
-        className={"d-flex align-items-center justify-content-end"}
+        className={""}
       >
-        <Button
-          onClick={props.submitItems}
-          color="primary"
-          variant={"contained"}
-        >
-          Save changes
-        </Button>
+        {getButton}
+
+       
       </Box>
+       
+
+      </Box>
+     
     </React.Fragment>
   );
 };

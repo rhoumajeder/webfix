@@ -54,3 +54,6 @@ pip-delete-this-directory.txt
 
 frontend/node_modules/
 .vscode/settings.json
+db.sqlite3
+Pipfile
+rjeproject/settings.py

@@ -37,6 +37,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { AuthContext } from "../../context/auth";
 
 const CreateAskRecord = (props) => {
+
   let history = useHistory();
   const { addToast } = useToasts();
   const [user, setUser] = useContext(AuthContext)
@@ -134,6 +135,8 @@ const CreateAskRecord = (props) => {
   const handleInputChange = (e) => {
     setAskRecord({ ...askRecord, [e.target.name]: e.target.value });
   };
+  const [isloading, setisLoading] = useState(false);
+
 
   // Submit record to database
   const submitItems = () => {
@@ -159,6 +162,7 @@ const CreateAskRecord = (props) => {
                 axiosInstance
                   .post(`create-record/`, askRecord)
                   .then((res) => {
+                    let ps = []
                     if (res.data.id) {
                       const recordId = res.data.id;
                       axiosInstance
@@ -166,25 +170,58 @@ const CreateAskRecord = (props) => {
                         .then((res) => {
                           itemFiles.forEach((fileArr, index) => {
                             fileArr.forEach((file) => {
-                              let data = new FormData();
-                              data.append("image", file);
+                              if (fileArr[fileArr.length - 1] === file) {
+                                console.log("last element")
+                                setisLoading(true);
+                                let data = new FormData();
+                                data.append("image", file);
 
-                              fileAxios
-                                .post(
-                                  `create-ask-record-item-images/${res.data[index].id}/`,
-                                  data
-                                )
-                                .then((res) => {
-                                  console.log(res.data);
-                                })
-                                .catch((err) => {
-                                  console.log(err.response);
-                                });
+                                fileAxios
+                                  .post(
+                                    `create-ask-record-item-images/${res.data[index].id}/`,
+                                    data
+                                  )
+                                  .then((res) => {
+                                    console.log(res.data);
+
+                                    Promise.all(ps).then(
+                                      () => {
+
+                                        addToast("Record created", { appearance: "success" });
+                                        history.push(`/ask-record-details/${recordId}`);
+                                        history.go();
+
+                                      }
+                                    )
+
+                                  })
+                                  .catch((err) => {
+                                    console.log(err.response);
+                                  });
+
+                              }
+                              else {
+                                let data = new FormData();
+                                data.append("image", file);
+
+                                let p = fileAxios
+                                  .post(
+                                    `create-ask-record-item-images/${res.data[index].id}/`,
+                                    data
+                                  )
+                                  .then((res) => {
+                                    console.log(res.data);
+                                  })
+                                  .catch((err) => {
+                                    console.log(err.response);
+                                  });
+                                ps.push(p)
+
+                              }
+
                             });
                           });
-                          addToast("Record created", { appearance: "success" });
-                          history.push(`/ask-record-details/${recordId}`);
-                          history.go();
+
                         })
                         .catch((err) => {
                           addToast("There was an error", { appearance: "error" });
@@ -210,8 +247,16 @@ const CreateAskRecord = (props) => {
       });
   };
 
+  
+
+
   return (
+    
+
+
     <Grid container direction="row" alignItems="center" justify="center">
+      
+     
       <Grid item xl={8} md={10} xs={12} className="my-5">
         <Card className={"shadow"}>
           <CardContent>
@@ -345,6 +390,7 @@ const CreateAskRecord = (props) => {
                   <CreateItemTable
                     setRows={setRows}
                     rows={rows}
+                    isloading={isloading}
                     submitItems={submitItems}
                     priceRequired={true}
                   />

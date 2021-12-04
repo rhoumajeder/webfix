@@ -3,7 +3,9 @@ const webpack = require("webpack");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
+  
   entry: "./src/index.js",
+
   output: {
     path: path.resolve(__dirname, "./static/frontend"),
     filename: "[name].js",
