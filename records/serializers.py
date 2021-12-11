@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
-from records.models import Record, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
+from records.models import Record, Captcha, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
 from users.serializers import UserSerializer
 
 
@@ -17,6 +17,13 @@ class SubRecordSerializer(ModelSerializer):
 
     class Meta:
         model = SubRecord
+        fields = "__all__"
+
+
+class CaptchaSerializer(ModelSerializer):
+
+    class Meta:
+        model = Captcha
         fields = "__all__"
 
 

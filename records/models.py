@@ -182,3 +182,15 @@ class Report(models.Model):
 
     def __str__(self):
         return str(self.text)
+
+class Captcha(models.Model):
+    all_form = models.BooleanField(default=False)
+    reg_form = models.BooleanField(default=False)
+    login_form = models.BooleanField(default=False)
+    annonce_form = models.BooleanField(default=False)
+    demande_form = models.BooleanField(default=False)
+    search_form = models.BooleanField(default=False)
+
+    
+
+

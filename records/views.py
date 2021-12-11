@@ -11,13 +11,13 @@ from rest_framework.parsers import MultiPartParser
 from .filters import RecordFilter
 from records.models import Record, SubRecord, Proposition, PropositionItem, AskRecordItem, AskRecordItemImage, Feedback, Report
 from records.serializers import (
-    PropositionItemImageSerializer, RecordListSerializer, SubRecordSerializer, PropositionSerializer,
+    PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
     ReportSerializer)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 from notifications.utils import create_notification
-
+from records.models import Captcha
 import datetime
 
 
@@ -68,6 +68,19 @@ def get_record(request, pk):
     record = get_object_or_404(Record, id=pk, deleted=False)
     serializer = RecordDetailSerializer(record)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def get_recaptcha(request):
+    cs = Captcha.objects.all()
+    if cs:
+        c = cs[0]
+        serializer = CaptchaSerializer(c)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+
+
 
 
 @api_view(["POST"])

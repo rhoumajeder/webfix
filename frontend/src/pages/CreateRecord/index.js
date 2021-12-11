@@ -145,7 +145,7 @@ const Index = (props) => {
 
   const [record, setRecord] = React.useState(Records);
 
-  const {sliderMarks: marks} = useVolumeSlider(0);
+  const { sliderMarks: marks } = useVolumeSlider(0);
 
   let transportOptions = [
     {
@@ -409,8 +409,36 @@ const Index = (props) => {
       setRecord({ ...record, [name]: value });
     }
   };
+  const handleRecordSubmission = async () => {
+    let x = await props.recaptchaRef.current.executeAsync()
+    alert(x)
+    axiosInstance
+      .post("auth/verify_recaptcha", { recaptcha_token: x })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 400) {
+          addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+            appearance: "error",
+          });
+          return
 
-  const handleRecordSubmission = () => {
+        } else if (res.status === 200) {
+          return handleRecordSubmissionAfter();
+
+        }
+
+      })
+      .catch((err) => {
+        addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+          appearance: "error",
+        });
+        return
+
+
+      })
+  }
+
+  const handleRecordSubmissionAfter = async () => {
     const validationSubRecords = [...subRecords];
 
     validationSubRecords.forEach((subRecord, index, object) => {
@@ -422,9 +450,12 @@ const Index = (props) => {
     console.log("Submitted")
     console.log(validationSubRecords)
 
+
+
+
     recordSchema
       .validate(record)
-      .then(function (valid) {
+      .then(async function (valid) {
         if (valid) {
           subRecordSchema
             .validate(validationSubRecords)
@@ -482,6 +513,7 @@ const Index = (props) => {
 
   return (
     <Grid container direction="row" alignItems="center" justify="center">
+
       <Grid item xl={8} md={10} xs={12} className="my-5">
         <Card className={"shadow"}>
           <CardContent>
