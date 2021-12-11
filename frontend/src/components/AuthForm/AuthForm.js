@@ -15,9 +15,12 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import moment from "moment";
+import ReCAPTCHA from "react-google-recaptcha";
+
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import { ScreenContext } from "../../helpers/context";
 import { Link } from "react-router-dom";
+
 
 
 
@@ -30,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
+const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) => {
   const screen = React.useContext(ScreenContext);
   const classes = useStyles()
 
@@ -227,7 +230,12 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid }) => {
                 </React.Fragment>
               )}
             </CardContent>
+
             <CardActions className={"px-3 d-block text-center"}>
+              {captcha}
+
+
+
               <Button
                 id={`${type}_btn_login`}
                 type={"submit"}

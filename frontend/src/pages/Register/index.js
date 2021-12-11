@@ -5,10 +5,14 @@ import { register } from "../../helpers/auth";
 import { useToasts } from "react-toast-notifications";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import * as yup from "yup";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 const Index = () => {
   const { addToast } = useToasts();
   const history = useHistory();
+  const recaptchaRef = React.useRef();
+
 
   let FormRecord = {
     username: "",
@@ -46,6 +50,10 @@ const Index = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const gRecaptchaRoken = recaptchaRef.current.execute();
+    console.log(gRecaptchaRoken)
+
+
 
     validFormSchema
       .validate(formData)
@@ -108,6 +116,11 @@ const Index = () => {
       setForm={setForm}
       formData={formData}
       isValid={isValid}
+      captcha={<ReCAPTCHA
+        sitekey="CAPTCHA PUBLIC KEY"
+        ref={recaptchaRef}
+        size="invisible"
+      />}
     />
   );
 };

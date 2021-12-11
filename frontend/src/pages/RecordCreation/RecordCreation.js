@@ -11,11 +11,16 @@ import "./RecordCreation.css";
 import Header from "../../components/Header/Header";
 import Index from "../CreateRecord";
 import CreateAskRecord from "../../components/CreateAskRecord/CreateAskRecord";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 const RecordCreation = () => {
   // Current record state
   const [recordToShow, setRecordToShow] = useState("");
   const [showRecords, setShowRecords] = useState(false);
+  var recaptchaRef = React.useRef();
+
+
 
   // Hanlders for showing and hiding records
   const hideAskRecord = () => {
@@ -36,6 +41,11 @@ const RecordCreation = () => {
   return (
     <div>
       <Header />
+      <ReCAPTCHA
+        sitekey="CAPTCHA PUBLIC KEY"
+        ref={recaptchaRef}
+        size="invisible"
+      />
       {recordToShow === "" && (
         <Container>
           <Grid container spacing={2} style={{ marginTop: "50px" }}>
@@ -56,9 +66,9 @@ const RecordCreation = () => {
       {showRecords && (
         <React.Fragment>
           {recordToShow === "ask" ? (
-            <CreateAskRecord goBack={goBack} />
+            <CreateAskRecord goBack={goBack} recaptchaRef={recaptchaRef} />
           ) : (
-            <Index goBack={goBack} />
+            <Index goBack={goBack} recaptchaRef={recaptchaRef} />
           )}
         </React.Fragment>
       )}
