@@ -1,4 +1,5 @@
 import jwt
+import requests
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
@@ -9,6 +10,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
+from ipware import get_client_ip
+from django.views.decorators.csrf import csrf_exempt
+
 
 from users.errors import UserAlreadyExistsError
 from users.models import CustomUser
@@ -131,3 +135,24 @@ def change_password_by_token(request):
     user.save()
 
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def verify_g_token(request):
+
+
+    x = requests.post(
+        "https://www.google.com/recaptcha/api/siteverify",
+        data={
+            'secret': 'SECRET KEY CAPTCHA',
+            'response': request.data['recaptcha_token'],
+            'remoteip': get_client_ip(request)
+        },
+        verify=True
+    ).json()
+
+    if x['success'] == True:
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    
+

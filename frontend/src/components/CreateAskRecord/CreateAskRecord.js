@@ -136,16 +136,45 @@ const CreateAskRecord = (props) => {
     setAskRecord({ ...askRecord, [e.target.name]: e.target.value });
   };
   const [isloading, setisLoading] = useState(false);
+  const submitItems = async () => {
+    let x = await props.recaptchaRef.current.executeAsync()
+    alert(x)
+    axiosInstance
+      .post("auth/verify_recaptcha", { recaptcha_token: x })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 400) {
+          addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+            appearance: "error",
+          });
+          return
 
+        } else if (res.status === 200) {
+          return submitItemAfter();
+
+        }
+
+      })
+      .catch((err) => {
+        addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+          appearance: "error",
+        });
+        return
+
+
+      })
+  }
 
   // Submit record to database
-  const submitItems = () => {
+  const submitItemAfter = () => {
+
 
 
     askRecordSchema
       .validate(askRecord)
       .then((valid) => {
         if (valid) {
+
           itemSchema
             .validate(rows)
             .then((valid) => {
@@ -247,16 +276,17 @@ const CreateAskRecord = (props) => {
       });
   };
 
-  
+
+
 
 
   return (
-    
+
 
 
     <Grid container direction="row" alignItems="center" justify="center">
-      
-     
+
+
       <Grid item xl={8} md={10} xs={12} className="my-5">
         <Card className={"shadow"}>
           <CardContent>
