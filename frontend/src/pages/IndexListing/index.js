@@ -188,49 +188,51 @@ const CardListing = (props) => {
               </Grid>
             </Grid>
             {/*To add more customer cards duplicate this grid... */}
-            {recordToShow.map((row, index) => {
-              const recordDateExpired = moment(row.date).isBefore(
-                new Date(),
-                "day"
-              );
+            {
+              recordToShow.map((row, index) => {
+                const recordDateExpired = moment(row.date).isBefore(
+                  new Date(),
+                  "day"
+                );
 
-              return (<Grid item lg={8} md={10} xs={12} className="my-2" key={index}>
-                <TravelCard
-                  disabled={recordDateExpired}
-                  recordInputInfo={row.type === "Propose" ? true : false}
-                  itemTable={row.type === "Propose" ? false : true}
-                  username={row.user.username}
-                  user={row.user}
-                  record={row}
-                  hasAvatar={true}
-                  hasShadow={true}
-                  hasViewButton={true}
-                  viewButton={
-                    <Button
-                      variant="contained"
-                      style={{ marginTop: "10px" }}
-                      // disabled={recordDateExpired}
-                      {...(!recordDateExpired ? {color: 'primary'} : {})}
-                    >
-                      <Link
-                        style={{
-                          textDecoration: "inherit",
-                          color: "inherit",
-                        }}
-                        to={
-                          row.type === "Propose"
-                            ? `record-details/${row.id}`
-                            : `ask-record-details/${row.id}`
-                        }
+                return (<Grid item lg={8} md={10} xs={12} className="my-2" key={index}>
+                  <TravelCard
+                    disabled={recordDateExpired}
+                    recordInputInfo={row.type === "Propose" ? true : false}
+                    itemTable={row.type === "Propose" ? false : true}
+                    typeRecord={row.type}
+                    username={row.user.username}
+                    user={row.user}
+                    record={row}
+                    hasAvatar={true}
+                    hasShadow={true}
+                    hasViewButton={true}
+                    viewButton={
+                      <Button
+                        variant="contained"
+                        style={{ marginTop: "10px" }}
+                        // disabled={recordDateExpired}
+                        {...(!recordDateExpired ? { color: 'primary' } : {})}
                       >
-                        View
-                      </Link>
-                    </Button>
-                  }
-                />
-              </Grid>)
-            }
-            )}
+                        <Link
+                          style={{
+                            textDecoration: "inherit",
+                            color: "inherit",
+                          }}
+                          to={
+                            row.type === "Propose"
+                              ? `record-details/${row.id}`
+                              : `ask-record-details/${row.id}`
+                          }
+                        >
+                          View
+                        </Link>
+                      </Button>
+                    }
+                  />
+                </Grid>)
+              }
+              )}
             <Grid item lg={8} md={10} xs={12} className="my-2 text-center">
               <CustomPagination
                 itemCount={props.records.length}

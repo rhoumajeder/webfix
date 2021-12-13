@@ -40,7 +40,7 @@ const TravelCard = (props) => {
   return (
     <Card
       className={`${props.hasShadow ? "shadow" : "shadow-none"}`}
-      style={{ backgroundColor: props.disabled ? "#f9f9f9" : "white" }}
+      style={{ backgroundColor: props.disabled && (props.typeRecord === 'Propose') ? "#f9f9f9" : "white" }}
     >
       <ConditionalWrapper
         wrapper={(children) => <CardActionArea>{children}</CardActionArea>}
@@ -66,9 +66,8 @@ const TravelCard = (props) => {
               item
               sm
               xs={12}
-              className={`my-2 ms-lg-2 ms-md-2 ms-sm-2 ${
-                screen.width <= 480 ? "mt-5" : ""
-              }`}
+              className={`my-2 ms-lg-2 ms-md-2 ms-sm-2 ${screen.width <= 480 ? "mt-5" : ""
+                }`}
             >
               <Grid
                 container
@@ -295,9 +294,8 @@ const TravelCardExtendedTables = ({ luggageTables }) => {
               item
               sm
               xs={12}
-              className={`my-2 ms-lg-2 ms-md-2 ms-sm-2 ${
-                screen.width <= 480 ? "mt-5" : ""
-              }`}
+              className={`my-2 ms-lg-2 ms-md-2 ms-sm-2 ${screen.width <= 480 ? "mt-5" : ""
+                }`}
             >
               <Box component={"div"} key={index} className={"px-1"}>
                 {data}
