@@ -1,7 +1,7 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles, ButtonBase} from "@material-ui/core";
-import {GiCheckMark} from "react-icons/gi";
-import {BiEdit} from "react-icons/bi";
+import React, { useState, useContext, useEffect } from 'react';
+import { Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles, ButtonBase } from "@material-ui/core";
+import { GiCheckMark } from "react-icons/gi";
+import { BiEdit } from "react-icons/bi";
 import moment from 'moment';
 
 import "./index.css";
@@ -29,7 +29,7 @@ const Index = (props) => {
     const [authUser, setAuthUser] = useContext(AuthContext)
     const record = targetUser || authUser
     useEffect(() => {
-        if(targetUserId && (targetUserId != authUser.id)){
+        if (targetUserId && (targetUserId != authUser.id)) {
             axiosInstance
                 .get(`auth/get-user/${targetUserId}`)
                 .then(res => {
@@ -48,23 +48,23 @@ const Index = (props) => {
     const handleChange = (event, newValue) => {
         setTab(newValue);
     };
-	const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+    const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
 
-	const openFeedbackModal = () => {
+    const openFeedbackModal = () => {
         setFeedbackModalOpen(true);
     };
 
     const [isUserProfileModalOpen, setUserProfileModalOpen] = useState(false);
 
     const [reportModalOpen, setReportModalOpen] = useState(false);
-	const openReportModal = () => {
-		setReportModalOpen(true);
-	};
+    const openReportModal = () => {
+        setReportModalOpen(true);
+    };
 
     const publishedRecords = (
         (record ? record.records.length : 0)
         + ' record'
-        + ((record && record.records.length > 1) ? 's' : '' )
+        + ((record && record.records.length > 1) ? 's' : '')
         + ' published'
     )
 
@@ -79,7 +79,7 @@ const Index = (props) => {
     return (
         <Box component={"div"}>
 
-            <Header/>
+            <Header />
 
             <Container className="py-5">
                 <Grid container direction="row" justify="center" spacing={1}>
@@ -101,7 +101,7 @@ const Index = (props) => {
                                     <Grid container direction="row" justify="space-between">
                                         <Grid item>
                                             <Typography variant="h6" component="h6" gutterBottom
-                                                        className={`m-0 me-1 fw-medium`}>
+                                                className={`m-0 me-1 fw-medium`}>
                                                 Contact Information
                                             </Typography>
                                         </Grid>
@@ -116,88 +116,90 @@ const Index = (props) => {
                                             </Grid>
                                         )}
                                     </Grid>
-                                    <Box className="my-1">
+                                    {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Name
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal`}>
+                                            className={`m-0 ps-2 fw-normal`}>
                                             {record && record.first_name}
                                         </Typography>
-                                    </Box>
-                                    <Box className="my-1">
+                                    </Box>}
+                                    {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Last Name
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal`}>
+                                            className={`m-0 ps-2 fw-normal`}>
                                             {record && record.last_name}
                                         </Typography>
-                                    </Box>
-                                    <Box className="my-1">
+                                    </Box>}
+                                    {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Email Address
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal`}>
+                                            className={`m-0 ps-2 fw-normal`}>
+                                            {console.log(record)}
+                                            {console.log(authUser)}
                                             {record && record.email}
                                         </Typography>
                                         <Typography variant="body2" component="span"
-                                                    className="ps-2">
-                                            {record && record.checked_email && <GiCheckMark className="text-success" /> }
+                                            className="ps-2">
+                                            {record && record.checked_email && <GiCheckMark className="text-success" />}
                                         </Typography>
-                                    </Box>
-                                    <Box className="my-1">
+                                    </Box>}
+                                    {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Phone Number
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal`}>
+                                            className={`m-0 ps-2 fw-normal`}>
                                             {record && record.phone_number}
                                         </Typography>
                                         <Typography variant="body2" component="span"
-                                                    className="ps-2">
-                                            {record && record.checked_phone && <GiCheckMark className="text-success" /> }
+                                            className="ps-2">
+                                            {record && record.checked_phone && <GiCheckMark className="text-success" />}
                                         </Typography>
-                                    </Box>
+                                    </Box>}
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Date Of Birth
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal`}>
+                                            className={`m-0 ps-2 fw-normal`}>
                                             {record && record.dob}
                                         </Typography>
                                     </Box>
-                                    <Box className="my-1">
+                                    {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Current Password
                                         </Typography>
-                                    </Box>
-                                    <Box className="my-1">
+                                    </Box>}
+                                    {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
-                                                    className={`m-0 fw-bold`}>
+                                            className={`m-0 fw-bold`}>
                                             Current Address
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
-                                                    className={`m-0 ps-2 fw-normal`}>
+                                            className={`m-0 ps-2 fw-normal`}>
                                             {record && record.address}
                                         </Typography>
                                         <Typography variant="body2" component="span"
-                                                    className="ps-2">
-                                            {record && record.checked_billet && <GiCheckMark className="text-success" /> }
+                                            className="ps-2">
+                                            {record && record.checked_billet && <GiCheckMark className="text-success" />}
                                         </Typography>
-                                    </Box>
+                                    </Box>}
                                 </Box>
                                 <Box className={'border-top border-2 py-3'}>
                                     <Typography variant="h6" component="h6" gutterBottom
-                                                className={`m-0 me-1 fw-medium`}>
+                                        className={`m-0 me-1 fw-medium`}>
                                         Other Details
                                     </Typography>
                                     <Box className="my-1">
@@ -221,7 +223,7 @@ const Index = (props) => {
                                         </Typography>
                                     </Box>
                                 </Box>
-                                <Box align="right">
+                                {!(targetUserId == authUser.id) && <Box align="right">
                                     <ButtonBase>
                                         <Typography
                                             variant="h6"
@@ -230,7 +232,7 @@ const Index = (props) => {
                                             Signalez ce membre
                                         </Typography>
                                     </ButtonBase>
-                                </Box>
+                                </Box>}
                             </CardContent>
                         </Card>
 
@@ -241,8 +243,8 @@ const Index = (props) => {
                             <CardContent>
                                 <Paper>
                                     <Tabs value={tab} onChange={handleChange}
-                                          aria-label="user-tab-profile" textColor={'secondary'}
-                                          variant={"scrollable"} scrollButtons="auto">
+                                        aria-label="user-tab-profile" textColor={'secondary'}
+                                        variant={"scrollable"} scrollButtons="auto">
                                         <Tab label="Feedback" id={`user-tab-${0}`} />
                                     </Tabs>
                                 </Paper>
@@ -251,7 +253,7 @@ const Index = (props) => {
                                         <Grid item xs={12}>
                                             <Grid container alignItems="flex-end" direction="column">
                                                 <Grid item>
-                                                    <ButtonBase>
+                                                    {!(targetUserId == authUser.id) && <ButtonBase>
                                                         <Typography
                                                             variant="h6"
                                                             component="span"
@@ -260,7 +262,7 @@ const Index = (props) => {
                                                         >
                                                             Add Feedbacks
                                                         </Typography>
-                                                    </ButtonBase>
+                                                    </ButtonBase>}
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -320,7 +322,7 @@ const TabPanel = (props) => {
         >
             {value === index && (
                 <Box p={1} pt={2}>
-					{children}
+                    {children}
                 </Box>
             )}
         </div>

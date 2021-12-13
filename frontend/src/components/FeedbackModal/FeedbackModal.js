@@ -9,6 +9,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
+import LoadingOverlay from 'react-loading-overlay';
 
 import Rating from "@material-ui/lab/Rating";
 
@@ -27,7 +28,7 @@ const style = {
 };
 
 const FeedbackModal = (props) => {
-  const [feedback, setFeedback] = useState({ text: "", note: 0 });
+  const [feedback, setFeedback] = useState({ text: "he is a good user", note: 2 });
   const { addToast } = useToasts();
 
   const changeRating = (event, newValue) => {
@@ -44,27 +45,42 @@ const FeedbackModal = (props) => {
 
   // Submit feedback
   const sendFeedback = () => {
-    axiosInstance
-      .post(`create-feedback/${props.receiver.email}/`, feedback)
-      .then((res) => {
-        console.log(res.data);
-        addToast("Feedback sent", { appearance: "success" });
-      })
-      .catch((err) => {
-        console.log(err.response);
-        addToast(err.response.data, { appearance: "error" });
-      });
+    if (feedback.text.length === 0 || feedback.note === 0) {
+      addToast("Fields can not be empty", { appearance: "error" });
 
-    handleModal();
+
+
+    } else {
+      axiosInstance
+        .post(`create-feedback/${props.receiver.email}/`, feedback)
+        .then((res) => {
+          console.log(res.data);
+          addToast("Feedback sent", { appearance: "success" });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          addToast(err.response.data, { appearance: "error" });
+        });
+
+      handleModal();
+
+
+    }
+
+
   };
 
   return (
+
+
     <Modal
       open={props.feedbackModalOpen}
       onClose={handleModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
+
+
       <Fade in={props.feedbackModalOpen}>
         <Box style={style}>
           <Typography variant="h6">Leave feedback</Typography>
@@ -82,6 +98,7 @@ const FeedbackModal = (props) => {
               name="text"
               onChange={handleInputChange}
               variant="outlined"
+              defaultValue={"This is a good user"}
               placeholder="Message"
               multiline
               rows={3}

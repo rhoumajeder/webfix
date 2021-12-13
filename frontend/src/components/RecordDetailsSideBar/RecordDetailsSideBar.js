@@ -80,7 +80,7 @@ const RecordDetailsSideBar = (props) => {
                     {showPhoneNumber ? props.record.phone_number : "See Number"}
                   </Button>
                 </Grid>
-                <Grid item xs={6}>
+                {!(user.id === props.record.user.id) && <Grid item xs={6}>
                   <Button
                     onClick={openChatRoom}
                     color="primary"
@@ -90,7 +90,7 @@ const RecordDetailsSideBar = (props) => {
                   >
                     Message
                   </Button>
-                </Grid>
+                </Grid>}
               </Grid>
             </React.Fragment>
           ) : null}

@@ -42,7 +42,7 @@ const RecordCreation = () => {
     <div>
       <Header />
       <ReCAPTCHA
-        sitekey="CAPTCHA PUBLIC KEY"
+        sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
         ref={recaptchaRef}
         size="invisible"
       />

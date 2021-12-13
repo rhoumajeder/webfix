@@ -56,7 +56,7 @@ const Index = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const screen = React.useContext(ScreenContext);
 
-  const {maxVolume, sliderMarks, setSelectionIndex} = useVolumeSlider(0);
+  const { maxVolume, sliderMarks, setSelectionIndex } = useVolumeSlider(0);
 
   const isRecordVisiable = (record.approved || (
     user
@@ -107,7 +107,7 @@ const Index = ({ match }) => {
   };
 
   const openInteractionTable = () => {
-    if(!user.username){
+    if (!user.username) {
       const qs = new URLSearchParams(
         `next=${history.location.pathname}`
       )
@@ -280,7 +280,7 @@ const Index = ({ match }) => {
                       {record && record.description}
                     </Typography>
                   </Box>
-                  <hr/>
+                  <hr />
                   <Box>
                     <Typography
                       variant="h6"
@@ -420,7 +420,7 @@ const Index = ({ match }) => {
                     })}
 
                   <Grid container direction="row" justify="space-between">
-                    <Grid item>
+                    {(user.id === record.user.id) && <Grid item>
                       <Button
                         size="large"
                         variant="outlined"
@@ -429,8 +429,8 @@ const Index = ({ match }) => {
                       >
                         Delete
                       </Button>
-                    </Grid>
-                    <Grid item>
+                    </Grid>}
+                    {!(user.id === record.user.id) && <Grid item>
                       <Button
                         className="ms-auto my-2"
                         variant="outlined"
@@ -441,7 +441,7 @@ const Index = ({ match }) => {
                       >
                         Interact
                       </Button>
-                    </Grid>
+                    </Grid>}
                   </Grid>
                 </Box>
               )}
@@ -454,7 +454,7 @@ const Index = ({ match }) => {
           </Box>
         )}
       </Container>
-    </Box>
+    </Box >
   );
 };
 
