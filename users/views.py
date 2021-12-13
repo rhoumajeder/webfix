@@ -140,22 +140,22 @@ def change_password_by_token(request):
 def verify_g_token(request):
 
     #checking captcha un comment if you want to check captcha
-    # x = requests.post(
-    #     "https://www.google.com/recaptcha/api/siteverify",
-    #     data={
-    #         'secret': 'SECRET KEY CAPTCHA',
-    #         'response': request.data['recaptcha_token'],
-    #         'remoteip': get_client_ip(request)
-    #     },
-    #     verify=True
-    # ).json()
+    x = requests.post(
+        "https://www.google.com/recaptcha/api/siteverify",
+        data={
+            'secret': '6LdF_5IdAAAAAO9nzD8MpbWhdfSyahJfDn9eThWp',
+            'response': request.data['recaptcha_token'],
+            'remoteip': get_client_ip(request)
+        },
+        verify=True
+    ).json()
 
-    # if x['success'] == True:
-    #     return Response(status=status.HTTP_200_OK)
-    # return Response(status=status.HTTP_400_BAD_REQUEST)
+    if x['success'] == True:
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
     ########FOR TESTING WE DO NEED IT #### 
-    return Response(status=status.HTTP_200_OK)
+    # return Response(status=status.HTTP_200_OK)
 
 
     
