@@ -36,6 +36,7 @@ class SubRecordBulkInsertView(APIView):
         invalid_objects = list()
 
         for obj in request.data:
+            print(obj)
             serializer = SubRecordSerializer(data=obj)
             if serializer.is_valid():
                 serializer.create(serializer.validated_data)
@@ -54,7 +55,7 @@ def create_record(request):
 
     # if record_count > 1:
     #     return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
-
+    print(request.data)
     serializer = RecordSerializer(data=request.data)
 
     if serializer.is_valid():

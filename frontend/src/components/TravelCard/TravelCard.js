@@ -19,6 +19,27 @@ import "./TravelCard.css";
 import ItemCard from "../ItemCard/ItemCard";
 import objectSum from "../../helpers/objectSum";
 
+const getMinPrice = (record) => {
+
+  let minPrice = 0;
+  let prices = [];
+  console.log(record)
+
+  try {
+    record.forEach(elem => {
+      prices.push(elem.price)
+    })
+    return Math.min(...prices);
+
+  } catch (err) {
+    console.log(err)
+    return 0;
+  }
+
+
+}
+
+
 const TravelCard = (props) => {
   const { record } = props;
   const screen = React.useContext(ScreenContext);
@@ -108,8 +129,9 @@ const TravelCard = (props) => {
                   >
                     {" "}
                     Min price:{" "}
+                    {console.log(record)}
                     {record.sub_records.length > 0 &&
-                      objectSum(record.sub_records, "price") + "€"}{" "}
+                      getMinPrice(record.sub_records) + "€"}{" "}
                   </Typography>
 
                   <Typography

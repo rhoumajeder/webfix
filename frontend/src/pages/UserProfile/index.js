@@ -21,6 +21,8 @@ const PAGE_SIZE = 5;
 
 
 const Index = (props) => {
+    console.log(props)
+
     const targetUserId = isNaN(props.match.params.user) ? null : (
         parseInt(props.match.params.user)
     )
@@ -143,8 +145,6 @@ const Index = (props) => {
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
                                             className={`m-0 ps-2 fw-normal`}>
-                                            {console.log(record)}
-                                            {console.log(authUser)}
                                             {record && record.email}
                                         </Typography>
                                         <Typography variant="body2" component="span"
@@ -176,6 +176,7 @@ const Index = (props) => {
                                             {record && record.dob}
                                         </Typography>
                                     </Box>
+
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
@@ -223,7 +224,12 @@ const Index = (props) => {
                                         </Typography>
                                     </Box>
                                 </Box>
-                                {!(targetUserId == authUser.id) && <Box align="right">
+                                {console.log(targetUserId)}
+                                {console.log("authUser")}
+
+                                {console.log(authUser)}
+
+                                {!(targetUserId == authUser.id) && !(targetUserId === null) && <Box align="right">
                                     <ButtonBase>
                                         <Typography
                                             variant="h6"
@@ -253,7 +259,7 @@ const Index = (props) => {
                                         <Grid item xs={12}>
                                             <Grid container alignItems="flex-end" direction="column">
                                                 <Grid item>
-                                                    {!(targetUserId == authUser.id) && <ButtonBase>
+                                                    {!(targetUserId == authUser.id) && !(targetUserId === null) && <ButtonBase>
                                                         <Typography
                                                             variant="h6"
                                                             component="span"
