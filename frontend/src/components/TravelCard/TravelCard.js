@@ -28,7 +28,7 @@ const getMinPrice = (record) => {
   try {
 
     record.forEach(elem => {
-      if (Object.prototype.hasOwnProperty.call(myObj, 'items')) {
+      if (Object.prototype.hasOwnProperty.call(elem, 'items')) {
         elem.items.forEach(
           el => {
             prices.push(el.price)
