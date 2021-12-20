@@ -55,7 +55,7 @@ class SubRecord(models.Model):
 
     price = models.PositiveIntegerField()
     max_quantity = models.PositiveIntegerField()
-    max_weight = models.PositiveIntegerField()
+    max_weight = models.FloatField()
 
     record = models.ForeignKey(
         Record, on_delete=models.CASCADE, related_name="sub_records")
