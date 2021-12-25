@@ -234,6 +234,7 @@ const CreateAskRecord = (props) => {
                                   })
                                   .catch((err) => {
                                     console.log(err.response);
+                                    setisLoading(false);
                                   });
 
                               }
@@ -251,6 +252,7 @@ const CreateAskRecord = (props) => {
                                   })
                                   .catch((err) => {
                                     console.log(err.response);
+                                    setisLoading(false);
                                   });
                                 ps.push(p)
 
@@ -262,6 +264,7 @@ const CreateAskRecord = (props) => {
                         })
                         .catch((err) => {
                           addToast("There was an error", { appearance: "error" });
+                          setisLoading(false);
                           console.log(err);
                         });
                     }
@@ -269,6 +272,7 @@ const CreateAskRecord = (props) => {
                   .catch((err) => {
                     console.log(err.response);
                     addToast(err.response.data, { appearance: "error" });
+                    setisLoading(false);
                   });
               }
             })

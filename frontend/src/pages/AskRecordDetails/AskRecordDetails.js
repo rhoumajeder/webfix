@@ -83,7 +83,14 @@ const AskRecordDetails = () => {
         });
         history.go();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      addToast(err.response.data, { appearance: "error" });
+      }
+      
+
+      );
+     
   };
 
   const handleInputChange = (e) => {

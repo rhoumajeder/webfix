@@ -51,10 +51,16 @@ class SubRecordBulkInsertView(APIView):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def create_record(request):
-    # record_count = Record.objects.filter(user=request.user).count()
-
-    # if record_count > 1:
-    #     return Response("You can not have more than two active records", status=status.HTTP_400_BAD_REQUEST)
+    date_from = datetime.datetime.now() - datetime.timedelta(hours=10)
+    record_count = Record.objects.filter(user=request.user,created_at__gt=date_from).count()
+    print("===================Debgu rje star=====================")
+    print(record_count)
+    print(date_from)
+    print( datetime.datetime.now())
+    print(datetime.timedelta(hours=10))
+    print("===============Debgu rje star===========================")
+    if record_count > 10:
+         return Response("You can not have more than x records in Last x Hours", status=status.HTTP_400_BAD_REQUEST)
     print(request.data)
     serializer = RecordSerializer(data=request.data)
 
@@ -114,7 +120,7 @@ def get_all_records(request):
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-id')[:5]
+    ).order_by('-id')[:15]
     # records = Record.objects.filter(
     #     approved=True,
     #     deleted=False
@@ -204,6 +210,17 @@ def create_proposition(request, pk):
     record = get_object_or_404(Record, id=pk)
     serializer = PropositionSerializer(data=request.data)
 
+    date_from = datetime.datetime.now() - datetime.timedelta(hours=10)
+    record_count = Proposition.objects.filter(user=request.user,created_at__gt=date_from).count()
+    print("===================Debgu rje star=====================")
+    print(record_count)
+    print(date_from)
+    print( datetime.datetime.now())
+    print(datetime.timedelta(hours=10))
+    print("===============Debgu rje star===========================")
+    if record_count > 10:
+         return Response("You can not have more than x proposition in Last x Hours", status=status.HTTP_400_BAD_REQUEST)
+
     if serializer.is_valid():
         proposition = serializer.save(record=record, user=request.user)
         create_notification(to_user=record.user, created_by=request.user,
@@ -266,6 +283,8 @@ def get_proposition_requests(request):
 def create_proposition_items(request, pk):
     proposition = get_object_or_404(Proposition, id=pk)
     serializer = PropositionItemSerializer(data=request.data, many=True)
+
+   
 
     if serializer.is_valid():
         serializer.save(proposition=proposition)

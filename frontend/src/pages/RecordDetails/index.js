@@ -250,11 +250,15 @@ const Index = ({ match }) => {
                   })
                   .catch((err) => {
                     console.log(err.response);
+                    addToast(err.response.data, { appearance: "error" });
+                    setisLoading(false);
                   });
               }
             })
             .catch((err) => {
               console.log(err);
+              addToast(err.response.data, { appearance: "error" });
+              setisLoading(false);
             });
         }
       })
