@@ -96,8 +96,8 @@ const Index = (props) => {
       .max(400, "Description can not have more than 400 characters"),
     categories: yup
       .array()
-      .of(yup.string())
-      .min(1, "Please select at least 1 category"),
+      .of(yup.string()),
+     // .min(1, "Please select at least 1 category"),
     phone_number: yup
       .string()
       .required("Phone number for records is required")
@@ -108,7 +108,7 @@ const Index = (props) => {
     .array()
     .of(
       yup.object().shape({
-        category: yup.string().required("Please select at least 1 category"),
+     //   category: yup.string().required("Please select at least 1 category"),
         name: yup.string().required("Sub-category name is required!"),
         price: yup
           .number()
@@ -128,19 +128,19 @@ const Index = (props) => {
           .max(99, "Weight can not be more than 99"),
       })
     )
-    .min(1, "Please select at least 1 sub-category for selected category(s)");
+    //.min(1, "Please select at least 1 sub-category for selected category(s)");
 
   let Records = {
     date: moment(new Date()).format("YYYY-MM-DD"),
-    moyen_de_transport: "",
-    city_destination: "",
-    city_arrival: "",
-    max_weight: 0,
+    moyen_de_transport: "Avion",
+    city_arrival: "Bretagne, France",
+    city_destination: "Berlin, Allemagne",
+    max_weight: 1,
     max_volume: 1,
-    description: "",
+    description: "null value",
     categories: [],
     type: "Propose",
-    phone_number: user.phone_number ? user.phone_number : null
+    phone_number: user.phone_number ? user.phone_number : "8328382332"
   };
 
   const [record, setRecord] = React.useState(Records);
@@ -174,18 +174,18 @@ const Index = (props) => {
           id: 1,
           accepted: false,
           name: "Food Solide",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Food"
         },
         {
           id: 2,
           accepted: false,
           name: "Food Liquid",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Food"
         },
       ],
@@ -198,9 +198,9 @@ const Index = (props) => {
           id: 3,
           accepted: false,
           name: "Medicaments",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Medicaments"
         },
       ],
@@ -213,18 +213,18 @@ const Index = (props) => {
           id: 4,
           accepted: false,
           name: "Portable",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Small Electronics"
         },
         {
           id: 5,
           accepted: false,
           name: "HeartBeat",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Small Electronics"
         },
       ],
@@ -237,18 +237,18 @@ const Index = (props) => {
           id: 6,
           accepted: false,
           name: "Montre",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Small Accessories"
         },
         {
           id: 7,
           accepted: false,
           name: "Braclet",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Small accessories"
         },
       ],
@@ -261,27 +261,27 @@ const Index = (props) => {
           id: 8,
           accepted: false,
           name: "Pantalon",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Vetements"
         },
         {
           id: 9,
           accepted: false,
           name: "Robe",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Vetements"
         },
         {
           id: 10,
           accepted: false,
           name: "Chaussure",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Vetements"
         },
       ],
@@ -294,18 +294,18 @@ const Index = (props) => {
           id: 11,
           accepted: false,
           name: "Moteur",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Big Mechanical"
         },
         {
           id: 12,
           accepted: false,
           name: "Trotinette",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Big Mechanical"
         },
       ],
@@ -318,18 +318,18 @@ const Index = (props) => {
           id: 13,
           accepted: false,
           name: "Machine Cafe",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Big Electronics"
         },
         {
           id: 14,
           accepted: false,
           name: "Machine à Laver",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Big Electronics"
         },
       ],
@@ -342,9 +342,9 @@ const Index = (props) => {
           id: 15,
           accepted: false,
           name: "Autres",
-          max_quantity: 0,
-          max_weight: 0,
-          price: 0,
+          max_quantity: 1,
+          max_weight: 1,
+          price: 1,
           category: "Autres"
         },
       ],
@@ -410,32 +410,33 @@ const Index = (props) => {
     }
   };
   const handleRecordSubmission = async () => {
-    let x = await props.recaptchaRef.current.executeAsync()
-    alert(x)
-    axiosInstance
-      .post("auth/verify_recaptcha", { recaptcha_token: x })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status === 400) {
-          addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
-            appearance: "error",
-          });
-          return
+    // let x = await props.recaptchaRef.current.executeAsync()
+    // alert(x)
+    // axiosInstance
+    //   .post("auth/verify_recaptcha", { recaptcha_token: x })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if (res.status === 400) {
+    //       addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+    //         appearance: "error",
+    //       });
+    //       return
 
-        } else if (res.status === 200) {
-          return handleRecordSubmissionAfter();
+    //     } else if (res.status === 200) {
+    //       return handleRecordSubmissionAfter();
 
-        }
+    //     }
 
-      })
-      .catch((err) => {
-        addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
-          appearance: "error",
-        });
-        return
+    //   })
+    //   .catch((err) => {
+    //     addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+    //       appearance: "error",
+    //     });
+    //     return
 
 
-      })
+    //   })
+    return handleRecordSubmissionAfter();
   }
 
   const handleRecordSubmissionAfter = async () => {
@@ -666,7 +667,7 @@ const Index = (props) => {
                       step={null}
                       valueLabelDisplay="off"
                       marks={marks}
-                      defaultValue={0}
+                      defaultValue={2}
                       name={"max_volume"}
                       value={marks[record.max_volume - 1].value}
                       onChange={handleVolumeChange}

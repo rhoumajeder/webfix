@@ -14,7 +14,6 @@ import {
 } from "@material-ui/core";
 import uuid from "react-uuid";
 import CreateItemRow from "./CreateItemRow/CreateItemRow";
-
 import { useToasts } from "react-toast-notifications";
 
 const CreateItemTable = (props) => {
@@ -58,7 +57,7 @@ const CreateItemTable = (props) => {
         color="primary"
         variant={"contained"}
       >
-        Save changes
+        Save changes 
       </Button>);
     }
   }

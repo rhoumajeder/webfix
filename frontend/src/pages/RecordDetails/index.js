@@ -53,8 +53,11 @@ const Index = ({ match }) => {
   );
   const [categories, setCategories] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
+  
   const screen = React.useContext(ScreenContext);
+
+
 
   const { maxVolume, sliderMarks, setSelectionIndex } = useVolumeSlider(0);
 
@@ -97,7 +100,6 @@ const Index = ({ match }) => {
         res.data.sub_records = Object.values(group);
         setRecord(res.data);
         setSelectionIndex(res.data.max_volume - 1)
-        setLoading(false);
       })
       .catch((err) => console.log(err.response));
   }, []);
@@ -105,6 +107,7 @@ const Index = ({ match }) => {
   const handleCategories = () => {
     setCategories(!categories);
   };
+  const [isloading, setisLoading] = React.useState(false);
 
   const openInteractionTable = () => {
     if (!user.username) {
@@ -130,7 +133,7 @@ const Index = ({ match }) => {
           files: [],
           type: "added",
         });
-      }
+      } 
       return newTableData;
     });
     setCategories(!categories);
@@ -151,7 +154,7 @@ const Index = ({ match }) => {
     })
   );
 
-  const submitItems = () => {
+  const submitItems = async () => {
     const itemData = [...dynamicRows];
     const itemFiles = [];
 
@@ -165,9 +168,11 @@ const Index = ({ match }) => {
       .validate(itemData)
       .then((valid) => {
         if (valid) {
+          setisLoading(true);
           axiosInstance
             .post(`create-proposition/${record.id}/`, {})
             .then((res) => {
+              let ps = []
               if (res.data.id) {
                 const propositionId = res.data.id;
                 axiosInstance
@@ -175,30 +180,73 @@ const Index = ({ match }) => {
                   .then((res) => {
                     itemFiles.forEach((fileArr, index) => {
                       fileArr.forEach((file) => {
-                        let data = new FormData();
-                        data.append("image", file);
+                        if (fileArr[fileArr.length - 1] === file) {
+                            console.log("last element")
+                            
+                            let data = new FormData();
+                            data.append("image", file);
+    
+                            console.log("star consol");
+                            console.log({ fileArr, file, itemFiles, data });
+                            console.log("end consol");
 
-                        fileAxios
-                          .post(
-                            `create-item-images/${res.data[index].id}/`,
-                            data
-                          )
-                          .then((res) => {
-                            console.log(res.data);
-                          })
-                          .catch((err) => {
-                            console.log(err.response);
-                          });
-                      });
+                            let p = fileAxios
+                              .post(
+                                `create-item-images/${res.data[index].id}/`,
+                                data
+                              )
+                              .then((res) => {
+                                console.log(res.data);
+
+                                Promise.all(ps).then(
+                                  () => {
+
+                                    addToast("Record created rje", { appearance: "success" });
+                                    // history.push(`/ask-record-details/${recordId}`);
+                                    // history.go();
+                                    
+                                    history.push({
+                                      pathname: `/my-request-state/${propositionId}`,
+                                      state: {
+                                        askRecord: false,
+                                      },
+                                    });
+                                    history.go();
+                                    setisLoading(false);
+
+                                  }
+                                )
+
+                              })
+                              .catch((err) => {
+                                console.log(err.response);
+                              });
+                              ps.push(p)
+                        }
+                        else {
+                          let data = new FormData();
+                          data.append("image", file);
+
+                          let p = fileAxios
+                            .post(
+                              `create-item-images/${res.data[index].id}/`,
+                              data
+                            )
+                            .then((res) => {
+                              console.log(res.data);
+                            })
+                            .catch((err) => {
+                              console.log(err.response);
+                            });
+                          ps.push(p)
+
+                        }
+                      }
+                      );
                     });
                     addToast("Proposition created", { appearance: "success" });
-                    history.push({
-                      pathname: `/my-request-state/${propositionId}`,
-                      state: {
-                        askRecord: false,
-                      },
-                    });
-                    history.go();
+
+
                   })
                   .catch((err) => {
                     console.log(err.response);
@@ -215,7 +263,7 @@ const Index = ({ match }) => {
         console.log(err.message);
       });
 
-    setCategories(!categories);
+    //setCategories(!categories);
     setDynamicRows([
       {
         id: `row-${uuid()}`,
@@ -230,11 +278,13 @@ const Index = ({ match }) => {
 
   const [dynamicRows, setDynamicRows] = React.useState([]);
 
-  if (loading) {
-    return <Spinner />;
+  const CreatingRecord = "  Creating Record ... ";
+  if (isloading) {
+    
+    return <Spinner name = {CreatingRecord}/>;
   }
 
-  return (
+  return ( 
     <Box component={"div"}>
       <Header />
 
@@ -372,6 +422,7 @@ const Index = ({ match }) => {
                       <CreateItemTable
                         setRows={setDynamicRows}
                         rows={dynamicRows}
+                        isloading={isloading}
                         submitItems={submitItems}
                         priceRequired={false}
                       />

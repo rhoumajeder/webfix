@@ -31,6 +31,7 @@ import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router";
 
 import cities from "../../helpers/cities";
+import Spinner from "../../components/Spinner/Spinner";
 
 import { IoArrowBack } from "react-icons/io5";
 
@@ -44,22 +45,22 @@ const CreateAskRecord = (props) => {
 
   // Ask record state holder
   const [askRecord, setAskRecord] = useState({
-    city_arrival: "",
-    city_destination: "",
+    city_arrival: "Bretagne, France",
+    city_destination: "Berlin, Allemagne",
     date: moment(new Date()).format("YYYY-MM-DD"),
-    description: "",
+    description: "Null value",
     type: "Ask",
-    phone_number: user.phone_number ? user.phone_number : null
+    phone_number: user.phone_number ? user.phone_number : "98989898"
   });
 
   // Ask record items state holder
   const [rows, setRows] = useState([
     {
       id: `row-${uuid()}`,
-      name: "",
-      quantity: 0,
-      weight: 0,
-      price: 0,
+      name: "default name",
+      quantity: 1,
+      weight: 1,
+      price: 1,
       files: [],
       type: "added",
     },
@@ -137,32 +138,37 @@ const CreateAskRecord = (props) => {
   };
   const [isloading, setisLoading] = useState(false);
   const submitItems = async () => {
-    let x = await props.recaptchaRef.current.executeAsync()
-    alert(x)
-    axiosInstance
-      .post("auth/verify_recaptcha", { recaptcha_token: x })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status === 400) {
-          addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
-            appearance: "error",
-          });
-          return
+    // let x = await props.recaptchaRef.current.executeAsync()
+    // alert(x)
+    // axiosInstance
+    //   .post("auth/verify_recaptcha", { recaptcha_token: x })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if (res.status === 400) {
+    //       addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+    //         appearance: "error",
+    //       });
+    //       return
 
-        } else if (res.status === 200) {
-          return submitItemAfter();
+    //     } else if (res.status === 200) {
+    //       return submitItemAfter();
 
-        }
+    //     }
 
-      })
-      .catch((err) => {
-        addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
-          appearance: "error",
-        });
-        return
+    //   })
+    //   .catch((err) => {
+    //     addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+    //       appearance: "error",
+    //     });
+    //     return
 
 
-      })
+    //   }) 
+    return submitItemAfter();
+  }
+  const CreatingRecord = "  Creating Record ... ";
+  if (isloading) {
+    return <Spinner name = {CreatingRecord}/>;
   }
 
   // Submit record to database
@@ -174,6 +180,7 @@ const CreateAskRecord = (props) => {
       .validate(askRecord)
       .then((valid) => {
         if (valid) {
+          setisLoading(true);
 
           itemSchema
             .validate(rows)
@@ -219,6 +226,7 @@ const CreateAskRecord = (props) => {
                                         addToast("Record created", { appearance: "success" });
                                         history.push(`/ask-record-details/${recordId}`);
                                         history.go();
+                                        setisLoading(false);
 
                                       }
                                     )
@@ -276,6 +284,7 @@ const CreateAskRecord = (props) => {
       });
   };
 
+  
 
 
 

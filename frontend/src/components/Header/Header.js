@@ -163,6 +163,10 @@ const Header = () => {
   const handleNotificationClose = (e) => {
     setAnchorElNotification(null);
   };
+  console.log("start rje ");
+  console.log(user.id);
+  console.log(user.username);
+  console.log("end rje ");
 
   return (
     <AppBar position="sticky" className={"bg-white text-dark py-2"}>
@@ -247,12 +251,13 @@ const Header = () => {
                 onClose={handleClose}
               >
                 <MenuItem>
-                  <Link to="/user-profile" className="text-link">
+                  <Link to={`/user-profile/${user.id}`} className="text-link">
                     <Box
+                    
                       component="span"
                       className="d-flex align-items-center justify-content-evenly"
                     >
-                      <BsPersonFill className="me-2 fs-5" /> Profile
+                      <BsPersonFill className="me-2 fs-5" /> Profile 
                     </Box>
                   </Link>
                 </MenuItem>

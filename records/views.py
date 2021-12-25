@@ -108,10 +108,19 @@ def delete_record(request, pk):
 
 @api_view(["GET"])
 def get_all_records(request):
+
+
+   
     records = Record.objects.filter(
         approved=True,
-        deleted=False
-    ).order_by('-updated_at')
+        deleted=False,
+    ).order_by('-id')[:5]
+    # records = Record.objects.filter(
+    #     approved=True,
+    #     deleted=False
+    # ).order_by('-updated_at')
+
+
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
     date = request.GET.get("date", "")
