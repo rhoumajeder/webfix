@@ -501,7 +501,8 @@ const Index = ({ match }) => {
           </Grid>
         ) : (
           <Box className="translate-middle position-absolute top-50 start-50">
-            <Typography variant="h2">Page not found</Typography>
+            {/* <Typography variant="h2">Page not found</Typography> */}
+            <Spinner />;
           </Box>
         )}
       </Container>

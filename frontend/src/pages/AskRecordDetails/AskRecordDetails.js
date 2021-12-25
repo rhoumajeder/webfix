@@ -152,7 +152,8 @@ const AskRecordDetails = () => {
               </CardContent>
             </Card>
             <Box className="my-2 d-flex align-items-center justify-content-end">
-              <Button
+
+            {!(user.id === record.user.id) &&<Button
                 className="ms-auto my-2"
                 variant="outlined"
                 color={"primary"}
@@ -161,7 +162,8 @@ const AskRecordDetails = () => {
                 onClick={handleModal}
               >
                 Interact
-              </Button>
+              </Button>}
+
             </Box>
           </Grid>
           <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
