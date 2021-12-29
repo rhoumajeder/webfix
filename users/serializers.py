@@ -67,14 +67,12 @@ class SignupSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-   # records = RecordSerializer(many=True, read_only=True)
+    records = RecordSerializer(many=True, read_only=True)
     received_feedback = FeedbackSerializer(many=True, read_only=True)
 
     class Meta:
         model = CustomUser
-        fields = ["id", "intro", "photo", "email", "username", "first_name", "last_name", "phone_number",
-                  "checked_email", "checked_phone", "checked_billet", "start_date", "received_feedback",
-                  "address", "dob", "is_pro","note_feedback","number_of_feedbacks","total_number_of_ads"]
+        fields = "__all__"
 
 
 class UserSerializer_lighter(serializers.ModelSerializer):

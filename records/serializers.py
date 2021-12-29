@@ -77,6 +77,17 @@ class RecordDetailSerializer_lighter(ModelSerializer):
         "max_weight","categories","user","ask_items","sub_records","type"]
 
 
+class PropositionSerializer_list(ModelSerializer):
+    #record = RecordDetailSerializer_lighter(read_only=True)
+    user = UserSerializer_lighter(read_only=True)
+    proposition_items = PropositionItemListSerializer(
+        read_only=True, many=True)
+
+    class Meta:
+        model = Proposition
+        fields = "__all__"
+
+#backup
 class PropositionSerializer(ModelSerializer):
     record = RecordDetailSerializer(read_only=True)
     user = UserSerializer(read_only=True)
@@ -88,6 +99,18 @@ class PropositionSerializer(ModelSerializer):
         fields = "__all__"
 
 
+
+class RecordGetSerializer_list(ModelSerializer):
+    user = UserSerializer_lighter(read_only=True)
+    propositions =  PropositionSerializer_list(many=True, read_only=True)
+    ask_items = AskRecordItemSerializer(read_only=True, many=True)
+    sub_records = SubRecordSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Record
+        fields = "__all__"
+
+#backup
 class RecordGetSerializer(ModelSerializer):
     user = UserSerializer(read_only=True)
     propositions = PropositionSerializer(many=True, read_only=True)
