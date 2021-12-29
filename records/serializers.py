@@ -134,6 +134,7 @@ class FeedbackSerializer_user(ModelSerializer):
     def update(self, instance, validated_data, *args, **kwargs):
         instance.note_feedback = validated_data.get('note_feedback', instance.note_feedback)
         instance.number_of_feedbacks = validated_data.get('number_of_feedbacks', instance.note_feedback)
+        instance.total_number_of_ads = validated_data.get('total_number_of_ads', instance.note_feedback)
         instance.save()
         return instance
    

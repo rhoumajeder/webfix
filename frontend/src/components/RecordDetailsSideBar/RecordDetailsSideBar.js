@@ -126,7 +126,8 @@ const RecordDetailsSideBar = (props) => {
               gutterBottom
               className={`m-0 me-1 fw-medium`}
             >
-              Annonces Publiés: {props.record.user.records.length}
+               {/* Annonces Publiés: {props.record.user.records.length}  to be fixed properly*/}
+              Annonces Publiés: {props.record.user.total_number_of_ads}
             </Typography>
             <Typography
               variant="subtitle1"

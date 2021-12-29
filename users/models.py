@@ -58,6 +58,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     #i am about to run migrate make mirgation
     note_feedback = models.FloatField(default = 0 )
     number_of_feedbacks = models.PositiveIntegerField(default =0 )
+    total_number_of_ads = models.PositiveIntegerField(default =0 )
+
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username', 'first_name']

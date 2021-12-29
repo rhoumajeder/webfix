@@ -54,6 +54,7 @@ class SubRecordBulkInsertView(APIView):
 def create_record(request):
     date_from = datetime.datetime.now() - datetime.timedelta(hours=10)
     record_count = Record.objects.filter(user=request.user,created_at__gt=date_from).count()
+    
     print("===================Debgu rje star=====================")
     print(record_count)
     print(date_from)
@@ -63,10 +64,20 @@ def create_record(request):
     if record_count > 10:
          return Response("You can not have more than x records in Last x Hours", status=status.HTTP_400_BAD_REQUEST)
     print(request.data)
+    
+    total_number_of_ads = Record.objects.filter(user=request.user).count()
+    total_number_of_ads_dic = {}
+    total_number_of_ads_dic["total_number_of_ads"] =  total_number_of_ads
+
+    serializer_feedback = FeedbackSerializer_user(data=total_number_of_ads_dic)
+
     serializer = RecordSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save(user=request.user)
+        if serializer_feedback.is_valid():
+            serializer_feedback.update(request.user,serializer_feedback.validated_data)
+        
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -74,6 +85,9 @@ def create_record(request):
 @api_view(["GET"])
 def get_record(request, pk):
     record = get_object_or_404(Record, id=pk, deleted=False)
+    print("====================== ")
+    print("i am called here ")
+    print("====================== ")
     serializer = RecordDetailSerializer(record)
     return Response(serializer.data, status=status.HTTP_200_OK)
 

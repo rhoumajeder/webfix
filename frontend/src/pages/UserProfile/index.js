@@ -63,12 +63,13 @@ const Index = (props) => {
         setReportModalOpen(true);
     };
 
+
     const publishedRecords = (
-        (record ? record.records.length : 0)
+        (record ? record.total_number_of_ads : 0)
         + ' record'
-        + ((record && record.records.length > 1) ? 's' : '')
+        + ((record && record.total_number_of_ads > 1) ? 's' : '')
         + ' published'
-    )
+    ) 
 
     const startDate = record ? moment(record.start_date).format('YYYY') : null
 
