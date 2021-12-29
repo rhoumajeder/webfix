@@ -27,20 +27,20 @@ const LoginForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const gRecaptchaToken = await recaptchaRef.current.executeAsync();
-    console.log(gRecaptchaToken)
-    axiosInstance
-      .post("auth/verify_recaptcha", { recaptcha_token: gRecaptchaToken })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status === 400) {
-          addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
-            appearance: "error",
-          });
-          return
+    //const gRecaptchaToken = await recaptchaRef.current.executeAsync();
+    //console.log(gRecaptchaToken)
+    // axiosInstance
+    //   .post("auth/verify_recaptcha", { recaptcha_token: gRecaptchaToken })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if (res.status === 400) {
+    //       addToast(err?.response?.data?.detail || "ReCaptcha Failed", {
+    //         appearance: "error",
+    //       });
+    //       return
 
-        }
-        else if (res.status === 200) {
+    //     }
+    //     else if (res.status === 200) {
           axiosInstance
             .post("auth/token", formData)
             .then((res) => {
@@ -69,18 +69,20 @@ const LoginForm = (props) => {
               });
             });
 
-        }
+        //}
 
 
-      }
-      )
-      .catch((err) => {
-        console.log(err.response);
-        addToast(err?.response?.data?.detail || "Recaptcha Failed", {
-          appearance: "error",
-        });
-        return
-      });
+     // }
+      // )
+      // .catch((err) => {
+      //   console.log(err.response);
+      //   addToast(err?.response?.data?.detail || "Recaptcha Failed", {
+      //     appearance: "error",
+      //   });
+      //   return
+      // });
+
+      
 
   };
 

@@ -4,7 +4,8 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
 from records.models import Record, Captcha, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer,UserSerializer_lighter
+from users.models import CustomUser
 
 
 class PropositionItemListSerializer(ModelSerializer):
@@ -18,6 +19,14 @@ class SubRecordSerializer(ModelSerializer):
     class Meta:
         model = SubRecord
         fields = "__all__"
+
+
+class SubRecordSerializer_light(ModelSerializer):
+
+    class Meta:
+        model = SubRecord
+        #fields = "__all__"
+        fields = ["name","category","accepted","price","max_quantity","max_weight","record"]
 
 
 class CaptchaSerializer(ModelSerializer):
@@ -55,6 +64,17 @@ class RecordDetailSerializer(ModelSerializer):
     class Meta:
         model = Record
         fields = "__all__"
+
+class RecordDetailSerializer_lighter(ModelSerializer):
+    sub_records = SubRecordSerializer_light(many=True, read_only=True)
+    user = UserSerializer_lighter(read_only=True)
+    ask_items = AskRecordItemSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Record
+       # fields = "__all__"
+        fields = ["id","date","city_destination","city_arrival","moyen_de_transport","min_price",
+        "max_weight","categories","user","ask_items","sub_records","type"]
 
 
 class PropositionSerializer(ModelSerializer):
@@ -108,6 +128,18 @@ class FeedbackSerializer(ModelSerializer):
     class Meta:
         model = Feedback
         fields = "__all__"
+
+class FeedbackSerializer_user(ModelSerializer):
+
+    def update(self, instance, validated_data, *args, **kwargs):
+        instance.note_feedback = validated_data.get('note_feedback', instance.note_feedback)
+        instance.number_of_feedbacks = validated_data.get('number_of_feedbacks', instance.note_feedback)
+        instance.save()
+        return instance
+   
+    class Meta:
+        model = CustomUser
+        fields = ["note_feedback","number_of_feedbacks"]
 
 
 class ReportSerializer(ModelSerializer):

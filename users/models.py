@@ -54,6 +54,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     checked_phone = models.BooleanField(default=False)
     checked_billet = models.BooleanField(default=False)
 
+
+    #i am about to run migrate make mirgation
+    note_feedback = models.FloatField(default = 0 )
+    number_of_feedbacks = models.PositiveIntegerField(default =0 )
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username', 'first_name']
 

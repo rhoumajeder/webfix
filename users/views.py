@@ -97,6 +97,8 @@ def update_profile(request):
     return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 
+
+
 @api_view(['POST'])
 def forget_password(request):
     email = request.data['email']

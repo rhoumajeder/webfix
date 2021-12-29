@@ -8,14 +8,15 @@ import "./UserAvatar.css";
 const UserAvatar = (props) => {
   const user = props.user
   const getAverageRating = () => {
-    let totalRating = 0;
+    let totalRating = props.user.note_feedback;  
 
-    props.user.received_feedback.forEach((feedback) => {
-      totalRating += feedback.note;
-    });
-
+    // props.user.received_feedback.forEach((feedback) => {
+    //   totalRating += feedback.note;
+    // });
+ 
     const averageRating = (
-      totalRating / props.user.received_feedback.length
+    //  totalRating / props.user.received_feedback.length  number_of_feedbacks
+    totalRating /  props.user.number_of_feedbacks
     ).toFixed(1);
 
     return averageRating;
@@ -65,7 +66,7 @@ const UserAvatar = (props) => {
           <Rating
             name="read-only"
             value={
-              props.user.received_feedback.length > 0
+              props.user.number_of_feedbacks > 0
                 ? Math.round(getAverageRating())
                 : 0
             }
@@ -80,7 +81,7 @@ const UserAvatar = (props) => {
             className="fw-bold m-0 ms-1"
           >
             {" "}
-            {getAverageRating()}/5-{props.user.received_feedback.length} avis{" "}
+            {getAverageRating()}/5-{props.user.number_of_feedbacks} avis {" "}
           </Typography>
         </Box>
       )}

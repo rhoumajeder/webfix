@@ -13,9 +13,10 @@ from records.models import Record, SubRecord, Proposition, PropositionItem, AskR
 from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
-    ReportSerializer)
+    ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
+
 from notifications.utils import create_notification
 from records.models import Captcha
 import datetime
@@ -112,21 +113,60 @@ def delete_record(request, pk):
     return Response("Record Deleted", status=status.HTTP_200_OK)
 
 
+
+
+"""
+Get record by theses conditions : 
+-approved=True, deleted=False, last 30 element , 
+- Date for propose  greater then now.
+
+"""
+
 @api_view(["GET"])
 def get_all_records(request):
-
-
-   
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-id')[:15]
+    ).order_by('-id')[:10]
+    
     # records = Record.objects.filter(
     #     approved=True,
     #     deleted=False
     # ).order_by('-updated_at')
+    max_weight = request.GET.get("max_weight", "")
+    max_volume = request.GET.get("max_volume", "")
+    date = request.GET.get("date", "")
+
+    record_filter = RecordFilter(request.GET, queryset=records)
+    records = record_filter.qs
+
+    if max_weight != "":
+        records = records.filter(max_weight__gte=int(max_weight))
+
+    if max_volume != "":
+        records = records.filter(max_volume__gte=int(max_volume))
+
+    if date != "":
+        records = records.filter(
+            date__gte=datetime.datetime.now().date(), date__lte=datetime.datetime.strptime(date, "%Y-%m-%d").date())
 
 
+    # see the data in json is repeat itself to be filtred by the elimanted maybe the record details  repeated fields 
+    serializer = RecordDetailSerializer_lighter(records, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def get_all_records_backup(request):
+    records = Record.objects.filter(
+        approved=True,
+        deleted=False,
+    ).order_by('-id')[:30]
+    print(records)
+    # records = Record.objects.filter(
+    #     approved=True,
+    #     deleted=False
+    # ).order_by('-updated_at')
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
     date = request.GET.get("date", "")
@@ -336,12 +376,26 @@ def get_item_images(request, pk):
 def create_feedback(request, receiver_email):
     receiver = get_object_or_404(CustomUser, email=receiver_email)
 
+    notes_feedback = CustomUser.objects.filter(email=receiver_email).values_list('note_feedback', flat=True)
+    get_total_feedback = Feedback.objects.filter(receiver=receiver).count()
+    Feedback_notes = {}
+    Feedback_notes["number_of_feedbacks"] =  get_total_feedback + 1
+    Feedback_notes["note_feedback"] = request.data["note"]  + notes_feedback[0]
+
     if Feedback.objects.filter(writer=request.user, receiver=receiver).exists():
         return Response("You have already left feedback for this user", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = FeedbackSerializer(data=request.data)
 
+    serializer_feedback = FeedbackSerializer_user(data=Feedback_notes)
+
+    
+
     if serializer.is_valid():
+        
+        if serializer_feedback.is_valid():
+            serializer_feedback.update(receiver,serializer_feedback.validated_data)
+        
         serializer.save(writer=request.user, receiver=receiver)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
