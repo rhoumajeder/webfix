@@ -4,7 +4,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
 from records.models import Record, Captcha, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
-from users.serializers import UserSerializer,UserSerializer_lighter
+from users.serializers import UserSerializer,UserSerializer_lighter,UserSerializer_record_details
 from users.models import CustomUser
 
 
@@ -67,13 +67,13 @@ class RecordDetailSerializer(ModelSerializer):
 
 class RecordDetailSerializer_lighter(ModelSerializer):
     sub_records = SubRecordSerializer_light(many=True, read_only=True)
-    user = UserSerializer_lighter(read_only=True)
+    user = UserSerializer_record_details(read_only=True)
     ask_items = AskRecordItemSerializer(read_only=True, many=True)
 
     class Meta:
         model = Record
        # fields = "__all__"
-        fields = ["id","date","city_destination","city_arrival","moyen_de_transport","min_price",
+        fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
         "max_weight","categories","user","ask_items","sub_records","type"]
 
 

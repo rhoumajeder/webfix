@@ -72,7 +72,16 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = "__all__"
+        fields = ["id", "intro", "photo", "email", "username", "first_name", "last_name", "records", "phone_number",
+                  "checked_email", "checked_phone", "checked_billet", "start_date", "received_feedback",
+                  "address", "dob", "is_pro"]
+
+class UserSerializer_record_details(serializers.ModelSerializer):
+    received_feedback = FeedbackSerializer(many=True, read_only=True)
+    class Meta:
+        model = CustomUser
+        fields = ["id", "photo","username","note_feedback","total_number_of_ads","received_feedback",
+                  "checked_email", "checked_phone", "checked_billet", "start_date","is_pro"]
 
 
 class UserSerializer_lighter(serializers.ModelSerializer):
