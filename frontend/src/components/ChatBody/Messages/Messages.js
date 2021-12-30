@@ -36,7 +36,8 @@ const Messages = ({ messages }) => {
     return (
         <React.Fragment>
             {messages.map((message, index) => {
-                const userIsOwner = user.email === message.user.email;
+                // const userIsOwner = user.email === message.user.email;
+                const userIsOwner = user.id === message.user.id;
 
                 return (
                     <ListItem key={index}>
@@ -57,7 +58,8 @@ const Messages = ({ messages }) => {
                             <Grid item xs={12}>
                                 <ListItemText
                                     align={
-                                        user.email === message.user.email ? "right" : "left"
+                                        // user.email === message.user.email ? "right" : "left"
+                                        user.id === message.user.id ? "right" : "left"
                                     }
                                     secondary={moment(message.timestamp).format("hh:mm")}
                                 ></ListItemText>

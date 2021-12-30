@@ -108,6 +108,16 @@ class UserSerializer_for_profil(serializers.ModelSerializer):
         fields = ["id", "intro", "photo","username", "dob", "is_pro","received_feedback"] # we need to add email or add feedback will not work
 
 
+class UserSerializer_for_message(serializers.ModelSerializer):
+    #records = RecordSerializer(many=True, read_only=True)
+    #received_feedback = FeedbackSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ["id","photo","username"] # we need to add email or add feedback will not work
+
+
+
 # i just finished fixing add feedback by adding email to show profil we leak the eamils 
 class UserSerializer_record_details(serializers.ModelSerializer):
     #records = RecordSerializer(many=True, read_only=True)

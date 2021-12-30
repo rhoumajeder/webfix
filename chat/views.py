@@ -53,8 +53,8 @@ def create_message(request, room_id):
         message = serializer.save(room=room, user=request.user)
 
         to_user = ""
-
-        if room.owner.username == request.user.username:
+        # if room.owner.username == request.user.username:
+        if room.owner.id == request.user.id:
             to_user = room.user
         else:
             to_user = room.owner
