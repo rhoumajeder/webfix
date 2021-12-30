@@ -319,8 +319,8 @@ def update_proposition(request, pk):
         serializer.save()
 
         to_user = ""
-
-        if proposition.record.user.username == request.user.username:
+        # if proposition.record.user.username == request.user.username:
+        if proposition.record.user.id == request.user.id:
             to_user = proposition.user
         else:
             to_user = proposition.record.user

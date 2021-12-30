@@ -387,8 +387,10 @@ const Header = () => {
                       notification.proposition_notification;
 
                     link.pathname =
-                      prop_notification.proposition.user.username ===
-                        user.username
+                      // prop_notification.proposition.user.username ===
+                      //   user.username
+                      prop_notification.proposition.user.id ===
+                      user.id
                         ? `/my-request-state/${notification.proposition_notification.proposition.id}`
                         : `/my-offer-state/${notification.proposition_notification.proposition.id}`;
 
