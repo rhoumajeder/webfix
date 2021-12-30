@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from .models import Notification, PropositionNotification, RoomNotification
-from users.serializers import UserSerializer
-from records.serializers import PropositionSerializer
+from users.serializers import UserSerializer,UserSerializer_for_message
+from records.serializers import PropositionSerializer,PropositionSerializer_for_notifications
 from chat.serializers import ChatRoomSerializer
 
 
@@ -15,7 +15,8 @@ class ChatNotificationSerializer(serializers.ModelSerializer):
 
 
 class PropositionNotificationSerializer(serializers.ModelSerializer):
-    proposition = PropositionSerializer(read_only=True)
+    #proposition = PropositionSerializer(read_only=True)
+    proposition = PropositionSerializer_for_notifications(read_only=True)
 
     class Meta:
         model = PropositionNotification
@@ -23,8 +24,11 @@ class PropositionNotificationSerializer(serializers.ModelSerializer):
 
 
 class NotificationSerializer(serializers.ModelSerializer):
-    to_user = UserSerializer(read_only=True)
-    created_by = UserSerializer(read_only=True)
+    # to_user = UserSerializer(read_only=True)
+    # created_by = UserSerializer(read_only=True) UserSerializer_for_message
+    to_user = UserSerializer_for_message(read_only=True)
+    created_by = UserSerializer_for_message(read_only=True) 
+    
     proposition_notification = PropositionNotificationSerializer(
         read_only=True)
     room_notification = ChatNotificationSerializer(read_only=True)

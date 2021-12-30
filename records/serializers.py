@@ -4,7 +4,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
 from records.models import Record, Captcha, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
-from users.serializers import UserSerializer,UserSerializer_lighter,UserSerializer_record_details,UserSerializer_for_feedbacks
+from users.serializers import UserSerializer, UserSerializer_for_message,UserSerializer_lighter,UserSerializer_record_details,UserSerializer_for_feedbacks
 from users.models import CustomUser
 
 
@@ -156,6 +156,25 @@ class PropositionSerializer_for_proposition_state(ModelSerializer):
 class PropositionSerializer(ModelSerializer):
     record = RecordDetailSerializer(read_only=True)
     user = UserSerializer(read_only=True)
+    proposition_items = PropositionItemListSerializer(
+        read_only=True, many=True)
+
+    class Meta:
+        model = Proposition
+        fields = "__all__"
+class RecordGetSerializer_list(ModelSerializer):
+    user = UserSerializer_lighter(read_only=True)
+    propositions =  PropositionSerializer_list(many=True, read_only=True)
+    ask_items = AskRecordItemSerializer(read_only=True, many=True)
+    sub_records = SubRecordSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Record
+        fields = "__all__"
+
+class PropositionSerializer_for_notifications(ModelSerializer):
+    record = RecordDetailSerializer_for_list_offers(read_only=True)
+    user = UserSerializer_for_message(read_only=True)
     proposition_items = PropositionItemListSerializer(
         read_only=True, many=True)
 
