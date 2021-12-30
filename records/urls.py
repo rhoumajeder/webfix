@@ -16,7 +16,8 @@ urlpatterns = [
     path('get-all-records/', views.get_all_records),
     path('get-ask-records/', views.get_ask_records),
     path('get-propose-records/', views.get_propose_records),
-    path('get-records-for-user/', views.get_records_for_user),
+#     path('get-records-for-user/', views.get_records_for_user),  get_list_offers
+    path('get-records-for-user/', views.get_list_offers),
     path('sub-records/bulk', views.SubRecordBulkInsertView.as_view()),
     path('create-proposition/<str:pk>/',
          views.create_proposition),
@@ -24,7 +25,8 @@ urlpatterns = [
     path('update-proposition/<str:pk>/',
          views.update_proposition),
     path('get-offers/', views.get_propositions_offers),
-    path('get-requests/', views.get_proposition_requests),
+    path('get-requests/', views.get_list_requests),
+#     path('get-requests/', views.get_proposition_requests),
 
     path('create-proposition-items/<str:pk>/',
          views.create_proposition_items),

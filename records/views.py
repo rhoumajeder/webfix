@@ -13,7 +13,8 @@ from records.models import Record, SubRecord, Proposition, PropositionItem, AskR
 from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
-    ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list)
+    ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
+    get_list_requests_PropositionSerializer_list)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 
@@ -263,7 +264,22 @@ def get_ask_record_item_images(request, pk):
 @permission_classes([IsAuthenticated])
 def get_records_for_user(request):
     records = Record.objects.filter(user=request.user).order_by('-updated_at')[:4]
-    serializer = RecordGetSerializer_list(records, many=True)
+    serializer = RecordGetSerializer(records, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_list_offers(request):
+    records = Record.objects.filter(user=request.user).order_by('-updated_at')[:4]
+    serializer = get_list_offers_serializers(records, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_list_requests(request):
+    propositions = Proposition.objects.filter(
+        user=request.user).order_by('-updated_at')
+    serializer = get_list_requests_PropositionSerializer_list(propositions, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -332,13 +348,23 @@ def get_propositions_offers(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def get_proposition_requests(request):
+#     propositions = Proposition.objects.filter(
+#         user=request.user).order_by('-updated_at')
+#     serializer = PropositionSerializer(propositions, many=True)
+#     return Response(serializer.data, status=status.HTTP_200_OK)
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_proposition_requests(request):
     propositions = Proposition.objects.filter(
         user=request.user).order_by('-updated_at')
-    serializer = PropositionSerializer(propositions, many=True)
+    serializer = PropositionSerializer_list(propositions, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 
 
 @api_view(["POST"])
