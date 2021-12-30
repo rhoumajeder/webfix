@@ -15,9 +15,9 @@ from notifications.utils import create_notification
 # Create your views here.
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def chat_room(request, owner_email, user_email, record_id):
-    owner = get_object_or_404(CustomUser, email=owner_email)
-    user = get_object_or_404(CustomUser, email=user_email)
+def chat_room(request, owner_id, user_id, record_id): #owner_email 
+    owner = get_object_or_404(CustomUser, id=owner_id)
+    user = get_object_or_404(CustomUser, id=user_id)
     record = get_object_or_404(Record, id=record_id)
 
     new_room, created = ChatRoom.objects.get_or_create(

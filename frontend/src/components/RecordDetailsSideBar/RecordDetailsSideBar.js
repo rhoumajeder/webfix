@@ -30,7 +30,8 @@ const RecordDetailsSideBar = (props) => {
   const openChatRoom = () => {
     axiosInstance
       .post(
-        `chat/chat-room/${props.record.user.email}/${user.email}/${props.record.id}/`
+        // `chat/chat-room/${props.record.user.email}/${user.email}/${props.record.id}/`
+        `chat/chat-room/${props.record.user.id}/${user.id}/${props.record.id}/`
       )
       .then((res) => {
         console.log(res.data);
