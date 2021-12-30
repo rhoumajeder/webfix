@@ -81,6 +81,15 @@ def create_record(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#BackUp
+# @api_view(["GET"])
+# def get_record(request, pk):
+#     record = get_object_or_404(Record, id=pk, deleted=False)
+#     print("====================== ")
+#     print("i am called here ")
+#     print("====================== ")
+#     serializer = RecordDetailSerializer(record)
+#     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 def get_record(request, pk):
@@ -88,7 +97,7 @@ def get_record(request, pk):
     print("====================== ")
     print("i am called here ")
     print("====================== ")
-    serializer = RecordDetailSerializer(record)
+    serializer = RecordDetailSerializer_lighter(record)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 

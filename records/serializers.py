@@ -66,15 +66,16 @@ class RecordDetailSerializer(ModelSerializer):
         fields = "__all__"
 
 class RecordDetailSerializer_lighter(ModelSerializer):
-    sub_records = SubRecordSerializer_light(many=True, read_only=True)
+    sub_records = SubRecordSerializer(many=True, read_only=True)
     user = UserSerializer_record_details(read_only=True)
+    #user = UserSerializer(read_only=True)
     ask_items = AskRecordItemSerializer(read_only=True, many=True)
 
     class Meta:
         model = Record
-       # fields = "__all__"
-        fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
-        "max_weight","categories","user","ask_items","sub_records","type"]
+        fields = "__all__"
+        # fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
+        # "max_weight","max_volume","categories","user","ask_items","sub_records","type"]
 
 
 class PropositionSerializer_list(ModelSerializer):
