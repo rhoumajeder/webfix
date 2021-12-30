@@ -555,7 +555,8 @@ const ItemCard = (props) => {
         <FeedbackModal
           writer={user}
           receiver={
-            user.email === props.item.user.email
+            user.id === props.item.user.id
+            // user.email === props.item.user.email
               ? props.item.record.user
               : props.item.user
           }

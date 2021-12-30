@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 from users.errors import UserAlreadyExistsError
 from users.models import CustomUser
 from users.serializers import (
-    CustomUserSerializer, UserSerializer, UserDetailSerializer, UserUpdateSerializer)
+    CustomUserSerializer, UserSerializer, UserDetailSerializer, UserUpdateSerializer,UserSerializer_for_profil,UserSerializer_for_my_profil)
 from users.utils import send_reset_email
 
 
@@ -38,7 +38,8 @@ def sign_up(request):
 @permission_classes([IsAuthenticated])
 def get_user(request):
     user = request.user
-    serializer = UserSerializer(user)
+ 
+    serializer = UserSerializer_for_my_profil(user)
     return Response({"user": serializer.data})
 
 
@@ -46,7 +47,12 @@ def get_user(request):
 @permission_classes([IsAuthenticated])
 def get_user_details(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
-    serializer = UserSerializer(user)
+    if request.user == user_id : 
+        serializer = UserSerializer_for_my_profil(user)
+    else: 
+        serializer = UserSerializer_for_profil(user)
+
+    
     return Response({"user": serializer.data})
 
 

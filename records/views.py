@@ -14,7 +14,7 @@ from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
     ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
-    get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state)
+    get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state,FeedbackSerializer_for_creation)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 
@@ -423,10 +423,11 @@ def get_item_images(request, pk):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def create_feedback(request, receiver_email):
-    receiver = get_object_or_404(CustomUser, email=receiver_email)
+# def create_feedback(request, receiver_email):
+def create_feedback(request, id):
+    receiver = get_object_or_404(CustomUser, id=id)
 
-    notes_feedback = CustomUser.objects.filter(email=receiver_email).values_list('note_feedback', flat=True)
+    notes_feedback = CustomUser.objects.filter(id=id).values_list('note_feedback', flat=True)
     get_total_feedback = Feedback.objects.filter(receiver=receiver).count()
     Feedback_notes = {}
     Feedback_notes["number_of_feedbacks"] =  get_total_feedback + 1
@@ -435,7 +436,7 @@ def create_feedback(request, receiver_email):
     if Feedback.objects.filter(writer=request.user, receiver=receiver).exists():
         return Response("You have already left feedback for this user", status=status.HTTP_400_BAD_REQUEST)
 
-    serializer = FeedbackSerializer(data=request.data)
+    serializer = FeedbackSerializer_for_creation(data=request.data)
 
     serializer_feedback = FeedbackSerializer_user(data=Feedback_notes)
 

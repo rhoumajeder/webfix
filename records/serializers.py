@@ -4,7 +4,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
 from records.models import Record, Captcha, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
-from users.serializers import UserSerializer,UserSerializer_lighter,UserSerializer_record_details
+from users.serializers import UserSerializer,UserSerializer_lighter,UserSerializer_record_details,UserSerializer_for_feedbacks
 from users.models import CustomUser
 
 
@@ -220,7 +220,17 @@ class AskRecordItemImageSerializer(ModelSerializer):
 
 
 class FeedbackSerializer(ModelSerializer):
-    writer = UserSerializer(read_only=True)
+    writer = UserSerializer(read_only=True)  
+    receiver = UserSerializer(read_only=True)
+    # writer = UserSerializer_for_feedbacks(read_only=True)  
+    # receiver = UserSerializer_for_feedbacks(read_only=True)
+
+    class Meta:
+        model = Feedback
+        fields = "__all__"
+
+class FeedbackSerializer_for_creation(ModelSerializer):
+    writer = UserSerializer(read_only=True)  
     receiver = UserSerializer(read_only=True)
 
     class Meta:

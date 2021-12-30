@@ -11,7 +11,9 @@ from records.models import Record, Feedback
 class GetUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ("email", "id", "username")
+        fields = ("id", "username")
+        #fields = "__all__"
+        #fields = ("email", "id", "username")
 
 
 class RecordSerializer(serializers.ModelSerializer):
@@ -19,10 +21,21 @@ class RecordSerializer(serializers.ModelSerializer):
         model = Record
         fields = "__all__"
 
+class UserSerializer_for_feedbacks(serializers.ModelSerializer):
+    #records = RecordSerializer(many=True, read_only=True)
+    #received_feedback = FeedbackSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ["id",  "username", ]
 
 class FeedbackSerializer(serializers.ModelSerializer):
-    writer = GetUserSerializer(read_only=True)
+    writer = GetUserSerializer(read_only=True)    #UserSerializer_for_feedbacks
     receiver = GetUserSerializer(read_only=True)
+
+    # writer = UserSerializer_for_feedbacks(read_only=True)    
+    # receiver = UserSerializer_for_feedbacks(read_only=True)
+    
 
     class Meta:
         model = Feedback
@@ -76,6 +89,26 @@ class UserSerializer(serializers.ModelSerializer):
                   "checked_email", "checked_phone", "checked_billet", "start_date", "received_feedback",
                   "address", "dob", "is_pro"]
 
+class UserSerializer_for_my_profil(serializers.ModelSerializer):
+    #records = RecordSerializer(many=True, read_only=True)
+    received_feedback = FeedbackSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ["id", "intro", "photo", "email", "username", "first_name", "last_name", "phone_number",
+                  "checked_email", "checked_phone", "checked_billet", "start_date", "received_feedback",
+                  "address", "dob", "is_pro"]
+
+class UserSerializer_for_profil(serializers.ModelSerializer):
+    #records = RecordSerializer(many=True, read_only=True)
+    received_feedback = FeedbackSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ["id", "intro", "photo","username", "dob", "is_pro","received_feedback"] # we need to add email or add feedback will not work
+
+
+# i just finished fixing add feedback by adding email to show profil we leak the eamils 
 class UserSerializer_record_details(serializers.ModelSerializer):
     #records = RecordSerializer(many=True, read_only=True)
     received_feedback = FeedbackSerializer(many=True, read_only=True)

@@ -52,7 +52,8 @@ const FeedbackModal = (props) => {
 
     } else {
       axiosInstance
-        .post(`create-feedback/${props.receiver.email}/`, feedback)
+        .post(`create-feedback/${props.receiver.id}/`, feedback)
+        // .post(`create-feedback/${props.receiver.email}/`, feedback)
         .then((res) => {
           console.log(res.data);
           addToast("Feedback sent", { appearance: "success" });
