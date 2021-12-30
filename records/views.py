@@ -14,7 +14,7 @@ from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
     ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
-    get_list_requests_PropositionSerializer_list)
+    get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 
@@ -335,7 +335,8 @@ def update_proposition(request, pk):
 @permission_classes([IsAuthenticated])
 def get_proposition(request, pk):
     proposition = get_object_or_404(Proposition, id=pk)
-    serializer = PropositionSerializer(proposition)
+    # serializer = PropositionSerializer(proposition)
+    serializer = PropositionSerializer_for_proposition_state(proposition)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 

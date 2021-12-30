@@ -120,8 +120,30 @@ class RecordDetailSerializer_for_list_offers(ModelSerializer):
         # fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
         # "max_weight","max_volume","categories","user","ask_items","sub_records","type"]
 
+class RecordDetailSerializer_for_proposition_state(ModelSerializer):
+    sub_records = SubRecordSerializer(many=True, read_only=True)
+    user = UserSerializer_lighter(read_only=True)
+    #user = UserSerializer(read_only=True)
+    ask_items = AskRecordItemSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Record
+        fields = "__all__"
+        # fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
+        # "max_weight","max_volume","categories","user","ask_items","sub_records","type"]
+
 class list_offers_Propositions_Serializer(ModelSerializer):
     record = RecordDetailSerializer_for_list_offers(read_only=True)
+    user = UserSerializer_lighter(read_only=True)
+    proposition_items = PropositionItemListSerializer(
+        read_only=True, many=True)
+
+    class Meta:
+        model = Proposition
+        fields = "__all__"
+
+class PropositionSerializer_for_proposition_state(ModelSerializer):
+    record = RecordDetailSerializer_for_proposition_state(read_only=True)
     user = UserSerializer_lighter(read_only=True)
     proposition_items = PropositionItemListSerializer(
         read_only=True, many=True)
