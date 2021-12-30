@@ -96,8 +96,8 @@ class UserSerializer_lighter(serializers.ModelSerializer):
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
-    phone_number = serializers.CharField(validators=[])
-    note_feedback = serializers.CharField(validators=[])
+    phone_number = serializers.CharField( required=False,validators=[])
+    note_feedback = serializers.CharField( required=False,validators=[])
     password = serializers.CharField(
         write_only=True, required=False, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True, required=False)
@@ -126,7 +126,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
-        #instance.note_feedback = validated_data.get('note_feedback', instance.note_feedback)
+        instance.note_feedback = validated_data.get('note_feedback', instance.note_feedback)
         instance.address = validated_data.get('address', instance.address)
         instance.dob = validated_data.get('dob', instance.dob)
 
