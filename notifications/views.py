@@ -14,7 +14,7 @@ from .models import Notification
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_notifications(request):
-    notifications = Notification.objects.filter(to_user=request.user)
+    notifications = Notification.objects.filter(to_user=request.user)[:5]
     serializer = NotificationSerializer(notifications, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 

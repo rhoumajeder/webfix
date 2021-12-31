@@ -24,6 +24,16 @@ class ChatRoomSerializer(serializers.ModelSerializer):
         model = ChatRoom
         fields = "__all__"
 
+class ChatRoomSerializer_for_notifications(serializers.ModelSerializer):
+    owner = UserSerializer_for_message(read_only=True)
+    user = UserSerializer_for_message(read_only=True)
+    #record = RecordDetailSerializer_lighter(read_only=True)
+    #messages = MessageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ChatRoom
+        fields = "__all__"
+
 #backup
 # class ChatRoomSerializer(serializers.ModelSerializer):
 #     owner = UserSerializer(read_only=True)

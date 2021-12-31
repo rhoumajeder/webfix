@@ -3,11 +3,11 @@ from rest_framework import serializers
 from .models import Notification, PropositionNotification, RoomNotification
 from users.serializers import UserSerializer,UserSerializer_for_message
 from records.serializers import PropositionSerializer,PropositionSerializer_for_notifications
-from chat.serializers import ChatRoomSerializer
+from chat.serializers import ChatRoomSerializer,ChatRoomSerializer_for_notifications
 
 
 class ChatNotificationSerializer(serializers.ModelSerializer):
-    room = ChatRoomSerializer(read_only=True)
+    room = ChatRoomSerializer_for_notifications(read_only=True)
 
     class Meta:
         model = RoomNotification
