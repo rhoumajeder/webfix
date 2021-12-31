@@ -164,6 +164,18 @@ const Index = ({ match }) => {
       delete item.files;
     });
 
+    let bimages = false;  // to detect the presence of image , so we should wait for the uploading 
+    itemFiles.forEach((fileArr, index) => {
+      fileArr.forEach((file) => {
+        if (fileArr[fileArr.length - 1] === file) {
+          console.log({ fileArr });
+          if(fileArr.length > 0 ){
+            bimages = true;
+          }
+        }
+      });
+    });
+
     itemSchema
       .validate(itemData)
       .then((valid) => {
@@ -245,6 +257,18 @@ const Index = ({ match }) => {
                       );
                     });
                     addToast("Proposition created", { appearance: "success" });
+                    if(!bimages){
+                      bimages = !bimages ;  
+                      history.push({
+                        pathname: `/my-request-state/${propositionId}`,
+                        state: {
+                          askRecord: false,
+                        },
+                      });
+                      history.go();
+                      setisLoading(false);
+
+                    }
 
 
                   })

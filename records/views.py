@@ -62,7 +62,7 @@ def create_record(request):
     print( datetime.datetime.now())
     print(datetime.timedelta(hours=10))
     print("===============Debgu rje star===========================")
-    if record_count > 10:
+    if record_count > 100:
          return Response("You can not have more than x records in Last x Hours", status=status.HTTP_400_BAD_REQUEST)
     print(request.data)
     
@@ -297,7 +297,7 @@ def create_proposition(request, pk):
     print( datetime.datetime.now())
     print(datetime.timedelta(hours=10))
     print("===============Debgu rje star===========================")
-    if record_count > 10:
+    if record_count > 100:
          return Response("You can not have more than x proposition in Last x Hours", status=status.HTTP_400_BAD_REQUEST)
 
     if serializer.is_valid():

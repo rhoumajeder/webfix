@@ -194,6 +194,17 @@ const CreateAskRecord = (props) => {
                   itemFiles.push(item.files);
                   delete item.files;
                 });
+                let bimages = false;  // to detect the presence of image , so we should wait for the uploading 
+                itemFiles.forEach((fileArr, index) => {
+                  fileArr.forEach((file) => {
+                    if (fileArr[fileArr.length - 1] === file) {
+                      console.log({ fileArr });
+                      if(fileArr.length > 0 ){
+                        bimages = true;
+                      }
+                    }
+                  });
+                });
 
                 axiosInstance
                   .post(`create-record/`, askRecord)
@@ -204,6 +215,13 @@ const CreateAskRecord = (props) => {
                       axiosInstance
                         .post(`create-ask-record-items/${recordId}/`, itemData)
                         .then((res) => {
+                          if(bimages == false){
+                            addToast("Record created", { appearance: "success" });
+                            history.push(`/ask-record-details/${recordId}`);
+                            history.go();
+                            setisLoading(false);
+
+                          }
                           itemFiles.forEach((fileArr, index) => {
                             fileArr.forEach((file) => {
                               if (fileArr[fileArr.length - 1] === file) {
