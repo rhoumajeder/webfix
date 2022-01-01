@@ -97,7 +97,7 @@ class UserSerializer_for_my_profil(serializers.ModelSerializer):
         model = CustomUser
         fields = ["id", "intro", "photo", "email", "username", "first_name", "last_name", "phone_number",
                   "checked_email", "checked_phone", "checked_billet", "start_date", "received_feedback",
-                  "address", "dob", "is_pro"]
+                  "address", "dob", "is_pro","total_number_of_ads"]
 
 class UserSerializer_for_profil(serializers.ModelSerializer):
     #records = RecordSerializer(many=True, read_only=True)
@@ -105,7 +105,7 @@ class UserSerializer_for_profil(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ["id", "intro", "photo","username", "dob", "is_pro","received_feedback"] # we need to add email or add feedback will not work
+        fields = ["id", "intro", "photo","username", "dob", "is_pro","received_feedback","total_number_of_ads"] # we need to add email or add feedback will not work
 
 
 class UserSerializer_for_message(serializers.ModelSerializer):

@@ -198,7 +198,7 @@ const Header = () => {
             </Button>
           </Link>
         </Box>
-        <Box component="div" display={{ xs: "none", md: "block" }}>
+        {/* <Box component="div" display={{ xs: "none", md: "block" }}>
           <Link to="/shop" className="text-link">
             <Button
               className="mx-2"
@@ -206,10 +206,10 @@ const Header = () => {
               aria-label="menu"
               startIcon={<RiShoppingCartFill />}
             >
-              Online Shop
+               Shop
             </Button>
           </Link>
-        </Box>
+        </Box> */}
 
         <Box component="div" className={"ms-auto"}>
           {user.username ? (

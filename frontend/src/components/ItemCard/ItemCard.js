@@ -220,7 +220,7 @@ const ItemCard = (props) => {
               gutterBottom
               className="fw-bold m-0 my-3"
             >
-              This offer process has ended
+             __ {/* This offer process has ended */}
             </Typography>
           </div>
         );

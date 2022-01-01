@@ -14,7 +14,8 @@ from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
     ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
-    get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state,FeedbackSerializer_for_creation)
+    get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state,FeedbackSerializer_for_creation,
+    RecordDetailSerializer_only_travel_card_for_index)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 
@@ -145,24 +146,38 @@ Get record by theses conditions :
 - Date for propose  greater then now.
 
 """
+import time
+
+
 
 @api_view(["GET"])
 def get_all_records(request):
+
+    start = time.time()
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-id')[:10]
+    ).order_by('-id')[:5]
     
+    end = time.time()
+    durantion = end - start
+    print("***** time for records.object = " +  str(durantion))
     # records = Record.objects.filter(
     #     approved=True,
     #     deleted=False
     # ).order_by('-updated_at')
+
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
     date = request.GET.get("date", "")
 
+    start = time.time()
     record_filter = RecordFilter(request.GET, queryset=records)
     records = record_filter.qs
+    end = time.time()
+    durantion = end - start
+    print("***** time for record_filter = " +  str(durantion))
+
 
     if max_weight != "":
         records = records.filter(max_weight__gte=int(max_weight))
@@ -176,8 +191,18 @@ def get_all_records(request):
 
 
     # see the data in json is repeat itself to be filtred by the elimanted maybe the record details  repeated fields 
-    serializer = RecordDetailSerializer_lighter(records, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    start2 = time.time()
+    serializer = RecordDetailSerializer_only_travel_card_for_index(records, many=True)
+    #print(serializer.data)
+    end2 = time.time()
+    durantion2 = end2 - start2
+    print("***** time for serializer = " + str(durantion2))
+    start1 = time.time()
+    res = Response(serializer.data, status=status.HTTP_200_OK)
+    end1 = time.time()
+    durantion1 = end1 - start1
+    print("***** time for response = " + str(durantion1))
+    return res
 
 
 @api_view(["GET"])
