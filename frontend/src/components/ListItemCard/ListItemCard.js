@@ -9,7 +9,7 @@ import {
   Button,
 } from "@material-ui/core";
 import ButtonBase from '@material-ui/core/ButtonBase';
-
+import Spinner from "../../components/Spinner/Spinner";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import TravelCard from "../TravelCard/TravelCard";
 import PaginationExtended from "../PaginationExtended/PaginationExtended";
@@ -68,20 +68,31 @@ const ListItemCard = (props) => {
     records,
     PAGE_SIZE
   );
+  const [isloading, setisLoading] = useState(true);
+
+
+
 
   const recordsData = getRecordsCurrentData()
 
   // Fetch all records for user
   const fetchItems = () => {
     if (props.itemType === "offer") {
+
       axiosInstance.get("get-records-for-user/").then((res) => {
         console.log(res.data);
         setRecords(res.data);
+        setisLoading(false);
+        // alert(isloading);
+        
       });
     } else {
       axiosInstance.get("get-requests/").then((res) => {
         console.log(res.data);
         setItems(res.data);
+        setisLoading(false);
+        // alert(isloading);
+         
       });
     }
   };
@@ -90,11 +101,19 @@ const ListItemCard = (props) => {
     fetchItems();
   }, []);
 
+
+  const sloading = " Loading ... ";
+  if (isloading) {
+    return <Spinner name = {sloading}/>;
+  }
+
   if (props.itemType === "offer") {
+    
     return (
       <Card className="shadow">
         {records.length > 0 ? (
           recordsData.map((record) => {
+            
             let disabled = false;
             const recordDateExpired = moment(record.date).isBefore(
               new Date(),
@@ -229,7 +248,7 @@ const ListItemCard = (props) => {
     return (
       <div>
         {getCurrentData().length > 0 ? (
-          getCurrentData().map((item) => {
+          getCurrentData().map((item) => { 
             let disabled = false;
             const recordDateExpired = moment(item.record.date).isBefore(
               new Date(),
