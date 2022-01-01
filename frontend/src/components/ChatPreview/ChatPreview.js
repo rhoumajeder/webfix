@@ -67,8 +67,9 @@ const ChatPreview = (props) => {
                   className="fw-bold m-0"
                 >
                   {" "}
-                  Min price:{" "}
-                  {objectSum(props.room.record.sub_records, "price") + "€"}{" "}
+                  Min price:{props.room.record.min_price}
+                  {/* {objectSum(props.room.record.sub_records, "price") + "€"}{" "}  min_price */}
+                  {/* {objectSum(props.room.record.sub_records, "price") + "€"}{" "}  min_price */}
                 </Typography>
 
                 <Typography
@@ -90,8 +91,8 @@ const ChatPreview = (props) => {
                   className="fw-bold m-0"
                 >
                   {" "}
-                  Total price:{" "}
-                  {objectSum(props.room.record.ask_items, "price") + "€"}{" "}
+                  {/* Total price:{props.room.record.min_price} */}
+                  {/* {objectSum(props.room.record.ask_items, "price") + "€"}{" "} */}
                 </Typography>
 
                 <Typography
@@ -101,8 +102,8 @@ const ChatPreview = (props) => {
                   className="fw-bold m-0"
                 >
                   {" "}
-                  Total weight:{" "}
-                  {objectSum(props.room.record.ask_items, "weight") + "Kg"}{" "}
+                  {/* Total weight:{props.room.record.max_weight} */}
+                  {/* {objectSum(props.room.record.ask_items, "weight") + "Kg"}{" "} */}
                 </Typography>
               </React.Fragment>
             )}

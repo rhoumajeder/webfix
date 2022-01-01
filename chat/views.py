@@ -32,9 +32,9 @@ def chat_room(request, owner_id, user_id, record_id): #owner_email
 @permission_classes([IsAuthenticated])
 def get_rooms(request):
     owner_rooms = ChatRoom.objects.filter(
-        owner=request.user)
+        owner=request.user)[:5]
     user_rooms = ChatRoom.objects.filter(
-        user=request.user)
+        user=request.user)[:5]
 
     owner_room_serializer = ChatRoomSerializer(owner_rooms, many=True)
     user_room_serializer = ChatRoomSerializer(user_rooms, many=True)

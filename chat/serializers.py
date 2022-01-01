@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import ChatRoom, Message
 from users.serializers import UserSerializer,UserSerializer_for_message
-from records.serializers import RecordDetailSerializer,RecordDetailSerializer_lighter
+from records.serializers import RecordDetailSerializer,RecordDetailSerializer_lighter, RecordDetailSerializer_for_get_rooms
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -17,7 +17,8 @@ class MessageSerializer(serializers.ModelSerializer):
 class ChatRoomSerializer(serializers.ModelSerializer):
     owner = UserSerializer_for_message(read_only=True)
     user = UserSerializer_for_message(read_only=True)
-    record = RecordDetailSerializer_lighter(read_only=True)
+    record = RecordDetailSerializer_for_get_rooms(read_only=True)  
+    #record = RecordDetailSerializer_lighter(read_only=True)  
     messages = MessageSerializer(many=True, read_only=True)
 
     class Meta:

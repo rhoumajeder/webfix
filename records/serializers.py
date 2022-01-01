@@ -89,6 +89,18 @@ class RecordDetailSerializer_lighter(ModelSerializer):
         # fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
         # "max_weight","max_volume","categories","user","ask_items","sub_records","type"]
 
+class RecordDetailSerializer_for_get_rooms(ModelSerializer):
+    #sub_records = SubRecordSerializer(many=True, read_only=True)
+    user = UserSerializer_for_message(read_only=True)
+    #user = UserSerializer(read_only=True)
+    #ask_items = AskRecordItemSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Record
+        fields = "__all__"
+        # fields = ["id","date","city_destination","city_arrival","moyen_de_transport","description","min_price",
+        # "max_weight","max_volume","categories","user","ask_items","sub_records","type"]
+
 
 class PropositionSerializer_list(ModelSerializer):
     record = RecordDetailSerializer_lighter(read_only=True)
