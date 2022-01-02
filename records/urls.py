@@ -14,6 +14,7 @@ urlpatterns = [
     path('delete-record/<str:pk>/', views.delete_record),
     path('get-record/<str:pk>/', views.get_record),
     path('get-all-records/', views.get_all_records),
+    path('search-all-records/', views.search_all_records),
     path('get-ask-records/', views.get_ask_records),
     path('get-propose-records/', views.get_propose_records),
 #     path('get-records-for-user/', views.get_records_for_user),  get_list_offers

@@ -80,8 +80,34 @@ const Index = () => {
       .catch((err) => console.log(err.response));
   };
 
+  const fetchRecords_for_button_search = (recordTypeCheck) => {  //it was only fetchRecords
+    const paramFilters = { ...filters };
+    if (recordTypeCheck.propose && recordTypeCheck.ask) {
+      delete paramFilters.type;
+    } else if (recordTypeCheck.propose && !recordTypeCheck.ask) {
+      paramFilters.type = "Propose";
+    } else if (!recordTypeCheck.propose && recordTypeCheck.ask) {
+      paramFilters.type = "Ask";
+    }
+
+    setFilters(paramFilters);
+
+    axiosInstance
+      .get("search-all-records/", {
+        params: paramFilters,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setRecords(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err.response));
+  };
+
+
   useEffect(() => {
     fetchRecords(recordType);
+   // fetchRecords_for_button_search(recordType);
   }, []);
 
   return (
@@ -110,7 +136,8 @@ const Index = () => {
         </Box>
 
         <Search
-          fetchRecords={fetchRecords}
+         // fetchRecords={fetchRecords} // fetchRecords_for_button_search
+          fetchRecords_for_button_search={fetchRecords_for_button_search} // fetchRecords_for_button_search
           recordType={recordType}
           setRecordType={setRecordType}
           setLoading={setLoading}

@@ -50,14 +50,20 @@ const Search = (props) => {
   }
   const classes = useStyles()
   const { propose, ask } = props.recordType;
+  let defaultdatevalue =  moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M');
+  //alert(defaultdatevalue);
+  // const [currentDate, setCurrentDate] = useState(
+  //   moment(new Date()).format("YYYY-MM-DD")
+  // ); 
   const [currentDate, setCurrentDate] = useState(
-    moment(new Date()).format("YYYY-MM-DD")
+    defaultdatevalue
   );
+ 
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
 
   const screen = React.useContext(ScreenContext);
 
-  const handleAdvancedFilters = () => {
+  const handleAdvancedFilters = () => { 
     setShowAdvancedFilters(!showAdvancedFilters)
   }
 
@@ -106,7 +112,8 @@ const Search = (props) => {
       };
     }
     props.setRecordType(newRecordType);
-    props.fetchRecords(newRecordType);
+    // props.fetchRecords(newRecordType); 
+    props.fetchRecords_for_button_search(newRecordType); 
     props.setLoading(true);
   };
 
@@ -144,7 +151,8 @@ const Search = (props) => {
 
   const submitFilters = () => {
     props.setLoading(true);
-    props.fetchRecords(props.recordType);
+    //props.fetchRecords(props.recordType);
+    props.fetchRecords_for_button_search(props.recordType);
   };
 
   return (
@@ -225,6 +233,7 @@ const Search = (props) => {
                 className={"m-0 p-0"}
                 color={"primary"}
                 size="small"
+                defaultValue={defaultdatevalue}
                 value={currentDate}
                 inputVariant="outlined"
                 onChange={handleDateChange}
@@ -325,6 +334,7 @@ const Search = (props) => {
               color={"primary"}
               startIcon={<FaSearch />}
               onClick={submitFilters}
+              id={"search_id"}
             >
               Rechercher
             </Button>

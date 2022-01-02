@@ -22,6 +22,8 @@ from users.models import CustomUser
 from notifications.utils import create_notification
 from records.models import Captcha
 import datetime
+from django.views.decorators.cache import cache_page
+
 
 
 class SubRecordViewSet(viewsets.ModelViewSet):
@@ -149,7 +151,7 @@ Get record by theses conditions :
 import time
 
 
-
+@cache_page(60 * 60)  # 60 minutes 
 @api_view(["GET"])
 def get_all_records(request):
 
@@ -157,10 +159,11 @@ def get_all_records(request):
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-id')[:5]
+    ).order_by('-date')[:50]
+    # ).order_by('-id') date
     
     end = time.time()
-    durantion = end - start
+    durantion = end - start 
     print("***** time for records.object = " +  str(durantion))
     # records = Record.objects.filter(
     #     approved=True,
@@ -202,8 +205,51 @@ def get_all_records(request):
     end1 = time.time()
     durantion1 = end1 - start1
     print("***** time for response = " + str(durantion1))
+    print("index button called me")
     return res
 
+
+@cache_page(60 * 60)  # 60 minutes 
+@api_view(["GET"])
+def search_all_records(request):
+
+    max_weight = request.GET.get("max_weight", "")
+    max_volume = request.GET.get("max_volume", "")
+    date = request.GET.get("date", "")
+     
+    records = Record.objects.filter(
+        approved=True,
+        deleted=False,
+    ).order_by('-date')
+    # ).order_by('-id') date
+    
+    record_filter = RecordFilter(request.GET, queryset=records)
+    records = record_filter.qs
+     
+    if max_weight != "":
+        records = records.filter(max_weight__gte=int(max_weight))
+
+    if max_volume != "":
+        records = records.filter(max_volume__gte=int(max_volume))
+
+    if date != "":
+        records = records.filter(
+            date__gte=datetime.datetime.now().date(), date__lte=datetime.datetime.strptime(date, "%Y-%m-%d").date())
+
+    print("search button called me")
+    records = records[:25]
+   
+    serializer = RecordDetailSerializer_only_travel_card_for_index(records, many=True)
+    
+    start1 = time.time()
+    res = Response(serializer.data, status=status.HTTP_200_OK)
+
+    end1 = time.time()
+    durantion1 = end1 - start1
+    print("***** search all time for response = " + str(durantion1))
+     
+   
+    return res
 
 @api_view(["GET"])
 def get_all_records_backup(request):
