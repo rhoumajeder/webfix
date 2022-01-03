@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.http import (
+    Http404
+)
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes, parser_classes
@@ -11,6 +13,10 @@ from users.models import CustomUser
 from records.models import Record
 from notifications.utils import create_notification
 
+from django.views.decorators.vary import vary_on_cookie
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
+from django.db.models import Q
 
 # Create your views here.
 @api_view(["POST"])
@@ -28,6 +34,8 @@ def chat_room(request, owner_id, user_id, record_id): #owner_email
     return Response(room_serializer.data, status=status.HTTP_200_OK)
 
 
+# @cache_page(60 * 15)
+@vary_on_headers('Authorization')
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_rooms(request):
@@ -66,10 +74,16 @@ def create_message(request, room_id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# @cache_page(60 * 10)
+# @vary_on_headers('Authorization')
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_messages(request, room_id):
     print(room_id)
-    room = get_object_or_404(ChatRoom, id=room_id)
+    #room = get_object_or_404(ChatRoom, id=room_id)  #Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6)
+    try :
+        room = ChatRoom.objects.get(Q(id=room_id), Q(owner=request.user) | Q(user=request.user ) )
+    except :
+        raise Http404("not found")
     serializer = MessageSerializer(room.messages.all(), many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)

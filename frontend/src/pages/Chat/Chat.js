@@ -69,8 +69,9 @@ const Chat = (props) => {
   const [loading, setLoading] = useState(true);
   const [ownedRooms, setOwnedRooms] = useState([]);
   const [userRooms, setUserRooms] = useState([]);
-  const [currentRoom, setCurrentRoom] = useState(actualRoom ? parseInt(actualRoom) : null);
-
+  // const [currentRoom, setCurrentRoom] = useState(actualRoom ? parseInt(actualRoom) : null);
+  const [currentRoom, setCurrentRoom] = useState(null);
+ 
   // Get rooms for current user
   const getRooms = (currentRoom) => {
     axiosInstance
