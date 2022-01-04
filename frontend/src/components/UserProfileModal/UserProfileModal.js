@@ -233,6 +233,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         name="intro"
                         variant="outlined"
                         placeholder="Intro"
+                        inputProps={{ maxLength: 200 }}
                         defaultValue={profile.intro}
                       />
                     </Grid>

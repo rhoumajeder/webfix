@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from ipware import get_client_ip
 from django.views.decorators.csrf import csrf_exempt
 
+from django.core.cache import cache
 
 from users.errors import UserAlreadyExistsError
 from users.models import CustomUser
@@ -38,9 +39,16 @@ def sign_up(request):
 @permission_classes([IsAuthenticated])
 def get_user(request):
     user = request.user
- 
+    print("he call me here for himself ********")
     serializer = UserSerializer_for_my_profil(user)
-    return Response({"user": serializer.data})
+
+    cache_key_get_user = str("get_user") + str(request.user.id)
+    if cache.get(cache_key_get_user) != None : 
+        return  Response(cache.get(cache_key_get_user), status=status.HTTP_200_OK)
+    
+    cached_response = {"user": serializer.data}
+    cache.get_or_set(cache_key_get_user, cached_response, 60 *15 )
+    return Response(cached_response)
 
 
 @api_view(['GET'])
@@ -48,8 +56,10 @@ def get_user(request):
 def get_user_details(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     if request.user == user_id : 
+        print("he call me here for detail himself again********")
         serializer = UserSerializer_for_my_profil(user)
     else: 
+        print("he call me here for detail other person********")
         serializer = UserSerializer_for_profil(user)
 
     
@@ -100,6 +110,8 @@ def update_profile(request):
     serializer = UserUpdateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.update(request.user, serializer.validated_data)
+    cache_key_get_user = str("get_user") + str(request.user.id)
+    cache.delete(cache_key_get_user)
     return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 

@@ -33,12 +33,12 @@ class UserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, unique=True)
+class CustomUser(AbstractBaseUser, PermissionsMixin): 
+    username = models.CharField(max_length=21, unique=False, default = "user")
     email = models.EmailField(_("email address"), unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
-    intro = models.TextField(blank=True, null=True)
+    intro = models.TextField(blank=True,max_length=200, null=True)
     phone_number = models.CharField(
         _("phone number"), unique=True, max_length=20, null=True, blank=True)
     city = models.CharField(max_length=50, blank=True, null=True)
