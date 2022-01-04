@@ -39,6 +39,7 @@ const RecordDetailsSideBar = (props) => {
           pathname: "/chat",
           state: {
             currentPropRoom: res.data,
+            userid: user.id
           },
         });
         history.go();
