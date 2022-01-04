@@ -267,6 +267,7 @@ const Header = () => {
                       pathname: "/chat",
                       state: {
                         currentPropRoom: null,
+                        userid: user.id
                       },
                     }}
                     className="text-link"

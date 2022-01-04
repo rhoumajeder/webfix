@@ -14,6 +14,10 @@ class ChatRoom(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name='connected_rooms', blank=True, null=True)
 
+    created_room_at = models.DateTimeField(auto_now_add=True)
+    last_updated_room_at = models.DateTimeField(auto_now=True)
+    #bUpdate = models.BooleanField(default=False)
+
     def __str__(self):
         return f'Owner: {self.owner}. Connected to: {self.user}'
 

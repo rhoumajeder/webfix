@@ -48,9 +48,11 @@ const useStyles = makeStyles({
 const Chat = (props) => {
   const location = useLocation();
   let currentPropRoom = "";
+  let userid = "";
 
   if (location.state) {
     currentPropRoom = location.state.currentPropRoom
+    userid = location.state.userid
   }
 
   const storageRoom = localStorage.getItem("currentRoom");
@@ -78,6 +80,10 @@ const Chat = (props) => {
       .get("chat/get-rooms/")
       .then((res) => {
         console.log(res.data);
+        console.log("start rje in chat  ");
+        console.log(userid); 
+        
+        console.log("end rje in chat  ");
 
         setOwnedRooms(res.data["owner_rooms"]);
         setUserRooms(res.data["user_rooms"]);
@@ -143,7 +149,8 @@ const Chat = (props) => {
                 return (
                   <ChatPreview
                     selected={room.id === currentRoom}
-                    username={room.user.username}
+                    // username={room.user.username}
+                    username={room.user.id == userid ? room.owner.username : room.user.username }
                     room={room}
                     handleClick={changeCurrentRoom}
                   />
@@ -153,7 +160,8 @@ const Chat = (props) => {
                 return (
                   <ChatPreview
                     selected={room.id === currentRoom}
-                    username={room.owner.username}
+                    // username={room.owner.username}
+                    username={room.user.id == userid ? room.owner.username : room.user.username }
                     handleClick={changeCurrentRoom}
                     room={room}
                   />
