@@ -19,7 +19,7 @@ import { AuthContext } from "../../context/auth";
 
 import { Link } from "react-router-dom";
 
-import usePagination from "../../hooks/usePagination";
+import usePaginationHomePage from "../../hooks/usePaginationHomePage";
 
 import CustomPagination from "../../components/Pagination/Pagination";
 
@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+let first_load = true ; 
 
 
 const Index = () => {
@@ -52,6 +53,7 @@ const Index = () => {
   // Record and loading state
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [number_of_items, set_number_of_items] = useState(12);
 
   const [filters, setFilters] = useState({});
 
@@ -97,11 +99,40 @@ const Index = () => {
         params: paramFilters,
       })
       .then((res) => {
+        first_load = false; 
         console.log(res.data);
-        setRecords(res.data);
+        setRecords(res.data.results);
+        set_number_of_items(res.data.count);
         setLoading(false);
       })
       .catch((err) => console.log(err.response));
+
+
+  };
+
+  const get_page = (recordTypeCheck,currentPage) => {  //it was only fetchRecords
+    const paramFilters = { ...filters };
+    if (recordTypeCheck.propose && recordTypeCheck.ask) {
+      delete paramFilters.type;
+    } else if (recordTypeCheck.propose && !recordTypeCheck.ask) {
+      paramFilters.type = "Propose";
+    } else if (!recordTypeCheck.propose && recordTypeCheck.ask) {
+      paramFilters.type = "Ask";
+    }
+    axiosInstance
+    .get("search-all-records/?page="+currentPage, {
+      params: paramFilters,
+      
+      }) 
+      .then((res) => {
+       
+        console.log(res.data); 
+        setRecords(res.data.results);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err.response));
+
+      
   };
 
 
@@ -148,7 +179,7 @@ const Index = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <CardListing filters={filters} records={records} />
+        <CardListing filters={filters} records={records} recordType={recordType} number_of_items={number_of_items} get_page={get_page} />
       )}
     </Box>
   );
@@ -158,12 +189,23 @@ const CardListing = (props) => {
   const [user, setUser] = useContext(AuthContext);
 
   // Pagination
-  const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
+  const { currentPage, getCurrentData, changePage, pageCount } = usePaginationHomePage(
+    // first_load ? props.records:props.records.results,
     props.records,
-    PAGE_SIZE
+    PAGE_SIZE,
+    first_load,
+    props.number_of_items,
+    
   );
 
-  const onPageChange = (event, value) => changePage(value);
+
+
+  
+  const onPageChange = (event, value) => {
+    first_load ? "1":props.get_page(props.recordType,currentPage);
+    changePage(value);
+    
+  };
 
   const recordToShow = getCurrentData();
 
@@ -209,7 +251,7 @@ const CardListing = (props) => {
                     gutterBottom
                     className="fw-bold m-0 d-block"
                   >
-                    {props.records.length} Records disponibles
+                    {first_load ? props.records.length:props.number_of_items} Records disponibles
                   </Typography>
                 </Grid>
               </Grid>
@@ -262,7 +304,7 @@ const CardListing = (props) => {
               )}
             <Grid item lg={8} md={10} xs={12} className="my-2 text-center">
               <CustomPagination
-                itemCount={props.records.length}
+                itemCount={props.records.count}
                 itemsPerPage={PAGE_SIZE}
                 onPageChange={onPageChange}
                 currentPage={currentPage}

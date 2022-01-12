@@ -23,7 +23,8 @@ from notifications.utils import create_notification
 from records.models import Captcha
 import datetime
 from django.views.decorators.cache import cache_page
-
+from rest_framework.pagination import PageNumberPagination
+from django.db.models import Q
 
 
 class SubRecordViewSet(viewsets.ModelViewSet):
@@ -159,7 +160,7 @@ def get_all_records(request):
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-date')[:50]
+    ).order_by('-date')[:15]
     # ).order_by('-id') date
     
     end = time.time()
@@ -217,11 +218,10 @@ def search_all_records(request):
     max_volume = request.GET.get("max_volume", "")
     date = request.GET.get("date", "")
      
-    records = Record.objects.filter(
-        approved=True,
-        deleted=False,
-    ).order_by('-date')
-    # ).order_by('-id') date
+    #records = Record.objects.filter(approved=True,deleted=False).order_by('-date')
+    records = Record.objects.filter( 
+        Q(approved=True) & Q(deleted=False ),
+         ).exclude( Q(type="Propose") & Q( date__lt=datetime.datetime.now().date() ))
     
     record_filter = RecordFilter(request.GET, queryset=records)
     records = record_filter.qs
@@ -237,19 +237,24 @@ def search_all_records(request):
             date__gte=datetime.datetime.now().date(), date__lte=datetime.datetime.strptime(date, "%Y-%m-%d").date())
 
     print("search button called me")
-    records = records[:25]
-   
-    serializer = RecordDetailSerializer_only_travel_card_for_index(records, many=True)
     
-    start1 = time.time()
-    res = Response(serializer.data, status=status.HTTP_200_OK)
-
-    end1 = time.time()
-    durantion1 = end1 - start1
-    print("***** search all time for response = " + str(durantion1))
-     
+    
+    #records = records[:25]
    
-    return res
+   
+    paginator = PageNumberPagination()
+    paginator.page_size = 3
+    result_page = paginator.paginate_queryset(records, request)
+    serializer = RecordDetailSerializer_only_travel_card_for_index(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
+    
+    # start1 = time.time()
+    # res = Response(serializer.data, status=status.HTTP_200_OK)
+
+    # end1 = time.time()
+    # durantion1 = end1 - start1
+    # print("***** search all time for response = " + str(durantion1))
+    # return res
 
 @api_view(["GET"])
 def get_all_records_backup(request):
@@ -334,14 +339,14 @@ def get_ask_record_item_images(request, pk):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_records_for_user(request):
-    records = Record.objects.filter(user=request.user).order_by('-updated_at')[:4]
+    records = Record.objects.filter(user=request.user).order_by('-updated_at')[:11]
     serializer = RecordGetSerializer(records, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_list_offers(request):
-    records = Record.objects.filter(user=request.user).order_by('-updated_at')[:4]
+    records = Record.objects.filter(user=request.user).order_by('-updated_at')[:11]
     serializer = get_list_offers_serializers(records, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -349,7 +354,7 @@ def get_list_offers(request):
 @permission_classes([IsAuthenticated])
 def get_list_requests(request):
     propositions = Proposition.objects.filter(
-        user=request.user).order_by('-updated_at')
+        user=request.user).order_by('-updated_at')[:11]
     serializer = get_list_requests_PropositionSerializer_list(propositions, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 

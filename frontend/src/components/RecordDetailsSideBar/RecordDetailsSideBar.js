@@ -154,7 +154,7 @@ const RecordDetailsSideBar = (props) => {
               Avis:
             </Typography>
             {props.record.user.received_feedback.length > 0 ? (
-              props.record.user.received_feedback.map((feedback) => {
+              props.record.user.received_feedback.filter((item, index) => index < 10).map((feedback) => {
                 return (
                   <Feedback
                     text={feedback.text}

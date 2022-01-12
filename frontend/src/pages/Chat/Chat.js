@@ -5,6 +5,10 @@ import { Paper, Grid, Typography, List } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import { makeStyles } from "@material-ui/core/styles";
 
+import usePagination from "../../hooks/usePagination";
+
+import CustomPagination from "../../components/Pagination/Pagination";
+
 import Header from "../../components/Header/Header";
 import ChatPreview from "../../components/ChatPreview/ChatPreview";
 import Spinner from "../../components/Spinner/Spinner";
@@ -17,6 +21,8 @@ import ChatBody from "../../components/ChatBody/ChatBody";
 
 import { useLocation } from "react-router";
 
+
+const PAGE_SIZE = 3;
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -81,7 +87,7 @@ const Chat = (props) => {
       .then((res) => {
         console.log(res.data);
         console.log("start rje in chat  ");
-        console.log(userid); 
+        console.log(userid);  
         
         console.log("end rje in chat  ");
 
@@ -108,6 +114,13 @@ const Chat = (props) => {
       });
   };
 
+  const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
+    userRooms,
+    PAGE_SIZE
+ );
+ const onPageChange = (event, value) => changePage(value);
+ const userRoomsdata = getCurrentData();
+
   useEffect(() => {
     getRooms(currentRoom);
   }, []);
@@ -122,6 +135,8 @@ const Chat = (props) => {
   if (loading) {
     return <Spinner />;
   }
+
+  
 
   return (
     <div>
@@ -156,7 +171,7 @@ const Chat = (props) => {
                   />
                 );
               })}
-              {userRooms.map((room) => {
+              {userRoomsdata.map((room) => {
                 return (
                   <ChatPreview
                     selected={room.id === currentRoom}
@@ -167,12 +182,23 @@ const Chat = (props) => {
                   />
                 );
               })}
-            </List>
+            </List> 
           </Grid>
+
           <Grid item xs={7}>
             <ChatBody room={currentRoom} getRooms={getRooms} />
           </Grid>
+          
         </Grid>
+        <Grid item lg={12} md={12} xs={12} className="my-2 text-center">
+              <CustomPagination
+                itemCount={userRooms.length}
+                itemsPerPage={PAGE_SIZE}
+                onPageChange={onPageChange}
+                currentPage={currentPage}
+                pageCount={pageCount}
+              />
+            </Grid>
       </div>
     </div>
   );
