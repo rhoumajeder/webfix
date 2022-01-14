@@ -9,7 +9,8 @@ const usePagination = (data, itemsPerPage) => {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
 
-    return data.slice(start, end);
+    // return data.slice(start, end);
+    return data;
   };
 
   const changePage = (pageNumber) => {

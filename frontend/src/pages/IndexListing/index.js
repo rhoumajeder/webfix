@@ -202,7 +202,7 @@ const CardListing = (props) => {
 
   
   const onPageChange = (event, value) => {
-    first_load ? "1":props.get_page(props.recordType,currentPage);
+    first_load ? "1":props.get_page(props.recordType,value);
     changePage(value);
     
   };

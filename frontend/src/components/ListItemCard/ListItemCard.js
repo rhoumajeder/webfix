@@ -25,6 +25,7 @@ import objectInArray from "../../helpers/objectInArray";
 
 import { AuthContext } from "../../context/auth";
 
+import usePaginationHomePage from "../../hooks/usePaginationHomePage";
 import usePagination from "../../hooks/usePagination";
 import CustomPagination from "../Pagination/Pagination";
 
@@ -50,24 +51,69 @@ const ListItemCard = (props) => {
   const screen = React.useContext(ScreenContext);
   const [items, setItems] = useState([]);
   const [records, setRecords] = useState([]);
+  const [number_of_items, set_number_of_items] = useState(12);
 
-  const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
+  const { currentPage, getCurrentData, changePage, pageCount } = usePaginationHomePage(
     items,
-    PAGE_SIZE
+    PAGE_SIZE,
+    false, 
+    number_of_items
   );
 
-  const onPageChange = (event, value) => changePage(value);
+  
+  const onPageChange = (event, value) => {
+    get_page(value);
+    changePage(value);
+    
+  };
+
 
 
   const {
     currentPage: recordsCurrentPage,
     getCurrentData: getRecordsCurrentData,
-    changePage: changeRecordsPage,
+    changePage:OfferchangePage,
     pageCount: countRecordsPage
-  } = usePagination(
+  } = usePaginationHomePage(
     records,
-    PAGE_SIZE
+    PAGE_SIZE,
+    false, 
+    number_of_items
   );
+  const OnchangeRecordsPage = (event, value) => {
+    
+    get_page(value);
+    OfferchangePage(value);
+    
+    
+  };
+
+  const get_page = (currentPage) => {  //it was only fetchRecords
+    setisLoading(true);
+    if (props.itemType === "offer") { 
+
+      axiosInstance.get("get-records-for-user/?page="+currentPage).then((res) => {
+        console.log(res.data);
+        setRecords(res.data.results); 
+       
+        setisLoading(false);
+        // alert(isloading);
+        
+      });
+    } else {
+      axiosInstance.get("get-requests/?page="+currentPage).then((res) => {
+        console.log(res.data);
+        setItems(res.data.results);
+        setisLoading(false);
+        // alert(isloading);
+         
+      });
+    }
+
+    
+  };
+
+
   const [isloading, setisLoading] = useState(true);
 
 
@@ -81,7 +127,8 @@ const ListItemCard = (props) => {
 
       axiosInstance.get("get-records-for-user/").then((res) => {
         console.log(res.data);
-        setRecords(res.data);
+        setRecords(res.data.results);
+        set_number_of_items(res.data.count);
         setisLoading(false);
         // alert(isloading);
         
@@ -89,7 +136,8 @@ const ListItemCard = (props) => {
     } else {
       axiosInstance.get("get-requests/").then((res) => {
         console.log(res.data);
-        setItems(res.data);
+        setItems(res.data.results);
+        set_number_of_items(res.data.count);
         setisLoading(false);
         // alert(isloading);
          
@@ -237,7 +285,8 @@ const ListItemCard = (props) => {
           <CustomPagination
             itemCount={records.length}
             itemsPerPage={PAGE_SIZE}
-            onPageChange={(e, value) => changeRecordsPage(value)}
+            // onPageChange={(e, value) => changeRecordsPage(value)}
+            onPageChange={OnchangeRecordsPage}
             currentPage={recordsCurrentPage}
             pageCount={countRecordsPage}
           />

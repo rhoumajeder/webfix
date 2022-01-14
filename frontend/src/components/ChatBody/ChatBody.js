@@ -71,6 +71,7 @@ const ChatBody = (props) => {
   // Get all messages for user
   const getMessages = () => {
     if (props.room) {
+      setLoading(true);
       axiosInstance.get(`chat/get-messages/${props.room}/`).then((res) => {
         console.log(res.data);
         setMessages(res.data);

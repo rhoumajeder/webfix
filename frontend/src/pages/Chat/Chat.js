@@ -5,7 +5,7 @@ import { Paper, Grid, Typography, List } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import { makeStyles } from "@material-ui/core/styles";
 
-import usePagination from "../../hooks/usePagination";
+import usePaginationHomePage from "../../hooks/usePaginationHomePage";
 
 import CustomPagination from "../../components/Pagination/Pagination";
 
@@ -77,30 +77,29 @@ const Chat = (props) => {
   const [loading, setLoading] = useState(true);
   const [ownedRooms, setOwnedRooms] = useState([]);
   const [userRooms, setUserRooms] = useState([]);
+  const [number_of_items, set_number_of_items] = useState(1);
+
   // const [currentRoom, setCurrentRoom] = useState(actualRoom ? parseInt(actualRoom) : null);
   const [currentRoom, setCurrentRoom] = useState(null);
  
   // Get rooms for current user
-  const getRooms = (currentRoom) => {
+  const getRooms = (currentRoom) => { 
     axiosInstance
-      .get("chat/get-rooms/")
+      .get("chat/get-rooms/?page="+1)
       .then((res) => {
-        console.log(res.data);
-        console.log("start rje in chat  ");
-        console.log(userid);  
+         
         
-        console.log("end rje in chat  ");
-
-        setOwnedRooms(res.data["owner_rooms"]);
-        setUserRooms(res.data["user_rooms"]);
+        set_number_of_items(res.data.count);
+        setOwnedRooms(res.data.results["owner_rooms"]);
+        setUserRooms(res.data.results["user_rooms"]);
 
         if (!currentRoom) {
-          if (res.data["owner_rooms"].length > 0) {
-            setCurrentRoom(res.data["owner_rooms"][0].id);
-            localStorage.setItem("currentRoom", res.data["owner_rooms"][0].id);
-          } else if (res.data["user_rooms"].length > 0) {
-            setCurrentRoom(res.data["user_rooms"][0].id);
-            localStorage.setItem("currentRoom", res.data["user_rooms"][0].id);
+          if (res.data.results["owner_rooms"].length > 0) {
+            setCurrentRoom(res.data.results["owner_rooms"][0].id);
+            localStorage.setItem("currentRoom", res.data.results["owner_rooms"][0].id);
+          } else if (res.data.results["user_rooms"].length > 0) {
+            setCurrentRoom(res.data.results["user_rooms"][0].id);
+            localStorage.setItem("currentRoom", res.data.results["user_rooms"][0].id);
           } else {
             setCurrentRoom(null);
           }
@@ -114,11 +113,41 @@ const Chat = (props) => {
       });
   };
 
-  const { currentPage, getCurrentData, changePage, pageCount } = usePagination(
+  const get_page = (currentPage) => {  //it was only fetchRecords
+    
+    setLoading(true);
+    axiosInstance
+    .get("chat/get-rooms/?page="+currentPage)
+    .then((res) => {
+      console.log(res.data);
+      setOwnedRooms(res.data.results["owner_rooms"]);
+      setUserRooms(res.data.results["user_rooms"]);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err.response);
+ 
+    });
+
+
+    
+  };
+
+  const { currentPage, getCurrentData, changePage, pageCount } = usePaginationHomePage(
     userRooms,
-    PAGE_SIZE
+    PAGE_SIZE,
+    false, 
+    number_of_items
  );
- const onPageChange = (event, value) => changePage(value);
+ 
+ const onPageChange = (event, value) => {
+  get_page(value);
+  changePage(value);
+  
+};
+
+
+
  const userRoomsdata = getCurrentData();
 
   useEffect(() => {
@@ -192,7 +221,8 @@ const Chat = (props) => {
         </Grid>
         <Grid item lg={12} md={12} xs={12} className="my-2 text-center">
               <CustomPagination
-                itemCount={userRooms.length}
+                // itemCount={userRooms.length} number_of_items
+                itemCount={number_of_items} 
                 itemsPerPage={PAGE_SIZE}
                 onPageChange={onPageChange}
                 currentPage={currentPage}

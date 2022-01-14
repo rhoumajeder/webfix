@@ -338,7 +338,7 @@ def get_ask_record_item_images(request, pk):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_records_for_user(request):
+def get_records_for_user(request): # we do not use this function , it's replaced by get_list_offers 
     records = Record.objects.filter(user=request.user).order_by('-updated_at')[:11]
     serializer = RecordGetSerializer(records, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -346,17 +346,30 @@ def get_records_for_user(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_list_offers(request):
-    records = Record.objects.filter(user=request.user).order_by('-updated_at')[:11]
-    serializer = get_list_offers_serializers(records, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    records = Record.objects.filter(user=request.user).order_by('-date')
+
+    paginator = PageNumberPagination()
+    paginator.page_size = 3
+    result_page = paginator.paginate_queryset(records, request)
+    serializer = get_list_offers_serializers(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+    # serializer = get_list_offers_serializers(records, many=True)
+    # return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_list_requests(request):
     propositions = Proposition.objects.filter(
         user=request.user).order_by('-updated_at')[:11]
-    serializer = get_list_requests_PropositionSerializer_list(propositions, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    paginator = PageNumberPagination()
+    paginator.page_size = 3
+    result_page = paginator.paginate_queryset(propositions, request)
+    serializer = get_list_requests_PropositionSerializer_list(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+    # return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

@@ -17,7 +17,7 @@ from django.views.decorators.vary import vary_on_cookie
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.db.models import Q
-
+from rest_framework.pagination import PageNumberPagination
 
 
 from django.core.cache import cache
@@ -55,21 +55,27 @@ def get_rooms(request):
     # user_rooms = ChatRoom.objects.filter(
     #     user=request.user).order_by('-last_updated_room_at') # Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6)
 
-    user_rooms = ChatRoom.objects.filter(Q(user=request.user) | Q(owner=request.user)).order_by('-last_updated_room_at')[:5]
+    user_rooms = ChatRoom.objects.filter(Q(user=request.user) | Q(owner=request.user)).order_by('-last_updated_room_at')
 
     #owner_room_serializer = ChatRoomSerializer(owner_rooms, many=True)
-    user_room_serializer = ChatRoomSerializer(user_rooms, many=True)
 
-    cache_key_get_rooms = str("chat_room") + str(request.user.id)
+    paginator = PageNumberPagination()
+    paginator.page_size = 3
+    result_page = paginator.paginate_queryset(user_rooms, request)
+    user_room_serializer = ChatRoomSerializer(result_page, many=True)
+    responded_data = {"owner_rooms": [], "user_rooms": user_room_serializer.data}
+    return paginator.get_paginated_response(responded_data)
 
-    if cache.get(cache_key_get_rooms) != None : 
-        return  Response(cache.get(cache_key_get_rooms), status=status.HTTP_200_OK)
+    # cache_key_get_rooms = str("chat_room") + str(request.user.id)
+
+    # if cache.get(cache_key_get_rooms) != None : 
+    #     return  Response(cache.get(cache_key_get_rooms), status=status.HTTP_200_OK)
     
     #responded_data = {"owner_rooms": owner_room_serializer.data, "user_rooms": user_room_serializer.data}
-    responded_data = {"owner_rooms": [], "user_rooms": user_room_serializer.data}
-    cache.get_or_set(cache_key_get_rooms, responded_data, 60 *15 )
+    # responded_data = {"owner_rooms": [], "user_rooms": user_room_serializer.data}
+    # cache.get_or_set(cache_key_get_rooms, responded_data, 60 *15 )
 
-    return Response(responded_data, status=status.HTTP_200_OK)
+    # return Response(responded_data, status=status.HTTP_200_OK) 
 
 
 @api_view(["POST"])
