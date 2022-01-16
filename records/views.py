@@ -160,7 +160,7 @@ def get_all_records(request):
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-date')[:15]
+    ).order_by('-date')
     # ).order_by('-id') date
     
     end = time.time()
