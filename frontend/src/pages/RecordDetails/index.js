@@ -521,10 +521,10 @@ const Index = ({ match }) => {
                     <Grid item>
 
                     <FacebookShareButton
-                          url={"https://rjeapp.herokuapp.com/record-details/456"}
-                          quote={" vsssopopo popoaop paopo dzzdzdz"}
-                          hashtag={"#hashtag"}
-                          description={"izdzdz zkdjzkldz asas sss aasasadxa "}
+                          url={"https://storage-test-rje.s3.amazonaws.com/images/human_body.jpg"}
+                          quote={" this is a quand "}
+                          hashtag={"#this is htag"}
+                          description={" this is description "}
                           className="Demo__some-network__share-button"
                         > 
                           <FacebookIcon size={32} round /> Facebook share

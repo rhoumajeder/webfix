@@ -42,7 +42,6 @@ import PropositionState from "./pages/PropositionState/PropositionState";
 
 import AskRecordDetails from "./pages/AskRecordDetails/AskRecordDetails";
 
-import { Helmet } from "react-helmet";
 
 const theme = createMuiTheme({
   palette: {
@@ -89,12 +88,7 @@ const App = () => {
     return (
       
       <MuiPickersUtilsProvider utils={MomentUtils}>
-                <Helmet>
-        <title>{"rje first title"}</title>
-        <meta property="og:title"         content="Your Website Title" />
-        <meta property="og:description"   content="Your description" />
-        <meta property="og:image"   content="https://rjeapp.herokuapp.com/static/frontend/306342da4b9d4bcbcb70af882122a9f0.png" />
-                    </Helmet>
+                
         <ThemeProvider theme={theme}>
           <Context>
             <ToastProvider
