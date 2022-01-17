@@ -42,6 +42,8 @@ import PropositionState from "./pages/PropositionState/PropositionState";
 
 import AskRecordDetails from "./pages/AskRecordDetails/AskRecordDetails";
 
+import { Helmet } from "react-helmet";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -85,7 +87,18 @@ const App = () => {
     return <Spinner />;
   } else {
     return (
+      
       <MuiPickersUtilsProvider utils={MomentUtils}>
+                <Helmet>
+        <title>{"rje first title"}</title>
+                    <meta property="title" content={"rje title"} />
+
+<meta property="image" content={"https://storage-test-rje.s3.amazonaws.com/images/humanbody3.jpg"} />
+
+<meta property="og:title" content={"rje title"} />
+
+<meta property="og:image" content={"https://storage-test-rje.s3.amazonaws.com/images/humanbody3.jpg"} />
+                    </Helmet>
         <ThemeProvider theme={theme}>
           <Context>
             <ToastProvider

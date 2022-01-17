@@ -42,6 +42,13 @@ import Spinner from "../../components/Spinner/Spinner";
 
 import { AuthContext } from "../../context/auth";
 
+
+import { FacebookShareButton } from "react-share";
+import { FacebookIcon } from "react-share";
+ 
+
+
+
 const Index = ({ match }) => {
   const [user, setUser] = useContext(AuthContext)
   const { addToast } = useToasts();
@@ -315,6 +322,7 @@ const Index = ({ match }) => {
   return ( 
     <Box component={"div"}>
       <Header />
+      
 
       <Container className="py-5">
         {isRecordVisiable ? (
@@ -346,7 +354,7 @@ const Index = ({ match }) => {
                       gutterBottom
                       className={`m-0 me-1 fw-medium`}
                     >
-                      Description
+                      Description rje 
                     </Typography>
                     <Typography
                       variant="subtitle2"
@@ -509,6 +517,28 @@ const Index = ({ match }) => {
                         Delete
                       </Button>
                     </Grid>}
+
+                    <Grid item>
+
+                    <FacebookShareButton
+                          url={"https://rjeapp.herokuapp.com/record-details/456"}
+                          quote={" vsssopopo popoaop paopo dzzdzdz"}
+                          hashtag={"#hashtag"}
+                          description={"izdzdz zkdjzkldz asas sss aasasadxa "}
+                          className="Demo__some-network__share-button"
+                        > 
+                          <FacebookIcon size={32} round /> Facebook share
+                    </FacebookShareButton>
+                      {/* <Button
+                        size="large"
+                        variant="outlined"
+                        onClick={deleteRecord}
+                        className="ms-auto my-2 text-info"
+                      >
+                        Share On FaceBook
+                      </Button> */}
+                    </Grid>
+
                     {!(user.id === record.user.id) && <Grid item>
                       <Button
                         className="ms-auto my-2"

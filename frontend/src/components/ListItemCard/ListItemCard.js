@@ -189,7 +189,26 @@ const ListItemCard = (props) => {
                             hasShadow={false}
                             username={record.user.username}
                             record={record}
+                            hasViewButton={true}
                             user={record.user}
+                            viewButton={
+                              <Button
+                                variant="contained"
+
+                                color="primary"
+                                style={{ marginTop: "10px" }}
+                              >
+                                <Link
+                                  style={{
+                                    textDecoration: "inherit",
+                                    color: "inherit",
+                                  }}
+                                  to={`/record-details/${record.id}`}
+                                >
+                                  View
+                                </Link>
+                              </Button>
+                            }
                           />
                         ) : (
                           <div>
@@ -197,7 +216,7 @@ const ListItemCard = (props) => {
                               user={record.user}
                               itemTable={true}
 
-                              hasAvatar={true}
+                              hasAvatar={true} 
                               hasShadow={false}
                               username={record.user.username}
                               record={record}
