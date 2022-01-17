@@ -91,13 +91,9 @@ const App = () => {
       <MuiPickersUtilsProvider utils={MomentUtils}>
                 <Helmet>
         <title>{"rje first title"}</title>
-                    <meta property="title" content={"rje title"} />
-
-<meta property="image" content={"https://storage-test-rje.s3.amazonaws.com/images/humanbody3.jpg"} />
-
-<meta property="og:title" content={"rje title"} />
-
-<meta property="og:image" content={"https://storage-test-rje.s3.amazonaws.com/images/humanbody3.jpg"} />
+        <meta property="og:title"         content="Your Website Title" />
+        <meta property="og:description"   content="Your description" />
+        <meta property="og:image"   content="https://rjeapp.herokuapp.com/static/frontend/306342da4b9d4bcbcb70af882122a9f0.png" />
                     </Helmet>
         <ThemeProvider theme={theme}>
           <Context>
