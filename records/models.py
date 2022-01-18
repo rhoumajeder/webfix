@@ -42,6 +42,8 @@ class Record(models.Model):
     deleted = models.BooleanField(default=False)
     approved = models.BooleanField(default=True)
     phone_number = models.CharField(max_length=20, null=True)
+    image_ask = models.ImageField(upload_to="images/",null=True,blank=True) 
+    image_propose = models.ImageField(upload_to="images/",null=True,blank=True)
 
     def __str__(self):
         return f"From {self.city_arrival} to {self.city_destination} at {str(self.date)}"
