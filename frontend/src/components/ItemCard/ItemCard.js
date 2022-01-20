@@ -37,6 +37,8 @@ import moment from "moment";
 
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
+import { CgShapeCircle } from "react-icons/cg";
+
 import {
   HeaderDeliveryCode,
   HeaderSetupMeeting,
@@ -58,6 +60,31 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { AuthContext } from "../../context/auth";
 import { PortraitSharp } from "@material-ui/icons";
 
+import {
+  ModeOfTransportationContext,
+  ScreenContext,
+} from "../../helpers/context";
+
+export const TravelInformation = (props) => {
+  return (
+    <Box className="mt-1">
+      <Box className="d-flex align-items-center">
+        {props.departure && <CgShapeCircle className="text-success" />}
+        {props.destination && <CgShapeCircle className="text-danger" />}
+        <Typography
+          variant="subtitle2"
+          component="span"
+          color="textSecondary"
+          gutterBottom
+          className="fw-bold m-0 ms-2"
+        >
+          {props.location}
+        </Typography>
+      </Box>
+    </Box>
+  );
+};
+
 const ItemCard = (props) => {
   const [user, setUser] = useContext(AuthContext);
   const { addToast } = useToasts();
@@ -65,6 +92,8 @@ const ItemCard = (props) => {
   const [address, setAddress] = useState("");
   const [showImage, setShowImage] = useState(false);
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+
+  const modes = React.useContext(ModeOfTransportationContext);
 
   const openFeedbackModal = () => {
     setFeedbackModalOpen(true);
@@ -417,7 +446,7 @@ const ItemCard = (props) => {
       if (proposition.proposition_state === "Pending") {
         return (
           <div className="my-2">
-            Waiting for acceptance{" "}
+            Waiting for acceptance {" "}
             <GoUnverified className={"ms-1 text-primary"} />
           </div>
         );
@@ -436,7 +465,70 @@ const ItemCard = (props) => {
       {props.askProposition && props.item.proposition_state === "Pending" ? (
         <div>
           <div className="my-2">{displayAskPropositionState(props.item)}</div>
-          <Card className={"shadow py-2 my-3"}>
+          <Card className={"shadow py-2 my-3"} style={{padding:"10px", margin:"10px"}}>
+
+                <Grid item sm={"auto"} xs={12}>
+                  <Box component="div">
+                    <Typography
+                      variant="subtitle1"
+                      color="inherit"
+                      gutterBottom
+                      className="fw-bold m-0 pb-1 border-bottom border-2 text-dark"
+                    >
+                      {props &&
+                        moment(props.item.date).format("dddd DD MMMM YYYY")}
+                      {props &&
+                        modes &&
+                        props.item.Proposed_moyen_de_transport &&
+                        modes[props.item.Proposed_moyen_de_transport]}
+                    </Typography>
+                  </Box>
+                </Grid>
+
+
+
+                <Grid
+                container
+                direction="row"
+                spacing={2}
+                item
+                sm={"auto"}
+                xs={12}
+              >
+                <Grid item sm={"auto"} xs={12}>
+                  <Box
+                    component="div"
+                    className={"border-bottom border-2 pb-2"}
+                  >
+                    <TravelInformation
+                      location={props && props.item.Proposed_city_arrival}
+                      departure={true}
+                    />
+                    <TravelInformation
+                      location={props && props.item.Proposed_city_destination}
+                      destination={true}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Grid>
+                  <label>
+                  <input type="checkbox" name={"Proposed_home_delivery"} checked={ props.item.Proposed_home_delivery} /> 
+                  | Home Delivery 
+                  </label>
+                </Grid>
+
+
+
+
+
+
+
+
+
+
+
             <CardContent>
               <Typography
                 variant="h6"
@@ -445,7 +537,7 @@ const ItemCard = (props) => {
                 gutterBottom
                 className={`m-0 me-1 fw-medium`}
               >
-                Description
+                Message 
               </Typography>
               <Typography
                 variant="subtitle2"
