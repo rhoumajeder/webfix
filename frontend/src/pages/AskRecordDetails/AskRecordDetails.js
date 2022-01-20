@@ -29,7 +29,11 @@ import { useToasts } from "react-toast-notifications";
 
 import { useHistory } from "react-router";
 
-import { AuthContext } from "../../context/auth";
+import { AuthContext } from "../../context/auth"; 
+import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
+import { KeyboardDatePicker } from "@material-ui/pickers";
+import cities from "../../helpers/cities";
+import moment from "moment";
 
 const style = {
   position: "absolute",
@@ -50,7 +54,51 @@ const AskRecordDetails = () => {
   const [record, setRecord] = useState();
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [proposition, setProposition] = useState({});
+
+  let defaultdatevalue =  moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M')
+  let Records = {
+    date: defaultdatevalue,
+    Proposed_moyen_de_transport: "Avion",
+    Proposed_city_arrival: "Bretagne, France",
+    Proposed_city_destination: "Berlin, Allemagne",
+    Proposed_home_delivery: false
+  };
+
+
+  const [proposition, setProposition] = useState({
+    date: defaultdatevalue,
+    Proposed_moyen_de_transport: "Avion",
+    Proposed_city_arrival: "Bretagne, France",
+    Proposed_city_destination: "Berlin, Allemagne",
+    Proposed_home_delivery: false
+  });   
+  // currentDate
+;
+  //alert(defaultdatevalue);
+  // const [currentDate, setCurrentDate] = useState(
+  //   moment(new Date()).format("YYYY-MM-DD")
+  // ); 
+  const [currentDate, setCurrentDate] = useState(
+    defaultdatevalue
+  );
+  const [checked, setChecked] = React.useState(false);
+
+
+
+  const transportOptions = [
+    {
+      label: "None",
+      value: "",
+    },
+    {
+      label: "Avion",
+      value: "Avion",
+    },
+    {
+      label: "Car",
+      value: "Car",
+    },
+  ];
 
   // Get the current record
   useEffect(() => {
@@ -95,12 +143,40 @@ const AskRecordDetails = () => {
 
   const handleInputChange = (e) => {
     setProposition({ ...proposition, [e.target.name]: e.target.value });
+    console.log(proposition);
+  };
+
+
+  const handleChangeForCheckBox = () => {
+    setChecked(!checked);
+    setProposition({ ...proposition, ["Proposed_home_delivery"]: checked });
+    console.log(proposition);
+  };
+
+
+  const handleSelectChange = (item, target) => {
+    setProposition({ ...proposition, [target.name]: item.value });
+    console.log(proposition);
+     
+  };
+ 
+
+  const handleDateChange = (date) => {
+    // setCurrentDate(moment(date).format("YYYY-MM-DD"));
+    setProposition({ ...proposition, ["date"]: moment(date).format("YYYY-MM-DD") });
+    console.log(proposition);
+    
   };
 
   const handleConfirm = () => {
     handleModal();
     submitProposition();
+    alert(proposition);
   };
+  const handleX= () => { 
+    setModalOpen(!modalOpen);
+   
+  }; 
 
   if (loading) {
     return <Spinner />;
@@ -158,26 +234,158 @@ const AskRecordDetails = () => {
                 </Box>
               </CardContent>
             </Card>
+
+
+
+
             <Box className="my-2 d-flex align-items-center justify-content-end">
 
-            {!(user.id === record.user.id) &&<Button
+            {!(user.id === record.user.id ) &&<Button
                 className="ms-auto my-2"
                 variant="outlined"
                 color={"primary"}
                 disabled={user.username ? false : true}
-                size="large"
+                size="large" 
+                hidden={modalOpen}
                 onClick={handleModal}
               >
                 Interact
               </Button>}
-
             </Box>
+
+
+
+            <Fade in={modalOpen} >
+              
+              <Grid  className={"shadow"} item sm={12} xs={12} md={12}  style={{ backgroundColor: "white", padding:"10px"}} >
+                <Typography variant="h6">Send a proposition</Typography>
+                <Grid item md={4} xs={12} sm={12} className="my-2">
+                    <Typography
+                      variant={"subtitle2"}
+                      color={"textPrimary"}
+                      className={"fw-bold my-2"}
+                    >
+                      Date Of Voyage:
+                    </Typography> 
+                    <KeyboardDatePicker
+                      disableToolbar
+                      autoOk
+                      variant={screen.width <= 480 ? "dialog" : "inline"}
+                      format="DD MMM, yyyy"
+                      margin="normal"
+                      fullWidth
+                      id="date-picker-inline"
+                      placeholder="Aujourd'hui"
+                      InputLabelProps={{ shrink: false }}
+                      className={"m-0 p-0"}
+                      color={"primary"}
+                      size="small" 
+                      defaultValue={defaultdatevalue}
+                      value={proposition.date} 
+                      inputVariant="outlined"
+                      // name={"date"}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}/>  
+
+                </Grid>
+                <Grid item md={4} sm={6} xs={12}>
+                    <SelectBoxExtended
+                      labelId={"ville-de-depart"}
+                      options={cities}
+                      label={"Ville De Départ"}
+                      name={"Proposed_city_arrival"}
+                      // value={proposition.Proposed_city_arrival}
+                      placeholder={"Ville De Départ"}
+                      onChange={handleSelectChange}
+                    />
+                </Grid>
+                <Grid item md={4} sm={6} xs={12}>
+                    <SelectBoxExtended
+                      labelId={"ville-de-destination"}
+                      label={"Ville De Destination"}
+                      options={cities}
+                      name={"Proposed_city_destination"}
+                      // value={proposition.Proposed_city_destination}
+                      placeholder={"Ville De Destination"}
+                      onChange={handleSelectChange}
+                    />
+                </Grid>
+                <Grid item md={4} xs={12} sm={12} className="my-2">
+                      <Typography
+                          variant={"subtitle2"}
+                          color={"textPrimary"}
+                          className={"fw-bold my-1"}
+                        >Moyen de Transport:</Typography>
+                      <SelectBoxExtended
+                        // style={{ zIndex: 100 }}
+                        labelId={"moyen-de-transport"}
+                        label={"Moyen de transport"}
+                        options={transportOptions}
+                        name={"Proposed_moyen_de_transport"}
+                        // value={proposition.Proposed_moyen_de_transport}
+                        placeholder={"Moyen de transport"}
+                        onChange={handleSelectChange}
+                        className="my-2"
+                        // value={ }
+                      />
+                </Grid>
+                <Grid>
+                  <label>
+                  <input type="checkbox" name={"Proposed_home_delivery"} checked={proposition.Proposed_home_delivery} onChange={handleChangeForCheckBox}/> 
+                  | Home Delivery 
+                  </label>
+                </Grid>
+                <Grid >
+                  <div className="my-4 w-100">
+                  <InputLabel htmlFor={"message"}>Message</InputLabel>
+                  <TextField
+                  className="w-100 my-3"
+                  name="message"
+                  onChange={handleInputChange}
+                  variant="outlined"
+                  placeholder="Message"
+                  multiline
+                  rows={3}
+                  helperText={"Write a message to the owner of the record"}
+                  />
+                  </div>
+                  <Button
+                  className="ms-auto my-2"
+                  variant="contained"
+                  color={"primary"}
+                  size="large"
+                  onClick={handleConfirm}
+                  >
+                  Confirm
+                  </Button>&nbsp;&nbsp;&nbsp;
+                  <Button
+                    className="ms-auto my-2"
+                    variant="outlined"
+                    color={"primary"}
+                    disabled={user.username ? false : true}
+                    size="large"
+                    onClick={handleX} 
+                  >
+                    X
+                  </Button>
+                </Grid>
+              </Grid>
+            </Fade>
+
+
+
+
+
+
           </Grid>
           <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
         </Grid>
         <Modal
-          open={modalOpen}
-          onClose={handleModal}
+          // open={modalOpen}
+          open={false}
+          onClose={handleModal} 
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >

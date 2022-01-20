@@ -88,6 +88,16 @@ class AskRecordItemImage(models.Model):
 
 class Proposition(models.Model):
 
+    TRANSPORTS = [
+        ("Car", "Car"),
+        ("Avion", "Avion"),
+    ]
+
+    RECORD_TYPE = [
+        ("Propose", "Propose"),
+        ("Ask", "Ask")
+    ]
+
     ADDRESS_STATE = [
         ("Undefined", "Undefined"),
         ("Pending", "Pending"),
@@ -122,6 +132,13 @@ class Proposition(models.Model):
     message = models.TextField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    date = models.DateField(blank=True, null=True)
+    Proposed_city_destination = models.CharField(max_length=50,blank=True, null=True)
+    Proposed_city_arrival = models.CharField(max_length=50,blank=True, null=True)
+    Proposed_moyen_de_transport = models.CharField(max_length=50, choices=TRANSPORTS, blank=True, null=True)
+    Proposed_home_delivery = models.BooleanField(default=False,blank=True, null=True)
+
 
     def __str__(self):
         return f'{self.user}: {self.record}'
