@@ -33,8 +33,8 @@ def Create_imagefrom_ad(Ads):
          # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
         # Custom font style and font size
-        myFontbd = ImageFont.truetype('arialbd.ttf', 18)
-        myFont = ImageFont.truetype('arial.ttf', 18)
+        myFontbd = ImageFont.truetype('/app/arialbd.ttf', 18)
+        myFont = ImageFont.truetype('/app/arial.ttf', 18)
 
 
         # Add Text to an image
