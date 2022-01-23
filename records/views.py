@@ -22,9 +22,9 @@ def rd_string():
 
 def Create_imagefrom_ad(Ads):
 
-    link_image_card = "records\card.PNG"
-    link_image_plane = "records\plane.png"
-    link_image_ask = "records\imageAskrecord.PNG"
+    link_image_card = "card.PNG"
+    link_image_plane = "plane.png"
+    link_image_ask = "imageAskrecord.PNG"
 
     
     if Ads["type"] == "Propose" :
