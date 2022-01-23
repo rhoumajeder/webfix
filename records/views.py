@@ -22,13 +22,13 @@ def rd_string():
 
 def Create_imagefrom_ad(Ads):
 
-    link_image_card = "card.PNG"
+    link_image_card = "records/card.PNG"
     link_image_plane = "plane.png"
     link_image_ask = "imageAskrecord.PNG"
 
     
     if Ads["type"] == "Propose" :
-        img = Image.open(link_image_plane if Ads["plane"] else link_image_card)
+        img = Image.open('plane.png' if Ads["plane"] else 'card.PNG')
 
          # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
@@ -65,7 +65,7 @@ def Create_imagefrom_ad(Ads):
     
     elif Ads["type"] == "Ask": 
 
-        img = Image.open(link_image_ask)
+        img = Image.open('imageAskrecord.PNG')
          # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
         # Custom font style and font size
