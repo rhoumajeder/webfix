@@ -1,6 +1,6 @@
 const objectSum = (items, prop) => {
   return items.reduce((a, b) => {
-    return a + b[prop];
+    return Number(a) + Number(b[prop]);
   }, 0);
 };
 

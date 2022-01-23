@@ -302,7 +302,7 @@ class FeedbackSerializer_user(ModelSerializer):
    
     class Meta:
         model = CustomUser
-        fields = ["note_feedback","number_of_feedbacks"]
+        fields = ["note_feedback","number_of_feedbacks","total_number_of_ads"]
 
 
 class ReportSerializer(ModelSerializer):

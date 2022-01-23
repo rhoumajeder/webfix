@@ -1,3 +1,115 @@
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+import os, random 
+import string
+from django.core.files.base import ContentFile
+from io import BytesIO, StringIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+import datetime
+
+# Open an Image
+
+
+Color = {"red" : (255, 0, 0), "green" : (102, 175, 50) }
+def VX(Ads,key):
+    return "V" if Ads[key] else "X"
+def RG(Ads,key):
+     return Color["green"] if Ads[key] else Color["red"]
+def rd_string():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
+
+def Create_imagefrom_ad(Ads):
+
+    link_image_card = "records\card.PNG"
+    link_image_plane = "records\plane.png"
+    link_image_ask = "records\imageAskrecord.PNG"
+
+    
+    if Ads["type"] == "Propose" :
+        img = Image.open(link_image_plane if Ads["plane"] else link_image_card)
+
+         # Call draw Method to add 2D graphics in an image
+        I1 = ImageDraw.Draw(img)
+        # Custom font style and font size
+        myFontbd = ImageFont.truetype('arialbd.ttf', 18)
+        myFont = ImageFont.truetype('arial.ttf', 18)
+
+
+        # Add Text to an image
+        I1.text((300, 60), Ads["date"], font=myFontbd, fill =(0, 0, 0))
+        I1.text((838, 57), Ads["min_price"], font=myFontbd, fill =(0, 0, 0))
+        I1.text((850, 80), Ads["max_weight"], font=myFontbd, fill =(0, 0, 0))
+        I1.text((323,125), Ads["destination"], font=myFont, fill =(0, 0, 0))
+        I1.text((323,  94),Ads["depart"], font=myFont, fill =(0, 0, 0))
+        I1.text((120, 174),Ads["username"], font=myFont, fill =(0, 0, 0))
+
+
+        I1.text((347, 175), VX(Ads,"f") , font=myFontbd, fill = RG(Ads,"f") )
+        I1.text((483, 175), VX(Ads,"M"), font=myFontbd, fill =  RG(Ads,"M") )
+        I1.text((646, 175), VX(Ads,"SE"), font=myFontbd, fill = RG(Ads,"SE") )
+        I1.text((815, 175), VX(Ads,"SA"), font=myFontbd, fill = RG(Ads,"SA") )
+
+        I1.text((386, 209), VX(Ads,"V"), font=myFontbd, fill = RG(Ads,"V") )
+        I1.text((539, 209), VX(Ads,"BM"), font=myFontbd, fill = RG(Ads,"BM") )
+        I1.text((684, 209), VX(Ads,"BE"), font=myFontbd, fill = RG(Ads,"BE") )
+        I1.text((769, 209), VX(Ads,"Autres"), font=myFontbd, fill = RG(Ads,"Autres") )
+
+
+
+        img_io = BytesIO()
+        img.save(img_io, format='PNG', quality=100)
+        img_content = ContentFile(img_io.getvalue(), Ads["name_image_url"] + '.jpg')
+        return img_content 
+    
+    elif Ads["type"] == "Ask": 
+
+        img = Image.open(link_image_ask)
+         # Call draw Method to add 2D graphics in an image
+        I1 = ImageDraw.Draw(img)
+        # Custom font style and font size
+        myFontbd = ImageFont.truetype('arialbd.ttf', 18)
+        myFont = ImageFont.truetype('arial.ttf', 18)
+
+
+        # Add Text to an image
+        I1.text((240, 40), Ads["date"], font=myFontbd, fill =(0, 0, 0))
+
+        I1.text((675, 40), Ads["ask_total_price"], font=myFontbd, fill =(0, 0, 0))
+        I1.text((684, 61), Ads["ask_total_weight"], font=myFontbd, fill =(0, 0, 0))
+
+        I1.text((260, 104), Ads["destination"], font=myFont, fill =(0, 0, 0))
+        I1.text((260, 75),Ads["depart"], font=myFont, fill =(0, 0, 0))
+
+        I1.text((95, 145),Ads["username"], font=myFont, fill =(0, 0, 0))
+
+        index = 0 
+        inc_y = 0
+        for i in Ads["ask_item_info"] : 
+            # 'name': 'Trotinette ', 'quantity': 1, 'weight': '50', 'price': '70',
+            I1.text((321, 226 + inc_y ),i["name"], font=myFont, fill =(0, 0, 0))
+            I1.text((494, 226 + inc_y ),str(i["quantity"]), font=myFont, fill =(0, 0, 0))
+            I1.text((592, 226 + inc_y ),str(i["weight"]), font=myFont, fill =(0, 0, 0))
+            I1.text((685, 226 + inc_y ),str(i["price"]), font=myFont, fill =(0, 0, 0))
+            index = index + 1 
+            inc_y = inc_y + 30
+            if index == 3 : 
+                break
+            
+        img_io = BytesIO()
+        img.save(img_io, format='PNG', quality=100)
+        img_content = ContentFile(img_io.getvalue(), Ads["name_image_url"] + '.jpg')
+        return img_content 
+
+
+
+
+
+"""
+end of modification to insert image
+
+"""
 from django.shortcuts import get_object_or_404
 
 from rest_framework import viewsets
@@ -59,6 +171,7 @@ class SubRecordBulkInsertView(APIView):
 def create_record(request):
     date_from = datetime.datetime.now() - datetime.timedelta(hours=10)
     record_count = Record.objects.filter(user=request.user,created_at__gt=date_from).count()
+    record_count_all = Record.objects.filter(user=request.user).count() + 1
     
     print("===================Debgu rje star=====================")
     print(record_count)
@@ -75,8 +188,60 @@ def create_record(request):
     total_number_of_ads_dic["total_number_of_ads"] =  total_number_of_ads
 
     serializer_feedback = FeedbackSerializer_user(data=total_number_of_ads_dic)
+    data_treated=request.data
 
-    serializer = RecordSerializer(data=request.data)
+    print("==========rje star")
+    print(data_treated)
+    print("==========rje end")
+    
+    if data_treated["type"] == "Propose" :
+        Ads_propose ={  
+                "username": request.user.username,
+                "plane" : True if data_treated["moyen_de_transport"] == "Avion" else False ,
+                "date":   datetime.datetime.strptime(data_treated["date"], "%Y-%m-%d").strftime("%A %d %B %Y"),
+                "depart":  data_treated["city_arrival"],
+                "destination":  data_treated["city_destination"],
+                "max_weight":  str(data_treated["max_weight"]),
+                "min_price":  str(data_treated["min_price"]),
+                "f":      True if "Food" in data_treated["categories"] else False,
+                "M":      True if "Medicaments" in data_treated["categories"] else False,
+                "SE":     True if "Small Electronics" in data_treated["categories"] else False,
+                "SA":     True if "Small Accessories" in data_treated["categories"] else False,
+                "V":      True if "Vetements" in data_treated["categories"] else False,
+                "BM":     True if "Big Mechanical" in data_treated["categories"] else False,
+                "BE":     True if "Big Electronics" in data_treated["categories"] else False,
+                "Autres": True if "Autres" in data_treated["categories"] else False,
+                "name_image_url": request.user.username + "-img-propose-share-on-fb-" + str(record_count_all),
+                "type" : data_treated["type"]
+
+            }
+        image = Create_imagefrom_ad(Ads_propose)
+        data_treated["image_propose"]  = image
+
+    elif data_treated["type"] == "Ask" : 
+        Ads_Ask ={  
+                "username": request.user.username,
+                "date":   datetime.datetime.strptime(data_treated["date"], "%Y-%m-%d").strftime("%A %d %B %Y"),
+                "depart":  data_treated["city_arrival"],
+                "destination":  data_treated["city_destination"],
+
+                "ask_total_weight":  str(data_treated["ask_total_weight"]),
+                "ask_total_price":  str(data_treated["ask_total_price"]),
+                "ask_item_info" : data_treated["ask_item_info"], 
+
+                "name_image_url":  request.user.username + "-img-Ask-share-on-fb-" + str(record_count_all),
+                "type" : data_treated["type"]
+
+            }
+        image = Create_imagefrom_ad(Ads_Ask)
+        data_treated["image_ask"]  = image
+        del data_treated["ask_item_info"]
+
+
+    
+    # data_treated["ask_item_info"] = []
+    serializer = RecordSerializer(data=data_treated)
+
 
     if serializer.is_valid():
         serializer.save(user=request.user)

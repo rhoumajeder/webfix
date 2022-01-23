@@ -36,6 +36,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { IoArrowBack } from "react-icons/io5";
 
 import { AuthContext } from "../../context/auth";
+import objectSum from "../../helpers/objectSum";
 
 const CreateAskRecord = (props) => {
 
@@ -50,14 +51,15 @@ const CreateAskRecord = (props) => {
     date: moment(new Date()).format("YYYY-MM-DD"),
     description: "Null value",
     type: "Ask",
-    phone_number: user.phone_number ? user.phone_number : "98989898"
+    phone_number: user.phone_number ? user.phone_number : "98989898",
+    ask_item_info : []
   });
 
   // Ask record items state holder
   const [rows, setRows] = useState([
     {
       id: `row-${uuid()}`,
-      name: "default name",
+      name: "default name", 
       quantity: 1,
       weight: 1,
       price: 1,
@@ -138,6 +140,9 @@ const CreateAskRecord = (props) => {
   };
   const [isloading, setisLoading] = useState(false);
   const submitItems = async () => {
+
+    // setAskRecord({ ...askRecord, ["ask_item_info"]: ["a","c"] });
+
     // let x = await props.recaptchaRef.current.executeAsync()
     // alert(x)
     // axiosInstance
@@ -174,13 +179,20 @@ const CreateAskRecord = (props) => {
   // Submit record to database
   const submitItemAfter = () => {
 
-
+    const itemData1 = [...rows];
+    console.log("rje star debug itemdata 1");
+    console.log(itemData1);
+    askRecord["ask_item_info"] = itemData1; 
+    askRecord["ask_total_price"] = objectSum(itemData1, "price");
+    askRecord["ask_total_weight"] = objectSum(itemData1, "weight");
+    console.log("rje star askrecord  1");
+    console.log(askRecord);
 
     askRecordSchema
       .validate(askRecord)
       .then((valid) => {
         if (valid) {
-          setisLoading(true);
+          setisLoading(true); 
 
           itemSchema
             .validate(rows)

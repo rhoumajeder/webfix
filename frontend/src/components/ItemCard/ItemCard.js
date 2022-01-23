@@ -514,6 +514,9 @@ const ItemCard = (props) => {
                   | Home Delivery 
                   </label>
                 </Grid>
+
+
+
             <CardContent>
               <Typography
                 variant="h6"
@@ -539,11 +542,13 @@ const ItemCard = (props) => {
       ) : (
         <TableContainer
           component={props.noShadow ? "div" : Paper}
+
         >
           <Table>
             <TableHead>
               <TableRow>
                 {showImage && <TableCell />}
+
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Quantity</TableCell>
                 <TableCell align="left">Weight</TableCell>

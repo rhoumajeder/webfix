@@ -137,6 +137,7 @@ const Index = (props) => {
     city_destination: "Berlin, Allemagne",
     max_weight: 1,
     max_volume: 1,
+    min_price:  0,
     description: "null value",
     categories: [],
     type: "Propose",
@@ -351,6 +352,42 @@ const Index = (props) => {
     },
   };
 
+  
+const getMinPrice = (record) => {
+
+  let minPrice = 0;
+  let prices = [];
+  console.log(record)
+
+  try {
+
+    record.forEach(elem => {
+      if (Object.prototype.hasOwnProperty.call(elem, 'items')) {
+        elem.items.forEach(
+          el => {
+            prices.push(el.price)
+          }
+        )
+
+      } else {
+        record.forEach(elem => {
+          prices.push(elem.price)
+        })
+      }
+
+
+    })
+    return Math.min(...prices);
+
+
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+}
+
   const [subRecords, setSubRecords] = React.useState([]);
   const [categories, setCategories] = React.useState(CategoryList)
 
@@ -439,19 +476,45 @@ const Index = (props) => {
     return handleRecordSubmissionAfter();
   }
 
-  const handleRecordSubmissionAfter = async () => {
-    const validationSubRecords = [...subRecords];
+  const handleRecordSubmissionAfter =  () => {
+    let validationSubRecords = [...subRecords];
+    // alert(validationSubRecords.length); 
 
-    validationSubRecords.forEach((subRecord, index, object) => {
-      if (!subRecord.accepted) {
-        object.splice(index, 1)
+
+    // validationSubRecords.forEach((subRecord, index, object) => {
+    //   if (subRecord.accepted == false) {
+    //     object.splice(index, 1);
+    //     alert(validationSubRecords.length); 
+    //   }
+    // })
+
+    // validationSubRecords.forEach((subRecord, index, object) => {
+    //   if (subRecord.accepted == false) {
+    //     object.splice(index, 1);
+    //     alert(validationSubRecords.length); 
+    //   }
+    // })
+
+    let newlist = [];
+    for (let i = 0; i < validationSubRecords.length; i++) {
+       
+      let dict1 = validationSubRecords[i]
+      if (dict1.accepted == true){
+        newlist.push(dict1)
+
       }
-    })
+      
+    }
 
-    console.log("Submitted")
-    console.log(validationSubRecords)
+    validationSubRecords = newlist;
 
-
+    record["min_price"] =  getMinPrice(validationSubRecords) <  9999 ? getMinPrice(validationSubRecords): 0  ;
+    console.log("validationSubRecords")
+    console.log(validationSubRecords);
+    // alert(validationSubRecords.length);   
+    
+    
+ 
 
 
     recordSchema
@@ -487,7 +550,7 @@ const Index = (props) => {
                           history.go();
                         })
                         .catch((err) => {
-                          console.log(err.response);
+                          console.log(err.response); 
                           addToast("There was an error", { appearance: "error" });
 
                         });

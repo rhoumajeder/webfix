@@ -34,6 +34,8 @@ import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExten
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import cities from "../../helpers/cities";
 import moment from "moment";
+import { FacebookShareButton } from "react-share";
+import { FacebookIcon } from "react-share";
 
 const style = {
   position: "absolute",
@@ -54,6 +56,7 @@ const AskRecordDetails = () => {
   const [record, setRecord] = useState();
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [share_on_fb_image, Setshare_on_fb_image] = React.useState(false);
 
   let defaultdatevalue =  moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M')
   let Records = {
@@ -107,6 +110,7 @@ const AskRecordDetails = () => {
       .then((res) => {
         console.log(res.data);
         setRecord(res.data);
+        Setshare_on_fb_image((res.data.image_ask).slice(49));
         setLoading(false);
       })
       .catch((err) => console.log(err.response));
@@ -214,7 +218,7 @@ const AskRecordDetails = () => {
                   gutterBottom
                   className={`m-0 me-1 fw-medium`}
                 >
-                  Description
+                  Description RJE
                 </Typography>
                 <Typography
                   variant="subtitle2"
@@ -251,6 +255,18 @@ const AskRecordDetails = () => {
               >
                 Interact
               </Button>}
+              <Grid item>
+                      <FacebookShareButton 
+                            url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 
+                            // url={"https://storage-test-rje.s3.amazonaws.com/images/name.jpg"} 
+                            quote={" this is a quand "}
+                            hashtag={"#this is htag"} 
+                            description={" this is description "}
+                            className="Demo__some-network__share-button"
+                          >   
+                            <FacebookIcon size={32} round /> Facebook share
+                      </FacebookShareButton>
+                </Grid>
             </Box>
 
 

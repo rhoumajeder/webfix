@@ -145,9 +145,11 @@ const TravelCard = (props) => {
                     {" "}
                     Min price:{" "}
                     {console.log(record)}
-                    {record.sub_records.length > 0 &&
-                      getMinPrice(record.sub_records) + "€"}{" "}
-                  </Typography>
+                    {/* {record.sub_records.length > 0 &&
+                      getMinPrice(record.sub_records) + "€"}{"0 €"} */}
+                        {record && record.min_price 
+                     + "€"}{" "}
+                  </Typography> 
 
                   <Typography
                     variant="subtitle2"

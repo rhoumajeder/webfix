@@ -63,7 +63,7 @@ const Index = ({ match }) => {
   //const [loading, setLoading] = useState(true);
   
   const screen = React.useContext(ScreenContext);
-
+  const [share_on_fb_image, Setshare_on_fb_image] = React.useState(false);
 
 
   const { maxVolume, sliderMarks, setSelectionIndex } = useVolumeSlider(0);
@@ -107,6 +107,8 @@ const Index = ({ match }) => {
         res.data.sub_records = Object.values(group);
         setRecord(res.data);
         setSelectionIndex(res.data.max_volume - 1)
+        console.log("check image rje") 
+        Setshare_on_fb_image((res.data.image_propose).slice(49));
       })
       .catch((err) => console.log(err.response));
   }, []);
@@ -514,29 +516,20 @@ const Index = ({ match }) => {
                         onClick={deleteRecord}
                         className="ms-auto my-2 text-danger"
                       >
-                        Delete
+                        Delete 
                       </Button>
                     </Grid>}
 
                     <Grid item>
-
-                    <FacebookShareButton
-                          url={"https://storage-test-rje.s3.amazonaws.com/images/human_body.jpg"}
-                          quote={" this is a quand "}
-                          hashtag={"#this is htag"}
-                          description={" this is description "}
-                          className="Demo__some-network__share-button"
-                        > 
-                          <FacebookIcon size={32} round /> Facebook share
-                    </FacebookShareButton>
-                      {/* <Button
-                        size="large"
-                        variant="outlined"
-                        onClick={deleteRecord}
-                        className="ms-auto my-2 text-info"
-                      >
-                        Share On FaceBook
-                      </Button> */}
+                      <FacebookShareButton 
+                            url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 
+                            quote={" this is a quand "}
+                            hashtag={"#this is htag"} 
+                            description={" this is description "}
+                            className="Demo__some-network__share-button"
+                          >  
+                            <FacebookIcon size={32} round /> Facebook share
+                      </FacebookShareButton>
                     </Grid>
 
                     {!(user.id === record.user.id) && <Grid item>
