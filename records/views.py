@@ -28,7 +28,7 @@ def Create_imagefrom_ad(Ads):
 
     
     if Ads["type"] == "Propose" :
-        img = Image.open('plane.png' if Ads["plane"] else 'card.PNG')
+        img = Image.open("plane.png" if Ads["plane"] else "card.PNG")
 
          # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
@@ -65,7 +65,7 @@ def Create_imagefrom_ad(Ads):
     
     elif Ads["type"] == "Ask": 
 
-        img = Image.open('imageAskrecord.PNG')
+        img = Image.open("imageAskrecord.PNG")
          # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
         # Custom font style and font size
