@@ -193,6 +193,9 @@ def create_record(request):
     print("==========rje star")
     print(data_treated)
     print("==========rje end")
+
+    data_treated["categories"] =  data_treated["categoriesv"]
+    del data_treated["categoriesv"]
     
     if data_treated["type"] == "Propose" :
         Ads_propose ={  
@@ -237,8 +240,7 @@ def create_record(request):
         data_treated["image_ask"]  = image
         del data_treated["ask_item_info"]
 
-    data_treated["categories"] =  data_treated["categoriesv"]
-    del data_treated["categoriesv"]
+
 
 
     # data_treated["ask_item_info"] = []
