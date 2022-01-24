@@ -237,8 +237,10 @@ def create_record(request):
         data_treated["image_ask"]  = image
         del data_treated["ask_item_info"]
 
+    data_treated["categories"] =  data_treated["categoriesv"]
+    del data_treated["categoriesv"]
 
-    
+
     # data_treated["ask_item_info"] = []
     serializer = RecordSerializer(data=data_treated)
 

@@ -23,7 +23,7 @@ import LuggageTable from "../../components/LuggageTable/LuggageTable";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 
 import { ScreenContext } from "../../helpers/context";
-import { FaCarSide, FaPlane } from "react-icons/fa";
+import { FaCarSide, FaCommentsDollar, FaPlane } from "react-icons/fa";
 import { useToasts } from "react-toast-notifications";
 import moment from "moment";
 
@@ -136,16 +136,17 @@ const Index = (props) => {
     city_arrival: "Bretagne, France",
     city_destination: "Berlin, Allemagne",
     max_weight: 1,
-    max_volume: 1,
+    max_volume: 3,
     min_price:  0,
     description: "null value",
     categories: [],
+    categoriesv:["Food","Vetements","Small Accessories","Autres"], 
     type: "Propose",
     phone_number: user.phone_number ? user.phone_number : "8328382332"
   };
 
   const [record, setRecord] = React.useState(Records);
-
+ 
   const { sliderMarks: marks } = useVolumeSlider(0);
 
   let transportOptions = [
@@ -176,7 +177,7 @@ const Index = (props) => {
           accepted: false,
           name: "Food Solide",
           max_quantity: 1,
-          max_weight: 1,
+          max_weight: 1, 
           price: 1,
           category: "Food"
         },
@@ -389,11 +390,23 @@ const getMinPrice = (record) => {
 }
 
   const [subRecords, setSubRecords] = React.useState([]);
-  const [categories, setCategories] = React.useState(CategoryList)
+  const [categories, setCategories] = React.useState(CategoryList)  
+  
+  
+
+
+
+  // # create another categories which will be send to database , check every time if the default value have touched 
 
   const handleAvailableCategories = (event) => {
     if (event.target.checked) {
-      setRecord({ ...record, categories: [...record.categories, event.target.name] })
+      setRecord({ ...record, categories: [...record.categories, event.target.name],categoriesv: [...record.categoriesv, event.target.name] })
+
+
+      // setRecord({ ...record, categoriesv: [...record.categoriesv, event.target.name] })
+
+     
+
 
       setCategories({
         ...categories, [event.target.name]: {
@@ -403,13 +416,29 @@ const getMinPrice = (record) => {
       })
 
       setSubRecords([...subRecords, ...categories[event.target.name].items])
+      console.log("rje sub record ===");
+      console.log(subRecords)
 
     } else {
       console.log(subRecords)
       const newCategories = [...record.categories];
       const index = newCategories.indexOf(event.target.name)
-      newCategories.splice(index, 1)
-      setRecord({ ...record, categories: newCategories })
+      if(index > -1) {
+        newCategories.splice(index, 1)
+      }
+      
+
+      const newCategoriesv = [...record.categoriesv];
+      const indexv = newCategoriesv.indexOf(event.target.name)
+      if(indexv > -1){
+        newCategoriesv.splice(indexv, 1)
+      }
+      
+
+      setRecord({ ...record, categories: newCategories, categoriesv: newCategoriesv })
+
+
+      // setRecord({ ...record, categoriesv: newCategoriesv })  
 
       setCategories({
         ...categories, [event.target.name]: {
@@ -429,6 +458,10 @@ const getMinPrice = (record) => {
       console.log(newSubRecords)
       setSubRecords(newSubRecords)
     }
+   
+
+
+
   };
 
   const handleVolumeChange = (event, val) => {
@@ -473,6 +506,7 @@ const getMinPrice = (record) => {
 
 
     //   })
+   
     return handleRecordSubmissionAfter();
   }
 
@@ -660,8 +694,9 @@ const getMinPrice = (record) => {
                   <SelectBoxExtended
                     options={transportOptions}
                     name={"moyen_de_transport"}
-                    placeholder={"Moyen de Transport"}
-                    onChange={handleSelectChange}
+                    // placeholder={"Moyen de Transport"}
+                    defaultValue={transportOptions[0]}
+                    onChange={handleSelectChange} 
                   />
                 </Grid>
                 <Grid item md={4} sm={6} xs={12} className="my-2">
@@ -730,9 +765,9 @@ const getMinPrice = (record) => {
                       step={null}
                       valueLabelDisplay="off"
                       marks={marks}
-                      defaultValue={2}
+                      defaultValue={marks[3].value}
                       name={"max_volume"}
-                      value={marks[record.max_volume - 1].value}
+                      value={marks[record.max_volume - 1].value} 
                       onChange={handleVolumeChange}
                     />
                   </Box>
@@ -785,9 +820,10 @@ const getMinPrice = (record) => {
                     control={
                       <Checkbox
                         color="primary"
-                        checked={categories.Food.state}
+                        checked={categories.Food.state || record.categoriesv.indexOf("Food") > -1}
+                        // checked={record.categoriesv.indexOf("Food") > -1}
                         name="Food"
-                        onChange={handleAvailableCategories}
+                        onChange={handleAvailableCategories} 
                       />
                     }
                     label="Food"
@@ -824,7 +860,7 @@ const getMinPrice = (record) => {
                     control={
                       <Checkbox
                         color="primary"
-                        checked={categories["Small Accessories"].state}
+                        checked={categories["Small Accessories"].state || record.categoriesv.indexOf("Small Accessories") > -1}
                         name="Small Accessories"
                         onChange={handleAvailableCategories}
                       />
@@ -837,7 +873,7 @@ const getMinPrice = (record) => {
                     control={
                       <Checkbox
                         color="primary"
-                        checked={categories.Vetements.state}
+                        checked={categories.Vetements.state || record.categoriesv.indexOf("Vetements") > -1}
                         name="Vetements"
                         onChange={handleAvailableCategories}
                       />
@@ -878,9 +914,9 @@ const getMinPrice = (record) => {
                     control={
                       <Checkbox
                         color="primary"
-                        checked={categories.Autres.state}
+                        checked={categories.Autres.state || record.categoriesv.indexOf("Autres") > -1}
                         name="Autres"
-                        onChange={handleAvailableCategories}
+                        onChange={handleAvailableCategories} 
                       />
                     }
                     label="Autres"
