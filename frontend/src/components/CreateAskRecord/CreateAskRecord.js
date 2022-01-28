@@ -28,7 +28,7 @@ import { fileAxios } from "../../helpers/axios";
 
 import { useToasts } from "react-toast-notifications";
 
-import { useHistory } from "react-router"; 
+import { useHistory } from "react-router";
 
 import cities from "../../helpers/cities";
 import Spinner from "../../components/Spinner/Spinner";
@@ -52,14 +52,14 @@ const CreateAskRecord = (props) => {
     description: "Null value",
     type: "Ask",
     phone_number: user.phone_number ? user.phone_number : "98989898",
-    ask_item_info : []
+    ask_item_info: []
   });
 
   // Ask record items state holder
   const [rows, setRows] = useState([
     {
       id: `row-${uuid()}`,
-      name: "default name", 
+      name: "default name",
       quantity: 1,
       weight: 1,
       price: 1,
@@ -173,7 +173,7 @@ const CreateAskRecord = (props) => {
   }
   const CreatingRecord = "  Creating Record ... ";
   if (isloading) {
-    return <Spinner name = {CreatingRecord}/>;
+    return <Spinner name={CreatingRecord} />;
   }
 
   // Submit record to database
@@ -182,7 +182,7 @@ const CreateAskRecord = (props) => {
     const itemData1 = [...rows];
     console.log("rje star debug itemdata 1");
     console.log(itemData1);
-    askRecord["ask_item_info"] = itemData1; 
+    askRecord["ask_item_info"] = itemData1;
     askRecord["ask_total_price"] = objectSum(itemData1, "price");
     askRecord["ask_total_weight"] = objectSum(itemData1, "weight");
     console.log("rje star askrecord  1");
@@ -192,7 +192,7 @@ const CreateAskRecord = (props) => {
       .validate(askRecord)
       .then((valid) => {
         if (valid) {
-          setisLoading(true); 
+          setisLoading(true);
 
           itemSchema
             .validate(rows)
@@ -211,7 +211,7 @@ const CreateAskRecord = (props) => {
                   fileArr.forEach((file) => {
                     if (fileArr[fileArr.length - 1] === file) {
                       console.log({ fileArr });
-                      if(fileArr.length > 0 ){
+                      if (fileArr.length > 0) {
                         bimages = true;
                       }
                     }
@@ -227,7 +227,7 @@ const CreateAskRecord = (props) => {
                       axiosInstance
                         .post(`create-ask-record-items/${recordId}/`, itemData)
                         .then((res) => {
-                          if(bimages == false){
+                          if (bimages == false) {
                             addToast("Record created", { appearance: "success" });
                             history.push(`/ask-record-details/${recordId}`);
                             history.go();
@@ -318,18 +318,8 @@ const CreateAskRecord = (props) => {
       });
   };
 
-  
-
-
-
-
   return (
-
-
-
     <Grid container direction="row" alignItems="center" justify="center">
-
-
       <Grid item xl={8} md={10} xs={12} className="my-5">
         <Card className={"shadow"}>
           <CardContent>
@@ -351,6 +341,7 @@ const CreateAskRecord = (props) => {
                     Date Of Voyage:
                   </Typography>
                   <KeyboardDatePicker
+                    disablePast
                     value={askRecord.date}
                     disableToolbar
                     autoOk

@@ -7,3 +7,17 @@
 .paper:hover {
   cursor: pointer;
 }
+
+
+.announceBtn p,
+.demandBtn {
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.announceBtn:hover,
+.demandBtn:hover {
+  color: white;
+  transition: 1s;
+  background-color: black;
+}

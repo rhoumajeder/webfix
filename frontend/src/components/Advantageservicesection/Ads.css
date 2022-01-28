@@ -1,0 +1,11 @@
+.cardShadow:hover {
+    box-shadow: 0 .5rem 1rem black !important
+}
+
+.bg-gray {
+    background-color: rgba(128, 128, 128, 0.39) !important;
+}
+
+.boxx {
+    margin: 57px !important;
+}

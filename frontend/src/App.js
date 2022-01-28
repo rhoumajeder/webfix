@@ -11,7 +11,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 
 import IndexListing from "./pages/IndexListing";
-import UserProfile, {UserProfileDetails} from "./pages/UserProfile";
+import UserProfile, { UserProfileDetails } from "./pages/UserProfile";
 import RecordDetails from "./pages/RecordDetails";
 import CreateRecord from "./pages/CreateRecord";
 import ListRequests from "./pages/ListRequests";
@@ -41,6 +41,12 @@ import { AuthContext } from "./context/auth";
 import PropositionState from "./pages/PropositionState/PropositionState";
 
 import AskRecordDetails from "./pages/AskRecordDetails/AskRecordDetails";
+
+import Commentcamarche from "./pages/Commentcamarche";
+import Contactnous from "./pages/Contactnous";
+import Quisommesnous from "./pages/Quisommesnous";
+import FaqAccordation from "./components/FaqAccordation/FaqAccordation";
+import PaymentModal from "./components/PaymentModal/PaymentModal";
 
 
 const theme = createMuiTheme({
@@ -86,9 +92,9 @@ const App = () => {
     return <Spinner />;
   } else {
     return (
-      
+
       <MuiPickersUtilsProvider utils={MomentUtils}>
-                
+
         <ThemeProvider theme={theme}>
           <Context>
             <ToastProvider
@@ -196,6 +202,24 @@ const App = () => {
                     path={"/shop"}
                     component={ShoppingPage}
 
+                  />
+                  <Route exact path={"/Centreaide"} component={FaqAccordation} />
+                  <Route exact path={"/Contactnous"} component={Contactnous} />
+                  <Route
+                    exact
+                    path={"/Quisommesnous"}
+                    component={Quisommesnous}
+                  />
+
+                  <Route
+                    exact
+                    path={"/Commentcamarche"}
+                    component={Commentcamarche}
+                  />
+                  <Route
+                    exact
+                    path={"/Payment"}
+                    component={PaymentModal}
                   />
                   <Route
                     exact

@@ -50,13 +50,13 @@ const RecordCreation = () => {
         <Container>
           <Grid container spacing={2} style={{ marginTop: "50px" }}>
             <Grid item xs={6}>
-              <Paper onClick={hideAskRecord} className="paper">
-                <p style={{ textAlign: "center" }}>Annonce</p>
+              <Paper onClick={hideAskRecord} className="paper announceBtn">
+                <p style={{ textAlign: "center", marginTop: "25px" }}>ANNOUNCE</p>
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper onClick={revealAskRecord} className="paper">
-                <p style={{ textAlign: "center" }}>Demande</p>
+              <Paper onClick={revealAskRecord} className="paper demandBtn">
+                <p style={{ textAlign: "center", marginTop: "25px" }}>DEMANDE</p>
               </Paper>
             </Grid>
           </Grid>

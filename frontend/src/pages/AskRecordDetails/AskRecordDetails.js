@@ -29,7 +29,7 @@ import { useToasts } from "react-toast-notifications";
 
 import { useHistory } from "react-router";
 
-import { AuthContext } from "../../context/auth"; 
+import { AuthContext } from "../../context/auth";
 import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import cities from "../../helpers/cities";
@@ -47,7 +47,9 @@ const style = {
   padding: "40px",
 };
 
+
 const AskRecordDetails = () => {
+
   const [user, setUser] = useContext(AuthContext)
   let history = useHistory();
   const { addToast } = useToasts();
@@ -58,7 +60,7 @@ const AskRecordDetails = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [share_on_fb_image, Setshare_on_fb_image] = React.useState(false);
 
-  let defaultdatevalue =  moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M')
+  let defaultdatevalue = moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M')
   let Records = {
     date: defaultdatevalue,
     Proposed_moyen_de_transport: "Avion",
@@ -74,9 +76,9 @@ const AskRecordDetails = () => {
     Proposed_city_arrival: "Bretagne, France",
     Proposed_city_destination: "Berlin, Allemagne",
     Proposed_home_delivery: false
-  });   
+  });
   // currentDate
-;
+  ;
   //alert(defaultdatevalue);
   // const [currentDate, setCurrentDate] = useState(
   //   moment(new Date()).format("YYYY-MM-DD")
@@ -137,12 +139,12 @@ const AskRecordDetails = () => {
       })
       .catch((err) => {
         console.log(err);
-      addToast(err.response.data, { appearance: "error" });
+        addToast(err.response.data, { appearance: "error" });
       }
-      
+
 
       );
-     
+
   };
 
   const handleInputChange = (e) => {
@@ -161,15 +163,15 @@ const AskRecordDetails = () => {
   const handleSelectChange = (item, target) => {
     setProposition({ ...proposition, [target.name]: item.value });
     console.log(proposition);
-     
+
   };
- 
+
 
   const handleDateChange = (date) => {
     // setCurrentDate(moment(date).format("YYYY-MM-DD"));
     setProposition({ ...proposition, ["date"]: moment(date).format("YYYY-MM-DD") });
     console.log(proposition);
-    
+
   };
 
   const handleConfirm = () => {
@@ -177,10 +179,10 @@ const AskRecordDetails = () => {
     submitProposition();
     alert(proposition);
   };
-  const handleX= () => { 
+  const handleX = () => {
     setModalOpen(!modalOpen);
-   
-  }; 
+
+  };
 
   if (loading) {
     return <Spinner />;
@@ -244,137 +246,133 @@ const AskRecordDetails = () => {
 
             <Box className="my-2 d-flex align-items-center justify-content-end">
 
-            {!(user.id === record.user.id ) &&<Button
+              {!(user.id === record.user.id) && <Button
                 className="ms-auto my-2"
                 variant="outlined"
                 color={"primary"}
                 disabled={user.username ? false : true}
-                size="large" 
+                size="large"
                 hidden={modalOpen}
                 onClick={handleModal}
               >
                 Interact
               </Button>}
               <Grid item>
-                      <FacebookShareButton 
-                            url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 
-                            // url={"https://storage-test-rje.s3.amazonaws.com/images/name.jpg"} 
-                            quote={" this is a quand "}
-                            hashtag={"#this is htag"} 
-                            description={" this is description "}
-                            className="Demo__some-network__share-button"
-                          >   
-                            <FacebookIcon size={32} round /> Facebook share
-                      </FacebookShareButton>
-                </Grid>
+                <FacebookShareButton
+                  url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)}
+                  // url={"https://storage-test-rje.s3.amazonaws.com/images/name.jpg"} 
+                  quote={" this is a quand "}
+                  hashtag={"#this is htag"}
+                  description={" this is description "}
+                  className="Demo__some-network__share-button"
+                >
+                  <FacebookIcon size={32} round /> Facebook share
+                </FacebookShareButton>
+              </Grid>
             </Box>
 
-
-
             <Fade in={modalOpen} >
-              
-              <Grid  className={"shadow"} item sm={12} xs={12} md={12}  style={{ backgroundColor: "white", padding:"10px"}} >
+
+              <Grid className={"shadow"} item sm={12} xs={12} md={12} style={{ backgroundColor: "white", padding: "10px" }} >
                 <Typography variant="h6">Send a proposition</Typography>
                 <Grid item md={4} xs={12} sm={12} className="my-2">
-                    <Typography
-                      variant={"subtitle2"}
-                      color={"textPrimary"}
-                      className={"fw-bold my-2"}
-                    >
-                      Date Of Voyage:
-                    </Typography> 
-                    <KeyboardDatePicker
-                      disableToolbar
-                      autoOk
-                      variant={screen.width <= 480 ? "dialog" : "inline"}
-                      format="DD MMM, yyyy"
-                      margin="normal"
-                      fullWidth
-                      id="date-picker-inline"
-                      placeholder="Aujourd'hui"
-                      InputLabelProps={{ shrink: false }}
-                      className={"m-0 p-0"}
-                      color={"primary"}
-                      size="small" 
-                      defaultValue={defaultdatevalue}
-                      value={proposition.date} 
-                      inputVariant="outlined"
-                      // name={"date"}
-                      onChange={handleDateChange}
-                      KeyboardButtonProps={{
-                        "aria-label": "change date",
-                      }}/>  
-
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Date Of Voyage:
+                  </Typography>
+                  <KeyboardDatePicker
+                    disablePast
+                    disableToolbar
+                    autoOk
+                    variant={screen.width <= 480 ? "dialog" : "inline"}
+                    format="DD MMM, yyyy"
+                    margin="normal"
+                    fullWidth
+                    id="date-picker-inline"
+                    placeholder="Aujourd'hui"
+                    className={"m-0 p-0"}
+                    color={"primary"}
+                    InputLabelProps={{ shrink: false }}
+                    size="small"
+                    inputVariant="outlined"
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                  />
                 </Grid>
                 <Grid item md={4} sm={6} xs={12}>
-                    <SelectBoxExtended
-                      labelId={"ville-de-depart"}
-                      options={cities}
-                      label={"Ville De Départ"}
-                      name={"Proposed_city_arrival"}
-                      // value={proposition.Proposed_city_arrival}
-                      placeholder={"Ville De Départ"}
-                      onChange={handleSelectChange}
-                    />
+                  <SelectBoxExtended
+                    labelId={"ville-de-depart"}
+                    options={cities}
+                    label={"Ville De Départ"}
+                    name={"Proposed_city_arrival"}
+                    // value={proposition.Proposed_city_arrival}
+                    placeholder={"Ville De Départ"}
+                    onChange={handleSelectChange}
+                  />
                 </Grid>
                 <Grid item md={4} sm={6} xs={12}>
-                    <SelectBoxExtended
-                      labelId={"ville-de-destination"}
-                      label={"Ville De Destination"}
-                      options={cities}
-                      name={"Proposed_city_destination"}
-                      // value={proposition.Proposed_city_destination}
-                      placeholder={"Ville De Destination"}
-                      onChange={handleSelectChange}
-                    />
+                  <SelectBoxExtended
+                    labelId={"ville-de-destination"}
+                    label={"Ville De Destination"}
+                    options={cities}
+                    name={"Proposed_city_destination"}
+                    // value={proposition.Proposed_city_destination}
+                    placeholder={"Ville De Destination"}
+                    onChange={handleSelectChange}
+                  />
                 </Grid>
                 <Grid item md={4} xs={12} sm={12} className="my-2">
-                      <Typography
-                          variant={"subtitle2"}
-                          color={"textPrimary"}
-                          className={"fw-bold my-1"}
-                        >Moyen de Transport:</Typography>
-                      <SelectBoxExtended
-                        // style={{ zIndex: 100 }}
-                        labelId={"moyen-de-transport"}
-                        label={"Moyen de transport"}
-                        options={transportOptions}
-                        name={"Proposed_moyen_de_transport"}
-                        // value={proposition.Proposed_moyen_de_transport}
-                        placeholder={"Moyen de transport"}
-                        onChange={handleSelectChange}
-                        className="my-2"
-                        // value={ }
-                      />
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-1"}
+                  >Moyen de Transport:</Typography>
+                  <SelectBoxExtended
+                    // style={{ zIndex: 100 }}
+                    labelId={"moyen-de-transport"}
+                    label={"Moyen de transport"}
+                    options={transportOptions}
+                    name={"Proposed_moyen_de_transport"}
+                    // value={proposition.Proposed_moyen_de_transport}
+                    placeholder={"Moyen de transport"}
+                    onChange={handleSelectChange}
+                    className="my-2"
+                  // value={ }
+                  />
                 </Grid>
                 <Grid>
                   <label>
-                  <input type="checkbox" name={"Proposed_home_delivery"} checked={proposition.Proposed_home_delivery} onChange={handleChangeForCheckBox}/> 
-                  | Home Delivery 
+                    <input type="checkbox" name={"Proposed_home_delivery"} checked={proposition.Proposed_home_delivery} onChange={handleChangeForCheckBox} />
+                    | Home Delivery
                   </label>
                 </Grid>
                 <Grid >
                   <div className="my-4 w-100">
-                  <InputLabel htmlFor={"message"}>Message</InputLabel>
-                  <TextField
-                  className="w-100 my-3"
-                  name="message"
-                  onChange={handleInputChange}
-                  variant="outlined"
-                  placeholder="Message"
-                  multiline
-                  rows={3}
-                  helperText={"Write a message to the owner of the record"}
-                  />
+                    <InputLabel htmlFor={"message"}>Message</InputLabel>
+                    <TextField
+                      className="w-100 my-3"
+                      name="message"
+                      onChange={handleInputChange}
+                      variant="outlined"
+                      placeholder="Message"
+                      multiline
+                      rows={3}
+                      helperText={"Write a message to the owner of the record"}
+                    />
                   </div>
                   <Button
-                  className="ms-auto my-2"
-                  variant="contained"
-                  color={"primary"}
-                  size="large"
-                  onClick={handleConfirm}
+                    className="ms-auto my-2"
+                    variant="contained"
+                    color={"primary"}
+                    size="large"
+                    onClick={handleConfirm}
                   >
-                  Confirm
+                    Confirm
                   </Button>&nbsp;&nbsp;&nbsp;
                   <Button
                     className="ms-auto my-2"
@@ -382,26 +380,20 @@ const AskRecordDetails = () => {
                     color={"primary"}
                     disabled={user.username ? false : true}
                     size="large"
-                    onClick={handleX} 
+                    onClick={handleX}
                   >
                     X
                   </Button>
                 </Grid>
               </Grid>
             </Fade>
-
-
-
-
-
-
           </Grid>
           <RecordDetailsSideBar record={record} disabled={user.username ? false : true} />
         </Grid>
         <Modal
           // open={modalOpen}
           open={false}
-          onClose={handleModal} 
+          onClose={handleModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >

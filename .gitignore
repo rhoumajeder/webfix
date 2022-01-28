@@ -11,6 +11,7 @@ media
 #intelij idea configs
 .idea
 env
+venv
 
 # Backup files # 
 *.bak 

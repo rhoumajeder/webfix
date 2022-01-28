@@ -1,17 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {muiStyleAlpha} from "@material-ui/data-grid";
-import {BsSearch} from "react-icons/bs";
+// import { muiStyleAlpha } from "@material-ui/data-grid";
+import { BsSearch } from "react-icons/bs";
 import InputBase from '@material-ui/core/InputBase';
-import {Box} from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
-        backgroundColor: muiStyleAlpha(theme.palette.common.white, 0.15),
+        backgroundColor: '#ffc0cb',
         '&:hover': {
-            backgroundColor: muiStyleAlpha(theme.palette.common.white, 0.25),
+            backgroundColor: '#ffc0cb',
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -67,7 +67,7 @@ const SearchExtended = (props) => {
     return (
         <Box component={"div"} className={`${classes.search} ${props.className}`} borderRadius={16}>
             <Box component={"div"} className={classes.searchIcon}>
-                <BsSearch/>
+                <BsSearch />
             </Box>
             <InputBase
                 fullWidth
@@ -78,7 +78,7 @@ const SearchExtended = (props) => {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                 }}
-                inputProps={{'aria-label': 'search'}}
+                inputProps={{ 'aria-label': 'search' }}
             />
         </Box>
     );

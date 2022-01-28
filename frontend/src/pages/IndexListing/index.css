@@ -12,6 +12,10 @@
     visibility: collapse;
 }
 
+.MuiTypography-h5 {
+    display: flex;
+    justify-content: center;
+}
 
 @media (max-width: 480px)  {
     .page-header {
