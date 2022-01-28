@@ -2,9 +2,7 @@ from time import sleep
 import requests
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-# Haseeb
 
-#
 
 import threading
 import webbrowser
