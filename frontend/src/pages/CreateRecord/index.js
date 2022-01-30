@@ -12,6 +12,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import { FormControlLabel as FormLabelL, Checkbox as CheckBoxL } from '@mui/material';
 
 import * as yup from "yup";
 import axiosInstance from "../../helpers/axios";
@@ -692,13 +693,45 @@ const Index = (props) => {
                   >
                     Moyen de Transport:
                   </Typography>
-                  <SelectBoxExtended
+                  <div className="row">
+                    <div className="col">
+                      <div className="row">
+                        <label className='labelss'>
+                          Plane
+                        </label>
+                      </div>
+                      <div className="row">
+                        <FormLabelL
+                          control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                          name={"moyen_de_transport"}
+                          defaultValue={transportOptions[0]}
+                          label={<FaPlane />}
+                        />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="row">
+                        <label className='labelss'>
+                          Car
+                        </label>
+                      </div>
+                      <div className="row">
+                        <FormLabelL
+                          control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                          name={"moyen_de_transport"}
+                          defaultValue={transportOptions[0]}
+                          label={<FaCarSide />}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* <SelectBoxExtended
                     options={transportOptions}
                     name={"moyen_de_transport"}
                     // placeholder={"Moyen de Transport"}
                     defaultValue={transportOptions[0]}
                     onChange={handleSelectChange}
-                  />
+                  /> */}
                 </Grid>
                 <Grid item md={4} sm={6} xs={12} className="my-2">
                   <Typography

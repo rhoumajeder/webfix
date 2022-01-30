@@ -20,6 +20,7 @@ import axiosInstance from "../../helpers/axios";
 import ChatBody from "../../components/ChatBody/ChatBody";
 
 import { useLocation } from "react-router";
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const PAGE_SIZE = 3;
@@ -81,14 +82,14 @@ const Chat = (props) => {
 
   // const [currentRoom, setCurrentRoom] = useState(actualRoom ? parseInt(actualRoom) : null);
   const [currentRoom, setCurrentRoom] = useState(null);
- 
+
   // Get rooms for current user
-  const getRooms = (currentRoom) => { 
+  const getRooms = (currentRoom) => {
     axiosInstance
-      .get("chat/get-rooms/?page="+1)
+      .get("chat/get-rooms/?page=" + 1)
       .then((res) => {
-         
-        
+
+
         set_number_of_items(res.data.count);
         setOwnedRooms(res.data.results["owner_rooms"]);
         setUserRooms(res.data.results["user_rooms"]);
@@ -114,41 +115,41 @@ const Chat = (props) => {
   };
 
   const get_page = (currentPage) => {  //it was only fetchRecords
-    
+
     setLoading(true);
     axiosInstance
-    .get("chat/get-rooms/?page="+currentPage)
-    .then((res) => {
-      console.log(res.data);
-      setOwnedRooms(res.data.results["owner_rooms"]);
-      setUserRooms(res.data.results["user_rooms"]);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.log(err.response);
- 
-    });
+      .get("chat/get-rooms/?page=" + currentPage)
+      .then((res) => {
+        console.log(res.data);
+        setOwnedRooms(res.data.results["owner_rooms"]);
+        setUserRooms(res.data.results["user_rooms"]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.response);
+
+      });
 
 
-    
+
   };
 
   const { currentPage, getCurrentData, changePage, pageCount } = usePaginationHomePage(
     userRooms,
     PAGE_SIZE,
-    false, 
+    false,
     number_of_items
- );
- 
- const onPageChange = (event, value) => {
-  get_page(value);
-  changePage(value);
-  
-};
+  );
+
+  const onPageChange = (event, value) => {
+    get_page(value);
+    changePage(value);
+
+  };
 
 
 
- const userRoomsdata = getCurrentData();
+  const userRoomsdata = getCurrentData();
 
   useEffect(() => {
     getRooms(currentRoom);
@@ -165,11 +166,12 @@ const Chat = (props) => {
     return <Spinner />;
   }
 
-  
+
 
   return (
     <div>
       <Header />
+      <HelpButton />
       <div className={classes.headBG}>
         <Grid container>
           <Grid item xs={12}>
@@ -194,7 +196,7 @@ const Chat = (props) => {
                   <ChatPreview
                     selected={room.id === currentRoom}
                     // username={room.user.username}
-                    username={room.user.id == userid ? room.owner.username : room.user.username }
+                    username={room.user.id == userid ? room.owner.username : room.user.username}
                     room={room}
                     handleClick={changeCurrentRoom}
                   />
@@ -205,30 +207,30 @@ const Chat = (props) => {
                   <ChatPreview
                     selected={room.id === currentRoom}
                     // username={room.owner.username}
-                    username={room.user.id == userid ? room.owner.username : room.user.username }
+                    username={room.user.id == userid ? room.owner.username : room.user.username}
                     handleClick={changeCurrentRoom}
                     room={room}
                   />
                 );
               })}
-            </List> 
+            </List>
           </Grid>
 
           <Grid item xs={7}>
             <ChatBody room={currentRoom} getRooms={getRooms} />
           </Grid>
-          
+
         </Grid>
         <Grid item lg={12} md={12} xs={12} className="my-2 text-center">
-              <CustomPagination
-                // itemCount={userRooms.length} number_of_items
-                itemCount={number_of_items} 
-                itemsPerPage={PAGE_SIZE}
-                onPageChange={onPageChange}
-                currentPage={currentPage}
-                pageCount={pageCount}
-              />
-            </Grid>
+          <CustomPagination
+            // itemCount={userRooms.length} number_of_items
+            itemCount={number_of_items}
+            itemsPerPage={PAGE_SIZE}
+            onPageChange={onPageChange}
+            currentPage={currentPage}
+            pageCount={pageCount}
+          />
+        </Grid>
       </div>
     </div>
   );

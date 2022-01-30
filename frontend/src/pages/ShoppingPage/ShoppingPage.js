@@ -38,6 +38,7 @@ import bosePic from "../../assets/images/bose.jpg";
 import ramPic from "../../assets/images/ram.jpg";
 
 import "./index.css";
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 const PAGE_SIZE = 2;
 
@@ -74,6 +75,7 @@ const ShoppingPage = () => {
   return (
     <React.Fragment>
       <Header />
+      <HelpButton />
       <Container maxWidth="md" className="mt-5 mb-5">
         <Box>
           <Grid container spacing={6}>

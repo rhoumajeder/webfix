@@ -2,10 +2,12 @@ import React from "react";
 import { Container } from "@mui/material";
 import Header from "../../components/Header/Header";
 import NewFooter from "../../components/NewFooter/NewFooter";
+import HelpButton from "../../components/HelpButton/HelpButton";
 function index() {
   return (
     <div>
       <Header />
+      <HelpButton />
       <Container maxWidth="md">
         <h1>your heading for Qui sommes nous </h1>
         <p>

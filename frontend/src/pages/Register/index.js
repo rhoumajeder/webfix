@@ -6,6 +6,7 @@ import { useToasts } from "react-toast-notifications";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import * as yup from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const Index = () => {
@@ -28,7 +29,7 @@ const Index = () => {
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   let validFormSchema = yup.object().shape({
-    username: yup.string().max(20,"username should have less then 20 characters ").required("Username is required"),
+    username: yup.string().max(20, "username should have less then 20 characters ").required("Username is required"),
     email: yup
       .string()
       .email("Invalid email format")
@@ -110,18 +111,21 @@ const Index = () => {
   }, [formData]);
 
   return (
-    <AuthForm
-      type={"Register"}
-      onFormSubmit={handleSubmit}
-      setForm={setForm}
-      formData={formData}
-      isValid={isValid}
-      captcha={<ReCAPTCHA
-        sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
-        ref={recaptchaRef}
-        size="invisible"
-      />}
-    />
+    <div>
+      <AuthForm
+        type={"Register"}
+        onFormSubmit={handleSubmit}
+        setForm={setForm}
+        formData={formData}
+        isValid={isValid}
+        captcha={<ReCAPTCHA
+          sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
+          ref={recaptchaRef}
+          size="invisible"
+        />}
+      />
+      <HelpButton />
+    </div>
   );
 };
 

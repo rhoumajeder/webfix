@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import Header from '../Header/Header';
 import NewFooter from '../NewFooter/NewFooter';
+import HelpButton from '../HelpButton/HelpButton';
 
 
 function FaqAccordation() {
@@ -17,6 +18,7 @@ function FaqAccordation() {
     return (
         <div>
             <Header />
+            <HelpButton />
             <Container maxWidth='md'>
                 <Grid sx={{ my: 10 }}>
                     <Typography sx={{ fontWeight: "bold", my: 1 }}>

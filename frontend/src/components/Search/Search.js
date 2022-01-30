@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ScreenContext } from "../../helpers/context";
+import './Search.css';
 
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import {
@@ -23,6 +24,9 @@ import {
   Box,
   Slider,
 } from "@material-ui/core";
+import { FormControlLabel as FormLabelL, Checkbox as CheckBoxL } from '@mui/material';
+import { FaCarSide, FaPlane } from "react-icons/fa";
+
 import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
 import { FaSearch } from "react-icons/fa";
 import { ExpandMore } from "@material-ui/icons";
@@ -40,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Search = (props) => {
-  const {maxVolume, sliderMarks, handleVolumeChange: setVolume} = useVolumeSlider(0);
+  const { maxVolume, sliderMarks, handleVolumeChange: setVolume } = useVolumeSlider(0);
   const handleVolumeChange = (e, value) => {
     props.setFilters({
       ...props.filters,
@@ -50,7 +54,7 @@ const Search = (props) => {
   }
   const classes = useStyles()
   const { propose, ask } = props.recordType;
-  let defaultdatevalue =  moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M');
+  let defaultdatevalue = moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M');
   //alert(defaultdatevalue);
   // const [currentDate, setCurrentDate] = useState(
   //   moment(new Date()).format("YYYY-MM-DD")
@@ -58,12 +62,12 @@ const Search = (props) => {
   const [currentDate, setCurrentDate] = useState(
     defaultdatevalue
   );
- 
+
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
 
   const screen = React.useContext(ScreenContext);
 
-  const handleAdvancedFilters = () => { 
+  const handleAdvancedFilters = () => {
     setShowAdvancedFilters(!showAdvancedFilters)
   }
 
@@ -113,7 +117,7 @@ const Search = (props) => {
     }
     props.setRecordType(newRecordType);
     // props.fetchRecords(newRecordType); 
-    props.fetchRecords_for_button_search(newRecordType); 
+    props.fetchRecords_for_button_search(newRecordType);
     props.setLoading(true);
   };
 
@@ -277,7 +281,43 @@ const Search = (props) => {
                       <FormHelperText>Weight</FormHelperText>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                      <SelectBoxExtended
+                      <div className="row">
+                        <div className="col">
+                          <div className="row">
+                            <label className='labelss'>
+                              Plane
+                            </label>
+                          </div>
+                          <div className="row">
+                            <FormLabelL
+                              control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                              name={"moyen_de_transport"}
+                              defaultValue={transportOptions[0]}
+                              label={<FaPlane />}
+                            />
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div className="row">
+                            <label className='labelss'>
+                              Car
+                            </label>
+                          </div>
+                          <div className="row">
+                            <FormLabelL
+                              control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                              name={"moyen_de_transport"}
+                              defaultValue={transportOptions[0]}
+                              label={<FaCarSide />}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      {/* <SelectBoxExtended
                         style={{ zIndex: 100 }}
                         labelId={"moyen-de-transport"}
                         label={"Moyen de transport"}
@@ -294,7 +334,7 @@ const Search = (props) => {
                             )
                             : ""
                         }
-                      />
+                      /> */}
                     </Grid>
                     <Grid item xs={12} className="mb-5">
                       <Typography

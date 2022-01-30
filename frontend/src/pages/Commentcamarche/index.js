@@ -18,6 +18,7 @@ import Page3 from "./Page3";
 import Page4 from "./Page4";
 import Header from "../../components/Header/Header";
 import NewFooter from "../../components/NewFooter/NewFooter";
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 const section = {
   width: "100%",
@@ -71,6 +72,7 @@ function index() {
   return (
     <>
       <Header />
+      <HelpButton />
       <Container sx={{ my: 7 }}>
         <Grid container spacing={3}>
           <Grid item lg={4} xs={12} sm={6} sx={{ my: 7 }}>

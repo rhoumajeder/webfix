@@ -45,7 +45,8 @@ import { AuthContext } from "../../context/auth";
 
 import { FacebookShareButton } from "react-share";
 import { FacebookIcon } from "react-share";
- 
+import HelpButton from "../../components/HelpButton/HelpButton";
+
 
 
 
@@ -61,7 +62,7 @@ const Index = ({ match }) => {
   const [categories, setCategories] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
   //const [loading, setLoading] = useState(true);
-  
+
   const screen = React.useContext(ScreenContext);
   const [share_on_fb_image, Setshare_on_fb_image] = React.useState(false);
 
@@ -107,7 +108,7 @@ const Index = ({ match }) => {
         res.data.sub_records = Object.values(group);
         setRecord(res.data);
         setSelectionIndex(res.data.max_volume - 1)
-        console.log("check image rje") 
+        console.log("check image rje")
         Setshare_on_fb_image((res.data.image_propose).slice(49));
       })
       .catch((err) => console.log(err.response));
@@ -142,7 +143,7 @@ const Index = ({ match }) => {
           files: [],
           type: "added",
         });
-      } 
+      }
       return newTableData;
     });
     setCategories(!categories);
@@ -178,7 +179,7 @@ const Index = ({ match }) => {
       fileArr.forEach((file) => {
         if (fileArr[fileArr.length - 1] === file) {
           console.log({ fileArr });
-          if(fileArr.length > 0 ){
+          if (fileArr.length > 0) {
             bimages = true;
           }
         }
@@ -202,47 +203,47 @@ const Index = ({ match }) => {
                     itemFiles.forEach((fileArr, index) => {
                       fileArr.forEach((file) => {
                         if (fileArr[fileArr.length - 1] === file) {
-                            console.log("last element")
-                            
-                            let data = new FormData();
-                            data.append("image", file);
-    
-                            console.log("star consol");
-                            console.log({ fileArr, file, itemFiles, data });
-                            console.log("end consol");
+                          console.log("last element")
 
-                            let p = fileAxios
-                              .post(
-                                `create-item-images/${res.data[index].id}/`,
-                                data
+                          let data = new FormData();
+                          data.append("image", file);
+
+                          console.log("star consol");
+                          console.log({ fileArr, file, itemFiles, data });
+                          console.log("end consol");
+
+                          let p = fileAxios
+                            .post(
+                              `create-item-images/${res.data[index].id}/`,
+                              data
+                            )
+                            .then((res) => {
+                              console.log(res.data);
+
+                              Promise.all(ps).then(
+                                () => {
+
+                                  addToast("Record created rje", { appearance: "success" });
+                                  // history.push(`/ask-record-details/${recordId}`);
+                                  // history.go();
+
+                                  history.push({
+                                    pathname: `/my-request-state/${propositionId}`,
+                                    state: {
+                                      askRecord: false,
+                                    },
+                                  });
+                                  history.go();
+                                  setisLoading(false);
+
+                                }
                               )
-                              .then((res) => {
-                                console.log(res.data);
 
-                                Promise.all(ps).then(
-                                  () => {
-
-                                    addToast("Record created rje", { appearance: "success" });
-                                    // history.push(`/ask-record-details/${recordId}`);
-                                    // history.go();
-                                    
-                                    history.push({
-                                      pathname: `/my-request-state/${propositionId}`,
-                                      state: {
-                                        askRecord: false,
-                                      },
-                                    });
-                                    history.go();
-                                    setisLoading(false);
-
-                                  }
-                                )
-
-                              })
-                              .catch((err) => {
-                                console.log(err.response);
-                              });
-                              ps.push(p)
+                            })
+                            .catch((err) => {
+                              console.log(err.response);
+                            });
+                          ps.push(p)
                         }
                         else {
                           let data = new FormData();
@@ -266,8 +267,8 @@ const Index = ({ match }) => {
                       );
                     });
                     addToast("Proposition created", { appearance: "success" });
-                    if(!bimages){
-                      bimages = !bimages ;  
+                    if (!bimages) {
+                      bimages = !bimages;
                       history.push({
                         pathname: `/my-request-state/${propositionId}`,
                         state: {
@@ -317,14 +318,15 @@ const Index = ({ match }) => {
 
   const CreatingRecord = "  Creating Record ... ";
   if (isloading) {
-    
-    return <Spinner name = {CreatingRecord}/>;
+
+    return <Spinner name={CreatingRecord} />;
   }
 
-  return ( 
+  return (
     <Box component={"div"}>
       <Header />
-      
+      <HelpButton />
+
 
       <Container className="py-5">
         {isRecordVisiable ? (
@@ -356,7 +358,7 @@ const Index = ({ match }) => {
                       gutterBottom
                       className={`m-0 me-1 fw-medium`}
                     >
-                      Description rje 
+                      Description rje
                     </Typography>
                     <Typography
                       variant="subtitle2"
@@ -516,19 +518,19 @@ const Index = ({ match }) => {
                         onClick={deleteRecord}
                         className="ms-auto my-2 text-danger"
                       >
-                        Delete 
+                        Delete
                       </Button>
                     </Grid>}
 
                     <Grid item>
-                      <FacebookShareButton 
-                            url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 
-                            quote={" this is a quand "}
-                            hashtag={"#this is htag"} 
-                            description={" this is description "}
-                            className="Demo__some-network__share-button"
-                          >  
-                            <FacebookIcon size={32} round /> Facebook share
+                      <FacebookShareButton
+                        url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)}
+                        quote={" this is a quand "}
+                        hashtag={"#this is htag"}
+                        description={" this is description "}
+                        className="Demo__some-network__share-button"
+                      >
+                        <FacebookIcon size={32} round /> Facebook share
                       </FacebookShareButton>
                     </Grid>
 

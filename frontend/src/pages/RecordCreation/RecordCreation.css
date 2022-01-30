@@ -11,13 +11,13 @@
 
 .announceBtn p,
 .demandBtn {
-  font-size: 25px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 35px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .announceBtn:hover,
 .demandBtn:hover {
-  color: white;
+  color: black;
   transition: 1s;
-  background-color: black;
+  background-color: rgb(221, 217, 217);
 }
