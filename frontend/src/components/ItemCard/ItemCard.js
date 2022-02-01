@@ -64,6 +64,27 @@ import {
   ModeOfTransportationContext,
   ScreenContext,
 } from "../../helpers/context";
+// import ModalPay from "./ModalPay";
+// import ModalForPayment from "./ModalForPayment";
+import {
+  Input, InputLabel, FormControl,
+  InputAdornment
+} from "@mui/material";
+
+import { FaCcMastercard, FaCcVisa, FaCheck, FaLock } from 'react-icons/fa';
+
+import { SiAmericanexpress } from 'react-icons/si';
+import { BsPersonCircle } from 'react-icons/bs';
+import { FcExpired } from 'react-icons/fc';
+
+import {
+  Box as MuiBox,
+  Button as MuiButton,
+  Typography as MuiTypography,
+  Modal as MuiModal,
+  Checkbox as MuiCheckbox,
+  FormControlLabel as MuiFormControlLabel
+} from '@mui/material';
 
 export const TravelInformation = (props) => {
   return (
@@ -95,6 +116,7 @@ const ItemCard = (props) => {
 
   const modes = React.useContext(ModeOfTransportationContext);
 
+
   const openFeedbackModal = () => {
     setFeedbackModalOpen(true);
   };
@@ -112,6 +134,46 @@ const ItemCard = (props) => {
         props.fetchItems();
       });
   };
+
+  const [openPayModal, setOpenPayModal] = React.useState(false);
+  const handleOpenModal = () => setOpenPayModal(true);
+  const handleCloseModal = () => setOpenPayModal(false);
+
+  const payModal = () => {
+    return (
+      <React.Fragment>
+        <Modal
+          open={openPayModal}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+
+        </Modal>
+      </React.Fragment>
+    )
+  }
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 
   // Display the state of the payment process
   const displayPaymentState = (item) => {
@@ -138,14 +200,138 @@ const ItemCard = (props) => {
         );
       } else {
         return (
-          <Button
-            onClick={() => handlePayment(props.item)}
-            className="mx-auto text-danger border-danger"
-            variant="outlined"
-            size="small"
-          >
-            Payer
-          </Button>
+          <React.Fragment>
+            <MuiModal
+              open={openPayModal}
+              onClose={handleCloseModal}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <MuiBox sx={style}>
+                <MuiFormControlLabel disabled control={<MuiCheckbox />} label="Card" /> <br />
+                <MuiFormControlLabel disabled control={<MuiCheckbox />} label="Others" />
+
+                <div className='container text-center'>
+                  <div className='container p-2'>
+                    <FaCcMastercard size='50px' color='rgb(235, 0, 27)' className='m-2' />
+                    <FaCcVisa size='50px' color='rgb(0, 87, 159)' className='m-2' />
+                    <SiAmericanexpress size='40px' color='rgb(0, 111, 207)' className='m-2 rounded' /> <br />
+                    <div className="container">
+                      <div className="width-250 mt-2">
+                        <FormControl variant="standard">
+                          <InputLabel htmlFor="input-with-icon-adornment">
+                            Card Number
+                          </InputLabel>
+                          <Input
+                            id="input-with-icon-adornment"
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <FaCheck size='20px' color='lightgreen' className='m-2' />
+                                <FaCcVisa size='20px' color='rgb(0, 87, 159)' className='m-2' />
+                              </InputAdornment>
+                            }
+                          />
+                        </FormControl>
+                      </div>
+                      <div className="width-250 mt-2">
+                        <FormControl variant="standard">
+                          <InputLabel htmlFor="input-with-icon-adornment">
+                            Date Expiration
+                          </InputLabel>
+                          <Input
+                            id="input-with-icon-adornment"
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <FaCheck size='20px' color='lightgreen' className='m-2' />
+                                <FcExpired size='20px' className='m-2' />
+                              </InputAdornment>
+                            }
+                          />
+                        </FormControl>
+                      </div>
+                      <div className="width-250 mt-2">
+                        <FormControl variant="standard">
+                          <InputLabel htmlFor="input-with-icon-adornment">
+                            Code CVV
+                          </InputLabel>
+                          <Input
+                            id="input-with-icon-adornment"
+                            startAdornment={
+                              <InputAdornment position="end">
+                                <FaLock size='20px' color='gray' className='m-2' />
+                              </InputAdornment>
+                            }
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <FaCheck size='20px' color='lightgreen' className='m-2' />
+                              </InputAdornment>
+                            }
+                          />
+                        </FormControl>
+                      </div>
+                    </div>
+                    <div className="container">
+                      <div className="width-250 mt-2">
+                        <FormControl variant="standard">
+                          <InputLabel htmlFor="input-with-icon-adornment">
+                            First Name
+                          </InputLabel>
+                          <Input
+                            id="input-with-icon-adornment"
+                            startAdornment={
+                              <InputAdornment position="end">
+                                <BsPersonCircle size='20px' color='gray' className='m-2' />
+                              </InputAdornment>
+                            }
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <FaCheck size='20px' color='lightgreen' className='m-2' />
+                              </InputAdornment>
+                            }
+                          />
+                        </FormControl>
+                      </div>
+                      <div className="width-250 mt-2">
+                        <FormControl variant="standard">
+                          <InputLabel htmlFor="input-with-icon-adornment">
+                            Last Name
+                          </InputLabel>
+                          <Input
+                            id="input-with-icon-adornment"
+                            startAdornment={
+                              <InputAdornment position="end">
+                                <BsPersonCircle size='20px' color='gray' className='m-2' />
+                              </InputAdornment>
+                            }
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <FaCheck size='20px' color='lightgreen' className='m-2' />
+                              </InputAdornment>
+                            }
+                          />
+                          <MuiButton
+                            variant="contained"
+                            className='container mt-2'
+                            onClick={() => handlePayment(props.item)}
+                          >Pay</MuiButton>
+                        </FormControl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </MuiBox>
+            </MuiModal>
+
+            <Button
+              // onClick={() => handlePayment(props.item)}
+              onClick={handleOpenModal}
+              className="mx-auto text-danger border-danger"
+              variant="outlined"
+              size="small"
+            >
+              Payer
+            </Button>
+          </React.Fragment>
         );
       }
     }
@@ -249,7 +435,7 @@ const ItemCard = (props) => {
               gutterBottom
               className="fw-bold m-0 my-3"
             >
-             __ {/* This offer process has ended */}
+              __ {/* This offer process has ended */}
             </Typography>
           </div>
         );
@@ -465,55 +651,55 @@ const ItemCard = (props) => {
       {props.askProposition && props.item.proposition_state === "Pending" ? (
         <div>
           <div className="my-2">{displayAskPropositionState(props.item)}</div>
-          <Card className={"shadow py-2 my-3"} style={{padding:"10px", margin:"10px"}}>
+          <Card className={"shadow py-2 my-3"} style={{ padding: "10px", margin: "10px" }}>
 
-                <Grid item sm={"auto"} xs={12}>
-                  <Box component="div">
-                    <Typography
-                      variant="subtitle1"
-                      color="inherit"
-                      gutterBottom
-                      className="fw-bold m-0 pb-1 border-bottom border-2 text-dark"
-                    >
-                      {props &&
-                        moment(props.item.date).format("dddd DD MMMM YYYY")}
-                      {props &&
-                        modes &&
-                        props.item.Proposed_moyen_de_transport &&
-                        modes[props.item.Proposed_moyen_de_transport]}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid
-                container
-                direction="row"
-                spacing={2}
-                item
-                sm={"auto"}
-                xs={12}
-              >
-                <Grid item sm={"auto"} xs={12}>
-                  <Box
-                    component="div"
-                    className={"border-bottom border-2 pb-2"}
-                  >
-                    <TravelInformation
-                      location={props && props.item.Proposed_city_arrival}
-                      departure={true}
-                    />
-                    <TravelInformation
-                      location={props && props.item.Proposed_city_destination}
-                      destination={true}
-                    />
-                  </Box>
-                </Grid>
+            <Grid item sm={"auto"} xs={12}>
+              <Box component="div">
+                <Typography
+                  variant="subtitle1"
+                  color="inherit"
+                  gutterBottom
+                  className="fw-bold m-0 pb-1 border-bottom border-2 text-dark"
+                >
+                  {props &&
+                    moment(props.item.date).format("dddd DD MMMM YYYY")}
+                  {props &&
+                    modes &&
+                    props.item.Proposed_moyen_de_transport &&
+                    modes[props.item.Proposed_moyen_de_transport]}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              spacing={2}
+              item
+              sm={"auto"}
+              xs={12}
+            >
+              <Grid item sm={"auto"} xs={12}>
+                <Box
+                  component="div"
+                  className={"border-bottom border-2 pb-2"}
+                >
+                  <TravelInformation
+                    location={props && props.item.Proposed_city_arrival}
+                    departure={true}
+                  />
+                  <TravelInformation
+                    location={props && props.item.Proposed_city_destination}
+                    destination={true}
+                  />
+                </Box>
               </Grid>
-              <Grid>
-                  <label>
-                  <input type="checkbox" name={"Proposed_home_delivery"} checked={ props.item.Proposed_home_delivery} /> 
-                  | Home Delivery 
-                  </label>
-                </Grid>
+            </Grid>
+            <Grid>
+              <label>
+                <input type="checkbox" name={"Proposed_home_delivery"} checked={props.item.Proposed_home_delivery} />
+                | Home Delivery
+              </label>
+            </Grid>
 
 
 
@@ -525,7 +711,7 @@ const ItemCard = (props) => {
                 gutterBottom
                 className={`m-0 me-1 fw-medium`}
               >
-                Message 
+                Message
               </Typography>
               <Typography
                 variant="subtitle2"
@@ -636,7 +822,7 @@ const ItemCard = (props) => {
           writer={user}
           receiver={
             user.id === props.item.user.id
-            // user.email === props.item.user.email
+              // user.email === props.item.user.email
               ? props.item.record.user
               : props.item.user
           }

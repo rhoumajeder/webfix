@@ -49,6 +49,7 @@ import FaqAccordation from "./components/FaqAccordation/FaqAccordation";
 import PaymentModal from "./components/PaymentModal/PaymentModal";
 import HelpButton from "./components/HelpButton/HelpButton";
 import HelpPage from "./components/HelpPage/HelpPage";
+import ModalPay from "./components/ItemCard/ModalPay";
 
 
 const theme = createMuiTheme({
@@ -227,6 +228,11 @@ const App = () => {
                     exact
                     path={"/help"}
                     component={HelpPage}
+                  />
+                  <Route
+                    exact
+                    path={"/pay"}
+                    component={ModalPay}
                   />
                   <Route
                     exact

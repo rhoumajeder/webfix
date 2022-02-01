@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -148,6 +148,8 @@ const Index = (props) => {
 
   const [record, setRecord] = React.useState(Records);
 
+  const [checkBox, setCheckBox] = useState(false);
+
   const { sliderMarks: marks } = useVolumeSlider(0);
 
   let transportOptions = [
@@ -156,8 +158,35 @@ const Index = (props) => {
       value: "Avion",
       avatar: <FaPlane className={"fs-6 rotate-negative-90"} />,
     },
-    { label: "Car", value: "Car", avatar: <FaCarSide className={"fs-6"} /> },
+    {
+      label: "Car",
+      value: "Car",
+      avatar: <FaCarSide className={"fs-6"} />
+    },
   ];
+
+  const planeAndCar = {
+    Avion: {
+      label: "Avion",
+      value: "Avion",
+      avatar: <FaPlane className={"fs-6 rotate-negative-90"} />
+    },
+    Car: {
+      label: "Car",
+      value: "Car",
+      avatar: <FaCarSide className={"fs-6"} />
+    }
+  }
+
+  const onCheckBoxChange = (e) => {
+    let { name, value } = e.target;
+
+    if (e.target.type === "checkbox") {
+      value = e.target.checked;
+    }
+    return value;
+  };
+
 
   const handleDateChange = (date) => {
     setRecord({ ...record, ["date"]: moment(date).format("YYYY-MM-DD") });
@@ -167,6 +196,11 @@ const Index = (props) => {
     setRecord({ ...record, [target.name]: item.value });
     console.log(record);
   };
+
+  const handleCheckBoxChange = (item, target) => {
+    setRecord({ ...record, [target.name]: item.checked });
+    console.log('my new records are', record);
+  }
 
   const CategoryList = {
     Food: {
@@ -702,10 +736,12 @@ const Index = (props) => {
                       </div>
                       <div className="row">
                         <FormLabelL
-                          control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                          color="primary"
+                          control={<CheckBoxL className='mx-2' />}
                           name={"moyen_de_transport"}
-                          defaultValue={transportOptions[0]}
                           label={<FaPlane />}
+                          defaultValue={planeAndCar.Avion}
+                          onChange={handleCheckBoxChange}
                         />
                       </div>
                     </div>
@@ -717,10 +753,12 @@ const Index = (props) => {
                       </div>
                       <div className="row">
                         <FormLabelL
-                          control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                          color="primary"
+                          control={<CheckBoxL className='mx-2' />}
                           name={"moyen_de_transport"}
-                          defaultValue={transportOptions[0]}
                           label={<FaCarSide />}
+                          defaultValue={planeAndCar.Car}
+                          onChange={handleCheckBoxChange}
                         />
                       </div>
                     </div>

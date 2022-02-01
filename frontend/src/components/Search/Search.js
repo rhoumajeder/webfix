@@ -226,6 +226,7 @@ const Search = (props) => {
             <Grid item md={4} xs={12}>
               <KeyboardDatePicker
                 disableToolbar
+                disablePast
                 autoOk
                 variant={screen.width <= 480 ? "dialog" : "inline"}
                 format="DD MMM, yyyy"
