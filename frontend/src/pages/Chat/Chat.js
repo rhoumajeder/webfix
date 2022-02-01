@@ -20,7 +20,7 @@ import axiosInstance from "../../helpers/axios";
 import ChatBody from "../../components/ChatBody/ChatBody";
 
 import { useLocation } from "react-router";
-import HelpButton from "../../components/HelpButton/HelpButton";
+import NewFooter from "../../components/NewFooter/NewFooter";
 
 
 const PAGE_SIZE = 3;
@@ -171,7 +171,6 @@ const Chat = (props) => {
   return (
     <div>
       <Header />
-      <HelpButton />
       <div className={classes.headBG}>
         <Grid container>
           <Grid item xs={12}>
@@ -232,6 +231,7 @@ const Chat = (props) => {
           />
         </Grid>
       </div>
+      <NewFooter />
     </div>
   );
 };

@@ -34,7 +34,6 @@ import Newvideo from "../../components/NewVideo/Newvideo";
 import Social from "../../components/Social/Social";
 import NewFeedback from "../../components/NewFeedback/NewFeedback";
 import AdvServiceSec from "../../components/Advantageservicesection/AdvServiceSec";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const TEXTS = ["Forest", "Building", "Tree", "Color"];
@@ -221,7 +220,6 @@ const Index = () => {
           <CardListing filters={filters} records={records} />
         )}
       </Box>
-      <HelpButton />
       <Social />
       <NewFeedback />
       <Newvideo />

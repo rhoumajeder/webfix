@@ -15,6 +15,7 @@ import {
 import "./index.css";
 
 import ListItemCard from "../../components/ListItemCard/ListItemCard";
+import NewFooter from "../../components/NewFooter/NewFooter";
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
@@ -55,6 +56,7 @@ const Index = () => {
           </Grid>
         </Grid>
       </Container>
+      <NewFooter />
     </Box>
   );
 };

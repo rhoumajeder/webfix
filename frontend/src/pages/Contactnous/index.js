@@ -14,14 +14,12 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Link } from "@material-ui/core";
 import Header from "../../components/Header/Header";
 import NewFooter from "../../components/NewFooter/NewFooter";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 function index() {
   return (
     <div>
       <Header />
-      <HelpButton />
       <Box
         sx={{
           my: 5,

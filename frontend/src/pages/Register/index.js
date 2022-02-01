@@ -6,7 +6,6 @@ import { useToasts } from "react-toast-notifications";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import * as yup from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const Index = () => {
@@ -124,7 +123,6 @@ const Index = () => {
           size="invisible"
         />}
       />
-      <HelpButton />
     </div>
   );
 };

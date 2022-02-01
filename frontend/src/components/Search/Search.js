@@ -282,9 +282,9 @@ const Search = (props) => {
                       <FormHelperText>Weight</FormHelperText>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                      <div className="row">
-                        <div className="col">
-                          <div className="row">
+                      <div className="container row">
+                        <div className="col-sm">
+                          <div className="row ml-4">
                             <label className='labelss'>
                               Plane
                             </label>
@@ -294,11 +294,11 @@ const Search = (props) => {
                               control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
                               name={"moyen_de_transport"}
                               defaultValue={transportOptions[0]}
-                              label={<FaPlane />}
+                              label={<FaPlane size="25px" />}
                             />
                           </div>
                         </div>
-                        <div className="col">
+                        <div className="col-sm">
                           <div className="row">
                             <label className='labelss'>
                               Car
@@ -309,7 +309,7 @@ const Search = (props) => {
                               control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
                               name={"moyen_de_transport"}
                               defaultValue={transportOptions[0]}
-                              label={<FaCarSide />}
+                              label={<FaCarSide size="25px" />}
                             />
                           </div>
                         </div>

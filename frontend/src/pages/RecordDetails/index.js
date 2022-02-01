@@ -45,7 +45,6 @@ import { AuthContext } from "../../context/auth";
 
 import { FacebookShareButton } from "react-share";
 import { FacebookIcon } from "react-share";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 
@@ -325,7 +324,6 @@ const Index = ({ match }) => {
   return (
     <Box component={"div"}>
       <Header />
-      <HelpButton />
 
 
       <Container className="py-5">

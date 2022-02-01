@@ -12,7 +12,6 @@ import Header from "../../components/Header/Header";
 import Index from "../CreateRecord";
 import CreateAskRecord from "../../components/CreateAskRecord/CreateAskRecord";
 import ReCAPTCHA from "react-google-recaptcha";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const RecordCreation = () => {
@@ -42,7 +41,6 @@ const RecordCreation = () => {
   return (
     <div>
       <Header />
-      <HelpButton />
       <ReCAPTCHA
         sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
         ref={recaptchaRef}
@@ -52,13 +50,19 @@ const RecordCreation = () => {
         <Container>
           <Grid container spacing={2} style={{ marginTop: "50px" }}>
             <Grid item xs={6}>
-              <Paper onClick={hideAskRecord} className="paper announceBtn">
-                <p style={{ textAlign: "center", marginTop: "25px" }}>Announce</p>
+              <Paper onClick={hideAskRecord} className='paperBtn'>
+                <p style={{ textAlign: "center", marginTop: "25px" }} className="paper demandBtn">Announce</p>
+                <div className="text-center mb-3">
+                  <p className='fun-text'>Are goign To have fun</p>
+                </div>
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper onClick={revealAskRecord} className="paper demandBtn">
-                <p style={{ textAlign: "center", marginTop: "25px" }}>Demande</p>
+              <Paper onClick={revealAskRecord} className='paperBtn'>
+                <p style={{ textAlign: "center", marginTop: "25px" }} className="paper demandBtn">Demande</p>
+                <div className="text-center mb-3">
+                  <p className='fun-text'>Are goign To have fun</p>
+                </div>
               </Paper>
             </Grid>
           </Grid>

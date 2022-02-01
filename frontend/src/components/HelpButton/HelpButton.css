@@ -1,9 +1,3 @@
-.helpBtn{
-    position: fixed;
-    bottom: 80px;
-    right: 10px;
-}
-
 .helpBtn:hover{
     cursor: pointer;
 }

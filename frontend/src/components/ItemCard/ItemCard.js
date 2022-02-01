@@ -85,6 +85,7 @@ import {
   Checkbox as MuiCheckbox,
   FormControlLabel as MuiFormControlLabel
 } from '@mui/material';
+import PaymentModal from "../PaymentModal/PaymentModal";
 
 export const TravelInformation = (props) => {
   return (
@@ -207,119 +208,7 @@ const ItemCard = (props) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <MuiBox sx={style}>
-                <MuiFormControlLabel disabled control={<MuiCheckbox />} label="Card" /> <br />
-                <MuiFormControlLabel disabled control={<MuiCheckbox />} label="Others" />
-
-                <div className='container text-center'>
-                  <div className='container p-2'>
-                    <FaCcMastercard size='50px' color='rgb(235, 0, 27)' className='m-2' />
-                    <FaCcVisa size='50px' color='rgb(0, 87, 159)' className='m-2' />
-                    <SiAmericanexpress size='40px' color='rgb(0, 111, 207)' className='m-2 rounded' /> <br />
-                    <div className="container">
-                      <div className="width-250 mt-2">
-                        <FormControl variant="standard">
-                          <InputLabel htmlFor="input-with-icon-adornment">
-                            Card Number
-                          </InputLabel>
-                          <Input
-                            id="input-with-icon-adornment"
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <FaCheck size='20px' color='lightgreen' className='m-2' />
-                                <FaCcVisa size='20px' color='rgb(0, 87, 159)' className='m-2' />
-                              </InputAdornment>
-                            }
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="width-250 mt-2">
-                        <FormControl variant="standard">
-                          <InputLabel htmlFor="input-with-icon-adornment">
-                            Date Expiration
-                          </InputLabel>
-                          <Input
-                            id="input-with-icon-adornment"
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <FaCheck size='20px' color='lightgreen' className='m-2' />
-                                <FcExpired size='20px' className='m-2' />
-                              </InputAdornment>
-                            }
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="width-250 mt-2">
-                        <FormControl variant="standard">
-                          <InputLabel htmlFor="input-with-icon-adornment">
-                            Code CVV
-                          </InputLabel>
-                          <Input
-                            id="input-with-icon-adornment"
-                            startAdornment={
-                              <InputAdornment position="end">
-                                <FaLock size='20px' color='gray' className='m-2' />
-                              </InputAdornment>
-                            }
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <FaCheck size='20px' color='lightgreen' className='m-2' />
-                              </InputAdornment>
-                            }
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="container">
-                      <div className="width-250 mt-2">
-                        <FormControl variant="standard">
-                          <InputLabel htmlFor="input-with-icon-adornment">
-                            First Name
-                          </InputLabel>
-                          <Input
-                            id="input-with-icon-adornment"
-                            startAdornment={
-                              <InputAdornment position="end">
-                                <BsPersonCircle size='20px' color='gray' className='m-2' />
-                              </InputAdornment>
-                            }
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <FaCheck size='20px' color='lightgreen' className='m-2' />
-                              </InputAdornment>
-                            }
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="width-250 mt-2">
-                        <FormControl variant="standard">
-                          <InputLabel htmlFor="input-with-icon-adornment">
-                            Last Name
-                          </InputLabel>
-                          <Input
-                            id="input-with-icon-adornment"
-                            startAdornment={
-                              <InputAdornment position="end">
-                                <BsPersonCircle size='20px' color='gray' className='m-2' />
-                              </InputAdornment>
-                            }
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <FaCheck size='20px' color='lightgreen' className='m-2' />
-                              </InputAdornment>
-                            }
-                          />
-                          <MuiButton
-                            variant="contained"
-                            className='container mt-2'
-                            onClick={() => handlePayment(props.item)}
-                          >Pay</MuiButton>
-                        </FormControl>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </MuiBox>
+              <PaymentModal paymentOption={() => handlePayment(props.item)} />
             </MuiModal>
 
             <Button

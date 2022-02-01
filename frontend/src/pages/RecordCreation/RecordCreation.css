@@ -15,9 +15,12 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.announceBtn:hover,
-.demandBtn:hover {
+.paperBtn:hover {
   color: black;
   transition: 1s;
   background-color: rgb(221, 217, 217);
+}
+
+.fun-text{
+  font-size: 15px;
 }

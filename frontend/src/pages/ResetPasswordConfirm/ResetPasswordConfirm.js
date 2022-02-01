@@ -15,7 +15,6 @@ import * as yup from "yup";
 import { useToasts } from "react-toast-notifications";
 import Header from "../../components/Header/Header";
 import { useParams } from "react-router";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 const ResetPasswordConfirm = () => {
   let { uid, token } = useParams();
@@ -139,7 +138,6 @@ const ResetPasswordConfirm = () => {
           </Card>
         </Grid>
       </Grid>
-      <HelpButton />
     </React.Fragment>
   );
 };

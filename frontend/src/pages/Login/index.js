@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import RegisterForm from '../Register';
 import LoginForm from './LoginForm';
 import Header from "../../components/Header/Header";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const Index = (props) => {
@@ -20,7 +19,6 @@ const Index = (props) => {
           <RegisterForm {...props} />
         </Grid>
       </Grid>
-      <HelpButton />
     </React.Fragment>
   );
 };

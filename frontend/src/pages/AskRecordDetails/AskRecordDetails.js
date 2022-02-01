@@ -36,7 +36,6 @@ import cities from "../../helpers/cities";
 import moment from "moment";
 import { FacebookShareButton } from "react-share";
 import { FacebookIcon } from "react-share";
-import HelpButton from "../../components/HelpButton/HelpButton";
 
 const style = {
   position: "absolute",
@@ -192,7 +191,6 @@ const AskRecordDetails = () => {
   return (
     <Box>
       <Header />
-      <HelpButton />
       <Container className="py-5">
         <Grid container direction="row" justify="center" spacing={1}>
           <Grid

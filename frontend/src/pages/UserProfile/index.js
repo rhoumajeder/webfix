@@ -15,7 +15,7 @@ import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
 import ReportModal from "../../components/ReportModal/ReportModal";
 import ProfileFeedback from "../../components/Feedback/ProfileFeedback";
 import UserProfileModal from '../../components/UserProfileModal/UserProfileModal';
-import HelpButton from '../../components/HelpButton/HelpButton';
+import NewFooter from '../../components/NewFooter/NewFooter';
 
 
 const PAGE_SIZE = 5;
@@ -82,10 +82,7 @@ const Index = (props) => {
 
     return (
         <Box component={"div"}>
-
             <Header />
-            <HelpButton />
-
             <Container className="py-5">
                 <Grid container direction="row" justify="center" spacing={1}>
                     <Grid item md={4} xs={12} className={`my-2`}>
@@ -313,6 +310,7 @@ const Index = (props) => {
                 onSuccess={onSubmitUserFrom}
                 isModalOpen={isUserProfileModalOpen}
                 setModalOpen={setUserProfileModalOpen} />
+            <NewFooter />
         </Box>
     );
 };

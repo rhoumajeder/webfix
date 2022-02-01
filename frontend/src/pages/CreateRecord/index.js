@@ -38,6 +38,7 @@ import cities from "../../helpers/cities";
 import useVolumeSlider from '../../hooks/useVolumeSlider';
 
 import { IoArrowBack } from "react-icons/io5";
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 const Index = (props) => {
   let history = useHistory();
@@ -727,7 +728,7 @@ const Index = (props) => {
                   >
                     Moyen de Transport:
                   </Typography>
-                  <div className="row">
+                  <div className="container row">
                     <div className="col">
                       <div className="row">
                         <label className='labelss'>
@@ -739,7 +740,7 @@ const Index = (props) => {
                           color="primary"
                           control={<CheckBoxL className='mx-2' />}
                           name={"moyen_de_transport"}
-                          label={<FaPlane />}
+                          label={<FaPlane size="25px" />}
                           defaultValue={planeAndCar.Avion}
                           onChange={handleCheckBoxChange}
                         />
@@ -756,7 +757,7 @@ const Index = (props) => {
                           color="primary"
                           control={<CheckBoxL className='mx-2' />}
                           name={"moyen_de_transport"}
-                          label={<FaCarSide />}
+                          label={<FaCarSide size="25px" />}
                           defaultValue={planeAndCar.Car}
                           onChange={handleCheckBoxChange}
                         />
@@ -827,7 +828,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Max Volume:
+                    Max Volume:<HelpButton />
                   </Typography>
                   <Box
                     component={"div"}
