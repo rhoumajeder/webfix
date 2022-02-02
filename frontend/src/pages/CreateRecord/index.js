@@ -40,6 +40,12 @@ import useVolumeSlider from '../../hooks/useVolumeSlider';
 import { IoArrowBack } from "react-icons/io5";
 import HelpButton from "../../components/HelpButton/HelpButton";
 
+import {
+  RadioGroup as MuiRadioGroup,
+  FormControlLabel as MuiFormControlLabel,
+  Radio as MuiRadio
+} from '@mui/material';
+
 const Index = (props) => {
   let history = useHistory();
   const { addToast } = useToasts();
@@ -728,7 +734,21 @@ const Index = (props) => {
                   >
                     Moyen de Transport:
                   </Typography>
-                  <div className="container row">
+                  <MuiRadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="female"
+                    name="radio-buttons-group"
+                  >
+                    <div className="container row">
+                      <div className="col d-flex justify-content-end">
+                        <MuiFormControlLabel value="Plane" control={<MuiRadio />} label={<FaPlane size="35px" />} />
+                      </div>
+                      <div className="col d-flex justify-content-start">
+                        <MuiFormControlLabel value="male" control={<MuiRadio />} label={<FaCarSide size="35px" />} />
+                      </div>
+                    </div>
+                  </MuiRadioGroup>
+                  {/* <div className="container row">
                     <div className="col">
                       <div className="row">
                         <label className='labelss'>
@@ -763,7 +783,7 @@ const Index = (props) => {
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* <SelectBoxExtended
                     options={transportOptions}
                     name={"moyen_de_transport"}
@@ -828,8 +848,12 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Max Volume:<HelpButton />
+                    Max Volume:
                   </Typography>
+                  <div className="d-inline">
+                    <HelpButton />
+                  </div>
+
                   <Box
                     component={"div"}
                     className={"px-3 pb-5 position-relative"}

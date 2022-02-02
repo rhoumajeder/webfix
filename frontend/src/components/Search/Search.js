@@ -282,41 +282,40 @@ const Search = (props) => {
                       <FormHelperText>Weight</FormHelperText>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                      <div className="container row">
-                        <div className="col-sm">
-                          <div className="row ml-4">
-                            <label className='labelss'>
-                              Plane
-                            </label>
-                          </div>
-                          <div className="row">
-                            <FormLabelL
-                              control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
-                              name={"moyen_de_transport"}
-                              defaultValue={transportOptions[0]}
-                              label={<FaPlane size="25px" />}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-sm">
-                          <div className="row">
-                            <label className='labelss'>
-                              Car
-                            </label>
-                          </div>
-                          <div className="row">
-                            <FormLabelL
-                              control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
-                              name={"moyen_de_transport"}
-                              defaultValue={transportOptions[0]}
-                              label={<FaCarSide size="25px" />}
-                            />
+                      <div className="container">
+                        <div className="container">
+                          <div className="container">
+                            <div className="container">
+                              <div className="row">
+                                <div className="col d-flex justify-content-end">
+                                  <label className='labelss mt-2'>Plane</label>
+                                </div>
+                                <div className="col d-flex justify-content-start">
+                                  <FormLabelL
+                                    control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                                    name={"moyen_de_transport"}
+                                    defaultValue={transportOptions[0]}
+                                    label={<FaPlane size="35px" />}
+                                  />
+                                </div>
+                                <div className="col d-flex justify-content-end">
+                                  <label className='labelss mt-2'>
+                                    Car
+                                  </label>
+                                </div>
+                                <div className="col d-flex justify-content-start">
+                                  <FormLabelL
+                                    control={<CheckBoxL onChange={handleSelectChange} className='mx-2' />}
+                                    name={"moyen_de_transport"}
+                                    defaultValue={transportOptions[0]}
+                                    label={<FaCarSide size="35px" />}
+                                  />
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-
-
-
 
                       {/* <SelectBoxExtended
                         style={{ zIndex: 100 }}
