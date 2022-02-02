@@ -843,21 +843,14 @@ const Index = (props) => {
             <Box component={"div"} className={"my-2"}>
               <Grid container direction="row" alignItems="center" spacing={1}>
                 <Grid item xs={12} className="my-2">
-                  <Typography
-                    variant={"subtitle2"}
-                    color={"textPrimary"}
-                    className={"fw-bold my-2"}
-                  >
-                    <div className="row">
-                      <div className="col d-flex justify-content-end mt-3">
-                        Max Volume:
-                      </div>
-                      <div className="col d-flex justify-content-start">
-                        <HelpButton />
-                      </div>
+                  <div className='row'>
+                    <div className="col-2 fw-bold mt-3">
+                      Max Volume:
                     </div>
-
-                  </Typography>
+                    <div className="col-1 d-flex justify-content-start">
+                      <HelpButton />
+                    </div>
+                  </div>
                   <Box
                     component={"div"}
                     className={"px-3 pb-5 position-relative"}

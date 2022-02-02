@@ -164,62 +164,60 @@ const Index = () => {
 
   return (
     <Box component="div">
-      <Box component="div">
-        <Header />
-        <Box component={Paper} className='page-header shadow'>
-          <Box component={"div"}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              className="text-center pt-2 fw-bold"
-              sx={{ display: "flex" }}
-            >
-              Choisissez&nbsp;
-              <TextTransition
-                text={TEXTS[index % TEXTS.length]}
-                springConfig={presets.wobbly}
-              />
-              &nbsp;qui vous plaît
-            </Typography>
-            <Typography
-              variant="h5"
-              gutterBottom
-              className="text-center fw-bold"
-              sx={{ display: "flex" }}
-            >
-              Choisissez&nbsp;
-              <TextTransition
-                text={TEXTS[newText % TEXTS.length]}
-                springConfig={presets.wobbly}
-              />
-              &nbsp;qui vous plaît
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              gutterBottom
-              className="text-center pt-2"
-            >
-              {" "}
-              Trouvez la bonne affaire parmi les millions de petites annonces
-              leboncoin{" "}
-            </Typography>
-          </Box>
-
-          <Search
-            fetchRecords={fetchRecords}
-            recordType={recordType}
-            setRecordType={setRecordType}
-            setLoading={setLoading}
-            filters={filters}
-            setFilters={setFilters}
-          />
+      <Header />
+      <Box component={Paper} className='page-header shadow'>
+        <Box component={"div"}>
+          <Typography
+            variant="h5"
+            gutterBottom
+            className="text-center pt-2 fw-bold"
+            sx={{ display: "flex" }}
+          >
+            Choisissez&nbsp;
+            <TextTransition
+              text={TEXTS[index % TEXTS.length]}
+              springConfig={presets.wobbly}
+            />
+            &nbsp;qui vous plaît
+          </Typography>
+          <Typography
+            variant="h5"
+            gutterBottom
+            className="text-center fw-bold"
+            sx={{ display: "flex" }}
+          >
+            Choisissez&nbsp;
+            <TextTransition
+              text={TEXTS[newText % TEXTS.length]}
+              springConfig={presets.wobbly}
+            />
+            &nbsp;qui vous plaît
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            className="text-center pt-2"
+          >
+            {" "}
+            Trouvez la bonne affaire parmi les millions de petites annonces
+            leboncoin{" "}
+          </Typography>
         </Box>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <CardListing filters={filters} records={records} />
-        )}
+
+        <Search
+          fetchRecords={fetchRecords}
+          recordType={recordType}
+          setRecordType={setRecordType}
+          setLoading={setLoading}
+          filters={filters}
+          setFilters={setFilters}
+        />
       </Box>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <CardListing filters={filters} records={records} />
+      )}
       <Social />
       <NewFeedback />
       <Newvideo />
