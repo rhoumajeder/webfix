@@ -848,12 +848,16 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Max Volume:
-                  </Typography>
-                  <div className="d-inline">
-                    <HelpButton />
-                  </div>
+                    <div className="row">
+                      <div className="col d-flex justify-content-end mt-3">
+                        Max Volume:
+                      </div>
+                      <div className="col d-flex justify-content-start">
+                        <HelpButton />
+                      </div>
+                    </div>
 
+                  </Typography>
                   <Box
                     component={"div"}
                     className={"px-3 pb-5 position-relative"}

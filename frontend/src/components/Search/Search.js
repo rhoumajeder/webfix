@@ -36,6 +36,12 @@ import moment from "moment";
 import cities from "../../helpers/cities";
 import useVolumeSlider from "../../hooks/useVolumeSlider";
 
+import {
+  RadioGroup as MuiRadioGroup,
+  FormControlLabel as MuiFormControlLabel,
+  Radio as MuiRadio
+} from '@mui/material';
+
 
 const useStyles = makeStyles(theme => ({
   positionFix: {
@@ -286,7 +292,22 @@ const Search = (props) => {
                         <div className="container">
                           <div className="container">
                             <div className="container">
-                              <div className="row">
+                              <MuiRadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="female"
+                                name="radio-buttons-group"
+                              >
+                                <div className="container row">
+                                  <div className="col d-flex justify-content-end">
+                                    <MuiFormControlLabel value="Plane" control={<MuiRadio />} label={<FaPlane size="35px" />} />
+                                  </div>
+                                  <div className="col d-flex justify-content-start">
+                                    <MuiFormControlLabel value="male" control={<MuiRadio />} label={<FaCarSide size="35px" />} />
+                                  </div>
+                                </div>
+                              </MuiRadioGroup>
+
+                              {/* <div className="row">
                                 <div className="col d-flex justify-content-end">
                                   <label className='labelss mt-2'>Plane</label>
                                 </div>
@@ -311,7 +332,7 @@ const Search = (props) => {
                                     label={<FaCarSide size="35px" />}
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
