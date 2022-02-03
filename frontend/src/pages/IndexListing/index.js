@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Box, Container, Paper, makeStyles } from "@material-ui/core";
 
+import TextTransition, { presets } from "react-text-transition";
+
 import Header from "../../components/Header/Header";
 import Typography from "@material-ui/core/Typography";
 
@@ -26,7 +28,10 @@ import CustomPagination from "../../components/Pagination/Pagination";
 import Spinner from "../../components/Spinner/Spinner";
 import { MdLiveTv } from "react-icons/md";
 
-import moment from "moment"
+import moment from "moment";
+
+const TEXTS = ["Forest", "Building", "Tree", "Color"];
+
 
 const PAGE_SIZE = 3;
 
@@ -39,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-let first_load = true ; 
+let first_load = true;
 
 
 const Index = () => {
@@ -99,7 +104,7 @@ const Index = () => {
         params: paramFilters,
       })
       .then((res) => {
-        first_load = false; 
+        first_load = false;
         console.log(res.data);
         setRecords(res.data.results);
         set_number_of_items(res.data.count);
@@ -110,7 +115,7 @@ const Index = () => {
 
   };
 
-  const get_page = (recordTypeCheck,currentPage) => {  //it was only fetchRecords
+  const get_page = (recordTypeCheck, currentPage) => {  //it was only fetchRecords
     const paramFilters = { ...filters };
     if (recordTypeCheck.propose && recordTypeCheck.ask) {
       delete paramFilters.type;
@@ -120,25 +125,38 @@ const Index = () => {
       paramFilters.type = "Ask";
     }
     axiosInstance
-    .get("search-all-records/?page="+currentPage, {
-      params: paramFilters,
-      
-      }) 
+      .get("search-all-records/?page=" + currentPage, {
+        params: paramFilters,
+
+      })
       .then((res) => {
-       
-        console.log(res.data); 
+
+        console.log(res.data);
         setRecords(res.data.results);
         setLoading(false);
       })
       .catch((err) => console.log(err.response));
 
-      
+
   };
 
 
   useEffect(() => {
     fetchRecords(recordType);
-   // fetchRecords_for_button_search(recordType);
+    // fetchRecords_for_button_search(recordType);
+  }, []);
+
+  const [index, setIndex] = useState(0);
+  const [newText, setnewText] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => setIndex((index) => index + 1), 5000);
+    return () => clearTimeout(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const newintervalId = setInterval(() => setnewText((newText) => newText + 1), 20000);
+    return () => clearTimeout(newintervalId);
   }, []);
 
   return (
@@ -150,10 +168,28 @@ const Index = () => {
           <Typography
             variant="h5"
             gutterBottom
-            className="text-center pt-5 fw-bold"
+            className="text-center pt-2 fw-bold"
+            sx={{ display: "flex" }}
           >
-            {" "}
-            Choisissez le records qui vous plaît{" "}
+            Choisissez&nbsp;
+            <TextTransition
+              text={TEXTS[index % TEXTS.length]}
+              springConfig={presets.wobbly}
+            />
+            &nbsp;qui vous plaît
+          </Typography>
+          <Typography
+            variant="h5"
+            gutterBottom
+            className="text-center fw-bold"
+            sx={{ display: "flex" }}
+          >
+            Choisissez&nbsp;
+            <TextTransition
+              text={TEXTS[newText % TEXTS.length]}
+              springConfig={presets.wobbly}
+            />
+            &nbsp;qui vous plaît
           </Typography>
           <Typography
             variant="subtitle2"
@@ -167,7 +203,7 @@ const Index = () => {
         </Box>
 
         <Search
-         // fetchRecords={fetchRecords} // fetchRecords_for_button_search
+          // fetchRecords={fetchRecords} // fetchRecords_for_button_search
           fetchRecords_for_button_search={fetchRecords_for_button_search} // fetchRecords_for_button_search
           recordType={recordType}
           setRecordType={setRecordType}
@@ -195,16 +231,16 @@ const CardListing = (props) => {
     PAGE_SIZE,
     first_load,
     props.number_of_items,
-    
+
   );
 
 
 
-  
+
   const onPageChange = (event, value) => {
-    first_load ? "1":props.get_page(props.recordType,value);
+    first_load ? "1" : props.get_page(props.recordType, value);
     changePage(value);
-    
+
   };
 
   const recordToShow = getCurrentData();
@@ -251,7 +287,7 @@ const CardListing = (props) => {
                     gutterBottom
                     className="fw-bold m-0 d-block"
                   >
-                    {first_load ? props.records.length:props.number_of_items} Records disponibles
+                    {first_load ? props.records.length : props.number_of_items} Records disponibles
                   </Typography>
                 </Grid>
               </Grid>

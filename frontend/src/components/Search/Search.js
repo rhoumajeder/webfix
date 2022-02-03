@@ -32,6 +32,15 @@ import moment from "moment";
 import cities from "../../helpers/cities";
 import useVolumeSlider from "../../hooks/useVolumeSlider";
 
+import { FaCarSide, FaPlane } from "react-icons/fa";
+
+import {
+  RadioGroup as MuiRadioGroup,
+  FormControlLabel as MuiFormControlLabel,
+  Radio as MuiRadio
+} from '@mui/material';
+
+
 
 const useStyles = makeStyles(theme => ({
   positionFix: {
@@ -40,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Search = (props) => {
-  const {maxVolume, sliderMarks, handleVolumeChange: setVolume} = useVolumeSlider(0);
+  const { maxVolume, sliderMarks, handleVolumeChange: setVolume } = useVolumeSlider(0);
   const handleVolumeChange = (e, value) => {
     props.setFilters({
       ...props.filters,
@@ -50,7 +59,7 @@ const Search = (props) => {
   }
   const classes = useStyles()
   const { propose, ask } = props.recordType;
-  let defaultdatevalue =  moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M');
+  let defaultdatevalue = moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M');
   //alert(defaultdatevalue);
   // const [currentDate, setCurrentDate] = useState(
   //   moment(new Date()).format("YYYY-MM-DD")
@@ -58,12 +67,12 @@ const Search = (props) => {
   const [currentDate, setCurrentDate] = useState(
     defaultdatevalue
   );
- 
+
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
 
   const screen = React.useContext(ScreenContext);
 
-  const handleAdvancedFilters = () => { 
+  const handleAdvancedFilters = () => {
     setShowAdvancedFilters(!showAdvancedFilters)
   }
 
@@ -113,7 +122,7 @@ const Search = (props) => {
     }
     props.setRecordType(newRecordType);
     // props.fetchRecords(newRecordType); 
-    props.fetchRecords_for_button_search(newRecordType); 
+    props.fetchRecords_for_button_search(newRecordType);
     props.setLoading(true);
   };
 
@@ -222,6 +231,7 @@ const Search = (props) => {
             <Grid item md={4} xs={12}>
               <KeyboardDatePicker
                 disableToolbar
+                disablePast
                 autoOk
                 variant={screen.width <= 480 ? "dialog" : "inline"}
                 format="DD MMM, yyyy"
@@ -277,7 +287,29 @@ const Search = (props) => {
                       <FormHelperText>Weight</FormHelperText>
                     </Grid>
                     <Grid item sm={6} xs={12}>
-                      <SelectBoxExtended
+                      <div className="container">
+                        <div className="container">
+                          <div className="container">
+                            <div className="container">
+                              <MuiRadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="female"
+                                name="radio-buttons-group"
+                              >
+                                <div className="container row">
+                                  <div className="col d-flex justify-content-end">
+                                    <MuiFormControlLabel value="Plane" control={<MuiRadio />} label={<FaPlane size="35px" />} />
+                                  </div>
+                                  <div className="col d-flex justify-content-start">
+                                    <MuiFormControlLabel value="Car" control={<MuiRadio />} label={<FaCarSide size="35px" />} />
+                                  </div>
+                                </div>
+                              </MuiRadioGroup>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <SelectBoxExtended
                         style={{ zIndex: 100 }}
                         labelId={"moyen-de-transport"}
                         label={"Moyen de transport"}
@@ -294,7 +326,7 @@ const Search = (props) => {
                             )
                             : ""
                         }
-                      />
+                      /> */}
                     </Grid>
                     <Grid item xs={12} className="mb-5">
                       <Typography
