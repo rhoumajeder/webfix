@@ -5,7 +5,6 @@ import './NewCarousel.css';
 import {
     Face, Person
 } from "@material-ui/icons";
-
 function NewCarousel() {
     useEffect(() => {
         setInterval(() => {

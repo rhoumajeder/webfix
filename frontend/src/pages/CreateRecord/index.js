@@ -38,6 +38,13 @@ import useVolumeSlider from '../../hooks/useVolumeSlider';
 
 import { IoArrowBack } from "react-icons/io5";
 
+import {
+  RadioGroup as MuiRadioGroup,
+  FormControlLabel as MuiFormControlLabel,
+  Radio as MuiRadio
+} from '@mui/material';
+
+
 const Index = (props) => {
   let history = useHistory();
   const { addToast } = useToasts();
@@ -97,7 +104,7 @@ const Index = (props) => {
     categories: yup
       .array()
       .of(yup.string()),
-     // .min(1, "Please select at least 1 category"),
+    // .min(1, "Please select at least 1 category"),
     phone_number: yup
       .string()
       .required("Phone number for records is required")
@@ -108,7 +115,7 @@ const Index = (props) => {
     .array()
     .of(
       yup.object().shape({
-     //   category: yup.string().required("Please select at least 1 category"),
+        //   category: yup.string().required("Please select at least 1 category"),
         name: yup.string().required("Sub-category name is required!"),
         price: yup
           .number()
@@ -128,7 +135,7 @@ const Index = (props) => {
           .max(99, "Weight can not be more than 99"),
       })
     )
-    //.min(1, "Please select at least 1 sub-category for selected category(s)");
+  //.min(1, "Please select at least 1 sub-category for selected category(s)");
 
   let Records = {
     date: moment(new Date()).format("YYYY-MM-DD"),
@@ -137,16 +144,16 @@ const Index = (props) => {
     city_destination: "Berlin, Allemagne",
     max_weight: 1,
     max_volume: 3,
-    min_price:  0,
+    min_price: 0,
     description: "null value",
     categories: [],
-    categoriesv:["Food","Vetements","Small Accessories","Autres"], 
+    categoriesv: ["Food", "Vetements", "Small Accessories", "Autres"],
     type: "Propose",
     phone_number: user.phone_number ? user.phone_number : "8328382332"
   };
 
   const [record, setRecord] = React.useState(Records);
- 
+
   const { sliderMarks: marks } = useVolumeSlider(0);
 
   let transportOptions = [
@@ -177,7 +184,7 @@ const Index = (props) => {
           accepted: false,
           name: "Food Solide",
           max_quantity: 1,
-          max_weight: 1, 
+          max_weight: 1,
           price: 1,
           category: "Food"
         },
@@ -353,46 +360,46 @@ const Index = (props) => {
     },
   };
 
-  
-const getMinPrice = (record) => {
 
-  let minPrice = 0;
-  let prices = [];
-  console.log(record)
+  const getMinPrice = (record) => {
 
-  try {
+    let minPrice = 0;
+    let prices = [];
+    console.log(record)
 
-    record.forEach(elem => {
-      if (Object.prototype.hasOwnProperty.call(elem, 'items')) {
-        elem.items.forEach(
-          el => {
-            prices.push(el.price)
-          }
-        )
+    try {
 
-      } else {
-        record.forEach(elem => {
-          prices.push(elem.price)
-        })
-      }
+      record.forEach(elem => {
+        if (Object.prototype.hasOwnProperty.call(elem, 'items')) {
+          elem.items.forEach(
+            el => {
+              prices.push(el.price)
+            }
+          )
 
-
-    })
-    return Math.min(...prices);
+        } else {
+          record.forEach(elem => {
+            prices.push(elem.price)
+          })
+        }
 
 
+      })
+      return Math.min(...prices);
 
-  } catch (err) {
 
-    console.log(err);
 
+    } catch (err) {
+
+      console.log(err);
+
+    }
   }
-}
 
   const [subRecords, setSubRecords] = React.useState([]);
-  const [categories, setCategories] = React.useState(CategoryList)  
-  
-  
+  const [categories, setCategories] = React.useState(CategoryList)
+
+
 
 
 
@@ -400,12 +407,12 @@ const getMinPrice = (record) => {
 
   const handleAvailableCategories = (event) => {
     if (event.target.checked) {
-      setRecord({ ...record, categories: [...record.categories, event.target.name],categoriesv: [...record.categoriesv, event.target.name] })
+      setRecord({ ...record, categories: [...record.categories, event.target.name], categoriesv: [...record.categoriesv, event.target.name] })
 
 
       // setRecord({ ...record, categoriesv: [...record.categoriesv, event.target.name] })
 
-     
+
 
 
       setCategories({
@@ -423,17 +430,17 @@ const getMinPrice = (record) => {
       console.log(subRecords)
       const newCategories = [...record.categories];
       const index = newCategories.indexOf(event.target.name)
-      if(index > -1) {
+      if (index > -1) {
         newCategories.splice(index, 1)
       }
-      
+
 
       const newCategoriesv = [...record.categoriesv];
       const indexv = newCategoriesv.indexOf(event.target.name)
-      if(indexv > -1){
+      if (indexv > -1) {
         newCategoriesv.splice(indexv, 1)
       }
-      
+
 
       setRecord({ ...record, categories: newCategories, categoriesv: newCategoriesv })
 
@@ -458,7 +465,7 @@ const getMinPrice = (record) => {
       console.log(newSubRecords)
       setSubRecords(newSubRecords)
     }
-   
+
 
 
 
@@ -506,11 +513,11 @@ const getMinPrice = (record) => {
 
 
     //   })
-   
+
     return handleRecordSubmissionAfter();
   }
 
-  const handleRecordSubmissionAfter =  () => {
+  const handleRecordSubmissionAfter = () => {
     let validationSubRecords = [...subRecords];
     // alert(validationSubRecords.length); 
 
@@ -531,24 +538,24 @@ const getMinPrice = (record) => {
 
     let newlist = [];
     for (let i = 0; i < validationSubRecords.length; i++) {
-       
+
       let dict1 = validationSubRecords[i]
-      if (dict1.accepted == true){
+      if (dict1.accepted == true) {
         newlist.push(dict1)
 
       }
-      
+
     }
 
     validationSubRecords = newlist;
 
-    record["min_price"] =  getMinPrice(validationSubRecords) <  9999 ? getMinPrice(validationSubRecords): 0  ;
+    record["min_price"] = getMinPrice(validationSubRecords) < 9999 ? getMinPrice(validationSubRecords) : 0;
     console.log("validationSubRecords")
     console.log(validationSubRecords);
     // alert(validationSubRecords.length);   
-    
-    
- 
+
+
+
 
 
     recordSchema
@@ -584,7 +591,7 @@ const getMinPrice = (record) => {
                           history.go();
                         })
                         .catch((err) => {
-                          console.log(err.response); 
+                          console.log(err.response);
                           addToast("There was an error", { appearance: "error" });
 
                         });
@@ -634,6 +641,7 @@ const getMinPrice = (record) => {
                   </Typography>
                   <KeyboardDatePicker
                     disableToolbar
+                    disablePast
                     autoOk
                     variant={screen.width <= 480 ? "dialog" : "inline"}
                     format="DD MMM, yyyy"
@@ -691,13 +699,27 @@ const getMinPrice = (record) => {
                   >
                     Moyen de Transport:
                   </Typography>
-                  <SelectBoxExtended
+                  {/* <SelectBoxExtended
                     options={transportOptions}
                     name={"moyen_de_transport"}
                     // placeholder={"Moyen de Transport"}
                     defaultValue={transportOptions[0]}
-                    onChange={handleSelectChange} 
-                  />
+                    onChange={handleSelectChange}
+                  /> */}
+                  <MuiRadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="female"
+                    name="radio-buttons-group"
+                  >
+                    <div className="container row">
+                      <div className="col d-flex justify-content-end">
+                        <MuiFormControlLabel value="Plane" control={<MuiRadio />} label={<FaPlane size="35px" />} />
+                      </div>
+                      <div className="col d-flex justify-content-start">
+                        <MuiFormControlLabel value="Car" control={<MuiRadio />} label={<FaCarSide size="35px" />} />
+                      </div>
+                    </div>
+                  </MuiRadioGroup>
                 </Grid>
                 <Grid item md={4} sm={6} xs={12} className="my-2">
                   <Typography
@@ -767,7 +789,7 @@ const getMinPrice = (record) => {
                       marks={marks}
                       defaultValue={marks[3].value}
                       name={"max_volume"}
-                      value={marks[record.max_volume - 1].value} 
+                      value={marks[record.max_volume - 1].value}
                       onChange={handleVolumeChange}
                     />
                   </Box>
@@ -823,7 +845,7 @@ const getMinPrice = (record) => {
                         checked={categories.Food.state || record.categoriesv.indexOf("Food") > -1}
                         // checked={record.categoriesv.indexOf("Food") > -1}
                         name="Food"
-                        onChange={handleAvailableCategories} 
+                        onChange={handleAvailableCategories}
                       />
                     }
                     label="Food"
@@ -916,7 +938,7 @@ const getMinPrice = (record) => {
                         color="primary"
                         checked={categories.Autres.state || record.categoriesv.indexOf("Autres") > -1}
                         name="Autres"
-                        onChange={handleAvailableCategories} 
+                        onChange={handleAvailableCategories}
                       />
                     }
                     label="Autres"
