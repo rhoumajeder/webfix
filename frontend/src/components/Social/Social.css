@@ -1,0 +1,30 @@
+.instagram {
+    color: rgb(143, 74, 195) !important;
+}
+
+.twitter {
+    color: rgb(40, 166, 219) !important;
+}
+
+.facebook {
+    color: rgb(64, 100, 172) !important;
+}
+
+.youtube {
+    color: rgb(247, 0, 0) !important;
+}
+
+.whatsapp {
+    color: rgb(0, 223, 114) !important;
+}
+
+#apple,
+#google {
+    width: 200px;
+    border-radius: 7px;
+    height: auto;
+}
+
+.bg-lightgray{
+    background-color: rgba(235, 230, 230, 0.39) !important;
+}

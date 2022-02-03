@@ -14,6 +14,13 @@ import TravelCard from "../../components/TravelCard/TravelCard";
 import axiosInstance from "../../helpers/axios";
 import Search from "../../components/Search/Search";
 
+import NewFooter from "../../components/NewFooter/NewFooter";
+import Newvideo from "../../components/NewVideo/Newvideo";
+import Social from "../../components/Social/Social";
+import NewFeedback from "../../components/NewFeedback/NewFeedback";
+import AdvServiceSec from "../../components/Advantageservicesection/AdvServiceSec";
+
+
 import "./index.css";
 import { useHistory } from "react-router-dom";
 
@@ -217,6 +224,12 @@ const Index = () => {
       ) : (
         <CardListing filters={filters} records={records} recordType={recordType} number_of_items={number_of_items} get_page={get_page} />
       )}
+
+      <Social />
+      <NewFeedback />
+      <Newvideo />
+      <AdvServiceSec />
+      <NewFooter />
     </Box>
   );
 };

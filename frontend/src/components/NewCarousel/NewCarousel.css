@@ -1,0 +1,16 @@
+.wddth {
+    max-width: 340px;
+}
+
+.cardShadow:hover {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+}
+
+.iccn {
+    width: 30px;
+    height: 20px !important;
+}
+
+.iccon:hover {
+    background-color: gray;
+}
