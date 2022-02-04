@@ -43,6 +43,7 @@ import {
   FormControlLabel as MuiFormControlLabel,
   Radio as MuiRadio
 } from '@mui/material';
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 const Index = (props) => {
@@ -772,13 +773,21 @@ const Index = (props) => {
             <Box component={"div"} className={"my-2"}>
               <Grid container direction="row" alignItems="center" spacing={1}>
                 <Grid item xs={12} className="my-2">
-                  <Typography
+                  <div className='row'>
+                    <div className="col-2 d-flex justify-content-end font-3 mt-3">
+                      Max Volume:
+                    </div>
+                    <div className="col-1 d-flex justify-content-start">
+                      <HelpButton />
+                    </div>
+                  </div>
+                  {/* <Typography
                     variant={"subtitle2"}
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
                     Max Volume:
-                  </Typography>
+                  </Typography> */}
                   <Box
                     component={"div"}
                     className={"px-3 pb-5 position-relative"}

@@ -11,3 +11,8 @@
 .MuiSlider-markLabel {
     font-size: .825em !important;
 }
+
+.font-3{
+    font-size: 14px;
+    font-weight: bold;
+}
