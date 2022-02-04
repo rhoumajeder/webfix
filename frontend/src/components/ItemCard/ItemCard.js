@@ -61,6 +61,19 @@ import { AuthContext } from "../../context/auth";
 import { PortraitSharp } from "@material-ui/icons";
 
 import {
+  Box as MuiBox,
+  Button as MuiButton,
+  Typography as MuiTypography,
+  Modal as MuiModal,
+  Checkbox as MuiCheckbox,
+  FormControlLabel as MuiFormControlLabel
+} from '@mui/material';
+
+import PaymentModal from "../PaymentModal/PaymentModal";
+
+
+
+import {
   ModeOfTransportationContext,
   ScreenContext,
 } from "../../helpers/context";
@@ -113,6 +126,10 @@ const ItemCard = (props) => {
       });
   };
 
+  const [openPayModal, setOpenPayModal] = React.useState(false);
+  const handleOpenModal = () => setOpenPayModal(true);
+  const handleCloseModal = () => setOpenPayModal(false);
+
   // Display the state of the payment process
   const displayPaymentState = (item) => {
     if (item.paid) {
@@ -138,14 +155,34 @@ const ItemCard = (props) => {
         );
       } else {
         return (
-          <Button
-            onClick={() => handlePayment(props.item)}
-            className="mx-auto text-danger border-danger"
-            variant="outlined"
-            size="small"
-          >
-            Payer
-          </Button>
+          <React.Fragment>
+            <MuiModal
+              open={openPayModal}
+              onClose={handleCloseModal}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <PaymentModal paymentOption={() => handlePayment(props.item)} />
+            </MuiModal>
+
+            <Button
+              // onClick={() => handlePayment(props.item)}
+              onClick={handleOpenModal}
+              className="mx-auto text-danger border-danger"
+              variant="outlined"
+              size="small"
+            >
+              Payer
+            </Button>
+          </React.Fragment>
+          // <Button
+          //   onClick={() => handlePayment(props.item)}
+          //   className="mx-auto text-danger border-danger"
+          //   variant="outlined"
+          //   size="small"
+          // >
+          //   Payer
+          // </Button>
         );
       }
     }
@@ -249,7 +286,7 @@ const ItemCard = (props) => {
               gutterBottom
               className="fw-bold m-0 my-3"
             >
-             __ {/* This offer process has ended */}
+              __ {/* This offer process has ended */}
             </Typography>
           </div>
         );
@@ -465,55 +502,55 @@ const ItemCard = (props) => {
       {props.askProposition && props.item.proposition_state === "Pending" ? (
         <div>
           <div className="my-2">{displayAskPropositionState(props.item)}</div>
-          <Card className={"shadow py-2 my-3"} style={{padding:"10px", margin:"10px"}}>
+          <Card className={"shadow py-2 my-3"} style={{ padding: "10px", margin: "10px" }}>
 
-                <Grid item sm={"auto"} xs={12}>
-                  <Box component="div">
-                    <Typography
-                      variant="subtitle1"
-                      color="inherit"
-                      gutterBottom
-                      className="fw-bold m-0 pb-1 border-bottom border-2 text-dark"
-                    >
-                      {props &&
-                        moment(props.item.date).format("dddd DD MMMM YYYY")}
-                      {props &&
-                        modes &&
-                        props.item.Proposed_moyen_de_transport &&
-                        modes[props.item.Proposed_moyen_de_transport]}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid
-                container
-                direction="row"
-                spacing={2}
-                item
-                sm={"auto"}
-                xs={12}
-              >
-                <Grid item sm={"auto"} xs={12}>
-                  <Box
-                    component="div"
-                    className={"border-bottom border-2 pb-2"}
-                  >
-                    <TravelInformation
-                      location={props && props.item.Proposed_city_arrival}
-                      departure={true}
-                    />
-                    <TravelInformation
-                      location={props && props.item.Proposed_city_destination}
-                      destination={true}
-                    />
-                  </Box>
-                </Grid>
+            <Grid item sm={"auto"} xs={12}>
+              <Box component="div">
+                <Typography
+                  variant="subtitle1"
+                  color="inherit"
+                  gutterBottom
+                  className="fw-bold m-0 pb-1 border-bottom border-2 text-dark"
+                >
+                  {props &&
+                    moment(props.item.date).format("dddd DD MMMM YYYY")}
+                  {props &&
+                    modes &&
+                    props.item.Proposed_moyen_de_transport &&
+                    modes[props.item.Proposed_moyen_de_transport]}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              spacing={2}
+              item
+              sm={"auto"}
+              xs={12}
+            >
+              <Grid item sm={"auto"} xs={12}>
+                <Box
+                  component="div"
+                  className={"border-bottom border-2 pb-2"}
+                >
+                  <TravelInformation
+                    location={props && props.item.Proposed_city_arrival}
+                    departure={true}
+                  />
+                  <TravelInformation
+                    location={props && props.item.Proposed_city_destination}
+                    destination={true}
+                  />
+                </Box>
               </Grid>
-              <Grid>
-                  <label>
-                  <input type="checkbox" name={"Proposed_home_delivery"} checked={ props.item.Proposed_home_delivery} /> 
-                  | Home Delivery 
-                  </label>
-                </Grid>
+            </Grid>
+            <Grid>
+              <label>
+                <input type="checkbox" name={"Proposed_home_delivery"} checked={props.item.Proposed_home_delivery} />
+                | Home Delivery
+              </label>
+            </Grid>
 
 
 
@@ -525,7 +562,7 @@ const ItemCard = (props) => {
                 gutterBottom
                 className={`m-0 me-1 fw-medium`}
               >
-                Message 
+                Message
               </Typography>
               <Typography
                 variant="subtitle2"
@@ -636,7 +673,7 @@ const ItemCard = (props) => {
           writer={user}
           receiver={
             user.id === props.item.user.id
-            // user.email === props.item.user.email
+              // user.email === props.item.user.email
               ? props.item.record.user
               : props.item.user
           }

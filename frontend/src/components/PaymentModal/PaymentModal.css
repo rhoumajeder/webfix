@@ -1,0 +1,24 @@
+.boxx {
+    margin: 57px !important;
+    /* color: lightblue; */
+}
+
+.bg-gray {
+    background-color: rgb(206, 206, 206);
+}
+
+.shadowLg {
+    box-shadow: 0 .125rem .25rem gray !important;
+}
+
+#pay:hover {
+    color: rgb(0, 154, 221) !important;
+}
+
+.form-check {
+    cursor: hand !important;
+}
+/* 
+.accord{
+    padding: 200px !important;
+} */
