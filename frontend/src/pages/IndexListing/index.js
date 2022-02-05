@@ -20,6 +20,7 @@ import Social from "../../components/Social/Social";
 import NewFeedback from "../../components/NewFeedback/NewFeedback";
 import AdvServiceSec from "../../components/Advantageservicesection/AdvServiceSec";
 
+import ReactTextAnimation from "./ReactTextAnimation";
 
 import "./index.css";
 import { useHistory } from "react-router-dom";
@@ -156,15 +157,15 @@ const Index = () => {
   const [index, setIndex] = useState(0);
   const [newText, setnewText] = useState(0);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => setIndex((index) => index + 1), 5000);
-    return () => clearTimeout(intervalId);
-  }, []);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => setIndex((index) => index + 1), 5000);
+  //   return () => clearTimeout(intervalId);
+  // }, []);
 
-  useEffect(() => {
-    const newintervalId = setInterval(() => setnewText((newText) => newText + 1), 20000);
-    return () => clearTimeout(newintervalId);
-  }, []);
+  // useEffect(() => {
+  //   const newintervalId = setInterval(() => setnewText((newText) => newText + 1), 20000);
+  //   return () => clearTimeout(newintervalId);
+  // }, []);
 
   return (
     <Box component="div">
@@ -179,10 +180,11 @@ const Index = () => {
             sx={{ display: "flex" }}
           >
             Choisissez&nbsp;
-            <TextTransition
+            <ReactTextAnimation />
+            {/* <TextTransition
               text={TEXTS[index % TEXTS.length]}
               springConfig={presets.wobbly}
-            />
+            /> */}
             &nbsp;qui vous plaît
           </Typography>
           <Typography
@@ -192,10 +194,11 @@ const Index = () => {
             sx={{ display: "flex" }}
           >
             Choisissez&nbsp;
-            <TextTransition
+            <ReactTextAnimation /> 
+            {/* <TextTransition
               text={TEXTS[newText % TEXTS.length]}
               springConfig={presets.wobbly}
-            />
+            /> */}
             &nbsp;qui vous plaît
           </Typography>
           <Typography
