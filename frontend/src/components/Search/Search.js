@@ -33,6 +33,7 @@ import cities from "../../helpers/cities";
 import useVolumeSlider from "../../hooks/useVolumeSlider";
 
 import { FaCarSide, FaPlane } from "react-icons/fa";
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 import {
   RadioGroup as MuiRadioGroup,
@@ -136,6 +137,22 @@ const Search = (props) => {
     } else {
       newFilters[target.name] = values.value;
     }
+    console.log("debug rje 12 ")
+    console.log(newFilters);
+    props.setFilters(newFilters);
+  };
+
+  const handleRadioChange = (event) => {
+    let newFilters = {
+      ...props.filters,
+    };
+
+    if (event.target.value === "") {
+      delete newFilters[event.target.name];
+    } else {
+      newFilters[event.target.name] = event.target.value;
+    }
+    console.log("debug rje")
     console.log(newFilters);
     props.setFilters(newFilters);
   };
@@ -284,7 +301,7 @@ const Search = (props) => {
                         }
                         fullWidth
                       />
-                      <FormHelperText>Weight</FormHelperText>
+                      <FormHelperText>Weight </FormHelperText>
                     </Grid>
                     <Grid item sm={6} xs={12}>
                       <div className="container">
@@ -293,15 +310,15 @@ const Search = (props) => {
                             <div className="container">
                               <MuiRadioGroup
                                 aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="female"
-                                name="radio-buttons-group"
+                                defaultValue="Car"
+                                
                               >
                                 <div className="container row">
                                   <div className="col d-flex justify-content-end">
-                                    <MuiFormControlLabel value="Plane" control={<MuiRadio />} label={<FaPlane size="35px" />} />
+                                    <MuiFormControlLabel value="Avion" name="moyen_de_transport" onChange={handleRadioChange} checked={ props.filters.moyen_de_transport === "Avion"} control={<MuiRadio />} label={<FaPlane size="35px" />} />
                                   </div>
                                   <div className="col d-flex justify-content-start">
-                                    <MuiFormControlLabel value="Car" control={<MuiRadio />} label={<FaCarSide size="35px" />} />
+                                    <MuiFormControlLabel value="Car" name="moyen_de_transport" onChange={handleRadioChange} checked={ props.filters.moyen_de_transport === "Car"} control={<MuiRadio />} label={<FaCarSide size="35px" />} />
                                   </div>
                                 </div>
                               </MuiRadioGroup>
@@ -329,13 +346,22 @@ const Search = (props) => {
                       /> */}
                     </Grid>
                     <Grid item xs={12} className="mb-5">
-                      <Typography
+
+                    <div className='row'>
+                      <div className="col-2 d-flex justify-content-start font-3 mt-3"  style={{ width: "auto"}}>
+                      Max Volume: 
+                      </div>
+                      <div className="col-1 d-flex justify-content-start">
+                      <HelpButton />
+                      </div>
+                    </div>
+                      {/* <Typography
                         variant={"subtitle2"}
                         color={"textPrimary"}
                         className={"fw-bold my-2"}
                       >
                         Max Volume:
-                      </Typography>
+                      </Typography> */}
                       <Box
                         component={"div"}
                         className={"px-3 pb-5 position-relative"}

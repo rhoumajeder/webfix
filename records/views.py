@@ -194,10 +194,12 @@ def create_record(request):
     print(data_treated)
     print("==========rje end")
 
-    data_treated["categories"] =  data_treated["categoriesv"]
-    del data_treated["categoriesv"]
+
     
     if data_treated["type"] == "Propose" :
+
+        data_treated["categories"] =  data_treated["categoriesv"]
+        del data_treated["categoriesv"]
         Ads_propose ={  
                 "username": request.user.username,
                 "plane" : True if data_treated["moyen_de_transport"] == "Avion" else False ,
@@ -238,6 +240,8 @@ def create_record(request):
             }
         image = Create_imagefrom_ad(Ads_Ask)
         data_treated["image_ask"]  = image
+        print("print ask item info ==========")
+        print( data_treated["ask_item_info"])
         del data_treated["ask_item_info"]
 
 

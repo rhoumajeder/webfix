@@ -32,7 +32,7 @@ function HelpButton() {
                 onMouseEnter={handlePopoverOpen}
                 onMouseLeave={handlePopoverClose}
             >
-                <MdHelp size='50px' className='helpBtn' color='gray' />
+                <MdHelp size='40px' className='helpBtn' color='gray' />
             </Typography>
             <Popover
                 id="mouse-over-popover"

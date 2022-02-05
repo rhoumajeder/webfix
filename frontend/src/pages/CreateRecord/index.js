@@ -175,6 +175,13 @@ const Index = (props) => {
     console.log(record);
   };
 
+  const handleRadioChange = (event) => {
+    setRecord({ ...record, [event.target.name]: event.target.value });
+    console.log(record);
+    console.log(event.target.name);
+    console.log(event.target.value);
+  };
+
   const CategoryList = {
     Food: {
       state: false,
@@ -698,7 +705,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-1"}
                   >
-                    Moyen de Transport:
+                    Moyen de Transport :
                   </Typography>
                   {/* <SelectBoxExtended
                     options={transportOptions}
@@ -709,15 +716,16 @@ const Index = (props) => {
                   /> */}
                   <MuiRadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
+                    defaultValue="Car"
+                    
+                    
                   >
-                    <div className="container row">
+                    <div className="container row">  
                       <div className="col d-flex justify-content-end">
-                        <MuiFormControlLabel value="Plane" control={<MuiRadio />} label={<FaPlane size="35px" />} />
+                        <MuiFormControlLabel value="Avion" name="moyen_de_transport" onChange={handleRadioChange} checked={ record["moyen_de_transport"] === "Avion"} control={<MuiRadio />} label={<FaPlane size="35px" />} />
                       </div>
                       <div className="col d-flex justify-content-start">
-                        <MuiFormControlLabel value="Car" control={<MuiRadio />} label={<FaCarSide size="35px" />} />
+                        <MuiFormControlLabel value="Car" name="moyen_de_transport" onChange={handleRadioChange} checked={ record["moyen_de_transport"] === "Car"}  control={<MuiRadio />} label={<FaCarSide size="35px" />} />
                       </div>
                     </div>
                   </MuiRadioGroup>
@@ -773,12 +781,12 @@ const Index = (props) => {
             <Box component={"div"} className={"my-2"}>
               <Grid container direction="row" alignItems="center" spacing={1}>
                 <Grid item xs={12} className="my-2">
-                  <div className='row'>
-                    <div className="col-2 d-flex justify-content-end font-3 mt-3">
-                      Max Volume:
+                  <div className='row '>
+                    <div className="col-1 d-flex justify-content-start font-3 mt-3 " style={{ width: "auto"}} >
+                    Max Volume: 
                     </div>
-                    <div className="col-1 d-flex justify-content-start">
-                      <HelpButton />
+                    <div className="col-1 d-flex justify-content-start ">
+                    <HelpButton />
                     </div>
                   </div>
                   {/* <Typography
