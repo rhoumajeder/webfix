@@ -189,9 +189,9 @@ function PaymentModal(props) {
                                     </Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                <div className='text-center'>
-                                                <Button variant="contained" onClick={props.paymentOption}>Pay</Button>
-                                            </div>
+                                    <div className='text-center'>
+                                        <Button variant="contained" onClick={props.paymentOption}>Pay</Button>
+                                    </div>
                                 </AccordionDetails>
                                 {/* <AccordionDetails>
                                     <h3>Credit Card</h3>
