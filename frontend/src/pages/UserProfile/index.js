@@ -15,6 +15,7 @@ import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
 import ReportModal from "../../components/ReportModal/ReportModal";
 import ProfileFeedback from "../../components/Feedback/ProfileFeedback";
 import UserProfileModal from '../../components/UserProfileModal/UserProfileModal';
+import NewFooter from '../../components/NewFooter/NewFooter';
 
 
 const PAGE_SIZE = 5;
@@ -69,7 +70,7 @@ const Index = (props) => {
         + ' record'
         + ((record && record.total_number_of_ads > 1) ? 's' : '')
         + ' published'
-    ) 
+    )
 
     const startDate = record ? moment(record.start_date).format('YYYY') : null
 
@@ -310,7 +311,10 @@ const Index = (props) => {
                 profile={record}
                 onSuccess={onSubmitUserFrom}
                 isModalOpen={isUserProfileModalOpen}
-                setModalOpen={setUserProfileModalOpen} />
+                setModalOpen={setUserProfileModalOpen}
+            />
+            <NewFooter />
+
         </Box>
     );
 };

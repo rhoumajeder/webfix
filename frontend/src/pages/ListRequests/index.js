@@ -16,6 +16,7 @@ import {
 import "./index.css";
 
 import ListItemCard from "../../components/ListItemCard/ListItemCard";
+import NewFooter from "../../components/NewFooter/NewFooter";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -42,6 +43,7 @@ const Index = () => {
           </Grid>
         </Container>
       </Box>
+      <NewFooter />
     </React.Fragment>
   );
 };
