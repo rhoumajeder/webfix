@@ -539,7 +539,7 @@ def get_list_offers(request):
     records = Record.objects.filter(user=request.user).order_by('-date')
 
     paginator = PageNumberPagination()
-    paginator.page_size = 15
+    paginator.page_size = 5
     result_page = paginator.paginate_queryset(records, request)
     serializer = get_list_offers_serializers(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
