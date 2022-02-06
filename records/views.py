@@ -413,7 +413,7 @@ def search_all_records(request):
     if moyen_de_transport != "":
         records = records.filter(moyen_de_transport=moyen_de_transport)
 
-        
+
     if city_arrival != "":
         records = records.filter(city_arrival=city_arrival)
     if city_destination != "":
@@ -539,7 +539,7 @@ def get_list_offers(request):
     records = Record.objects.filter(user=request.user).order_by('-date')
 
     paginator = PageNumberPagination()
-    paginator.page_size = 3
+    paginator.page_size = 15
     result_page = paginator.paginate_queryset(records, request)
     serializer = get_list_offers_serializers(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)

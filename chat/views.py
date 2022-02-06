@@ -60,7 +60,7 @@ def get_rooms(request):
     #owner_room_serializer = ChatRoomSerializer(owner_rooms, many=True)
 
     paginator = PageNumberPagination()
-    paginator.page_size = 3
+    paginator.page_size = 15
     result_page = paginator.paginate_queryset(user_rooms, request)
     user_room_serializer = ChatRoomSerializer(result_page, many=True)
     responded_data = {"owner_rooms": [], "user_rooms": user_room_serializer.data}
