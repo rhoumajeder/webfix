@@ -387,20 +387,37 @@ def get_all_records(request):
 @api_view(["GET"])
 def search_all_records(request):
 
+    city_arrival = request.GET.get("city_arrival", "")
+    city_destination = request.GET.get("city_destination", "")
+    type = request.GET.get("type", "")
+    moyen_de_transport = request.GET.get("moyen_de_transport", "")
+
     max_weight = request.GET.get("max_weight", "")
     max_volume = request.GET.get("max_volume", "")
+
     date = request.GET.get("date", "")
      
     #records = Record.objects.filter(approved=True,deleted=False).order_by('-date')
     records = Record.objects.filter( 
         Q(approved=True) & Q(deleted=False ),
-         ).exclude( Q(type="Propose") & Q( date__lt=datetime.datetime.now().date() ))
+         ).exclude( Q(type="Propose") & Q( date__lt=datetime.datetime.now().date()) )
     
     record_filter = RecordFilter(request.GET, queryset=records)
     records = record_filter.qs
      
     if max_weight != "":
         records = records.filter(max_weight__gte=int(max_weight))
+
+    if type != "":
+        records = records.filter(type=type)
+    if moyen_de_transport != "":
+        records = records.filter(moyen_de_transport=moyen_de_transport)
+
+        
+    if city_arrival != "":
+        records = records.filter(city_arrival=city_arrival)
+    if city_destination != "":
+        records = records.filter(city_destination=city_destination)
 
     if max_volume != "":
         records = records.filter(max_volume__gte=int(max_volume))

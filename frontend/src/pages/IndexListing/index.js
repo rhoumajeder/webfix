@@ -113,6 +113,8 @@ const Index = () => {
       })
       .then((res) => {
         first_load = false;
+        console.log("rje filter =========");
+        console.log(paramFilters);
         console.log(res.data);
         setRecords(res.data.results);
         set_number_of_items(res.data.count);
@@ -207,7 +209,7 @@ const Index = () => {
             className="text-center pt-2"
           >
             {" "}
-            Trouvez la bonne affaire parmi les millions de petites annonces
+            Trouvez la bonne affaire parmi les millions de petites annonces 
             leboncoin{" "}
           </Typography>
         </Box>

@@ -121,9 +121,12 @@ const Search = (props) => {
         ask: ask,
       };
     }
-    props.setRecordType(newRecordType);
+    props.setRecordType(newRecordType); 
     // props.fetchRecords(newRecordType); 
     props.fetchRecords_for_button_search(newRecordType);
+    console.log("rej in search js===");
+    console.log(newFilters);
+
     props.setLoading(true);
   };
 
