@@ -383,7 +383,7 @@ def get_all_records(request):
     return res
 
 
-@cache_page(60 * 60)  # 60 minutes 
+# @cache_page(60 * 60)  # 60 minutes 
 @api_view(["GET"])
 def search_all_records(request):
 
@@ -401,18 +401,27 @@ def search_all_records(request):
     records = Record.objects.filter( 
         Q(approved=True) & Q(deleted=False ),
          ).exclude( Q(type="Propose") & Q( date__lt=datetime.datetime.now().date()) )
-    
-    record_filter = RecordFilter(request.GET, queryset=records)
-    records = record_filter.qs
-     
-    if max_weight != "":
-        records = records.filter(max_weight__gte=int(max_weight))
+    print(request.GET)
+    print(records.count())
+    # record_filter = RecordFilter(request.GET, queryset=records)
+    # records = record_filter.qs
+   
 
     if type != "":
         records = records.filter(type=type)
+        if type =="Ask" :
+            moyen_de_transport =""
+            max_volume =""
+            max_weight =""
+    
+     
+    if max_weight != "":
+        records = records.filter(max_weight__gte=int(max_weight))
+        
     if moyen_de_transport != "":
         records = records.filter(moyen_de_transport=moyen_de_transport)
 
+    print(records.count())
 
     if city_arrival != "":
         records = records.filter(city_arrival=city_arrival)
