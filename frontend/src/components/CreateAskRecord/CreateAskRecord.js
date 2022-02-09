@@ -49,9 +49,9 @@ const CreateAskRecord = (props) => {
     city_arrival: "Bretagne, France",
     city_destination: "Berlin, Allemagne",
     date: moment(new Date()).format("YYYY-MM-DD"),
-    description: "Null value",
+    description: "There is No Description ..",
     type: "Ask",
-    phone_number: user.phone_number ? user.phone_number : "98989898",
+    phone_number: "",
     ask_item_info: []
   });
 
@@ -96,8 +96,8 @@ const CreateAskRecord = (props) => {
       .max(400, "Description can not be more than 400 characters"),
     phone_number: yup
       .string()
-      .required("Phone number for records is required")
-      .matches(phoneRegExp, "Phone number is not valid"),
+      // .required("Phone number for records is required")
+      // .matches(phoneRegExp, "Phone number is not valid"),
   });
 
   // Validation schema for record item
@@ -419,7 +419,7 @@ const CreateAskRecord = (props) => {
                     InputLabelProps={{ shrink: false }}
 
                     placeholder={"Enter Phone Number"}
-                    value={askRecord.phone_number}
+                    // value={askRecord.phone_number}
                     type="text"
                     size={"small"}
                     variant="outlined"

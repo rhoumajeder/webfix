@@ -71,7 +71,7 @@ const RecordDetailsSideBar = (props) => {
                 user={props.record.user}
               />
               <Grid container style={{ textAlign: "center", width: "85%", marginRight: "auto", marginLeft: "auto" }} spacing={0} className="mb-2">
-                <Grid item xs={6}>
+              {(props.record.phone_number != "") && <Grid item xs={6}>
                   <Button
                     onClick={handleShowPhoneNumber}
                     color="primary"
@@ -81,7 +81,8 @@ const RecordDetailsSideBar = (props) => {
                   >
                     {showPhoneNumber ? props.record.phone_number : "See Number"}
                   </Button>
-                </Grid>
+                </Grid>}
+
                 {!(user.id === props.record.user.id) && <Grid item xs={6}>
                   <Button
                     onClick={openChatRoom}

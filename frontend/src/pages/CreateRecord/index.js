@@ -107,9 +107,8 @@ const Index = (props) => {
       .of(yup.string()),
     // .min(1, "Please select at least 1 category"),
     phone_number: yup
-      .string()
-      .required("Phone number for records is required")
-      .matches(phoneRegExp, "Phone number is not valid"),
+      .string() 
+      // .matches(phoneRegExp, "Phone number is not valid"),
   });
 
   let subRecordSchema = yup
@@ -149,8 +148,8 @@ const Index = (props) => {
     description: "null value",
     categories: [],
     categoriesv: ["Food", "Vetements", "Small Accessories", "Autres"],
-    type: "Propose",
-    phone_number: user.phone_number ? user.phone_number : "8328382332"
+    type: "Propose", 
+    phone_number:  ""
   };
 
   const [record, setRecord] = React.useState(Records);
@@ -759,13 +758,13 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Phone Number:
+                    Phone Number rje:
                   </Typography>
                   <TextField
                     id="phone_number"
                     InputLabelProps={{ shrink: false }}
                     placeholder={"Enter Phone Number"}
-                    value={record.phone_number}
+                    // value={record.phone_number}
                     type="text"
                     size={"small"}
                     variant="outlined"

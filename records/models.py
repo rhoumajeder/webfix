@@ -29,7 +29,7 @@ class Record(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     city_destination = models.CharField(max_length=50)
     city_arrival = models.CharField(max_length=50)
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250,blank=True, null=True)
     moyen_de_transport = models.CharField(
         max_length=50, choices=TRANSPORTS, blank=True, null=True)
     min_price = models.PositiveIntegerField(default=0, null=True)
@@ -42,7 +42,7 @@ class Record(models.Model):
     disabled = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     approved = models.BooleanField(default=True)
-    phone_number = models.CharField(max_length=20, null=True)
+    phone_number = models.CharField(max_length=14, null=True,blank=True)
 
     image_ask = models.ImageField(upload_to="images/",null=True,blank=True) 
     image_propose = models.ImageField(upload_to="images/",null=True,blank=True)
