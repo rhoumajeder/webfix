@@ -51,9 +51,9 @@ const CreateAskRecord = (props) => {
     date: moment(new Date()).format("YYYY-MM-DD"),
     description: "There is No Description ..",
     type: "Ask",
-    phone_number: "",
+    phone_number: "", 
     ask_item_info: []
-  });
+  });  
 
   // Ask record items state holder
   const [rows, setRows] = useState([
