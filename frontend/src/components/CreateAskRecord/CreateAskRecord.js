@@ -4,6 +4,8 @@ import {
   Grid,
   Card,
   Box,
+  Checkbox,
+  FormControlLabel,
   Typography,
   CardContent,
   TextField,
@@ -43,6 +45,8 @@ const CreateAskRecord = (props) => {
   let history = useHistory();
   const { addToast } = useToasts();
   const [user, setUser] = useContext(AuthContext)
+
+  const [showSubRecord, SetshowSubRecord] = useState(false)
 
   // Ask record state holder
   const [askRecord, setAskRecord] = useState({
@@ -125,6 +129,12 @@ const CreateAskRecord = (props) => {
         .max(99, "Weight can not be more than 99"),
     })
   );
+  const handleCheckboxChange = (e) => {
+    if (e.target.name === "AddItems") {
+      SetshowSubRecord(!showSubRecord)
+    }
+
+  };
 
   const handleDateChange = (date) => {
     setAskRecord({ ...askRecord, ["date"]: moment(date).format("YYYY-MM-DD") });
@@ -176,6 +186,7 @@ const CreateAskRecord = (props) => {
     return <Spinner name={CreatingRecord} />;
   }
 
+
   // Submit record to database
   const submitItemAfter = () => {
 
@@ -224,12 +235,20 @@ const CreateAskRecord = (props) => {
                     let ps = []
                     if (res.data.id) {
                       const recordId = res.data.id;
+                      if(!showSubRecord){
+                        addToast("Record created", { appearance: "success" });
+                        history.push(`/ask-record-details/${recordId}`);
+                        history.go();  
+                        setisLoading(false);
+                      }
+
+                      if(showSubRecord){
                       axiosInstance
                         .post(`create-ask-record-items/${recordId}/`, itemData)
                         .then((res) => {
                           if (bimages == false) {
                             addToast("Record created", { appearance: "success" });
-                            history.push(`/ask-record-details/${recordId}`);
+                            history.push(`/ask-record-details/${recordId}`); 
                             history.go();
                             setisLoading(false);
 
@@ -297,7 +316,10 @@ const CreateAskRecord = (props) => {
                           setisLoading(false);
                           console.log(err);
                         });
+                     }
                     }
+
+
                   })
                   .catch((err) => {
                     console.log(err.response);
@@ -456,21 +478,51 @@ const CreateAskRecord = (props) => {
                     placeholder={"Description"}
                   />
                 </Grid>
-              </Grid>
-            </Box>
-            <Box className={"my-2"}>
-              <Grid container direction="row" alignItems="center" spacing={1}>
-                <Grid item xs={12} className="my-2">
-                  <CreateItemTable
-                    setRows={setRows}
-                    rows={rows}
-                    isloading={isloading}
-                    submitItems={submitItems}
-                    priceRequired={true}
+                <Grid item xs={"auto"} className="my-1">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        checked={showSubRecord}
+                        name="AddItems"
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label="Add Items"
                   />
                 </Grid>
               </Grid>
+              { !showSubRecord &&
+                 <Button
+                 onClick={submitItems}
+                 color="primary"
+                 variant={"contained"}
+               >
+                 Save changes 
+               </Button>
+              }
+             
+
             </Box>
+            
+            { showSubRecord && 
+                          <Box className={"my-2"}>
+                          <Grid container direction="row" alignItems="center" spacing={1}>
+                            <Grid item xs={12} className="my-2">
+                              <CreateItemTable
+                                setRows={setRows}
+                                rows={rows}
+                                isloading={isloading}
+                                submitItems={submitItems}
+                                priceRequired={true}
+                              />
+                            </Grid>
+                          </Grid>
+                        </Box>
+
+            }
+
+
           </CardContent>
         </Card>
       </Grid>
