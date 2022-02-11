@@ -417,7 +417,7 @@ def search_all_records(request):
      
     if max_weight != "":
         records = records.filter(max_weight__gte=int(max_weight))
-        
+
     if moyen_de_transport != "":
         records = records.filter(moyen_de_transport=moyen_de_transport)
 
@@ -714,9 +714,15 @@ def get_item_images(request, pk):
 # def create_feedback(request, receiver_email):
 def create_feedback(request, id):
     receiver = get_object_or_404(CustomUser, id=id)
+    print("============+++++++++==================== rje debug")
+    print("request: ",request)
+    print("receiver: ",receiver)
+
 
     notes_feedback = CustomUser.objects.filter(id=id).values_list('note_feedback', flat=True)
     get_total_feedback = Feedback.objects.filter(receiver=receiver).count()
+    print("get_total_feedback: ",get_total_feedback)
+    print("notes_feedback: ",notes_feedback)
     Feedback_notes = {}
     Feedback_notes["number_of_feedbacks"] =  get_total_feedback + 1
     Feedback_notes["note_feedback"] = request.data["note"]  + notes_feedback[0]

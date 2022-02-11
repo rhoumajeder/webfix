@@ -965,7 +965,7 @@ const Index = (props) => {
 
             <Box component={"div"} className={"shadow my-2"}>
               {record.categories.length > 0 &&
-                record.categories.map((data, index) => {
+                record.categories.map((data, index) => { 
                   if (data !== "Autres") {
                     const rows = subRecords.filter(subRecord => subRecord.category === data);
                     console.log(rows)

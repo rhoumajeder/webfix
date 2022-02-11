@@ -91,7 +91,14 @@ const Index = (props) => {
 
                         <Card className={"shadow"}>
                             <CardContent>
-                                <UserAvatar profile={record.photo} name={record.username} />
+                                <UserAvatar 
+                                    profile={record.photo} 
+                                    name={record.username} 
+                                    user={record}
+                                    hasRating={true}
+                                    inlineRating={true}
+                                    
+                                />
                                 {record && record.intro && (
                                     <Box className="border-top border-2 bg-light p-2">
                                         <Box className="bg-white p-2">
@@ -99,7 +106,7 @@ const Index = (props) => {
                                                 {record.intro}
                                             </Typography>
                                         </Box>
-                                    </Box>
+                                    </Box>  
                                 )}
                                 <Box className={'border-top border-2 py-3'}>
                                     <Grid container direction="row" justify="space-between">
