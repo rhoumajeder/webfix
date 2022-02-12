@@ -13,13 +13,13 @@ const UserAvatar = (props) => {
     // props.user.received_feedback.forEach((feedback) => {
     //   totalRating += feedback.note;
     // });
- 
+   
     const averageRating = (
     //  totalRating / props.user.received_feedback.length  number_of_feedbacks
     totalRating /  props.user.number_of_feedbacks
-    ).toFixed(1);
-
-    return averageRating;
+    ).toFixed(1); 
+ 
+    return averageRating;  //here
   };
 
   return (

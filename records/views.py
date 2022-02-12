@@ -187,7 +187,7 @@ def create_record(request):
     total_number_of_ads_dic = {}
     total_number_of_ads_dic["total_number_of_ads"] =  total_number_of_ads
 
-    serializer_feedback = FeedbackSerializer_user(data=total_number_of_ads_dic)
+    # serializer_feedback = FeedbackSerializer_user(data=total_number_of_ads_dic) this miss up the rating 
     data_treated=request.data
 
     print("==========rje star")
@@ -253,8 +253,8 @@ def create_record(request):
 
     if serializer.is_valid():
         serializer.save(user=request.user)
-        if serializer_feedback.is_valid():
-            serializer_feedback.update(request.user,serializer_feedback.validated_data)
+        # if serializer_feedback.is_valid():
+        #     serializer_feedback.update(request.user,serializer_feedback.validated_data)
         
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -715,8 +715,11 @@ def get_item_images(request, pk):
 def create_feedback(request, id):
     receiver = get_object_or_404(CustomUser, id=id)
     print("============+++++++++==================== rje debug")
-    print("request: ",request)
+    print("request: ",request) 
     print("receiver: ",receiver)
+    print("request.user: ",request.user)
+    print("request:",request.data)
+    print("id:",id)
 
 
     notes_feedback = CustomUser.objects.filter(id=id).values_list('note_feedback', flat=True)
@@ -726,6 +729,9 @@ def create_feedback(request, id):
     Feedback_notes = {}
     Feedback_notes["number_of_feedbacks"] =  get_total_feedback + 1
     Feedback_notes["note_feedback"] = request.data["note"]  + notes_feedback[0]
+
+    print("Feedback_notes[number_of_feedbacks]:",Feedback_notes["number_of_feedbacks"])
+    print("Feedback_notes[note_feedback]",Feedback_notes["note_feedback"])
 
     if Feedback.objects.filter(writer=request.user, receiver=receiver).exists():
         return Response("You have already left feedback for this user", status=status.HTTP_400_BAD_REQUEST)
