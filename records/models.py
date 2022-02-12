@@ -32,8 +32,8 @@ class Record(models.Model):
     description = models.CharField(max_length=250,blank=True, null=True)
     moyen_de_transport = models.CharField(
         max_length=50, choices=TRANSPORTS, blank=True, null=True)
-    min_price = models.PositiveIntegerField(default=0, null=True)
-    max_weight = models.PositiveIntegerField(blank=True, null=True)
+    min_price = models.PositiveIntegerField(default=1, null=True)
+    max_weight = models.PositiveIntegerField(default=1,blank=True, null=True)
     max_volume = IntegerRangeField(
         min_value=1, max_value=5, blank=True, null=True)
     categories = models.JSONField(blank=True, null=True)
@@ -46,8 +46,8 @@ class Record(models.Model):
 
     image_ask = models.ImageField(upload_to="images/",null=True,blank=True) 
     image_propose = models.ImageField(upload_to="images/",null=True,blank=True)
-    ask_total_price  = models.PositiveIntegerField(default=0, null=True)
-    ask_total_weight = models.PositiveIntegerField(default=0, null=True)
+    ask_total_price  = models.PositiveIntegerField(default=1, null=True)
+    ask_total_weight = models.PositiveIntegerField(default=1, null=True)
     # ask_item_info = models.JSONField(blank=True, null=True)
 
    
