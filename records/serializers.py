@@ -304,6 +304,17 @@ class FeedbackSerializer_user(ModelSerializer):
         model = CustomUser
         fields = ["note_feedback","number_of_feedbacks","total_number_of_ads"]
 
+class Serializer_Update_Only_Total_Ads_For_user(ModelSerializer):  #Serializer_Update_Only_Total_Ads_For_user
+
+    def update(self, instance, validated_data, *args, **kwargs):
+        instance.total_number_of_ads = validated_data.get('total_number_of_ads', instance.note_feedback)
+        instance.save()
+        return instance
+   
+    class Meta:
+        model = CustomUser
+        fields = ["total_number_of_ads"]
+
 
 class ReportSerializer(ModelSerializer):
     writer = UserSerializer(read_only=True)

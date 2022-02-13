@@ -27,11 +27,20 @@ const UserAvatar = (props) => {
       component={"div"}
       className={"my-2 text-center px-lg-4 px-md-4 px-sm-4"}
     >
-      <Avatar
+      {/* <Avatar
         alt="Remy Sharp"
         src={
           props.profile
             ? props.profile
+            : require("../../assets/images/placeholder-avatar.png").default
+        }
+        className="person-card-image mx-auto shadow"
+      /> */}
+        <Avatar
+        alt="Remy Sharp"
+        src={
+          user.photo
+            ?  user.photo
             : require("../../assets/images/placeholder-avatar.png").default
         }
         className="person-card-image mx-auto shadow"

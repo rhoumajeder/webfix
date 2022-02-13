@@ -127,7 +127,7 @@ from records.serializers import (
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
     ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
     get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state,FeedbackSerializer_for_creation,
-    RecordDetailSerializer_only_travel_card_for_index)
+    RecordDetailSerializer_only_travel_card_for_index,Serializer_Update_Only_Total_Ads_For_user)
 from records.utils import CustomLimitOffsetPagination
 from users.models import CustomUser
 
@@ -187,7 +187,7 @@ def create_record(request):
     total_number_of_ads_dic = {}
     total_number_of_ads_dic["total_number_of_ads"] =  total_number_of_ads
 
-    # serializer_feedback = FeedbackSerializer_user(data=total_number_of_ads_dic) this miss up the rating 
+    Total_Ads_For_user = Serializer_Update_Only_Total_Ads_For_user(data=total_number_of_ads_dic) #this miss up the rating 
     data_treated=request.data
 
     print("==========rje star")
@@ -253,8 +253,8 @@ def create_record(request):
 
     if serializer.is_valid():
         serializer.save(user=request.user)
-        # if serializer_feedback.is_valid():
-        #     serializer_feedback.update(request.user,serializer_feedback.validated_data)
+        if Total_Ads_For_user.is_valid():
+             Total_Ads_For_user.update(request.user,Total_Ads_For_user.validated_data)
         
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

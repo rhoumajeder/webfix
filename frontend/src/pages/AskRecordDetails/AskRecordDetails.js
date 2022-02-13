@@ -119,6 +119,14 @@ const AskRecordDetails = () => {
   const handleModal = () => {
     setModalOpen(!modalOpen);
   };
+  const deleteRecord = () => {
+    axiosInstance 
+      .delete(`delete-record/${record.id}/`)
+      .then((res) => {
+        addToast("Record is deleted successfully", { appearance: "success" });
+        history.goBack()
+      })
+  }
 
   // Submit a proposition to current record
   const submitProposition = () => {
@@ -255,6 +263,16 @@ const AskRecordDetails = () => {
               >
                 Interact
               </Button>}
+              {(user.id === record.user.id) && <Grid item>
+                      <Button
+                        size="large"
+                        variant="outlined"
+                        onClick={deleteRecord}
+                        className="ms-auto my-2 text-danger"
+                      >
+                        Delete 
+                      </Button>
+                    </Grid>}
               <Grid item>
                       <FacebookShareButton 
                             url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 

@@ -74,7 +74,7 @@ const RecordDetailsSideBar = (props) => {
               {(props.record.phone_number != "") && <Grid item xs={6}>
                   <Button
                     onClick={handleShowPhoneNumber}
-                    color="primary"
+                    color="primary"  
                     className="text-center me-auto ms-auto mr-1 ml-auto"
                     variant="outlined"
                     disabled={props.disabled}
