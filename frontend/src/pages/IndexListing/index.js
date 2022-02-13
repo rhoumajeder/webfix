@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Box, Container, Paper, makeStyles } from "@material-ui/core";
+import { Box, Container, Paper, makeStyles, ButtonBase } from "@material-ui/core";
 
 import TextTransition, { presets } from "react-text-transition";
 
@@ -39,6 +39,7 @@ import { MdLiveTv } from "react-icons/md";
 import moment from "moment";
 
 const TEXTS = ["Forest", "Building", "Tree", "Color"];
+import { FaSearch } from "react-icons/fa";
 
 
 const PAGE_SIZE = 3;
@@ -342,15 +343,18 @@ const CardListing = (props) => {
                             textDecoration: "inherit",
                             color: "inherit",
                           }}
+                          
+                           
                           to={
                             row.type === "Propose"
                               ? `record-details/${row.id}`
                               : `ask-record-details/${row.id}`
-                          }
+                          } 
                         >
-                          View
+                         
                         </Link>
-                      </Button>
+                        Zoom
+                      </Button> 
                     }
                   />
                 </Grid>)

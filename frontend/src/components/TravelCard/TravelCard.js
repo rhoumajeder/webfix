@@ -76,7 +76,13 @@ const TravelCard = (props) => {
   return (
     <Card
       className={`${props.hasShadow ? "shadow" : "shadow-none"}`}
-      style={{ backgroundColor: props.disabled && (props.typeRecord === 'Propose') ? "#f9f9f9" : "white" }}
+      style={{ backgroundColor: props.disabled && (props.typeRecord === 'Propose') ? "#f9f9f9" : 
+              (props.typeRecord === 'Propose') ? "white" :
+              (props.typeRecord === 'Ask') ? "rgb(245, 248, 255)" :
+              "White" 
+
+            }}
+      
     >
       <ConditionalWrapper
         wrapper={(children) => <CardActionArea>{children}</CardActionArea>}
