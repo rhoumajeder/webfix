@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-// import { muiStyleAlpha } from "@material-ui/data-grid";
+import { muiStyleAlpha } from "@material-ui/data-grid";
 import { BsSearch } from "react-icons/bs";
 import InputBase from '@material-ui/core/InputBase';
 import { Box } from "@material-ui/core";
@@ -9,11 +9,11 @@ import { Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
-        backgroundColor: '#ffc0cb',
-        // backgroundColor: muiStyleAlpha(theme.palette.common.white, 0.15),
+        // backgroundColor: '#ffc0cb',
+        backgroundColor: muiStyleAlpha(theme.palette.common.white, 0.15),
         '&:hover': {
-            backgroundColor: '#ffc0cb'
-            // backgroundColor: muiStyleAlpha(theme.palette.common.white, 0.25),
+            // backgroundColor: '#ffc0cb'
+            backgroundColor: muiStyleAlpha(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,

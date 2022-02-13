@@ -45,7 +45,7 @@ import { AuthContext } from "../../context/auth";
 
 import { FacebookShareButton } from "react-share";
 import { FacebookIcon } from "react-share";
- 
+import HelpButton from "../../components/HelpButton/HelpButton";
 
 
 
@@ -370,7 +370,7 @@ const Index = ({ match }) => {
                   </Box>
                   <hr />
                   <Box>
-                    <Typography
+                    {/* <Typography
                       variant="h6"
                       component="h6"
                       color="textPrimary"
@@ -379,6 +379,15 @@ const Index = ({ match }) => {
                     >
                       Max Volume
                     </Typography>
+                    <HelpButton /> */}
+                     <div className='row '>
+                    <div className="col-1 d-flex justify-content-start font-3 mt-3 " style={{ width: "auto"}} >
+                    Max Volume: 
+                    </div>
+                    <div className="col-1 d-flex justify-content-start "> 
+                    <HelpButton />
+                    </div>
+                  </div>
                     <Box className="px-3 pb-5 mb-5">
                       <Slider
                         step={null}

@@ -351,9 +351,9 @@ const CardListing = (props) => {
                               : `ask-record-details/${row.id}`
                           } 
                         >
-                         
+                         Zoom
                         </Link>
-                        Zoom
+                        
                       </Button> 
                     }
                   />

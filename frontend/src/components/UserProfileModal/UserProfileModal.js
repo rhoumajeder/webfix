@@ -216,7 +216,12 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                       </Grid>
                       <Box align="right">
                       </Box>
-                      <UserAvatar profile={profilePic} name={profile.username} />
+                      <UserAvatar 
+                        profile={profilePic} 
+                        name={profile.username} 
+                        user={profile}
+                        
+                        />
                     </Grid>
                     <Grid item xs={12}>
                       <Typography

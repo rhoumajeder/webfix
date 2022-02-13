@@ -35,11 +35,11 @@ def chat_room(request, owner_id, user_id, record_id): #owner_email
 
     room_serializer = ChatRoomSerializer(new_room)
 
-    cache_chat_room_key_owner = str("chat_room") + str(owner_id)
-    cache_chat_room_key_user = str("chat_room") + str(user_id)
+    # cache_chat_room_key_owner = str("chat_room") + str(owner_id)
+    # cache_chat_room_key_user = str("chat_room") + str(user_id)
 
-    cache.delete(cache_chat_room_key_owner)
-    cache.delete(cache_chat_room_key_user)
+    # cache.delete(cache_chat_room_key_owner)
+    # cache.delete(cache_chat_room_key_user)
    
 
     return Response(room_serializer.data, status=status.HTTP_200_OK)
@@ -98,16 +98,16 @@ def create_message(request, room_id):
         create_notification(
             to_user=to_user, created_by=request.user, type="Message", reference=room, message=f"{request.user.username} has sent you a message",)
 
-        cache_create_message_key_owner = str("create_message") + str(room.owner.id) + str(room_id)
-        cache_create_message_key_user = str("create_message") + str(room.user.id) + str(room_id)
-        cache.delete(cache_create_message_key_owner)
-        cache.delete(cache_create_message_key_user)
+        # cache_create_message_key_owner = str("create_message") + str(room.owner.id) + str(room_id)
+        # cache_create_message_key_user = str("create_message") + str(room.user.id) + str(room_id)
+        # cache.delete(cache_create_message_key_owner)
+        # cache.delete(cache_create_message_key_user)
 
-        cache_key_get_rooms_owner = str("chat_room") + str(room.owner.id)
-        cache_key_get_rooms_user = str("chat_room") + str(room.user.id)
+        # cache_key_get_rooms_owner = str("chat_room") + str(room.owner.id)
+        # cache_key_get_rooms_user = str("chat_room") + str(room.user.id)
 
-        cache.delete(cache_key_get_rooms_owner)
-        cache.delete(cache_key_get_rooms_user)
+        # cache.delete(cache_key_get_rooms_owner)
+        # cache.delete(cache_key_get_rooms_user)
 
         
         room.save()
@@ -123,10 +123,10 @@ def get_messages(request, room_id):
     print(room_id)
     #room = get_object_or_404(ChatRoom, id=room_id)  #Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6)
 
-    cache_create_message_key = str("create_message") + str(request.user.id) + str(room_id)
+    # cache_create_message_key = str("create_message") + str(request.user.id) + str(room_id)
 
-    if cache.get(cache_create_message_key ) != None : 
-        return  Response(cache.get(cache_create_message_key), status=status.HTTP_200_OK)
+    # if cache.get(cache_create_message_key ) != None : 
+    #     return  Response(cache.get(cache_create_message_key), status=status.HTTP_200_OK)
 
     try :
         room = ChatRoom.objects.get(Q(id=room_id), Q(owner=request.user) | Q(user=request.user ) )
@@ -135,7 +135,7 @@ def get_messages(request, room_id):
     serializer = MessageSerializer(room.messages.all(), many=True)
 
     responded_data = serializer.data
-    cache.get_or_set(cache_create_message_key, responded_data, 60 *15 )
+    # cache.get_or_set(cache_create_message_key, responded_data, 60 *15 )
 
 
     return Response(responded_data, status=status.HTTP_200_OK)
