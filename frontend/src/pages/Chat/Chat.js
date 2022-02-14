@@ -23,7 +23,7 @@ import { useLocation } from "react-router";
 import NewFooter from "../../components/NewFooter/NewFooter";
 
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 5;
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
