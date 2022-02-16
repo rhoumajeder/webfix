@@ -71,16 +71,16 @@ const CreateItemTable = (props) => {
               <TableRow>
                 <TableCell />
                 <TableCell className={"text-nowrap"} align="left">
-                  Name
+                  Objet
                 </TableCell>
                 <TableCell className={"text-nowrap"} align="left">
-                  Quantity
+                  Quantité
                 </TableCell>
                 <TableCell className={"text-nowrap"} align="left">
-                  Weight
+                  Poids(kg)
                 </TableCell>
                 <TableCell className={"text-nowrap"} align="left">
-                  Price
+                  Prix €
                 </TableCell>
                 <TableCell
                   className={"text-nowrap"}
@@ -118,7 +118,7 @@ const CreateItemTable = (props) => {
           className={"my-3 float-end"}
           onClick={addRow}
         >
-          Add Item
+          Ajouter un Objet
 
         </Button>
         <Box

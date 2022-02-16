@@ -54,7 +54,7 @@ function HelpButton() {
             >
                 <Typography sx={{ p: 1 }}>
                     <p className='mt-3 p-3'>
-                        Human Body size as reference
+                        Reference: Le corps humain
                     </p>
                     <img src={body} alt="" width='600px' height='500px' />
                 </Typography>

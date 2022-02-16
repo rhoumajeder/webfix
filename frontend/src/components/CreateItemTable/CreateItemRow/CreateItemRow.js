@@ -107,14 +107,14 @@ const CreateItemRow = (props) => {
               type={"number"}
               inputProps={{ min: 0 }}
               style={{ minWidth: "100px" }}
-              placeholder={"Price"}
+              placeholder={"Prix €"}
               defaultValue={props.row.price}
               onChange={handleInputChange}
             />
           </TableCell>
         ) : (
           <TableCell className={"text-nowrap"} align="left">
-            <p>Waiting for price</p>
+            <p>Prix -- En cours</p>
           </TableCell>
         )}
 

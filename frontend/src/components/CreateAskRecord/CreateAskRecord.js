@@ -53,7 +53,7 @@ const CreateAskRecord = (props) => {
     city_arrival: "Bretagne, France",
     city_destination: "Berlin, Allemagne",
     date: moment(new Date()).format("YYYY-MM-DD"),
-    description: "There is No Description ..",
+    description: "Pas de Description",
     type: "Ask",
     phone_number: "", 
     ask_item_info: []
@@ -498,7 +498,7 @@ const CreateAskRecord = (props) => {
                  color="primary"
                  variant={"contained"}
                >
-                 Save changes 
+                 Sauvegarder
                </Button>
               }
              

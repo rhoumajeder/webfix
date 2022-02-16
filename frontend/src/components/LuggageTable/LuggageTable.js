@@ -107,17 +107,17 @@ const LuggageTable = (props) => {
               {props.hasCheckbox && <TableCell padding="checkbox" />}
               <TableCell className={"text-nowrap"}>Name</TableCell>
               <TableCell className={"text-nowrap"} align="right">
-                Max quantity
+                Max Quantité
               </TableCell>
               <TableCell className={`text-nowrap`} align="right">
-                Max weight
+                Max Poids
               </TableCell>
               {props.inProgress ? null : (
                 <TableCell
                   className={`${props.Decide ? "" : "text-nowrap"}`}
                   align="right"
                 >
-                  Price €
+                  Prix €
                 </TableCell>
               )}
               {props.LuggageState && (
@@ -285,7 +285,7 @@ const LuggageTable = (props) => {
                           onClick={props.handleRejectedLuggage}
                           size="small"
                         >
-                          Reject
+                          Refuser
                         </Button>
                       </Box>
                     ) : (
@@ -314,7 +314,7 @@ const LuggageTable = (props) => {
                     className={`text-nowrap`}
                     align={"right"}
                   >
-                    Total: {props.TotalPayment}${" "}
+                    Total: {props.TotalPayment}€{" "}
                   </TableCell>
                   <TableCell align="right" className={`text-nowrap`}>
                     {props.PaymentStatus === "paid" && "Payé"}
@@ -329,7 +329,7 @@ const LuggageTable = (props) => {
                         gutterBottom
                         className="fw-bold m-0"
                       >
-                        Waiting For Paiment{" "}
+                        Paiment en attente ..{" "}
                         <GoUnverified className={"ms-1 fs-6"} />
                       </Typography>
                     )}

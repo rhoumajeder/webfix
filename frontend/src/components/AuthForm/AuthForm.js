@@ -84,7 +84,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                   variant={"h6"}
                   className={"fw-bold my-2"}
                 >
-                  Please Login
+                  Se Connecter
                 </Typography>
               )}
               {type === "Register" && (
@@ -93,7 +93,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                   variant={"h6"}
                   className={"fw-bold my-2"}
                 >
-                  Fill out this form to Register
+                  Inscription
                 </Typography>
               )}
               {type === "Register" ? (
@@ -103,7 +103,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                   name={"username"}
                   InputLabelProps={{ shrink: false }}
                   style={{ minWidth: "100px" }}
-                  placeholder={"Enter Username"}
+                  placeholder={"Entrer Username"}
                   value={formData.username}
                   size={"small"}
                   variant="outlined"
@@ -118,7 +118,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 name={"email"}
                 InputLabelProps={{ shrink: false }}
                 style={{ minWidth: "100px" }}
-                placeholder={"Enter Email"}
+                placeholder={"Entrer votre Email"}
                 helperText="example@example.com"
                 value={formData.email}
                 size={"small"}
@@ -134,7 +134,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 id={`${type}_password`}
                 InputLabelProps={{ shrink: false }}
                 style={{ minWidth: "100px" }}
-                placeholder={"Enter Password"}
+                placeholder={"Entrer Votre Mot de Passe"}
                 value={formData.password}
                 type="password"
                 size={"small"}
@@ -153,7 +153,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                     id={`${type}_password2`}
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}
-                    placeholder={"Confirm Password"}
+                    placeholder={"Confirmer Votre mot De Passe"}
                     value={formData.password2}
                     type="password"
                     size={"small"}
@@ -169,7 +169,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                     id={`${type}_phone_number`}
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}
-                    placeholder={"Enter Phone Number"}
+                    placeholder={"Entrer Numéro de téléphone"}
                     value={formData.phone_number}
                     type="text"
                     size={"small"}
@@ -245,7 +245,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 className={"mb-3"}
                 variant="contained"
               >
-                {type === "Register" ? "Register" : "Login"}
+                {type === "Register" ? "Inscription" : "Se Connecter"}
               </Button>
               <Box component={"div"} className={"my-3"}>
                 {type === "Login" && (
@@ -254,8 +254,8 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                     color={"textSecondary"}
                     className={"fw-normal my-2"}
                   >
-                    Forgot your password?{" "}
-                    <Link to="/reset-password"> Reset password </Link>
+                    Mot de passe oublié?{" "}
+                    <Link to="/reset-password"> Cliquer ici </Link>
                   </Typography>
                 )}
               </Box>

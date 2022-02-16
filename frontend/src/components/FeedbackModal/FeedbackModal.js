@@ -28,7 +28,7 @@ const style = {
 };
 
 const FeedbackModal = (props) => {
-  const [feedback, setFeedback] = useState({ text: "he is a good user", note: 2 });
+  const [feedback, setFeedback] = useState({ text: "je recommande vivemenet ", note: 3 });
   const { addToast } = useToasts();
 
   const changeRating = (event, newValue) => {
@@ -84,7 +84,7 @@ const FeedbackModal = (props) => {
 
       <Fade in={props.feedbackModalOpen}>
         <Box style={style}>
-          <Typography variant="h6">Leave feedback</Typography>
+          <Typography variant="h6">Ajouter un avis</Typography>
           <div className="my-4 w-100">
             <Typography component="legend">Rating</Typography>
             <Rating
@@ -99,11 +99,11 @@ const FeedbackModal = (props) => {
               name="text"
               onChange={handleInputChange}
               variant="outlined"
-              defaultValue={"This is a good user"}
+              defaultValue={"Je recommande vivement .."}
               placeholder="Message"
               multiline
               rows={3}
-              helperText={"Write what you thought of the service"}
+              helperText={"Ecrire votre commentaire concernant cette service"}
             />
           </div>
           <Button
@@ -113,7 +113,7 @@ const FeedbackModal = (props) => {
             size="large"
             onClick={sendFeedback}
           >
-            Send
+            Envoyer
           </Button>
         </Box>
       </Fade>

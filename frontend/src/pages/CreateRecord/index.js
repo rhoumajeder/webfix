@@ -64,35 +64,35 @@ const Index = (props) => {
       .default(function () {
         return moment(new Date()).format("YYYY-MM-DD");
       })
-      .min(today, "Date can not be in the past"),
+      .min(today, "Date doit etre dans le futur"),
     moyen_de_transport: yup
       .string()
       .required("Please select mode of transportation"),
-    city_destination: yup.string().required("Please select destination city"),
+    city_destination: yup.string().required("Veuillez choisir votre Ville de destination"),
     city_arrival: yup
       .string()
-      .required("Please select arrival (departure) city")
+      .required("Veuillez choisir votre Ville de départ")
       .notOneOf(
         [yup.ref("city_destination")],
         "The departure city and destination can not be the same"
       ),
     max_weight: yup
       .number()
-      .required("Please enter maximum weight allowed")
-      .positive("Maximum weight has to be positive")
-      .min(1, "Max weight can not be less than 1")
+      .required("Please Entrer maximum poids autorisé")
+      .positive("Max Poids doit etre strictement positive")
+      .min(1, "Max Poids ne peut pas etre inférieur à 1")
       .when("moyen_de_transport", {
         is: "Avion",
-        then: yup.number().max(15, "Max weight for plane is 15kg"),
+        then: yup.number().max(15, "Max Poids Pour Avion est 15kg"),
       })
       .when("moyen_de_transport", {
         is: "Car",
-        then: yup.number().max(50, "Max weight for car is 50kg"),
+        then: yup.number().max(50, "Max Poids Pour Voiture est 50kg"),
       }),
     max_volume: yup
       .number()
-      .required("Please choose maximum volume")
-      .positive("Maximum volume has to be positive")
+      .required("Veuillez choisir maximum volume")
+      .positive("Maximum volume doit etre positive")
       .integer()
       .when("moyen_de_transport", {
         is: "Avion",
@@ -735,7 +735,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Max Weight (kg):
+                    Max Poids (kg):
                   </Typography>
                   <TextField
                     id={`luggage-weight`}

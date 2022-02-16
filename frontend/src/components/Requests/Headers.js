@@ -73,9 +73,9 @@ export const HeaderWaitingForMeetingRequest = () => {
       gutterBottom
       className="fw-bold m-0 my-3"
     >
-      Waiting For Address Meeting -{" "}
+      En Attente d'address de rencontre-{" "}
       <span className={"text-primary"}>
-        In Progress
+        En Cours ..
         <GoUnverified className={"ms-1"} />{" "}
       </span>
     </Typography>
@@ -122,7 +122,7 @@ export const HeaderAcceptReject = ({
             onClick={rejectHandler}
             size="small"
           >
-            Reject
+            Refuser
           </Button>
         </Box>
       </Grid>
@@ -153,7 +153,7 @@ export const HeaderMeetingConfirmation = ({ confirmationHandler }) => {
           gutterBottom
           className="fw-bold m-0 my-1"
         >
-          Meeting Confirmation
+          Confirmation de rencontre
         </Typography>
       </Grid>
       <Grid item sm={"auto"} xs={12}>
@@ -164,7 +164,7 @@ export const HeaderMeetingConfirmation = ({ confirmationHandler }) => {
             onChange={inputChange}
             InputLabelProps={{ shrink: false }}
             InputProps={{ classes: { input: "py-2 customize-inputField" } }}
-            placeholder={"Confirmation Code"}
+            placeholder={"Confirmation de Code"}
           />
           <Button
             className="ms-1 px-3 customize-inputButton"

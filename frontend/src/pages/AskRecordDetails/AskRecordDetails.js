@@ -123,7 +123,7 @@ const AskRecordDetails = () => {
     axiosInstance 
       .delete(`delete-record/${record.id}/`)
       .then((res) => {
-        addToast("Record is deleted successfully", { appearance: "success" });
+        addToast("Annonce a été supprimé avec succès", { appearance: "success" });
         history.goBack()
       })
   }
@@ -134,7 +134,7 @@ const AskRecordDetails = () => {
       .post(`create-proposition/${id}/`, proposition)
       .then((res) => {
         console.log(res.data);
-        addToast("Message sent", { appearance: "success" });
+        addToast("Proposition envoyée", { appearance: "success" });
         history.push({
           pathname: `/my-request-state/${res.data.id}`,
           state: {
@@ -226,7 +226,7 @@ const AskRecordDetails = () => {
                   gutterBottom
                   className={`m-0 me-1 fw-medium`}
                 >
-                  Description RJE
+                  Description
                 </Typography>
                 <Typography
                   variant="subtitle2"
@@ -261,7 +261,7 @@ const AskRecordDetails = () => {
                 hidden={modalOpen}
                 onClick={handleModal}
               >
-                Interact
+                Proposer
               </Button>}
               {(user.id === record.user.id) && <Grid item>
                       <Button
@@ -270,7 +270,7 @@ const AskRecordDetails = () => {
                         onClick={deleteRecord}
                         className="ms-auto my-2 text-danger"
                       >
-                        Delete 
+                        Supprimer
                       </Button>
                     </Grid>}
               <Grid item>
@@ -282,7 +282,7 @@ const AskRecordDetails = () => {
                             description={" this is description "}
                             className="Demo__some-network__share-button"
                           >   
-                            <FacebookIcon size={32} round /> Facebook share
+                            <FacebookIcon size={32} round /> Partager Sur FaceBook
                       </FacebookShareButton>
                 </Grid>
             </Box>
@@ -299,7 +299,7 @@ const AskRecordDetails = () => {
                       color={"textPrimary"}
                       className={"fw-bold my-2"}
                     >
-                      Date Of Voyage:
+                      Date de Voyage:
                     </Typography> 
                     <KeyboardDatePicker
                       disableToolbar
@@ -368,7 +368,7 @@ const AskRecordDetails = () => {
                 <Grid>
                   <label>
                   <input type="checkbox" name={"Proposed_home_delivery"} checked={proposition.Proposed_home_delivery} onChange={handleChangeForCheckBox}/> 
-                  | Home Delivery 
+                  | Livraison Main Propre
                   </label>
                 </Grid>
                 <Grid >
@@ -392,7 +392,7 @@ const AskRecordDetails = () => {
                   size="large"
                   onClick={handleConfirm}
                   >
-                  Confirm
+                  Confirmer
                   </Button>&nbsp;&nbsp;&nbsp;
                   <Button
                     className="ms-auto my-2"

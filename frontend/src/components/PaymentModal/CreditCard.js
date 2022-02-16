@@ -84,7 +84,7 @@ function CreditCard() {
                                 }}
                             />
                             <TextField variant="filled" size="small" sx={{ width: 300, marginTop: 1 }} label="Email" placeholder='Email' />
-                            <Button variant="contained" sx={{ marginTop: 2 }}>Pay Now</Button>
+                            <Button variant="contained" sx={{ marginTop: 2 }}>Payer</Button>
                             <Button variant="contained" onClick={handleClose} sx={{ marginTop: 2, marginLeft: 2 }}>Close</Button>
                         </p>
                     </Box>

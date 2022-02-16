@@ -229,7 +229,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold mb-2"
                       >
-                        Introduction
+                        Description
                       </Typography>
                       <TextField
                         fullWidth
@@ -248,7 +248,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Name
+                        Prénom
                       </Typography>
                       <TextField
                         fullWidth
@@ -264,14 +264,14 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Last Name
+                        Nom
                       </Typography>
                       <TextField
                         required
                         fullWidth
                         name="last_name"
                         variant="outlined"
-                        placeholder="Last Name"
+                        placeholder="Nom"
                         defaultValue={profile.last_name}
                       />
                     </Grid>
@@ -281,13 +281,13 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Phone Number
+                        Numéro de Téléphone
                       </Typography>
                       <TextField
                         fullWidth
                         name="phone_number"
                         variant="outlined"
-                        placeholder="Phone Number"
+                        placeholder="Numéro de Téléphone"
                         defaultValue={profile.phone_number}
                       />
                     </Grid>
@@ -297,7 +297,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Date Of Birth
+                        Date De Naissance
                       </Typography>
                       <KeyboardDatePicker
                         autoOk
@@ -324,13 +324,13 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Current Address
+                        Address
                       </Typography>
                       <TextField
                         fullWidth
                         name="address"
                         variant="outlined"
-                        placeholder="Current Address"
+                        placeholder="Address"
                         defaultValue={profile.address}
                       />
                     </Grid>
@@ -340,14 +340,14 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Old Password
+                        Ancien Mot De Passe
                       </Typography>
                       <TextField
                         fullWidth
                         type="password"
                         name="old_password"
                         variant="outlined"
-                        placeholder="Old Password"
+                        placeholder="Ancien Mot De Passe"
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -356,14 +356,14 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Password
+                        Mot De Passe
                       </Typography>
                       <TextField
                         fullWidth
                         type="password"
                         name="password"
                         variant="outlined"
-                        placeholder="Password"
+                        placeholder="Mot De Passe"
                         defaultValue={passValue}
                         onChange={handlePassValueChange}
                       />
@@ -374,7 +374,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         color="textPrimary"
                         className="fw-bold my-2"
                       >
-                        Confirm Password {isPassDirty && (isPassConfirmed ? (
+                        Confirmer Votre Mot De Passe {isPassDirty && (isPassConfirmed ? (
                           <GiCheckMark className="text-success" />
                         ) : (
                           <GiCrossMark className="text-danger" />
@@ -385,7 +385,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         type="password"
                         name="confirm_password"
                         variant="outlined"
-                        placeholder="Confirm Password"
+                        placeholder="Confirmer Votre Mot De Passe"
                         defaultValue={confirmPassValue}
                         onChange={handleConfirmPassValueChange}
                       />
@@ -393,7 +393,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                     <Grid item xs={12}>
                       <Box align="center">
                         <Button type="submit" color="primary" variant="contained" className="w-25">
-                          Save
+                        Sauvegarder
                         </Button>
                       </Box>
                     </Grid>

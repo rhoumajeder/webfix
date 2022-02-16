@@ -279,7 +279,7 @@ const Search = (props) => {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Typography>Advanced filters</Typography>
+                  <Typography>Afficher plus de filtres</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container spacing={1} alignItems="flex-start" direction="row">
@@ -304,7 +304,7 @@ const Search = (props) => {
                         }
                         fullWidth
                       />
-                      <FormHelperText>Weight </FormHelperText>
+                      <FormHelperText>Poids </FormHelperText>
                     </Grid>
                     <Grid item sm={6} xs={12}>
                       <div className="container">
@@ -402,7 +402,7 @@ const Search = (props) => {
           </div>
           <div className="w-100 text-center mt-2">
             <Button color="primary" onClick={handleAdvancedFilters}>
-              Show Advanced Filters
+            Afficher plus de filtres
             </Button>
           </div>
         </CardActions>

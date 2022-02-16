@@ -45,7 +45,7 @@ const Index = () => {
                   gutterBottom
                   className="fw-bold m-0"
                 >
-                  My Offers
+                  Mes Offres
                 </Typography>
               </Grid>
             </Grid>

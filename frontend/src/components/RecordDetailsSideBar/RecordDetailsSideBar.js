@@ -79,7 +79,7 @@ const RecordDetailsSideBar = (props) => {
                     variant="outlined"
                     disabled={props.disabled}
                   >
-                    {showPhoneNumber ? props.record.phone_number : "See Number"}
+                    {showPhoneNumber ? props.record.phone_number : "Voir Numéro de téléphone"}
                   </Button>
                 </Grid>}
 
@@ -170,7 +170,7 @@ const RecordDetailsSideBar = (props) => {
                 gutterBottom
                 className="fw-normal m-0"
               >
-                This user has no ratings yet
+                Cet Utilisateur n'a pas des Avis
               </Typography>
             )}
           </Box>

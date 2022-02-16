@@ -33,7 +33,7 @@ export const HeaderDeliveryCode = ({ validateHandler }) => {
           gutterBottom
           className="fw-bold m-0 my-1"
         >
-          Delivery Code:
+          Code de livraison:
         </Typography>
       </Grid>
       <Grid item sm={"auto"} xs={12}>
@@ -70,17 +70,17 @@ export const HeaderWaitingForMeeting = ({ date, address, verified }) => {
       gutterBottom
       className="fw-bold m-0 my-3"
     >
-      Date Of Meeting: {date} <br />
+      Date de rencontre: {date} <br />
       Address: {address} -{" "}
       <span className={`${verified ? "text-success" : "text-primary"}`}>
         {verified ? (
           <React.Fragment>
-            Accepted
+            Accepté
             <GoVerified className={"ms-1"} />
           </React.Fragment>
         ) : (
           <React.Fragment>
-            Waiting For Acceptance
+            En d'attente d'acceptation
             <GoUnverified className={"ms-1"} />
           </React.Fragment>
         )}{" "}
@@ -98,16 +98,16 @@ export const HeaderShipmentConfirmation = ({ shipmentCode, verified }) => {
       gutterBottom
       className="fw-bold m-0 my-3"
     >
-      Shipment Code: {shipmentCode} -{" "}
+      Code de livraison: {shipmentCode} -{" "}
       <span className={`${verified ? "text-success" : "text-primary"}`}>
         {verified ? (
           <React.Fragment>
-            Confirmed
+            Confirmé
             <GoVerified className={"ms-1"} />
           </React.Fragment>
         ) : (
           <React.Fragment>
-            Confirmation In Progress
+            Confirmation En cours
             <GoUnverified className={"ms-1"} />
           </React.Fragment>
         )}{" "}
@@ -207,7 +207,7 @@ export const HeaderSetupMeeting = ({
                 onChange={handleAddress}
                 InputLabelProps={{ shrink: false }}
                 InputProps={{ classes: { input: "py-2 customize-inputField" } }}
-                placeholder={"Enter Meeting Address"}
+                placeholder={"Addresse de rencontre"}
               />
               <Button
                 className="ms-1 px-3 customize-inputButton"
@@ -216,7 +216,7 @@ export const HeaderSetupMeeting = ({
                 onClick={handleValidateMeeting}
                 size="small"
               >
-                Validate
+                Valider
               </Button>
             </Box>
           </Grid>

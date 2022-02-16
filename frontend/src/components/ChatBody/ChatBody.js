@@ -132,7 +132,7 @@ const ChatBody = (props) => {
                 <ListItemText
                   align={"right"}
                   primary={
-                    "You have no messages yet. Send a proposition or create a record in order to contact other users!"
+                    "Vous n'avez pas des messages, Veuillez envoyer une proposition ou créer une annonce"
                   }
                 ></ListItemText>
               </Grid>

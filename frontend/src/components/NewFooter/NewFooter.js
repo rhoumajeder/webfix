@@ -68,9 +68,9 @@ function NewFooter() {
                     <li>
                         <a href="/aa">Conditions generales d'utilisation</a>
                     </li>
-                    <li>
-                        <a href="/Payment">Payments</a>
-                    </li>
+                    {/* <li>
+                        <a href="/Payment">Payments </a>
+                    </li> */}
                 </ul>
                 <div className='row text-center'>
                     <div className='col-sm d-flex justify-content-end'>
@@ -85,7 +85,7 @@ function NewFooter() {
                     </div>
                 </div>
                 <p className="copyright">
-                    &copy;Copyright 2021
+                    &copy;LelBled 2022
                 </p>
             </section>
         </Container>

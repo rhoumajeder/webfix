@@ -96,7 +96,7 @@ def create_message(request, room_id):
             to_user = room.owner
 
         create_notification(
-            to_user=to_user, created_by=request.user, type="Message", reference=room, message=f"{request.user.username} has sent you a message",)
+            to_user=to_user, created_by=request.user, type="Message", reference=room, message=f"{request.user.username} vous a envoyé un message",)
 
         # cache_create_message_key_owner = str("create_message") + str(room.owner.id) + str(room_id)
         # cache_create_message_key_user = str("create_message") + str(room.user.id) + str(room_id)

@@ -175,11 +175,11 @@ const Chat = (props) => {
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="h5" className={classes.headTitle}>
-              Chat
+              Mes Messages
             </Typography>
           </Grid>
         </Grid>
-        <Grid
+        <Grid 
           container
           component={Paper}
           className="shadow"

@@ -286,7 +286,7 @@ const Header = () => {
                       component="span"
                       className="d-flex align-items-center justify-content-evenly"
                     >
-                      <MdLocalOffer className="me-2 fs-5" /> My Offers
+                      <MdLocalOffer className="me-2 fs-5" /> Mes offres
                     </Box>
                   </Link>
                 </MenuItem>
@@ -296,7 +296,7 @@ const Header = () => {
                       component="span"
                       className="d-flex align-items-center justify-content-evenly"
                     >
-                      <BiShuffle className="me-2 fs-5" /> My Requests
+                      <BiShuffle className="me-2 fs-5" /> Mes Demandes
                     </Box>
                   </Link>
                 </MenuItem>
@@ -338,14 +338,14 @@ const Header = () => {
           ) : (
             <React.Fragment>
               <Button
-                color="secondary"
+                color="Primary"
                 variant="contained"
               >
                 <Link
                   style={{ color: "inherit", textDecoration: "inherit" }}
                   to="/login"
                 >
-                  Login / Register
+                  Se Connecter / Inscription
                 </Link>
               </Button>
             </React.Fragment>
@@ -435,7 +435,7 @@ const Header = () => {
                   )]
                 })
               ) : (
-                <MenuItem>You have no notifications</MenuItem>
+                <MenuItem>Vous n'avez pas des notifications</MenuItem>
               )}
             </Menu>
           </Box>

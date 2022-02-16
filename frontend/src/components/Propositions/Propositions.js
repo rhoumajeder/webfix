@@ -60,7 +60,7 @@ const Propositions = (props) => {
                         },
                       }}
                     >
-                      View
+                      Zoom
                     </Link>
                   </Button>
                 </div>

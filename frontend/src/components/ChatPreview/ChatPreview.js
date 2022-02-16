@@ -67,7 +67,7 @@ const ChatPreview = (props) => {
                   className="fw-bold m-0"
                 >
                   {" "}
-                  Min price:{props.room.record.min_price}
+                  Min Prix:{props.room.record.min_price}
                   {/* {objectSum(props.room.record.sub_records, "price") + "€"}{" "}  min_price */}
                   {/* {objectSum(props.room.record.sub_records, "price") + "€"}{" "}  min_price */}
                 </Typography>
@@ -79,7 +79,7 @@ const ChatPreview = (props) => {
                   className="fw-bold m-0"
                 >
                   {" "}
-                  Max weight: {props.room.record.max_weight + "Kg"}{" "}
+                  Max Poids: {props.room.record.max_weight + "Kg"}{" "}
                 </Typography>
               </React.Fragment>
             ) : (

@@ -35,7 +35,7 @@ function PaymentModal(props) {
             <Container className='container'>
                 <Box sx={style}>
                     <Typography variant="h5" component="h2" className='mt-1'>
-                        Add Payment Methods
+                        Choisir votre méthode de paiment(Cash - uniquement)
                     </Typography>
                     <div className='container mx-3 mt-1' >
                         <div className='container mx-5 mt-1'>
@@ -117,7 +117,7 @@ function PaymentModal(props) {
                                                 <div className="col-auto">
                                                     <FormControl variant="standard">
                                                         <InputLabel htmlFor="input-with-icon-adornment">
-                                                            Last Name
+                                                            Nom
                                                         </InputLabel>
                                                         <Input
                                                             id="input-with-icon-adornment"
@@ -132,7 +132,7 @@ function PaymentModal(props) {
                                                 <div className="col-auto">
                                                     <FormControl variant="standard">
                                                         <InputLabel htmlFor="input-with-icon-adornment">
-                                                            Last Name
+                                                            Prénom
                                                         </InputLabel>
                                                         <Input
                                                             id="input-with-icon-adornment"

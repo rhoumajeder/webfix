@@ -67,9 +67,9 @@ const Index = (props) => {
 
     const publishedRecords = (
         (record ? record.total_number_of_ads : 0)
-        + ' record'
+        + ' Annonces'
         + ((record && record.total_number_of_ads > 1) ? 's' : '')
-        + ' published'
+        + ' publiés'
     )
 
     const startDate = record ? moment(record.start_date).format('YYYY') : null
@@ -130,7 +130,7 @@ const Index = (props) => {
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
-                                            Name
+                                            Prénom
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
                                             className={`m-0 ps-2 fw-normal`}>
@@ -140,7 +140,7 @@ const Index = (props) => {
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
-                                            Last Name
+                                            Nom
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
                                             className={`m-0 ps-2 fw-normal`}>
@@ -164,7 +164,7 @@ const Index = (props) => {
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
-                                            Phone Number
+                                            Numéro De Téléphone
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
                                             className={`m-0 ps-2 fw-normal`}>
@@ -178,7 +178,7 @@ const Index = (props) => {
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
-                                            Date Of Birth
+                                            Date De Naissance
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
                                             className={`m-0 ps-2 fw-normal`}>
@@ -189,13 +189,13 @@ const Index = (props) => {
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
-                                            Current Password
+                                            Mot De Passe
                                         </Typography>
                                     </Box>}
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
                                             className={`m-0 fw-bold`}>
-                                            Current Address
+                                            Address
                                         </Typography>
                                         <Typography display="inline" variant="body2" component="h6"
                                             className={`m-0 ps-2 fw-normal`}>
@@ -210,7 +210,7 @@ const Index = (props) => {
                                 <Box className={'border-top border-2 py-3'}>
                                     <Typography variant="h6" component="h6" gutterBottom
                                         className={`m-0 me-1 fw-medium`}>
-                                        Other Details
+                                       Autres Détails
                                     </Typography>
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
@@ -220,15 +220,16 @@ const Index = (props) => {
                                     {startDate && (
                                         <Box className="my-1">
                                             <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
-                                                Registered since {startDate}
+                                                Membre Depuis {startDate}
                                             </Typography>
                                         </Box>
                                     )}
                                     <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" className={`m-0 fw-bold`}>
                                             {(record && record.is_pro)
-                                                ? 'This member is professional'
-                                                : 'This member is not professional'
+                                                ? 'ce member est pro'
+                                                 : ' ' 
+                                                //  for pro user
                                             }
                                         </Typography>
                                     </Box>
@@ -244,7 +245,7 @@ const Index = (props) => {
                                             variant="h6"
                                             onClick={openReportModal}
                                             className="text-primary text-decoration-underline fw-bold">
-                                            Signalez ce membre
+                                            Signaler ce membre
                                         </Typography>
                                     </ButtonBase>
                                 </Box>}
@@ -260,7 +261,7 @@ const Index = (props) => {
                                     <Tabs value={tab} onChange={handleChange}
                                         aria-label="user-tab-profile" textColor={'secondary'}
                                         variant={"scrollable"} scrollButtons="auto">
-                                        <Tab label="Feedback" id={`user-tab-${0}`} />
+                                        <Tab label="Mes Avis" id={`user-tab-${0}`} />
                                     </Tabs>
                                 </Paper>
                                 <TabPanel value={tab} index={0}>
@@ -275,7 +276,7 @@ const Index = (props) => {
                                                             onClick={openFeedbackModal}
                                                             className="text-decoration-underline fw-bold"
                                                         >
-                                                            Add Feedbacks
+                                                            Ajouter un Avis
                                                         </Typography>
                                                     </ButtonBase>}
                                                 </Grid>

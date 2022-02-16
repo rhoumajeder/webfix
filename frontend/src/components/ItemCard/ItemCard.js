@@ -149,7 +149,7 @@ const ItemCard = (props) => {
             gutterBottom
             className="fw-bold m-0"
           >
-            Waiting For Paiment
+            Paiment en attente ..
             <GoUnverified className={"ms-1 fs-6"} />
           </Typography>
         );
@@ -242,7 +242,7 @@ const ItemCard = (props) => {
           props.fetchItems();
         });
     } else {
-      addToast("The meeting code is not correct", { appearance: "error" });
+      addToast("Code de rencontre est incorrect", { appearance: "error" });
     }
   };
 
@@ -269,7 +269,7 @@ const ItemCard = (props) => {
             });
         });
     } else {
-      addToast("The delivery code is not correct", { appearance: "error" });
+      addToast("Code de livraison est incorrect", { appearance: "error" });
     }
   };
 
@@ -381,7 +381,7 @@ const ItemCard = (props) => {
                 address={item.address}
                 verified={true}
               />
-              <HeaderWithText text={`Delivery Code: ${item.delivery_code}`} />
+              <HeaderWithText text={`Code de livraison: ${item.delivery_code}`} />
             </div>
           );
         }
@@ -399,7 +399,7 @@ const ItemCard = (props) => {
             <HeaderWithText
               text={
                 <div>
-                  Meeting Confirmed
+                  Rencontre confirmé
                   <GoVerified className={"ms-1 text-success fs-6"} />
                 </div>
               }
@@ -410,7 +410,7 @@ const ItemCard = (props) => {
               variant="contained"
               className="mb-4"
             >
-              Leave Feedback
+              Ajouter un avis
             </Button>
           </div>
         );
@@ -455,7 +455,7 @@ const ItemCard = (props) => {
               size="small"
               disabled={props.disabled}
             >
-              Reject
+              Refuser
             </Button>
           </Box>
         );
@@ -463,7 +463,7 @@ const ItemCard = (props) => {
         return (
           <div>
             <div>
-              Accepted <GoVerified className={"ms-1 text-success fs-6"} />
+              Accepté <GoVerified className={"ms-1 text-success fs-6"} /> 
             </div>
             <div className="my-2">
               Waiting for paiment{" "}
@@ -586,12 +586,12 @@ const ItemCard = (props) => {
               <TableRow>
                 {showImage && <TableCell />}
 
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Quantity</TableCell>
-                <TableCell align="left">Weight</TableCell>
-                <TableCell align="left">Price</TableCell>
+                <TableCell align="left">Objet</TableCell>
+                <TableCell align="left">Quantité</TableCell>
+                <TableCell align="left">Poids</TableCell>
+                <TableCell align="left">Prix €</TableCell>
                 {!props.onlyDisplay && (
-                  <TableCell align="left">State</TableCell>
+                  <TableCell align="left">État</TableCell>
                 )}
               </TableRow>
             </TableHead>
@@ -657,7 +657,7 @@ const ItemCard = (props) => {
                         : props.item.proposition_items,
                       "price"
                     )}
-                    $
+                    €
                   </TableCell>
                   <TableCell align="left" className={`text-nowrap`}>
                     {displayPaymentState(props.item)}
@@ -753,14 +753,14 @@ function Row(props) {
               size="small"
               disabled={props.disabled}
             >
-              Reject
+              Refuser
             </Button>
           </Box>
         );
       } else {
         return (
           <React.Fragment>
-            In Progress
+            En Cours ...
             <GoUnverified className={"text-primary ms-1 fs-6"} />
           </React.Fragment>
         );
@@ -768,7 +768,7 @@ function Row(props) {
     } else if (row.state === "Accepted") {
       return (
         <React.Fragment>
-          Accepted
+          Accepté
           <GoVerified className={"ms-1 text-success fs-6"} />
         </React.Fragment>
       );

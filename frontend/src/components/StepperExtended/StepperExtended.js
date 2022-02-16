@@ -145,11 +145,11 @@ export const StepperButtons = ({ children, setActiveStep,
 
 const steps = [
     'Offre Envoyé',
-    'Offre Accepted',
-    'Payment',
+    'Offre Accepté',
+    'Paiment',
     'Meeting',
-    'Shipment',
-    'Delivered',
+    'Livraison en cours',
+    'livré',
 ]
 
 export default StepperExtended;

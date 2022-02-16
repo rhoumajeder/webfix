@@ -356,7 +356,7 @@ const Index = ({ match }) => {
                       gutterBottom
                       className={`m-0 me-1 fw-medium`}
                     >
-                      Description rje 
+                      Description
                     </Typography>
                     <Typography
                       variant="subtitle2"
@@ -525,7 +525,7 @@ const Index = ({ match }) => {
                         onClick={deleteRecord}
                         className="ms-auto my-2 text-danger"
                       >
-                        Delete 
+                        Supprimer
                       </Button>
                     </Grid>}
 
@@ -537,7 +537,7 @@ const Index = ({ match }) => {
                             description={" this is description "}
                             className="Demo__some-network__share-button"
                           >  
-                            <FacebookIcon size={32} round /> Facebook share
+                            <FacebookIcon size={32} round /> Partager Sur Facebook
                       </FacebookShareButton>
                     </Grid>
 
@@ -550,7 +550,7 @@ const Index = ({ match }) => {
                         onClick={openInteractionTable}
                         size="large"
                       >
-                        Interact
+                        Proposer
                       </Button>
                     </Grid>}
                   </Grid>

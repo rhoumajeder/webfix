@@ -591,7 +591,7 @@ def create_proposition(request, pk):
     if serializer.is_valid():
         proposition = serializer.save(record=record, user=request.user)
         create_notification(to_user=record.user, created_by=request.user,
-                            message=f"{request.user.username} has sent you a proposition", type="Proposition", reference=proposition)
+                            message=f"{request.user.username} vous a envoyé une proposition", type="Proposition", reference=proposition)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -614,7 +614,7 @@ def update_proposition(request, pk):
             to_user = proposition.record.user
 
         create_notification(
-            to_user=to_user, created_by=request.user, type="Proposition", reference=proposition, message=f"{request.user.username} has made an update in a proposition.",)
+            to_user=to_user, created_by=request.user, type="Proposition", reference=proposition, message=f"{request.user.username} a mis à jour  votre proposition.",)
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -734,7 +734,7 @@ def create_feedback(request, id):
     print("Feedback_notes[note_feedback]",Feedback_notes["note_feedback"])
 
     if Feedback.objects.filter(writer=request.user, receiver=receiver).exists():
-        return Response("You have already left feedback for this user", status=status.HTTP_400_BAD_REQUEST)
+        return Response("Vous avez déja ajouté un commentaire pour ce memebre", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = FeedbackSerializer_for_creation(data=request.data)
 

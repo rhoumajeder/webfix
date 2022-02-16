@@ -296,7 +296,7 @@ const CardListing = (props) => {
                         {props.filters.city_destination}
                       </div>
                     ) : (
-                      "All Cities"
+                      "Annonces :"
                     )}
                   </Typography>
                   <Typography
@@ -306,7 +306,7 @@ const CardListing = (props) => {
                     gutterBottom
                     className="fw-bold m-0 d-block"
                   >
-                    {first_load ? props.records.length : props.number_of_items} Records disponibles
+                    {first_load ? props.records.length : props.number_of_items} Annonces
                   </Typography>
                 </Grid>
               </Grid>

@@ -205,7 +205,7 @@ const ListItemCard = (props) => {
                                   }}
                                   to={`/record-details/${record.id}`}
                                 >
-                                  View
+                                  Zoom
                                 </Link>
                               </Button>
                             }
@@ -235,7 +235,7 @@ const ListItemCard = (props) => {
                                     }}
                                     to={`/ask-record-details/${record.id}`}
                                   >
-                                    View
+                                    Zoom
                                   </Link>
                                 </Button>
                               }
@@ -253,8 +253,8 @@ const ListItemCard = (props) => {
                             >
                               {record.propositions.length}{" "}
                               {props.itemType === "offer"
-                                ? "Offers Disponibles"
-                                : "Requests Disponibles"}
+                                ? "Offres Disponibles"
+                                : "Demandes Disponibles"}
                             </Typography>
                           </Grid>
                           <Grid item>
@@ -264,7 +264,7 @@ const ListItemCard = (props) => {
                                 component="h6"
                                 className="fw-bold m-0 my-2 px-3 text-decoration-underline text-primary"
                               >
-                                {isVisiable ? "Hide" : "Show"}
+                                {isVisiable ? "Masquer" : "Afficher"}
                               </Typography>
                             </ButtonBase>
                           </Grid>
@@ -295,7 +295,7 @@ const ListItemCard = (props) => {
           >
             <CardContent className="text-center">
               <Typography variant="h6">
-                You have not created any records yet
+                Vous n'avez pas des annonces
               </Typography>
             </CardContent>
           </Card>
@@ -368,7 +368,7 @@ const ListItemCard = (props) => {
                             },
                           }}
                         >
-                          View
+                          Zoom
                         </Link>
                       </Button>
                     }
@@ -406,7 +406,7 @@ const ListItemCard = (props) => {
           >
             <CardContent className="text-center">
               <Typography variant="h6">
-                You have not made any requests yet
+                Vous n'avez pas des propositions.
               </Typography>
             </CardContent>
           </Card>
