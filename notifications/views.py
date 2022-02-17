@@ -14,7 +14,7 @@ from .models import Notification
 
 # Create your views here.
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 @vary_on_headers('Authorization')
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

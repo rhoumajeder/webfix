@@ -63,6 +63,9 @@ const Index = () => {
     propose: true,
     ask: true,
   });
+  const texts = ["Colis", "Accessoires", "Documents"]; // Colis/Accessoires/ Documents
+  const texts2 = ["Documents", "Accessoires","Colis"];
+  const texts1 = ["d'avion", " de bateau"];
 
   // Record and loading state
   const [records, setRecords] = useState([]);
@@ -182,13 +185,13 @@ const Index = () => {
             className="text-center pt-2 fw-bold"
             sx={{ display: "flex" }}
           >
-            Choisissez&nbsp;
-            <ReactTextAnimation />
+            Envoyez Vos&nbsp;
+            <ReactTextAnimation texts={texts} time={2500} />
             {/* <TextTransition
               text={TEXTS[index % TEXTS.length]}
               springConfig={presets.wobbly}
             /> */}
-            &nbsp;qui vous plaît
+            &nbsp;le plus vite possible.
           </Typography>
           <Typography
             variant="h5"
@@ -196,13 +199,14 @@ const Index = () => {
             className="text-center fw-bold"
             sx={{ display: "flex" }}
           >
-            Choisissez&nbsp;
-            <ReactTextAnimation /> 
+            Economiser vos billets&nbsp;
+            <ReactTextAnimation texts={texts1} time={3000}/> 
             {/* <TextTransition
               text={TEXTS[newText % TEXTS.length]}
               springConfig={presets.wobbly}
             /> */}
-            &nbsp;qui vous plaît
+            &nbsp;en important des&nbsp;
+            <ReactTextAnimation texts={texts2} time={2500}/> 
           </Typography>
           <Typography
             variant="subtitle2"
@@ -210,8 +214,7 @@ const Index = () => {
             className="text-center pt-2"
           >
             {" "}
-            Trouvez la bonne affaire parmi les millions de petites annonces 
-            leboncoin{" "}
+            Trouvez la bonne affaire parmi Un vaste choix d'annonces{" "}
           </Typography>
         </Box>
 

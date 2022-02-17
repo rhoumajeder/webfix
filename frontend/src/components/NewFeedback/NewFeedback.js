@@ -18,23 +18,38 @@ function NewFeedback() {
                                 <CardContent>
                                     <img src={fash} alt="not found" width='25px' height='25px' />
                                     <Typography variant="h5" component="div">
-                                        Lorem ipsum dolor sit amet.
+                                    Economiser vos billets
                                     </Typography>
                                     <Typography variant="body2">
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque sequi et corporis ut nobis. Officia mollitia distinctio facere animi, earum commodi est nulla iste qui temporibus? Quis ipsam aliquam asperiores eligendi in deleniti eveniet amet perspiciatis dolore natus! Veritatis, deleniti enim! Magni maiores recusandae tenetur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum?
+                                    Proposez vos trajets sur LelBled et faites des économies en transportant des colis. Vos Billets(Avion/Bateau) vous coûtent chers? Découvrez LelBled App, notre application vous aide à trouver l’annonce idéal pour transporter des (colis/Accessoires/Documents) selon votre tarif.
                                     </Typography>
                                 </CardContent>
                             </Card>
                         </div>
                         <div className="col-md-6 p-3">
                             <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
-                                <CardContent>
+                            <CardContent>
+                                    <img src={fash} alt="not found" width='25px' height='25px' />
+                                    <Typography variant="h5" component="div">
+                                        Envoyer Vos Bien le plus vite possible
+                                    </Typography>
+                                    <Typography variant="body2">
+                                    Vous Avez un colis ou un document urgent à envoyer ? Découvrez LelBled App, Notre service vous aide à trouver la personne idéale avec qui vous envoyer votre colis. Où que vous envoyer vos colis, trouvez l’annonce idéal parmi notre large choix de destinations à petits prix.
+                                    </Typography>
+                                </CardContent>
+                            
+                            </Card>
+                        </div>
+                        <div className="col-md-6 p-3">
+                            <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
+                            <CardContent>
                                     <img src={img} alt="not found" width='25px' height='25px' />
                                     <Typography variant="h5" component="div">
-                                        Lorem ipsum dolor sit amet.
+                                         Envoyer en toute confiance
                                     </Typography>
                                     <Typography variant="body2">
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque sequi et corporis ut nobis. Officia mollitia distinctio facere animi, earum commodi est nulla iste qui temporibus? Quis ipsam aliquam asperiores eligendi in deleniti eveniet amet perspiciatis dolore natus! Veritatis, deleniti enim! Magni maiores recusandae tenetur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum?
+                                    Nous prenons le temps qu’il faut pour connaître nos membres.&nbsp; Nous vérifions les avis, les profils et les pièces d’identité.&nbsp; Vous savez donc avec qui vous envoyer vos colis pour réserver en toute confiance sur notre plateforme sécurisée.
+
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -44,23 +59,13 @@ function NewFeedback() {
                                 <CardContent>
                                     <img src={fash} alt="not found" width='25px' height='25px' />
                                     <Typography variant="h5" component="div">
-                                        Lorem ipsum dolor sit amet.
+                                        Recherchez, cliquez et réservez 
                                     </Typography>
                                     <Typography variant="body2">
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque sequi et corporis ut nobis. Officia mollitia distinctio facere animi, earum commodi est nulla iste qui temporibus? Quis ipsam aliquam asperiores eligendi in deleniti eveniet amet perspiciatis dolore natus! Veritatis, deleniti enim! Magni maiores recusandae tenetur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum?
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </div>
-                        <div className="col-md-6 p-3">
-                            <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
-                                <CardContent>
-                                    <img src={fash} alt="not found" width='25px' height='25px' />
-                                    <Typography variant="h5" component="div">
-                                        Lorem ipsum dolor sit amet.
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque sequi et corporis ut nobis. Officia mollitia distinctio facere animi, earum commodi est nulla iste qui temporibus? Quis ipsam aliquam asperiores eligendi in deleniti eveniet amet perspiciatis dolore natus! Veritatis, deleniti enim! Magni maiores recusandae tenetur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum? etur autem praesentium ipsam dolorum illum?
+                                        Trouver un transporteur devient encore plus simple !&nbsp; 
+                                        Facile d'utilisation et dotée de technologies avancées, notre appli vous permet de réserver en un rien de temps.&nbsp;
+
+
                                     </Typography>
                                 </CardContent>
                             </Card>
