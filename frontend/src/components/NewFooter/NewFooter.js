@@ -66,7 +66,7 @@ function NewFooter() {
                         <a href="/Contactnous">Contact nous</a>
                     </li>
                     <li>
-                        <a href="/aa">Conditions generales d'utilisation</a>
+                        <a href="/cgu">CGU</a>
                     </li>
                     {/* <li>
                         <a href="/Payment">Payments </a>

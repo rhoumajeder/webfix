@@ -42,13 +42,11 @@ function NewCarousel() {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <div className="card wddth cardShadow p-3">
-                                                <img class="img-fluid" alt="100%x280" src={fash} width="30" height="30" />
+                                                {/* <img class="img-fluid" alt="100%x280" src={fash} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">djfjhdfh jdjf jk djfdj k djfsd jk 1</h4>
+                                                    <h4 className="card-title">Rapide et Fiable</h4>
                                                     <p className="card-text">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                        industry. Lorem Ipsum has been the industry's standard dummy text
-                                                        ever since the 1500s, when an unknown printer
+                                                    Grace à Lelbled , j’ai pu envoyé rapidement des documents urgent en une journée 
                                                     </p>
                                                     <div className="row">
                                                         <div className="col-3">
@@ -60,10 +58,10 @@ function NewCarousel() {
                                                         <div className="col-9">
                                                             <div className="row mt-1">
                                                                 <div className="col">
-                                                                    <p>John doe</p>
+                                                                    <p>Mourad</p>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <p>12-1-2021</p>
+                                                                    <p>7-3-2021</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -73,13 +71,11 @@ function NewCarousel() {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="card wddth cardShadow p-3">
-                                                <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" />
+                                                {/* <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">djfjhdfh jdjf jk djfdj k djfsd jk 2</h4>
+                                                    <h4 className="card-title">Merci Beaucoup!</h4>
                                                     <p className="card-text">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                        industry. Lorem Ipsum has been the industry's standard dummy text
-                                                        ever since the 1500s, when an unknown printer
+                                                    Lya chHaar w ena N7awim kifeh neb3eth kathya il weldi mit8arrib , ikether 5erkom 3awentouni
                                                     </p>
                                                     <div className="row">
                                                         <div className="col-3">
@@ -91,10 +87,10 @@ function NewCarousel() {
                                                         <div className="col-9">
                                                             <div className="row mt-1">
                                                                 <div className="col">
-                                                                    <p>John doe</p>
+                                                                    <p>Fatima</p>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <p>12-1-2021</p>
+                                                                    <p>10-9-2021</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -104,13 +100,11 @@ function NewCarousel() {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="card wddth cardShadow p-3">
-                                                <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" />
+                                                {/* <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">djfjhdfh jdjf jk djfdj k djfsd jk 3</h4>
+                                                    <h4 className="card-title">à recommander .. </h4>
                                                     <p className="card-text">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                        industry. Lorem Ipsum has been the industry's standard dummy text
-                                                        ever since the 1500s, when an unknown printer
+                                                    J’ai pu économiser 30% de mon billet d’avion en transportant des colis. 
                                                     </p>
                                                     <div className="row">
                                                         <div className="col-3">
@@ -122,10 +116,10 @@ function NewCarousel() {
                                                         <div className="col-9">
                                                             <div className="row mt-1">
                                                                 <div className="col">
-                                                                    <p>John doe</p>
+                                                                    <p>Lilia</p>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <p>12-1-2021</p>
+                                                                    <p>4-5-2021</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -140,13 +134,11 @@ function NewCarousel() {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <div className="card wddth cardShadow p-3">
-                                                <img class="img-fluid" alt="100%x280" src={fash} width="30" height="30" />
+                                                {/* <img class="img-fluid" alt="100%x280" src={fash} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">djfjhdfh jdjf jk djfdj k djfsd jk 4</h4>
+                                                    <h4 className="card-title">Service Très sérieuse</h4>
                                                     <p className="card-text">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                        industry. Lorem Ipsum has been the industry's standard dummy text
-                                                        ever since the 1500s, when an unknown printer
+                                                    Wousslitni kathiitii kemlé w fi assra3 wa9t, je recommande vivement ces services
                                                     </p>
                                                     <div className="row">
                                                         <div className="col-3">
@@ -158,10 +150,10 @@ function NewCarousel() {
                                                         <div className="col-9">
                                                             <div className="row mt-1">
                                                                 <div className="col">
-                                                                    <p>John doe</p>
+                                                                    <p>Skander</p>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <p>12-1-2021</p>
+                                                                    <p>9-12-2021</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -171,13 +163,11 @@ function NewCarousel() {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="card wddth cardShadow p-3">
-                                                <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" />
+                                                {/* <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">djfjhdfh jdjf jk djfdj k djfsd jk 5</h4>
+                                                    <h4 className="card-title">Bonne solution!</h4>
                                                     <p className="card-text">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                        industry. Lorem Ipsum has been the industry's standard dummy text
-                                                        ever since the 1500s, when an unknown printer
+                                                    Je voyage souvent en bateau et sur lelbled je trouve rapidement ce que je peux transporter 
                                                     </p>
                                                     <div className="row">
                                                         <div className="col-3">
@@ -189,10 +179,10 @@ function NewCarousel() {
                                                         <div className="col-9">
                                                             <div className="row mt-1">
                                                                 <div className="col">
-                                                                    <p>John doe</p>
+                                                                    <p>Rami</p>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <p>12-1-2021</p>
+                                                                    <p>8-2-2022</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -202,13 +192,11 @@ function NewCarousel() {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="card wddth cardShadow p-3">
-                                                <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" />
+                                                {/* <img class="img-fluid" alt="100%x280" src={img} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">djfjhdfh jdjf jk djfdj k djfsd jk 6</h4>
+                                                    <h4 className="card-title">Service rapide!</h4>
                                                     <p className="card-text">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                        industry. Lorem Ipsum has been the industry's standard dummy text
-                                                        ever since the 1500s, when an unknown printer
+                                                    Est7akiit bich neb3eth dwa Lelbled, me l9iiit il 7ell ken fi lelbled , Merci beaucoup!
                                                     </p>
                                                     <div className="row">
                                                         <div className="col-3">
@@ -220,10 +208,10 @@ function NewCarousel() {
                                                         <div className="col-9">
                                                             <div className="row mt-1">
                                                                 <div className="col">
-                                                                    <p>John doe</p>
+                                                                    <p>Ahmed</p>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <p>12-1-2021</p>
+                                                                    <p>12-1-2022</p>
                                                                 </div>
                                                             </div>
                                                         </div>

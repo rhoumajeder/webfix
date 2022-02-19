@@ -6,6 +6,7 @@ import fash from "../../assets/images/flash.png";
 import img from '../../assets/images/database.png';
 import './NewFeedback.css';
 import { Card, Container } from '@material-ui/core';
+import { FaBolt,FaCoins,FaIdCard,FaGrinWink  } from "react-icons/fa";
 
 function NewFeedback() {
     return (
@@ -16,8 +17,9 @@ function NewFeedback() {
                         <div className="col-md-6 p-3">
                             <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
                                 <CardContent>
-                                    <img src={fash} alt="not found" width='25px' height='25px' />
-                                    <Typography variant="h5" component="div">
+                                    {/* <img src={fash} alt="not found" width='25px' height='25px' /> */}
+                                    <FaCoins size="35px" /> 
+                                    <Typography variant="h5" component="div" style={{ fontWeight: 600 }}> 
                                     Economiser vos billets
                                     </Typography>
                                     <Typography variant="body2">
@@ -27,10 +29,11 @@ function NewFeedback() {
                             </Card>
                         </div>
                         <div className="col-md-6 p-3">
-                            <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
+                            <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }} >
                             <CardContent>
-                                    <img src={fash} alt="not found" width='25px' height='25px' />
-                                    <Typography variant="h5" component="div">
+                                    {/* <img src={fash} alt="not found" width='25px' height='25px' /> */}
+                                    <FaBolt size="35px" /> 
+                                    <Typography variant="h5" component="div" style={{ fontWeight: 600 }} > 
                                         Envoyer Vos Bien le plus vite possible
                                     </Typography>
                                     <Typography variant="body2">
@@ -43,8 +46,9 @@ function NewFeedback() {
                         <div className="col-md-6 p-3">
                             <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
                             <CardContent>
-                                    <img src={img} alt="not found" width='25px' height='25px' />
-                                    <Typography variant="h5" component="div">
+                                    {/* <img src={img} alt="not found" width='25px' height='25px' />  */}
+                                    <FaIdCard size="35px" /> 
+                                    <Typography variant="h5" component="div" style={{ fontWeight: 600 }} >
                                          Envoyer en toute confiance
                                     </Typography>
                                     <Typography variant="body2">
@@ -57,9 +61,10 @@ function NewFeedback() {
                         <div className="col-md-6 p-3">
                             <Card className='cardShadow border border-2 p-2 mr-1 ml-1' sx={{ textAlign: 'justify' }}>
                                 <CardContent>
-                                    <img src={fash} alt="not found" width='25px' height='25px' />
-                                    <Typography variant="h5" component="div">
-                                        Recherchez, cliquez et réservez 
+                                    {/* <img src={fash} alt="not found" width='25px' height='25px' /> */}
+                                    <FaGrinWink size="35px" />
+                                    <Typography variant="h5" component="div" style={{ fontWeight: 600 }}> 
+                                        Recherchez et réservez 
                                     </Typography>
                                     <Typography variant="body2">
                                         Trouver un transporteur devient encore plus simple !&nbsp; 

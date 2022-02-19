@@ -42,7 +42,7 @@ const ShowStep = (Step) => {
     case 0:
       return (
         <>
-          <Page1 />
+          <Page2 />
         </>
       );
     case 1:
@@ -79,15 +79,6 @@ function index() {
               <List>
                 <ListItem button key={text} onClick={() => setshowStep(0)}>
                   <ListItemText primary="Mode d'emploi" />
-                </ListItem>
-                <ListItem button key={text} onClick={() => setshowStep(1)}>
-                  <ListItemText primary="Voleurs et Communaute" />
-                </ListItem>
-                <ListItem button key={text} onClick={() => setshowStep(2)}>
-                  <ListItemText primary="Partenariats" />
-                </ListItem>
-                <ListItem button key={text} onClick={() => setshowStep(3)}>
-                  <ListItemText primary="Partenariats" />
                 </ListItem>
               </List>
               <Divider />

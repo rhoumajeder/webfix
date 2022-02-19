@@ -20,7 +20,7 @@ function FaqAccordation() {
             <Container maxWidth='md'>
                 <Grid sx={{ my: 10 }}>
                     <Typography sx={{ fontWeight: "bold", my: 1 }}>
-                        People also ask
+                        Question/Réponse
                     </Typography>
                     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                         <AccordionSummary
@@ -29,14 +29,12 @@ function FaqAccordation() {
                             id="panel1bh-header"
                         >
                             <Typography>
-                                Which is correct FAQ or FAQs?
+                            Je chercher un transporteur, mais je n’ai pas trouvé comment faire ?
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                It's FAQ, for certain: Frequently Asked Questions, a simple
-                                plural. With “FAQs”, you get an extra S… would that be called a
-                                double plural? Anyway, two s's have no Earthly reason to exist
+                            Essayer de chercher dans une departement voisine ou reculer la date de voyage, il rester possible de créer une annonce en vous proposant votre colis. certains transporteurs prefere contacter directement l’utilisateur qui met plus de détails sur son colis.
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -46,11 +44,11 @@ function FaqAccordation() {
                             aria-controls="panel2bh-content"
                             id="panel2bh-header"
                         >
-                            <Typography>What is FAQ full form?</Typography>
+                            <Typography>Comment trouver un bon transporteur?</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                FAQ (Frequently Asked Questions)
+                            il est important de consulter les avis et le profil de transporteurs. Nous  vérifions également les avis, les profils et les pièces d’identité. il est possible aussi de contacter le transporteurs par message ou en téléphone
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -61,14 +59,12 @@ function FaqAccordation() {
                             id="panel3bh-header"
                         >
                             <Typography>
-                                Is FAQ an apostrophe?
+                            Comment Contacter Lelbled? 
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                FAQ is an acronym for Frequently Asked Questions. It's not
-                                possessive, not a contraction, doesn't have any foreign origins
-                                and is not used to indicate stress, so I write FAQs.
+                            il exister plusieurs moeyn de communication: Vous pouver nous contacter sur whatsApp ou consulter notre page FaceBook Lelbled, il est possible aussi de nous envoyer un message en cliquant sur ce lien.
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -78,13 +74,11 @@ function FaqAccordation() {
                             aria-controls="panel4bh-content"
                             id="panel4bh-header"
                         >
-                            <Typography>What does FAQ stand for in computers?</Typography>
+                            <Typography>Est-ce que je peux envoyer tout ce que veux avec le transporteur?</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                FAQ. abbreviation for. computing frequently asked question or
-                                questions: a text file containing basic information on a
-                                particular subject.
+                            Le transporteur peut accepter ou refuser de transporter certains colis pour différent raison. 
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -94,28 +88,11 @@ function FaqAccordation() {
                             aria-controls="panel4bh-content"
                             id="panel4bh-header"
                         >
-                            <Typography sx={{ width: '33%', flexShrink: 0 }}>What is FAQ section?</Typography>
+                            <Typography sx={{ width: '33%', flexShrink: 0 }}>Est-il possible de payer en ligne ?</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                In contrast to a landing page, where the goal is to convert
-                                buyers, the Frequently Asked Questions (FAQ) section is a part
-                                of your website where you address common concerns, questions,
-                                and objections that customers have
-                            </Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel4bh-content"
-                            id="panel4bh-header"
-                        >
-                            <Typography>What is the plural of FAQ?</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography>
-                                The plural form of faq is faqs.
+                            Actuellement , il est possible de payer uniquement en cash. Service de paiment en ligne est en cours.
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

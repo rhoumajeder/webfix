@@ -43,6 +43,8 @@ import PropositionState from "./pages/PropositionState/PropositionState";
 import AskRecordDetails from "./pages/AskRecordDetails/AskRecordDetails";
 
 import Commentcamarche from "./pages/Commentcamarche";
+import cgu from "./pages/cgu";
+
 import Contactnous from "./pages/Contactnous";
 import Quisommesnous from "./pages/Quisommesnous";
 import FaqAccordation from "./components/FaqAccordation/FaqAccordation";
@@ -225,8 +227,8 @@ const App = () => {
                   />
                   <Route
                     exact
-                    path={"/Payment"}
-                    component={PaymentModal}
+                    path={"/cgu"}
+                    component={cgu}
                   />
                   <Route
                     exact

@@ -12,7 +12,7 @@ function index() {
       <Container maxWidth="md">
         <Grid sx={{ my: 10 }}>
           <Typography sx={{ fontWeight: "bold", my: 1 }}>
-            People also ask
+            People also ask 222
           </Typography>
           <Accordion>
             <AccordionSummary
