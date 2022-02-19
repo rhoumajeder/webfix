@@ -11,8 +11,8 @@ export default function Page1() {
             alignItems: "left",
             color: "darkblue",
           }}
-          component="h2"
-          variant="h7"
+          component="h2" 
+          variant="h7"  
         >
           Mode d'emploi (PAGE 1)
         </Typography>
