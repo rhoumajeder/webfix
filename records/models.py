@@ -217,5 +217,14 @@ class Captcha(models.Model):
     search_form = models.BooleanField(default=False)
 
     
+class ContactNous(models.Model):
+    name = models.CharField(max_length=50,default="null",blank=True, null=True)
+    email = models.CharField(max_length=50,default="null",blank=True, null=True)
+    phone_number = models.CharField(max_length=23,default="null",blank=True, null=True)
+    objet = models.CharField(max_length=100,default="null",blank=True, null=True)
+    message = models.CharField(max_length=500,default="null",blank=True, null=True)
 
+   
+    def __str__(self):
+        return self.name
 

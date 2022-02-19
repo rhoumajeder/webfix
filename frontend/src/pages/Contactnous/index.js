@@ -14,9 +14,50 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Link } from "@material-ui/core";
 import Header from "../../components/Header/Header";
 import NewFooter from "../../components/NewFooter/NewFooter";
-
+import axiosInstance from "../../helpers/axios";
+import { useToasts } from "react-toast-notifications";
+import { useHistory } from "react-router";
+ 
 
 function index() {
+  let history = useHistory();
+  const { addToast } = useToasts();
+  const submitHandler = (e) => {
+    console.log("function call");
+    e.preventDefault()
+    const formData = new FormData(e.target)
+
+    const data = {}
+    formData.forEach((value, key) => {
+      data[key] = value
+    })
+
+    console.log("data :", data);
+
+    axiosInstance
+    .post("contactus/", formData)
+    .then((res) => {
+      console.log("function call sucess");
+      console.log(res.data);
+      addToast("Message envoyé.", { appearance: "success" }); 
+      history.push(`/home`);
+      history.go();  
+      
+    })
+    .catch((err) => {
+      console.log("function call wrong");
+      console.log("err",err);
+      console.log("err.response",err.response);
+      addToast('Bad Request.', { appearance: "error" });
+    });
+    console.log("function call end");
+  }
+
+
+
+
+
+
   return (
     <div>
       <Header />
@@ -50,7 +91,7 @@ function index() {
                 component="h2"
                 variant="h7"
               >
-                Let's connect
+                Contactez‑nous
               </Typography>
               <Typography
                 sx={{
@@ -58,15 +99,12 @@ function index() {
                   alignItems: "left",
                 }}
               >
-                In publishing and graphic design, Lorem ipsum is a placeholder
-                text commonly used to demonstrate the visual form of a document or
-                a typeface without relying on meaningful content. Lorem ipsum may
-                be used as a placeholder before final copy is available.
+               N'hésitez pas à nous contacter pour tout renseignement complémentaire
               </Typography>
               <Grid container sx={{ mb: 2 }}>
                 <MailOutlineIcon sx={{ mr: 1 }} />
                 <Typography sx={{ fontWeight: "bold" }}>
-                  Info@gmail.com
+                  ****@gmail.com
                 </Typography>
               </Grid>
               <Grid container>
@@ -120,46 +158,55 @@ function index() {
                 component="h2"
                 variant="h7"
               >
-                Send us a message
+                Contactez‑nous
               </Typography>
+              <form onSubmit={submitHandler}>
+
+              
               <Grid item xs={12} sx={{ my: 2 }}>
-                <InputLabel shrink>First & Last Name</InputLabel>
+                <InputLabel shrink>Nom & Prénom</InputLabel>
                 <TextField
                   name="name"
                   required
                   fullWidth
                   size="small"
+                  inputProps={{ maxLength: 50 }}
                   sx={{ backgroundColor: "white" }}
                 />
               </Grid>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <InputLabel shrink>Email address</InputLabel>
+                  <InputLabel shrink>Adresse Email</InputLabel>
                   <TextField
+                    required
                     name="email"
                     fullWidth
                     size="small"
+                    inputProps={{ maxLength: 50 }}
                     id="email"
                     sx={{ backgroundColor: "white" }}
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <InputLabel shrink>Phone Number</InputLabel>
+                  <InputLabel shrink>Numéro de téléphone</InputLabel>
                   <TextField
-                    name="phone"
+                    name="phone_number"
                     fullWidth
                     size="small"
+                    inputProps={{ maxLength: 23 }}
                     id="phone"
                     sx={{ backgroundColor: "white" }}
                   />
                 </Grid>
               </Grid>
               <Grid item xs={12} sx={{ my: 2 }}>
-                <InputLabel shrink>Object</InputLabel>
+                <InputLabel shrink>Objet</InputLabel>
                 <TextField
-                  name="object"
+                  required
+                  name="objet"
                   fullWidth
                   id="object"
+                  inputProps={{ maxLength: 100 }}
                   size="small"
                   sx={{ backgroundColor: "white" }}
                 />
@@ -167,19 +214,22 @@ function index() {
               <Grid item xs={12} sx={{ my: 2 }}>
                 <InputLabel shrink>Message</InputLabel>
                 <TextField
+                  required
                   name="message"
                   fullWidth
                   size="small"
                   id="message"
+                  inputProps={{ maxLength: 500 }}
                   multiline
-                  rows={3}
+                  rows={6}
                   placeholder="Write message here"
                   sx={{ backgroundColor: "white" }}
                 />
               </Grid>
               <Grid sx={{ my: 4 }}>
-                <Button variant="contained">Contact Us Now!</Button>
+                <Button type="submit" variant="contained">Contactez‑nous!</Button> 
               </Grid>
+              </form>
             </Box>
           </Grid>
         </Grid>

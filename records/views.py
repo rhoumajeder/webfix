@@ -6,8 +6,11 @@ import string
 from django.core.files.base import ContentFile
 from io import BytesIO, StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from rest_framework.permissions import AllowAny
 import sys
 import datetime
+
+from h11 import Data
 
 # Open an Image
 
@@ -125,7 +128,7 @@ from records.models import Record, SubRecord, Proposition, PropositionItem, AskR
 from records.serializers import (
     PropositionItemImageSerializer, RecordListSerializer, CaptchaSerializer, SubRecordSerializer, PropositionSerializer,
     PropositionItemSerializer, RecordSerializer, RecordGetSerializer, RecordDetailSerializer, AskRecordItemSerializer, AskRecordItemImageSerializer, FeedbackSerializer,
-    ReportSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
+    ReportSerializer,ContactNousSerializer,FeedbackSerializer_user,RecordDetailSerializer_lighter,RecordGetSerializer_list,PropositionSerializer_list,get_list_offers_serializers,
     get_list_requests_PropositionSerializer_list,PropositionSerializer_for_proposition_state,FeedbackSerializer_for_creation,
     RecordDetailSerializer_only_travel_card_for_index,Serializer_Update_Only_Total_Ads_For_user)
 from records.utils import CustomLimitOffsetPagination
@@ -764,5 +767,15 @@ def report_user(request, receiver_email):
 
     if serializer.is_valid():
         serializer.save(writer=request.user, receiver=receiver)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny]) 
+def contact_nous(request):
+    serializer = ContactNousSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

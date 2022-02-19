@@ -47,5 +47,6 @@ urlpatterns = [
     path('report-user/<str:receiver_email>/',
          views.report_user),
     path('getrecaptcha/', views.get_recaptcha),
+     path('contactus/', views.contact_nous),
 
 ]

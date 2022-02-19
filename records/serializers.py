@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from rest_framework.views import APIView
 
-from records.models import Record, Captcha, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
+from records.models import Record, Captcha,ContactNous, SubRecord, Proposition, PropositionItem, PropositionItemImage, AskRecordItem, AskRecordItemImage, Feedback, Report
 from users.serializers import UserSerializer, UserSerializer_for_message,UserSerializer_lighter,UserSerializer_record_details,UserSerializer_for_feedbacks
 from users.models import CustomUser
 
@@ -322,4 +322,11 @@ class ReportSerializer(ModelSerializer):
 
     class Meta:
         model = Report
+        fields = "__all__"
+
+
+class ContactNousSerializer(ModelSerializer):
+
+    class Meta:
+        model = ContactNous
         fields = "__all__"
