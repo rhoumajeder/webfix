@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny
 import sys
 import datetime
 
-from h11 import Data
+# from h11 import Data
 
 # Open an Image
 
