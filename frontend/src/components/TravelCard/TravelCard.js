@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { Box, CardActionArea, Typography } from "@material-ui/core";
 import PaginationExtended from "../PaginationExtended/PaginationExtended";
 import { CgShapeCircle } from "react-icons/cg";
+import { capitalize } from '@material-ui/core';
 
 import {
   ModeOfTransportationContext,
@@ -128,7 +129,7 @@ const TravelCard = (props) => {
                       className="fw-bold m-0 pb-1 border-bottom border-2 text-dark"
                     >
                       {record &&
-                        moment(record.date).format("dddd DD MMMM YYYY")}
+                        capitalize(moment(record.date).format("dddd DD MMMM YYYY"))} 
                       {record &&
                         modes &&
                         record.moyen_de_transport &&

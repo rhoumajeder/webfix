@@ -15,6 +15,9 @@ import {
 import * as yup from "yup";
 
 import { KeyboardDatePicker } from "@material-ui/pickers";
+import {MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
+import "moment/locale/fr";
 import "./index.css";
 
 import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
@@ -372,6 +375,7 @@ const CreateAskRecord = (props) => {
                   >
                     Date Of Voyage:
                   </Typography>
+                  <MuiPickersUtilsProvider locale="fr" utils={MomentUtils}>
                   <KeyboardDatePicker
                     value={askRecord.date}
                     disableToolbar
@@ -392,7 +396,7 @@ const CreateAskRecord = (props) => {
                     KeyboardButtonProps={{
                       "aria-label": "change date",
                     }}
-                  />
+                  /></MuiPickersUtilsProvider>
                 </Grid>
                 <Grid item md={4} sm={6} xs={12} className="my-2">
                   <Typography

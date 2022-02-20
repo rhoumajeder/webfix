@@ -21,11 +21,14 @@ import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExten
 import LuggageTable from "../../components/LuggageTable/LuggageTable";
 
 import { KeyboardDatePicker } from "@material-ui/pickers";
+import {MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import { ScreenContext } from "../../helpers/context";
 import { FaCarSide, FaCommentsDollar, FaPlane } from "react-icons/fa";
 import { useToasts } from "react-toast-notifications";
 import moment from "moment";
+import MomentUtils from "@date-io/moment";
+import "moment/locale/fr";
 
 import { AuthContext } from "../../context/auth";
 
@@ -646,6 +649,7 @@ const Index = (props) => {
                   >
                     Date Of Voyage:
                   </Typography>
+                  <MuiPickersUtilsProvider locale="FR" utils={MomentUtils}> 
                   <KeyboardDatePicker
                     disableToolbar
                     disablePast
@@ -666,7 +670,7 @@ const Index = (props) => {
                     KeyboardButtonProps={{
                       "aria-label": "change date",
                     }}
-                  />
+                  /></MuiPickersUtilsProvider>
                 </Grid>
                 <Grid item md={4} sm={6} xs={12} className="my-2">
                   <Typography
