@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from "react";
 import './NewFooter.css';
 import apple from './apple.png';
 import google from './google.png';
+
 
 import {
     Instagram,
@@ -10,40 +11,52 @@ import {
     Facebook,
     Twitter
 } from "@material-ui/icons";
+import {
+    Button,
+  } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 function NewFooter() {
+
+  
+    const [visible, setVisible] = useState(false);  // visibility state
     return (
         <Container>
             <section className="px-2 py-5 shadow footer bg-lightgray">
                 <div className='social'>
-                    <Link to="/aa">
+                    {/* <Link to="/aa">
                         <Instagram
                             className='instagram'
                             style={{ fontSize: "40px", margin: 2 }}
                         />
-                    </Link>
-                    <Link to="/aa">
-                        <WhatsApp
+                    </Link> */}
+                    {/* <Link > */}
+                       
+                         <Button variant="text" onClick={() => setVisible(!visible)}> <WhatsApp
                             className='whatsapp'
                             style={{ fontSize: "40px", margin: 2 }}
-                        />
-                    </Link>
-                    <Link to="/aa">
+
+                        />{visible && <div>+44 115 791 0834</div>}</Button> 
+                         
+                    {/* </Link> */}
+                    {/* <Link to="/aa">
                         <Twitter
                             className='twitter'
                             style={{ fontSize: "40px", margin: 2 }}
                         />
-                    </Link>
-                    <Link to="/aa">
+                    </Link> */}
+                    {/* <Link >  */}
+                    <Link to={{ pathname: "https://www.facebook.com/LelBled" }} target="_blank" >
+                        
                         <Facebook
                             className='facebook'
                             style={{ fontSize: "40px", margin: 2 }}
                         />
+                         
                     </Link>
-                    <Link to="/aa">
-                        <YouTube
+                    <Link to={{ pathname: "https://www.youtube.com/channel/UCrFphTIvEwjKdVBMbrTAvEQ" }} target="_blank" >
+                        <YouTube   
                             className='youtube'
                             style={{ fontSize: "40px", margin: 2 }}
                         />
