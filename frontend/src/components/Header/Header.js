@@ -180,7 +180,8 @@ const Header = () => {
           onClick={() => history.push("/home")}
         >
           <img
-            src={require("../../assets/images/placeholder-logo.svg").default}
+            // src={require("../../assets/images/placeholder-logo.svg").default}
+            src={require("../../assets/images/logo-lelbled.svg").default} 
             alt="Header Logo"
             className={"w-100"}
           />
