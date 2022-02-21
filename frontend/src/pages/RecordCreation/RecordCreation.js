@@ -52,9 +52,9 @@ const RecordCreation = () => {
             <Grid item xs={6}>
               <Paper onClick={hideAskRecord} className='paperBtn'>
                 <p style={{ textAlign: "center", marginTop: "25px" }} className="paper demandBtn">
-                  Announce
+                  Offre
                   <div className="text-center mb-3">
-                    <p className='fun-text'>Are going To have fun</p>
+                    <p className='fun-text'>Vous allez bientôt Voyager?</p>
                   </div>
                 </p>
               </Paper>
@@ -64,7 +64,7 @@ const RecordCreation = () => {
                 <p style={{ textAlign: "center", marginTop: "25px" }} className="paper demandBtn">
                   Demande
                   <div className="text-center mb-3">
-                    <p className='fun-text'>Are going To have fun</p>
+                    <p className='fun-text'>Vous voulez envoyer un objet?</p>
                   </div>
                 </p>
               </Paper>

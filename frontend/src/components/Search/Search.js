@@ -135,9 +135,9 @@ const Search = (props) => {
       ...props.filters,
     };
 
-    if (values.value === "") {
+    if (values.value === "") { 
       delete newFilters[target.name];
-    } else {
+    } else { 
       newFilters[target.name] = values.value;
     }
     console.log("debug rje 12 ")
@@ -211,7 +211,7 @@ const Search = (props) => {
                         checked={propose}
                       />
                     }
-                    label="Offers"
+                    label="Offres"
                   />
                   <FormControlLabel
                     variant="inline"
