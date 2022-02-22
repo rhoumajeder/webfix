@@ -120,7 +120,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 style={{ minWidth: "100px" }}
                 placeholder={"Entrer votre Email"}
                 helperText="example@example.com"
-                value={formData.email}
+                value={formData.email.toLowerCase()}
                 size={"small"}
                 variant="outlined"
                 onChange={handleChange}
