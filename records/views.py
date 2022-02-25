@@ -9,6 +9,8 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.permissions import AllowAny
 import sys
 import datetime
+import locale
+locale.setlocale(locale.LC_ALL, "fr")
 
 # from h11 import Data
 
@@ -39,8 +41,10 @@ def Create_imagefrom_ad(Ads):
         myFontbd = ImageFont.truetype('records/arialbd.ttf', 18)
         myFont = ImageFont.truetype('records/arial.ttf', 18)
 
+        myFontbdLink = ImageFont.truetype('records/arialbd.ttf', 30)
 
         # Add Text to an image
+        I1.text((410, 270), Ads["id"], font=myFontbdLink, fill =(0, 0, 0))
         I1.text((300, 60), Ads["date"], font=myFontbd, fill =(0, 0, 0))
         I1.text((838, 57), Ads["min_price"], font=myFontbd, fill =(0, 0, 0))
         I1.text((850, 80), Ads["max_weight"], font=myFontbd, fill =(0, 0, 0))
@@ -75,6 +79,10 @@ def Create_imagefrom_ad(Ads):
         myFontbd = ImageFont.truetype('records/arialbd.ttf', 18)
         myFont = ImageFont.truetype('records/arial.ttf', 18)
 
+        myFontbdLink = ImageFont.truetype('records/arialbd.ttf', 25)
+
+        # Add Text to an image
+        I1.text( ( 242 , 315 ), Ads["id"], font=myFontbdLink, fill =(0, 0, 0))
 
         # Add Text to an image
         I1.text((240, 40), Ads["date"], font=myFontbd, fill =(0, 0, 0))
@@ -196,72 +204,81 @@ def create_record(request):
     print("==========rje star")
     print(data_treated)
     print("==========rje end")
-
-
+    username = request.user.username
+   
+        
+    id_record = (Record.objects.filter().order_by('-id')[0]).id + 1
+    print(id_record)
     
     if data_treated["type"] == "Propose" :
 
-        data_treated["categories"] =  data_treated["categoriesv"]
-        del data_treated["categoriesv"]
-        Ads_propose ={  
-                "username": request.user.username,
-                "plane" : True if data_treated["moyen_de_transport"] == "Avion" else False ,
-                "date":   datetime.datetime.strptime(data_treated["date"], "%Y-%m-%d").strftime("%A %d %B %Y"),
-                "depart":  data_treated["city_arrival"],
-                "destination":  data_treated["city_destination"],
-                "max_weight":  str(data_treated["max_weight"]),
-                "min_price":  str(data_treated["min_price"]),
-                "f":      True if "Food" in data_treated["categories"] else False,
-                "M":      True if "Medicaments" in data_treated["categories"] else False,
-                "SE":     True if "Small Electronics" in data_treated["categories"] else False,
-                "SA":     True if "Small Accessories" in data_treated["categories"] else False,
-                "V":      True if "Vetements" in data_treated["categories"] else False,
-                "BM":     True if "Big Mechanical" in data_treated["categories"] else False,
-                "BE":     True if "Big Electronics" in data_treated["categories"] else False,
-                "Autres": True if "Autres" in data_treated["categories"] else False,
-                "name_image_url": request.user.username + "-img-propose-share-on-fb-" + str(record_count_all),
-                "type" : data_treated["type"]
+            data_treated["categories"] =  data_treated["categoriesv"]
+            del data_treated["categoriesv"]
+            Ads_propose ={  
+                    "username": username,
+                    "plane" : True if data_treated["moyen_de_transport"] == "Avion" else False ,
+                    "date":   datetime.datetime.strptime(data_treated["date"], "%Y-%m-%d").strftime("%A %d %B %Y").capitalize(),
+                    "depart":  data_treated["city_arrival"],
+                    "destination":  data_treated["city_destination"],
+                    "max_weight":  str(data_treated["max_weight"]),
+                    "min_price":  str(data_treated["min_price"]),
+                    "f":      True if "Food" in data_treated["categories"] else False,
+                    "M":      True if "Medicaments" in data_treated["categories"] else False,
+                    "SE":     True if "Small Electronics" in data_treated["categories"] else False,
+                    "SA":     True if "Small Accessories" in data_treated["categories"] else False,
+                    "V":      True if "Vetements" in data_treated["categories"] else False,
+                    "BM":     True if "Big Mechanical" in data_treated["categories"] else False,
+                    "BE":     True if "Big Electronics" in data_treated["categories"] else False,
+                    "Autres": True if "Autres" in data_treated["categories"] else False,
+                    "name_image_url": username + "-img-propose-share-on-fb-" + str(record_count_all),
+                    "type" : data_treated["type"],
+                    "id":"LelBled.com/record-details/" + str(id_record)
 
-            }
-        image = Create_imagefrom_ad(Ads_propose)
-        data_treated["image_propose"]  = image
+                }
+            image = Create_imagefrom_ad(Ads_propose)
+            data_treated["image_propose"]  = image
 
     elif data_treated["type"] == "Ask" : 
-        Ads_Ask ={  
-                "username": request.user.username,
-                "date":   datetime.datetime.strptime(data_treated["date"], "%Y-%m-%d").strftime("%A %d %B %Y"),
-                "depart":  data_treated["city_arrival"],
-                "destination":  data_treated["city_destination"],
+            Ads_Ask ={  
+                    "username": username,
+                    "date":   datetime.datetime.strptime(data_treated["date"], "%Y-%m-%d").strftime("%A %d %B %Y").capitalize(),
+                    "depart":  data_treated["city_arrival"],
+                    "destination":  data_treated["city_destination"],
 
-                "ask_total_weight":  str(data_treated["ask_total_weight"]),
-                "ask_total_price":  str(data_treated["ask_total_price"]),
-                "ask_item_info" : data_treated["ask_item_info"], 
+                    "ask_total_weight":  str(data_treated["ask_total_weight"]),
+                    "ask_total_price":  str(data_treated["ask_total_price"]),
+                    "ask_item_info" : data_treated["ask_item_info"], 
 
-                "name_image_url":  request.user.username + "-img-Ask-share-on-fb-" + str(record_count_all),
-                "type" : data_treated["type"]
+                    "name_image_url": username + "-img-Ask-share-on-fb-" + str(record_count_all),
+                    "type" : data_treated["type"],
+                    "id":"LelBled.com/ask-record-details/" + str(id_record)
 
-            }
-        image = Create_imagefrom_ad(Ads_Ask)
-        data_treated["image_ask"]  = image
-        print("print ask item info ==========")
-        print( data_treated["ask_item_info"])
-        del data_treated["ask_item_info"]
+                }
+            image = Create_imagefrom_ad(Ads_Ask)
+            data_treated["image_ask"]  = image
+            print("print ask item info ==========")
+            print( data_treated["ask_item_info"])
+            del data_treated["ask_item_info"]
 
 
 
 
     # data_treated["ask_item_info"] = []
+    yes = False
     serializer = RecordSerializer(data=data_treated)
-
-
     if serializer.is_valid():
         serializer.save(user=request.user)
+        yes = True
         if Total_Ads_For_user.is_valid():
              Total_Ads_For_user.update(request.user,Total_Ads_For_user.validated_data)
-        
+    
+    if yes :
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    
+    
 #BackUp
 # @api_view(["GET"])
 # def get_record(request, pk):
