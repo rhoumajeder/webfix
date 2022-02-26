@@ -311,6 +311,25 @@ const CardListing = (props) => {
                   >
                     {first_load ? props.records.length : props.number_of_items} Annonces
                   </Typography>
+
+                  {props.records.length == 0 &&
+                    <Link to="/record-creation" className="text-link">
+                      Aucun Résultat, Mais Vous Pouvez créer votre propre annonce pour (Transporter ou envoyer un colis)
+                    <Button
+                      className="mx-2"
+                      variant="contained"
+                      color="secondary"
+                      aria-label="menu"
+                      // startIcon={<RiAdvertisementFill />}
+                    >
+                      Déposer une annonce
+                    </Button>
+                    </Link>
+                      
+                      
+                      }
+
+
                 </Grid>
               </Grid>
             </Grid>
