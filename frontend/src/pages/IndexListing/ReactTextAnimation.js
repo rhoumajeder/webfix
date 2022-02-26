@@ -19,8 +19,10 @@ class ReactTextAnimation extends Component {
             <ReactTextTransition
               text={this.props.texts[this.state.textIndex % this.props.texts.length]}
               springConfig={presets.gentle}
-              style={{ margin: "0 4px" }}
+              
+              style={{ margin: "0 4px"  }}  // color:"#70726e"
               inline
+              
             />
     );
   }

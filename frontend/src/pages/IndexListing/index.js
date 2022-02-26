@@ -180,7 +180,7 @@ const Index = () => {
       <Box component={Paper} className={`page-header shadow pb-5 mb-5 ${classes.pageHeader}`}>
         <Box component={"div"}>
           <Typography
-            variant="h5"
+            variant="h3"
             gutterBottom
             className="text-center pt-2 fw-bold"
             sx={{ display: "flex" }}
@@ -194,7 +194,7 @@ const Index = () => {
             &nbsp;le plus vite possible.
           </Typography>
           <Typography
-            variant="h5"
+            variant="h3"
             gutterBottom
             className="text-center fw-bold"
             sx={{ display: "flex" }}
@@ -212,6 +212,7 @@ const Index = () => {
             variant="subtitle2"
             gutterBottom
             className="text-center pt-2"
+            variant="h5"
           >
             {" "}
             Trouvez la bonne affaire parmi Un vaste choix d'annonces{" "}
