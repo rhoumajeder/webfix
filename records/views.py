@@ -9,6 +9,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.permissions import AllowAny
 import sys
 import datetime
+from sharedfunctions.tools import compress
 import locale
 # locale.setlocale(locale.LC_ALL, "fr")
 
@@ -538,8 +539,10 @@ def create_ask_record_items(request, pk):
 @parser_classes([MultiPartParser])
 def create_ask_record_item_images(request, pk):
     item = get_object_or_404(AskRecordItem, id=pk)
+    data_processed = request.data
+    data_processed['image'] = compress(request.data['image'])
     serializer = AskRecordItemImageSerializer(
-        data=request.data)
+        data=data_processed)
 
     if serializer.is_valid():
         serializer.save(item=item)
@@ -711,8 +714,10 @@ def create_item_images(request, pk):
     print(pk)
     print(request.data)
     item = get_object_or_404(PropositionItem, id=pk)
+    data_processed = request.data
+    data_processed['image'] = compress(request.data['image'])
     serializer = PropositionItemImageSerializer(
-        data=request.data)
+        data=data_processed)
 
     if serializer.is_valid():
         serializer.save(item=item)
