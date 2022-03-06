@@ -138,6 +138,7 @@ class UserSerializer_lighter(serializers.ModelSerializer):
         model = CustomUser
         fields = ["id","photo","username","is_pro","note_feedback","number_of_feedbacks"]
 
+from sharedfunctions.tools import compress
 
 
 
@@ -166,7 +167,8 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         photo = validated_data.get("photo", None)
 
         if photo is not None:
-            instance.photo = photo
+            # instance.photo = photo
+            instance.photo = compress(photo)
 
         instance.intro = validated_data.get('intro', instance.intro)
         instance.last_name = validated_data.get('last_name', instance.last_name)
