@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny
 import sys
 import datetime
 import locale
-locale.setlocale(locale.LC_ALL, "fr")
+# locale.setlocale(locale.LC_ALL, "fr")
 
 # from h11 import Data
 
