@@ -44,8 +44,8 @@ const FileUpload = (props) => {
       let fileSize = e.target.files[i].size;
       fileSize = Math.round(fileSize / 1024);
 
-      if (fileSize > 15000) {
-        addToast("Max file size is 15mb", {
+      if (fileSize > 4000) {
+        addToast("Max image volume 4mb,compresser vos images https://imagecompressor.com/ ", {
           appearance: "error",
         });
         return;
