@@ -1,1 +1,1 @@
-web: gunicorn rjeproject.wsgi 
+web: gunicorn rjeproject.wsgi --timeout 180 --keep-alive 5 
