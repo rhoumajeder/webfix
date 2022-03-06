@@ -11,7 +11,7 @@ export const useVolumeSlider = (defaultValue) => {
       value: 0,
       label: (
         <img
-          src={require("../assets/slider/coke.png").default}
+          src={require("../assets/slider/coke.jpg").default}
           alt={"Coke"}
           width={screen.width <= 480 ? 25 : 50}
           height={screen.width <= 480 ? 25 : 50}
@@ -22,7 +22,7 @@ export const useVolumeSlider = (defaultValue) => {
       value: 25,
       label: (
         <img
-          src={require("../assets/slider/bottle.png").default}
+          src={require("../assets/slider/bottle.jpg").default}
           alt={"Coke"}
           width={screen.width <= 480 ? 50 : 75}
           height={screen.width <= 480 ? 50 : 75}
@@ -33,7 +33,7 @@ export const useVolumeSlider = (defaultValue) => {
       value: 50,
       label: (
         <img
-          src={require("../assets/slider/gallon-small.png").default}
+          src={require("../assets/slider/gallon-small.jpg").default}
           alt={"Coke"}
           width={screen.width <= 480 ? 75 : 100}
           height={screen.width <= 480 ? 75 : 100}
@@ -44,7 +44,7 @@ export const useVolumeSlider = (defaultValue) => {
       value: 75,
       label: (
         <img
-          src={require("../assets/slider/gallon-big.png").default}
+          src={require("../assets/slider/gallon-big.jpg").default}
           alt={"Coke"}
           width={screen.width <= 480 ? 100 : 125}
           height={screen.width <= 480 ? 100 : 125}

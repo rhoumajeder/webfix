@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdHelp } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import body from '../../assets/images/bodyref.png';
+import body from '../../assets/images/bodyref.jpg';
 
 
 import Popover from '@mui/material/Popover';
