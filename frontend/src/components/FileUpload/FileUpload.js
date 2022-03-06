@@ -44,8 +44,8 @@ const FileUpload = (props) => {
       let fileSize = e.target.files[i].size;
       fileSize = Math.round(fileSize / 1024);
 
-      if (fileSize > 5000) {
-        addToast("Max file size is 5mb", {
+      if (fileSize > 15000) {
+        addToast("Max file size is 15mb", {
           appearance: "error",
         });
         return;
