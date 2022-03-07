@@ -19,6 +19,8 @@ import { useToasts } from "react-toast-notifications";
 
 import findWithAttr from "../../helpers/findAttr";
 
+import Resizer from "react-image-file-resizer";
+
 
 
 
@@ -27,8 +29,25 @@ const FileUpload = (props) => {
   const { addToast } = useToasts();
   const [files, setFiles] = useState([1, 2, 3]);
 
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      1024,
+      768,
+      "JPEG",
+      70,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "file"
+    );
+  });
+
+
   // Function called when user selects one or multiple files
-  const selectFile = (e) => {
+  const selectFile = async (e) => {
     if (e.target.files.length > 3) {
       addToast("You can not add more than 3 images per item", {
         appearance: "error",
@@ -44,21 +63,31 @@ const FileUpload = (props) => {
       let fileSize = e.target.files[i].size;
       fileSize = Math.round(fileSize / 1024);
 
-      if (fileSize > 4000) {
-        addToast("Max image volume 4mb,compresser vos images https://imagecompressor.com/ ", {
+      if (fileSize > 10000) {
+        addToast("Max image volume 10mb,compresser vos images https://imagecompressor.com/ ", {
           appearance: "error",
         });
         return;
       }
 
       for (let j = 0; j < newFiles.length; j++) {
+
+        try {
+        const file_c = e.target.files[i];
+        const image_c = await resizeFile(file_c);
         if (typeof newFiles[j] === "number") {
           newFiles[j] = {
-            file: e.target.files[i],
-            preview: URL.createObjectURL(e.target.files[i]),
+            file: image_c,
+            preview: URL.createObjectURL(e.target.files[i]), 
           };
           break;
         }
+        } catch (err) {
+          console.log(err);
+        }
+
+
+  
       }
     }
 
@@ -81,6 +110,14 @@ const FileUpload = (props) => {
       return newTableData;
     });
   };
+
+
+
+
+
+
+
+
 
   // Delete a selected file
   const deleteFile = (index) => {

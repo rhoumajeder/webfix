@@ -541,6 +541,7 @@ def create_ask_record_item_images(request, pk):
     item = get_object_or_404(AskRecordItem, id=pk)
     data_processed = request.data
     data_processed['image'] = compress(request.data['image'])
+    # data_processed['image'] = request.data['image']
     serializer = AskRecordItemImageSerializer(
         data=data_processed)
 

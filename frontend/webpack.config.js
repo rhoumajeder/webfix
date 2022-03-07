@@ -40,7 +40,7 @@ module.exports = {
     minimize: true,
   },
   plugins: [
-    new NodePolyfillPlugin(),
+    new NodePolyfillPlugin(), 
     new CompressionPlugin({
       compressionOptions: {
         numiterations: 15,
