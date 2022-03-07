@@ -560,6 +560,18 @@ def get_ask_record_item_images(request, pk):
 
 
 @api_view(['GET'])
+def get_ask_record_item_images_mobile(request, slistpk):
+    list_of_ids = slistpk.split("-")
+    serializerdata = {}
+    for i in list_of_ids:
+        item = get_object_or_404(AskRecordItem, id=i)
+        serializer = AskRecordItemImageSerializer(
+            item.item_images.all(), many=True)
+        serializerdata[str(i)] = serializer.data
+    return Response(serializerdata, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_records_for_user(request): # we do not use this function , it's replaced by get_list_offers 
     records = Record.objects.filter(user=request.user).order_by('-updated_at')[:11]

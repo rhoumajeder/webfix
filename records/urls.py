@@ -41,6 +41,8 @@ urlpatterns = [
          views.create_ask_record_item_images),
     path('get-ask-record-item-images/<str:pk>/',
          views.get_ask_record_item_images),
+    path('get-ask-record-item-images-mobile/<str:slistpk>/',
+         views.get_ask_record_item_images_mobile),
 #     path('create-feedback/<str:receiver_email>/',
     path('create-feedback/<str:id>/',
          views.create_feedback),
