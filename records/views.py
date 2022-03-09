@@ -311,37 +311,53 @@ def get_ask_record_item_images_mobile_internal(slistpk):
 @api_view(["GET"])
 def get_record(request, pk):
 
-    if(pk[-6:] == "mobile"):
-        print(pk,"pk")
-        pk = pk[:-6]
-        record = get_object_or_404(Record, id=pk, deleted=False)
+    check_mobile = pk[-6:] == "mobile"
+    if check_mobile:
+         pk = pk[:-6] 
+
+    record = get_object_or_404(Record, id=pk, deleted=False)
+
+    if record.type == "Ask" and check_mobile:
+        if(check_mobile):
+            print(pk,"pk")
+            pk = pk[:-6] # "type": "Ask",
+            # record = get_object_or_404(Record, id=pk, deleted=False)
+            # record.type == "Ask":
+
+            serializer = RecordDetailSerializer_lighter(record)
+
+            data_initial = serializer.data
+            ask_items_initial = data_initial["ask_items"]
+
+            ask_items_final = []
+            print("print data === ",data_initial)
+            print("print data === ",ask_items_initial)
+            list_of_ids = ""
+            ids = []
+            for i in data_initial["ask_items"]:
+                list_of_ids = list_of_ids + str(i["id"]) + "-"
+                ids.append(str(i["id"]))
+            list_of_ids = list_of_ids[:-1]
+            get_images_links = get_ask_record_item_images_mobile_internal(list_of_ids)
+            index = 0
+            print("=======get_images_links ===",get_images_links)
+            for items in ask_items_initial : 
+                items["askImages"] = get_images_links[ids[index]]
+                print("items here ========",items)
+                ask_items_final.append(items)
+                index = index + 1 
+            data_initial["ask_items"] = ask_items_final
+            return Response(data_initial, status=status.HTTP_200_OK)
+    
+    if check_mobile == True and record.type == "Propose" :
+        #record = get_object_or_404(Record, id=pk, deleted=False)
+        print("====================== ")
+        print("i am called here ")
+        print("====================== ")
         serializer = RecordDetailSerializer_lighter(record)
-
-        data_initial = serializer.data
-        ask_items_initial = data_initial["ask_items"]
-
-        ask_items_final = []
-        print("print data === ",data_initial)
-        print("print data === ",ask_items_initial)
-        list_of_ids = ""
-        ids = []
-        for i in data_initial["ask_items"]:
-            list_of_ids = list_of_ids + str(i["id"]) + "-"
-            ids.append(str(i["id"]))
-        list_of_ids = list_of_ids[:-1]
-        get_images_links = get_ask_record_item_images_mobile_internal(list_of_ids)
-        index = 0
-        print("=======get_images_links ===",get_images_links)
-        for items in ask_items_initial : 
-            items["askImages"] = get_images_links[ids[index]]
-            print("items here ========",items)
-            ask_items_final.append(items)
-            index = index + 1 
-        data_initial["ask_items"] = ask_items_final
-        return Response(data_initial, status=status.HTTP_200_OK)
-
-    else:
-        record = get_object_or_404(Record, id=pk, deleted=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    if check_mobile == False:
+        #record = get_object_or_404(Record, id=pk, deleted=False)
         print("====================== ")
         print("i am called here ")
         print("====================== ")
