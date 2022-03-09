@@ -389,7 +389,7 @@ Get record by theses conditions :
 import time
 
 
-@cache_page(60 * 60)  # 60 minutes 
+# @cache_page(60 * 60)  # 60 minutes 
 @api_view(["GET"])
 def get_all_records(request):
 
@@ -397,7 +397,7 @@ def get_all_records(request):
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-date')[:10]
+    ).order_by('-date')[:100]
     # ).order_by('-id') date
     
     end = time.time()
