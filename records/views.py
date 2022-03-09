@@ -207,8 +207,14 @@ def create_record(request):
     print("==========rje end")
     username = request.user.username
    
-        
-    id_record = (Record.objects.filter().order_by('-id')[0]).id + 1
+    try:
+     id_record = (Record.objects.filter().order_by('-id')[0]).id + 1
+    except IndexError:
+        id_record = 1
+    
+    # id_record = (Record.objects.filter().order_by('-id')[0]).id + 1
+
+    
     print(id_record)
     
     if data_treated["type"] == "Propose" :
