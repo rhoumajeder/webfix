@@ -66,7 +66,7 @@ const TravelCard = (props) => {
   const allCategories = [
     "Food",
     "Medicaments",
-    "Small Electronics",
+    "Small Electronic",
     "Small Accessories",
     "Vetements",
     "Big Mechanical",
