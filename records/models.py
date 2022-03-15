@@ -46,8 +46,8 @@ class Record(models.Model):
 
     image_ask = models.ImageField(upload_to="images/",null=True,blank=True) 
     image_propose = models.ImageField(upload_to="images/",null=True,blank=True)
-    ask_total_price  = models.PositiveIntegerField(default=1, null=True)
-    ask_total_weight = models.PositiveIntegerField(default=1, null=True)
+    ask_total_price  = models.PositiveIntegerField(default=0, null=True)
+    ask_total_weight = models.PositiveIntegerField(default=0, null=True)
     # ask_item_info = models.JSONField(blank=True, null=True)
 
    
