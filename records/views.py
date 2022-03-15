@@ -327,26 +327,27 @@ def get_record(request, pk):
             serializer = RecordDetailSerializer_lighter(record)
 
             data_initial = serializer.data
-            ask_items_initial = data_initial["ask_items"]
+            if data_initial["ask_items"]:
+                ask_items_initial = data_initial["ask_items"]
 
-            ask_items_final = []
-            print("print data === ",data_initial)
-            print("print data === ",ask_items_initial)
-            list_of_ids = ""
-            ids = []
-            for i in data_initial["ask_items"]:
-                list_of_ids = list_of_ids + str(i["id"]) + "-"
-                ids.append(str(i["id"]))
-            list_of_ids = list_of_ids[:-1]
-            get_images_links = get_ask_record_item_images_mobile_internal(list_of_ids)
-            index = 0
-            print("=======get_images_links ===",get_images_links)
-            for items in ask_items_initial : 
-                items["askImages"] = get_images_links[ids[index]]
-                print("items here ========",items)
-                ask_items_final.append(items)
-                index = index + 1 
-            data_initial["ask_items"] = ask_items_final
+                ask_items_final = []
+                print("print data === ",data_initial)
+                print("print data === ",ask_items_initial)
+                list_of_ids = ""
+                ids = []
+                for i in data_initial["ask_items"]:
+                    list_of_ids = list_of_ids + str(i["id"]) + "-"
+                    ids.append(str(i["id"]))
+                list_of_ids = list_of_ids[:-1]
+                get_images_links = get_ask_record_item_images_mobile_internal(list_of_ids)
+                index = 0
+                print("=======get_images_links ===",get_images_links)
+                for items in ask_items_initial : 
+                    items["askImages"] = get_images_links[ids[index]]
+                    print("items here ========",items)
+                    ask_items_final.append(items)
+                    index = index + 1 
+                data_initial["ask_items"] = ask_items_final
             return Response(data_initial, status=status.HTTP_200_OK)
     
     if check_mobile == True and record.type == "Propose" :
