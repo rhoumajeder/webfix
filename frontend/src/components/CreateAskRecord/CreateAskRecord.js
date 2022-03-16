@@ -53,10 +53,10 @@ const CreateAskRecord = (props) => {
 
   // Ask record state holder
   const [askRecord, setAskRecord] = useState({
-    city_arrival: "Bretagne, France",
-    city_destination: "Berlin, Allemagne",
+    city_arrival: "",
+    city_destination: "",
     date: moment(new Date()).format("YYYY-MM-DD"),
-    description: "Pas de Description",
+    description: "",
     type: "Ask",
     phone_number: "", 
     ask_item_info: []
@@ -88,19 +88,19 @@ const CreateAskRecord = (props) => {
       .default(function () {
         return moment(new Date()).format("YYYY-MM-DD");
       })
-      .min(today, "Date can not be in the past"),
-    city_destination: yup.string().required("Please select destination city"),
+      .min(today, "Date doit etre dans le passé"),
+    city_destination: yup.string().required("Veuillez Choisir votre destiantion"),
     city_arrival: yup
       .string()
-      .required("Please select arrival (departure) city")
+      .required("Veuillez Choisir une ville de départ")
       .notOneOf(
         [yup.ref("city_destination")],
-        "The departure city and destination can not be the same"
+        "Veuillez vérifier Départ/Destination"
       ),
     description: yup
       .string()
-      .required("Please enter a short description")
-      .max(400, "Description can not be more than 400 characters"),
+      .required("Veullez détailler ce que vous voulez envoyer")
+      .max(400, "Description doit etre inférieur à 400 "),
     phone_number: yup
       .string()
       // .required("Phone number for records is required")
@@ -129,7 +129,7 @@ const CreateAskRecord = (props) => {
         .required("Please add a weight for selected sub-category")
         .positive("Weight for items must be positive")
         .integer()
-        .max(99, "Weight can not be more than 99"),
+        .max(99, " Poids doit etre inférieur à 99kg"),
     })
   );
   const handleCheckboxChange = (e) => {
@@ -194,13 +194,12 @@ const CreateAskRecord = (props) => {
   const submitItemAfter = () => {
 
     const itemData1 = [...rows];
-    console.log("rje star debug itemdata 1");
-    console.log(itemData1);
+    
+    
     askRecord["ask_item_info"] = itemData1;
     askRecord["ask_total_price"] = objectSum(itemData1, "price");
     askRecord["ask_total_weight"] = objectSum(itemData1, "weight");
-    console.log("rje star askrecord  1");
-    console.log(askRecord);
+    
 
     askRecordSchema
       .validate(askRecord)
@@ -363,7 +362,7 @@ const CreateAskRecord = (props) => {
               color="default"
               startIcon={<IoArrowBack />}
             >
-              Back
+              Retour
             </Button>
             <Box component="div">
               <Grid container direction="row" alignItems="center" spacing={1}>
@@ -438,7 +437,7 @@ const CreateAskRecord = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Phone Number
+                    Numéro de téléphone
                   </Typography>
                   <TextField
                     id="phone_number"
@@ -502,7 +501,7 @@ const CreateAskRecord = (props) => {
                  color="primary"
                  variant={"contained"}
                >
-                 Sauvegarder
+                 Valider
                </Button>
               }
              

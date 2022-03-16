@@ -140,8 +140,7 @@ const Search = (props) => {
     } else { 
       newFilters[target.name] = values.value;
     }
-    console.log("debug rje 12 ")
-    console.log(newFilters);
+    
     props.setFilters(newFilters);
   };
 
@@ -155,7 +154,7 @@ const Search = (props) => {
     } else {
       newFilters[event.target.name] = event.target.value;
     }
-    console.log("debug rje")
+    
     console.log(newFilters);
     props.setFilters(newFilters);
   };

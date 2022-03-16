@@ -77,7 +77,7 @@ const Index = (props) => {
       .required("Veuillez choisir votre Ville de départ")
       .notOneOf(
         [yup.ref("city_destination")],
-        "The departure city and destination can not be the same"
+        "Veuillez vérifier Départ/Destination"
       ),
     max_weight: yup
       .number()
@@ -143,12 +143,12 @@ const Index = (props) => {
   let Records = {
     date: moment(new Date()).format("YYYY-MM-DD"),
     moyen_de_transport: "Avion",
-    city_arrival: "Bretagne, France",
-    city_destination: "Berlin, Allemagne",
+    city_arrival: "",
+    city_destination: "",
     max_weight: 1,
     max_volume: 3,
     min_price: 0,
-    description: "null value",
+    description: " ",
     categories: [],
     categoriesv: ["Food", "Vetements", "Small Accessories", "Autres"],
     type: "Propose", 
@@ -433,8 +433,7 @@ const Index = (props) => {
       })
 
       setSubRecords([...subRecords, ...categories[event.target.name].items])
-      console.log("rje sub record ===");
-      console.log(subRecords)
+       
 
     } else {
       console.log(subRecords)
@@ -637,7 +636,7 @@ const Index = (props) => {
               color="default"
               startIcon={<IoArrowBack />}
             >
-              Back
+              Retour
             </Button>
             <Box component={"div"} className={"my-2"}>
               <Grid container direction="row" alignItems="center" spacing={1}>
@@ -762,7 +761,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Phone Number rje:
+                    Numéro De téléphone:
                   </Typography>
                   <TextField
                     id="phone_number"
@@ -868,7 +867,7 @@ const Index = (props) => {
                         onChange={handleAvailableCategories}
                       />
                     }
-                    label="Food"
+                    label="Aliments"
                   />
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
@@ -881,7 +880,7 @@ const Index = (props) => {
                         onChange={handleAvailableCategories}
                       />
                     }
-                    label="Medicaments"
+                    label="Médicaments"
                   />
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
@@ -894,7 +893,7 @@ const Index = (props) => {
                         onChange={handleAvailableCategories}
                       />
                     }
-                    label="Small Electronic"
+                    label="High-Tech"
                   />
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
@@ -907,7 +906,7 @@ const Index = (props) => {
                         onChange={handleAvailableCategories}
                       />
                     }
-                    label="Small Accessories"
+                    label="Accessoires"
                   />
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
@@ -920,7 +919,7 @@ const Index = (props) => {
                         onChange={handleAvailableCategories}
                       />
                     }
-                    label="Vetements"
+                    label="Vêtements"
                   />
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
@@ -933,9 +932,9 @@ const Index = (props) => {
                         name="Big Mechanical"
                         onChange={handleAvailableCategories}
                       />
-                    }
-                    label="Big Mechanical"
-                  />
+                    }       
+                    label="Mécanique" 
+                  /> 
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
                   <FormControlLabel
@@ -948,7 +947,7 @@ const Index = (props) => {
                         onChange={handleAvailableCategories}
                       />
                     }
-                    label="Big Electronics"
+                    label="Electronique"
                   />
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
@@ -1007,7 +1006,7 @@ const Index = (props) => {
                 onClick={handleRecordSubmission}
                 size="large"
               >
-                Create
+                Valider
               </Button>
             </Box>
           </CardContent>

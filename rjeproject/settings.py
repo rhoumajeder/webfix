@@ -28,10 +28,11 @@ CAPTCHA = True
 SECRET_KEY = 'django-insecure-mo3_)7aertv6&%yd8ju$rr&$#l07-nc$6lkazort)(jexk^q!x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://rjeapp.herokuapp.com', 'rjeapp.herokuapp.com',
-                 'rjeapptest.herokuapp.com', 'https://rjeapptest.herokuapp.com', "127.0.0.1"]
+                 'rjeapptest.herokuapp.com', 'https://rjeapptest.herokuapp.com', "127.0.0.1",
+                  "lelbled.com","www.lelbled.com","https://www.lelbled.com","http://www.lelbled.com"]
 
 
 # Application definition
@@ -212,8 +213,9 @@ SIMPLE_JWT = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'diegoabdov@gmail.com'
-EMAIL_HOST_PASSWORD = 'qsfhppatwsbjjdib'
+# EMAIL_HOST_USER = 'diegoabdov@gmail.com'
+EMAIL_HOST_USER = 'lelbled.transport@gmail.com'
+EMAIL_HOST_PASSWORD = 'Asmachoko4@'
 EMAIL_USE_TLS = True
 
 DJOSER = {

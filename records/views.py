@@ -239,7 +239,7 @@ def create_record(request):
                     "Autres": True if "Autres" in data_treated["categories"] else False,
                     "name_image_url": username + "-img-propose-share-on-fb-" + str(record_count_all),
                     "type" : data_treated["type"],
-                    "id":"LelBled.com/record-details/" + str(id_record)
+                    "id":"https://www.LelBled.com/record-details/" + str(id_record)
 
                 }
             image = Create_imagefrom_ad(Ads_propose)
@@ -258,7 +258,7 @@ def create_record(request):
 
                     "name_image_url": username + "-img-Ask-share-on-fb-" + str(record_count_all),
                     "type" : data_treated["type"],
-                    "id":"LelBled.com/ask-record-details/" + str(id_record)
+                    "id":"https://www.LelBled.com/ask-record-details/" + str(id_record)
 
                 }
             image = Create_imagefrom_ad(Ads_Ask)

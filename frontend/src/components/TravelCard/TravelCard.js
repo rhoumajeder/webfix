@@ -56,6 +56,31 @@ const getMinPrice = (record) => {
 }
 
 
+const rename_catego=(param)=>{
+  switch(param) {
+    case 'Food':
+      return "Aliments"
+    case 'Medicaments':
+      return 'Médicaments'
+    case 'Small Electronic':
+      return 'High-Tech'
+    case 'Small Accessories':
+      return 'Accessoires'
+    case 'Vetements':
+      return 'Vêtements'
+    case 'Big Mechanical':
+      return 'Mécanique'
+    case 'Big Electronics':
+      return 'Electronique'
+    case 'Autres':
+      return 'Autres'
+    default:
+      return "Autres";
+  
+    }
+
+}
+
 const TravelCard = (props) => {
   const { record } = props;
   const screen = React.useContext(ScreenContext);
@@ -68,7 +93,7 @@ const TravelCard = (props) => {
     "Medicaments",
     "Small Electronic",
     "Small Accessories",
-    "Vetements",
+    "Vetements", 
     "Big Mechanical",
     "Big Electronics",
     "Autres",
@@ -232,7 +257,7 @@ const TravelCard = (props) => {
                         <Grid item xs={"auto"} className={"pb-0"} key={index}>
                           <LuggageCheck
                             check={record.categories.includes(value)}
-                            text={value}
+                            text={rename_catego(value)}
                             className={"fw-medium"}
                           />
                         </Grid>

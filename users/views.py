@@ -125,7 +125,7 @@ def forget_password(request):
 
     if not users:
         response = Response(
-            data={"error": "user with this email not found."}, status=status.HTTP_400_BAD_REQUEST)
+            data={"error": "Something Wrong!"}, status=status.HTTP_400_BAD_REQUEST)
     else:
         user = users[0]
 

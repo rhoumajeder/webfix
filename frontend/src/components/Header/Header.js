@@ -163,10 +163,8 @@ const Header = () => {
   const handleNotificationClose = (e) => {
     setAnchorElNotification(null);
   };
-  console.log("start rje ");
-  console.log(user.id);
-  console.log(user.username);
-  console.log("end rje ");
+  
+  
 
   return (
     <AppBar position="sticky" className={"bg-white text-dark py-2"}>

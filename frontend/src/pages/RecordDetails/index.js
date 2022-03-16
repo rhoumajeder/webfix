@@ -107,7 +107,7 @@ const Index = ({ match }) => {
         res.data.sub_records = Object.values(group);
         setRecord(res.data);
         setSelectionIndex(res.data.max_volume - 1)
-        console.log("check image rje") 
+         
         Setshare_on_fb_image((res.data.image_propose).slice(49));
       })
       .catch((err) => console.log(err.response));
@@ -222,7 +222,7 @@ const Index = ({ match }) => {
                                 Promise.all(ps).then(
                                   () => {
 
-                                    addToast("Record created rje", { appearance: "success" });
+                                    addToast("votre proposition a été envoyé correctement ", { appearance: "success" });
                                     // history.push(`/ask-record-details/${recordId}`);
                                     // history.go();
                                     

@@ -117,7 +117,7 @@ const Index = () => {
       })
       .then((res) => {
         first_load = false;
-        console.log("rje filter =========");
+         
         console.log(paramFilters);
         console.log(res.data);
         setRecords(res.data.results);
