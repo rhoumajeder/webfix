@@ -45,7 +45,7 @@ def Create_imagefrom_ad(Ads):
         myFontbdLink = ImageFont.truetype('records/arialbd.ttf', 30)
 
         # Add Text to an image
-        I1.text((410, 270), Ads["id"], font=myFontbdLink, fill =(0, 0, 0))
+        I1.text((110, 285), Ads["id"], font=myFontbdLink, fill =(0, 0, 0))
         I1.text((300, 60), Ads["date"], font=myFontbd, fill =(0, 0, 0))
         I1.text((838, 57), Ads["min_price"], font=myFontbd, fill =(0, 0, 0))
         I1.text((850, 80), Ads["max_weight"], font=myFontbd, fill =(0, 0, 0))
@@ -54,15 +54,15 @@ def Create_imagefrom_ad(Ads):
         I1.text((120, 174),Ads["username"], font=myFont, fill =(0, 0, 0))
 
 
-        I1.text((347, 175), VX(Ads,"f") , font=myFontbd, fill = RG(Ads,"f") )
-        I1.text((483, 175), VX(Ads,"M"), font=myFontbd, fill =  RG(Ads,"M") )
-        I1.text((646, 175), VX(Ads,"SE"), font=myFontbd, fill = RG(Ads,"SE") )
-        I1.text((815, 175), VX(Ads,"SA"), font=myFontbd, fill = RG(Ads,"SA") )
+        I1.text((382, 178), VX(Ads,"f") , font=myFontbd, fill = RG(Ads,"f") )
+        I1.text((552, 176), VX(Ads,"M"), font=myFontbd, fill =  RG(Ads,"M") )
+        I1.text((686, 174), VX(Ads,"SE"), font=myFontbd, fill = RG(Ads,"SE") )
+        I1.text((832, 174), VX(Ads,"SA"), font=myFontbd, fill = RG(Ads,"SA") )
 
-        I1.text((386, 209), VX(Ads,"V"), font=myFontbd, fill = RG(Ads,"V") )
-        I1.text((539, 209), VX(Ads,"BM"), font=myFontbd, fill = RG(Ads,"BM") )
-        I1.text((684, 209), VX(Ads,"BE"), font=myFontbd, fill = RG(Ads,"BE") )
-        I1.text((769, 209), VX(Ads,"Autres"), font=myFontbd, fill = RG(Ads,"Autres") )
+        I1.text((689, 210), VX(Ads,"V"), font=myFontbd, fill = RG(Ads,"V") )
+        I1.text((554, 208), VX(Ads,"BM"), font=myFontbd, fill = RG(Ads,"BM") )
+        I1.text((406, 209), VX(Ads,"BE"), font=myFontbd, fill = RG(Ads,"BE") )
+        I1.text((786, 209), VX(Ads,"Autres"), font=myFontbd, fill = RG(Ads,"Autres") )
 
 
 
@@ -83,7 +83,7 @@ def Create_imagefrom_ad(Ads):
         myFontbdLink = ImageFont.truetype('records/arialbd.ttf', 25)
 
         # Add Text to an image
-        I1.text( ( 242 , 315 ), Ads["id"], font=myFontbdLink, fill =(0, 0, 0))
+        I1.text( ( 110 , 315 ), Ads["id"], font=myFontbdLink, fill =(0, 0, 0))
 
         # Add Text to an image
         I1.text((240, 40), Ads["date"], font=myFontbd, fill =(0, 0, 0))
