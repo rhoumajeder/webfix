@@ -66,7 +66,7 @@ const CreateAskRecord = (props) => {
   const [rows, setRows] = useState([
     {
       id: `row-${uuid()}`,
-      name: "default name",
+      name: "colis",
       quantity: 1,
       weight: 1,
       price: 1,
@@ -112,22 +112,22 @@ const CreateAskRecord = (props) => {
     yup.object().shape({
       name: yup
         .string()
-        .required("Item name is required")
+        .required(" Champs objet ne doit pas etre vide")
         .max(40, "Name can not be more than 40 characters"),
       price: yup
         .number()
-        .required("Please add a price for selected sub-category")
-        .positive("Price for items must be positive")
+        .required("Veuillez ajouter le prix")
+        .positive("Pris doit etre un nombre positive")
         .max(999, "Price can not be more than $999"),
       quantity: yup
         .number()
         .required("Please add a quantity for selected sub-category")
-        .positive("Quantity for items must be positive")
+        .positive("Quantité doit etre positive")
         .max(99, "Quantity can not be more than 99"),
       weight: yup
         .number()
         .required("Please add a weight for selected sub-category")
-        .positive("Weight for items must be positive")
+        .positive("Poids Doit etre positive")
         .integer()
         .max(99, " Poids doit etre inférieur à 99kg"),
     })
@@ -182,7 +182,17 @@ const CreateAskRecord = (props) => {
 
 
     //   }) 
-    return submitItemAfter();
+    const itemData1 = [...rows];
+    itemSchema
+    .validate(rows)
+    .then((valid) => {
+      if (valid) {
+      return submitItemAfter(); 
+    }
+  }).catch((err) => {
+    addToast(err.message, { appearance: "error" });
+  });
+    
   }
   const CreatingRecord = "  Creating Record ... ";
   if (isloading) {

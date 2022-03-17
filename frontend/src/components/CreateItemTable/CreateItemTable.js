@@ -57,7 +57,7 @@ const CreateItemTable = (props) => {
         color="primary"
         variant={"contained"}
       >
-        Save changes 
+        Valider
       </Button>);
     }
   }
