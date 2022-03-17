@@ -58,7 +58,7 @@ const FileUpload = (props) => {
     const newFiles = [...files];
 
     for (let i = 0; i < e.target.files.length; i++) {
-      console.log(i);
+       
 
       let fileSize = e.target.files[i].size;
       fileSize = Math.round(fileSize / 1024);
@@ -83,7 +83,7 @@ const FileUpload = (props) => {
           break;
         }
         } catch (err) {
-          console.log(err);
+          
         }
 
 
@@ -94,7 +94,7 @@ const FileUpload = (props) => {
     setFiles(newFiles);
 
     props.setDynamicRows((prevState) => {
-      console.log(prevState);
+       
       const newTableData = [...prevState];
       const rowFiles = [];
 
@@ -126,7 +126,7 @@ const FileUpload = (props) => {
     setFiles(newFiles);
 
     props.setDynamicRows((prevState) => {
-      console.log(prevState);
+       
       const newTableData = [...prevState];
 
       const rowIndex = findWithAttr(newTableData, "id", props.rowId);

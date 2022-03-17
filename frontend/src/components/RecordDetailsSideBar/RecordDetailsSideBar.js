@@ -34,7 +34,7 @@ const RecordDetailsSideBar = (props) => {
         `chat/chat-room/${props.record.user.id}/${user.id}/${props.record.id}/`
       )
       .then((res) => {
-        console.log(res.data);
+         
         history.push({
           pathname: "/chat",
           state: {

@@ -65,7 +65,7 @@ const Chat = (props) => {
   const storageRoom = localStorage.getItem("currentRoom");
 
   let actualRoom = null;
-  console.log(storageRoom);
+   
 
   if (currentPropRoom) {
     localStorage.setItem("currentRoom", currentPropRoom.id);
@@ -120,7 +120,7 @@ const Chat = (props) => {
     axiosInstance
       .get("chat/get-rooms/?page=" + currentPage)
       .then((res) => {
-        console.log(res.data);
+        
         setOwnedRooms(res.data.results["owner_rooms"]);
         setUserRooms(res.data.results["user_rooms"]);
         setLoading(false);

@@ -11,9 +11,7 @@ const usePaginationHomePage = (data, itemsPerPage,first_load,number_of_items) =>
      
       const start = (currentPage - 1) * itemsPerPage;
       const end = start + itemsPerPage;
-      console.log("from getcurrentdata");
-      console.log(data); 
-      console.log(data.slice(start, end));
+     
       if(first_load) {
         return data.slice(start, end) 
       } else {

@@ -80,7 +80,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+         
         setIsAuthenticated(false);
         setUser({});
         setLoading(false);

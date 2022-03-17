@@ -261,10 +261,10 @@ const ItemCard = (props) => {
               disabled: true,
             })
             .then((res) => {
-              console.log(res.data);
+               
             })
             .catch((err) => {
-              console.log(err.response);
+               
               addToast(err.message, { appearance: "error" });
             });
         });
@@ -311,7 +311,7 @@ const ItemCard = (props) => {
           item.address_state === "Accepted" &&
           item.meeting_confirmed === false
         ) {
-          console.log(item);
+           
           const date = formatDate(item.date_of_meeting);
           return (
             <div>
@@ -425,7 +425,7 @@ const ItemCard = (props) => {
     axiosInstance
       .post(`update-proposition/${props.item.id}/`, data)
       .then((res) => {
-        console.log(res.data);
+         
         props.fetchItems();
       });
   };
@@ -792,7 +792,7 @@ function Row(props) {
     axiosInstance
       .get(getImageURL)
       .then((res) => {
-        console.log(res.data);
+         
         setImages(res.data);
 
         if (res.data.length > 0) {

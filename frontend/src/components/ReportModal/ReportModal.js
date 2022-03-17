@@ -40,11 +40,11 @@ const ReportModal = (props) => {
     axiosInstance
       .post(`report-user/${props.receiver.email}/`, report)
       .then((res) => {
-        console.log(res.data);
+         
         addToast("Report sent", { appearance: "success" });
       })
       .catch((err) => {
-        console.log(err.response);
+         
         addToast(err.response.data, { appearance: "error" });
       });
 

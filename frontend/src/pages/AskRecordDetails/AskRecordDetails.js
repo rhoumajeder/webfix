@@ -155,20 +155,20 @@ const AskRecordDetails = () => {
 
   const handleInputChange = (e) => {
     setProposition({ ...proposition, [e.target.name]: e.target.value });
-    console.log(proposition);
+     
   };
 
 
   const handleChangeForCheckBox = () => {
     setChecked(!checked);
     setProposition({ ...proposition, ["Proposed_home_delivery"]: checked });
-    console.log(proposition);
+     
   };
 
 
   const handleSelectChange = (item, target) => {
     setProposition({ ...proposition, [target.name]: item.value });
-    console.log(proposition);
+    
      
   };
  
@@ -176,7 +176,7 @@ const AskRecordDetails = () => {
   const handleDateChange = (date) => {
     // setCurrentDate(moment(date).format("YYYY-MM-DD"));
     setProposition({ ...proposition, ["date"]: moment(date).format("YYYY-MM-DD") });
-    console.log(proposition);
+     
     
   };
 

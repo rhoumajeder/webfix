@@ -26,7 +26,7 @@ const ItemTable = (props) => {
     if (e.target.checked) {
       props.setDynamicRows((prevState) => {
         const newTableData = [...prevState];
-        console.log(newTableData);
+         
 
         const rowIndex = findWithAttr(props.rows, "id", parseInt(e.target.id));
         const newRow = {};
@@ -48,7 +48,7 @@ const ItemTable = (props) => {
     } else {
       props.setDynamicRows((prevState) => {
         const newTableData = [...prevState];
-        console.log(newTableData);
+         
 
         const rowIndex = findWithAttr(
           newTableData,

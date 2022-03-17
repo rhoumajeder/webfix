@@ -55,11 +55,11 @@ const FeedbackModal = (props) => {
         .post(`create-feedback/${props.receiver.id}/`, feedback)
         // .post(`create-feedback/${props.receiver.email}/`, feedback)
         .then((res) => {
-          console.log(res.data);
+           
           addToast("Feedback sent", { appearance: "success" });
         })
         .catch((err) => {
-          console.log(err.response);
+           
           addToast(err.response.data, { appearance: "error" });
         });
 

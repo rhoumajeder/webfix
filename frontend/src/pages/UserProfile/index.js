@@ -22,7 +22,7 @@ const PAGE_SIZE = 5;
 
 
 const Index = (props) => {
-    console.log(props)
+     
 
     const targetUserId = isNaN(props.match.params.user) ? null : (
         parseInt(props.match.params.user)
@@ -234,10 +234,10 @@ const Index = (props) => {
                                         </Typography>
                                     </Box>
                                 </Box>
-                                {console.log(targetUserId)}
+                                {/* {console.log(targetUserId)}
                                 {console.log("authUser")}
 
-                                {console.log(authUser)}
+                                {console.log(authUser)} */}
 
                                 {!(targetUserId == authUser.id) && !(targetUserId === null) && <Box align="right">
                                     <ButtonBase>

@@ -124,8 +124,8 @@ const Search = (props) => {
     props.setRecordType(newRecordType); 
     // props.fetchRecords(newRecordType); 
     props.fetchRecords_for_button_search(newRecordType);
-    console.log("rej in search js===");
-    console.log(newFilters);
+     
+     
 
     props.setLoading(true);
   };
@@ -155,7 +155,7 @@ const Search = (props) => {
       newFilters[event.target.name] = event.target.value;
     }
     
-    console.log(newFilters);
+     
     props.setFilters(newFilters);
   };
 
@@ -173,7 +173,7 @@ const Search = (props) => {
         newFilters[e.target.name] = e.target.value;
       }
     }
-    console.log(newFilters);
+     
     props.setFilters(newFilters);
   };
 

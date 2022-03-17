@@ -65,7 +65,7 @@ const LuggageTable = (props) => {
         row[event.target.name] = event.target.value;
       }
     })
-    console.log(newRows)
+     
     props.setSelected(newRows);
   };
 

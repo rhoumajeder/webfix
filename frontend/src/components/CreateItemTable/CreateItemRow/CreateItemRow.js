@@ -21,7 +21,7 @@ const CreateItemRow = (props) => {
   const handleInputChange = (e) => {
     props.setRows((prevState) => {
       const newTableData = [...prevState];
-      console.log(newTableData);
+       
 
       const rowIndex = findWithAttr(newTableData, "id", props.index);
 

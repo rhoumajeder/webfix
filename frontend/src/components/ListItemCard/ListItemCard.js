@@ -93,7 +93,7 @@ const ListItemCard = (props) => {
     if (props.itemType === "offer") { 
 
       axiosInstance.get("get-records-for-user/?page="+currentPage).then((res) => {
-        console.log(res.data);
+         
         setRecords(res.data.results); 
        
         setisLoading(false);
@@ -102,7 +102,7 @@ const ListItemCard = (props) => {
       });
     } else {
       axiosInstance.get("get-requests/?page="+currentPage).then((res) => {
-        console.log(res.data);
+         
         setItems(res.data.results);
         setisLoading(false);
         // alert(isloading);
@@ -126,7 +126,7 @@ const ListItemCard = (props) => {
     if (props.itemType === "offer") {
 
       axiosInstance.get("get-records-for-user/").then((res) => {
-        console.log(res.data);
+         
         setRecords(res.data.results);
         set_number_of_items(res.data.count);
         setisLoading(false);
@@ -135,7 +135,7 @@ const ListItemCard = (props) => {
       });
     } else {
       axiosInstance.get("get-requests/").then((res) => {
-        console.log(res.data);
+         
         setItems(res.data.results);
         set_number_of_items(res.data.count);
         setisLoading(false);

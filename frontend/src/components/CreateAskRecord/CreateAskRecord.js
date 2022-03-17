@@ -145,7 +145,7 @@ const CreateAskRecord = (props) => {
 
   const handleSelectChange = (item, target) => {
     setAskRecord({ ...askRecord, [target.name]: item.value });
-    console.log(askRecord);
+     
   };
 
   const handleInputChange = (e) => {
@@ -233,7 +233,7 @@ const CreateAskRecord = (props) => {
                 itemFiles.forEach((fileArr, index) => {
                   fileArr.forEach((file) => {
                     if (fileArr[fileArr.length - 1] === file) {
-                      console.log({ fileArr });
+                      
                       if (fileArr.length > 0) {
                         bimages = true;
                       }
@@ -268,7 +268,7 @@ const CreateAskRecord = (props) => {
                           itemFiles.forEach((fileArr, index) => {
                             fileArr.forEach((file) => {
                               if (fileArr[fileArr.length - 1] === file) {
-                                console.log("last element")
+                                 
                                 setisLoading(true);
                                 let data = new FormData();
                                 data.append("image", file);
@@ -279,7 +279,7 @@ const CreateAskRecord = (props) => {
                                     data
                                   )
                                   .then((res) => {
-                                    console.log(res.data);
+                                     
 
                                     Promise.all(ps).then(
                                       () => {
@@ -294,7 +294,7 @@ const CreateAskRecord = (props) => {
 
                                   })
                                   .catch((err) => {
-                                    console.log(err.response);
+                                    
                                     setisLoading(false);
                                   });
 
@@ -309,10 +309,10 @@ const CreateAskRecord = (props) => {
                                     data
                                   )
                                   .then((res) => {
-                                    console.log(res.data);
+                                     
                                   })
                                   .catch((err) => {
-                                    console.log(err.response);
+                                     
                                     setisLoading(false);
                                   });
                                 ps.push(p)
@@ -326,7 +326,7 @@ const CreateAskRecord = (props) => {
                         .catch((err) => {
                           addToast("There was an error", { appearance: "error" });
                           setisLoading(false);
-                          console.log(err);
+                           
                         });
                      }
                     }
@@ -334,7 +334,7 @@ const CreateAskRecord = (props) => {
 
                   })
                   .catch((err) => {
-                    console.log(err.response);
+                     
                     addToast(err.response.data, { appearance: "error" });
                     setisLoading(false);
                   });
@@ -342,13 +342,13 @@ const CreateAskRecord = (props) => {
             })
             .catch((err) => {
               addToast(err.message, { appearance: "error" });
-              console.log(err);
+              
             });
         }
       })
       .catch((err) => {
         addToast(err.message, { appearance: "error" });
-        console.log(err);
+         
       });
   };
 

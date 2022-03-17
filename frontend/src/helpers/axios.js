@@ -1,5 +1,5 @@
 import axios from "axios";
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 const baseURL = `${window.location.protocol}//${window.location.host}/api/`
 
 
@@ -88,7 +88,7 @@ axiosInstance.interceptors.response.use(
               originalRequest.headers["Authorization"] =
                 "JWT " + response.data.access;
 
-              console.log("Token refreshed");
+              // console.log("Token refreshed");
 
               return axiosInstance(originalRequest);
             })

@@ -95,7 +95,7 @@ const Header = () => {
     axiosInstance
       .get("notifications/get-notifications/")
       .then((res) => {
-        console.log(res.data);
+         
         setNotifications(res.data);
       })
       .catch((err) => {
@@ -108,7 +108,7 @@ const Header = () => {
     axiosInstance
       .post(`notifications/update-notification/${id}/`, data)
       .then((res) => {
-        console.log(data);
+         
         getNotifications();
       })
       .catch((err) => {
@@ -126,7 +126,7 @@ const Header = () => {
     axiosInstance
       .delete(`notifications/delete-notification/${id}/`)
       .then((res) => {
-        console.log(res.data);
+         
         getNotifications();
       })
       .catch((err) => {

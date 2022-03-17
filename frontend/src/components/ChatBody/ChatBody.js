@@ -73,7 +73,7 @@ const ChatBody = (props) => {
     if (props.room) {
       setLoading(true);
       axiosInstance.get(`chat/get-messages/${props.room}/`).then((res) => {
-        console.log(res.data);
+         
         setMessages(res.data);
         setLoading(false);
       })
@@ -97,12 +97,12 @@ const ChatBody = (props) => {
         axiosInstance
           .post(`chat/create-message/${props.room}/`, { content: text })
           .then((res) => {
-            console.log(res.data);
+             
             getMessages();
             setText("");
           })
           .catch((err) => {
-            console.log(err.response);
+            
           });
       }
     }
