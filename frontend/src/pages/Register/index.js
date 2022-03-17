@@ -116,11 +116,11 @@ const Index = () => {
       setForm={setForm}
       formData={formData}
       isValid={isValid}
-      captcha={<ReCAPTCHA
-        sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
-        ref={recaptchaRef}
-        size="invisible"
-      />}
+      // captcha={<ReCAPTCHA
+      //   sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
+      //   ref={recaptchaRef}
+      //   size="invisible"
+      // />}
     />
   );
 };

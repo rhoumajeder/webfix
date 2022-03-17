@@ -41,11 +41,11 @@ const RecordCreation = () => {
   return (
     <div>
       <Header />
-      <ReCAPTCHA
+      {/* <ReCAPTCHA
         sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
         ref={recaptchaRef}
         size="invisible"
-      />
+      /> */}
       {recordToShow === "" && (
         <Container>
           <Grid container spacing={2} style={{ marginTop: "50px" }}>
