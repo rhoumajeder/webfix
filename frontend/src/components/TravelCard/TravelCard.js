@@ -62,7 +62,7 @@ const rename_catego=(param)=>{
       return "Aliments"
     case 'Medicaments':
       return 'Médicaments'
-    case 'Small Electronic':
+    case 'Small Electronics':
       return 'High-Tech'
     case 'Small Accessories':
       return 'Accessoires'
@@ -91,7 +91,7 @@ const TravelCard = (props) => {
   const allCategories = [
     "Food",
     "Medicaments",
-    "Small Electronic",
+    "Small Electronics",
     "Small Accessories",
     "Vetements", 
     "Big Mechanical",
