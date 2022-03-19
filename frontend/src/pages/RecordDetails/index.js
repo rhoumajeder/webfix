@@ -128,7 +128,7 @@ const Index = ({ match }) => {
     }
     setDynamicRows((prevState) => {
       const newTableData = [...prevState];
-      console.log(newTableData);
+      //console.log(newTableData);
 
       if (
         !objectInArray(newTableData, "type", "added") &&
@@ -177,7 +177,7 @@ const Index = ({ match }) => {
     itemFiles.forEach((fileArr, index) => {
       fileArr.forEach((file) => {
         if (fileArr[fileArr.length - 1] === file) {
-          console.log({ fileArr });
+          //console.log({ fileArr });
           if(fileArr.length > 0 ){
             bimages = true;
           }
@@ -202,14 +202,14 @@ const Index = ({ match }) => {
                     itemFiles.forEach((fileArr, index) => {
                       fileArr.forEach((file) => {
                         if (fileArr[fileArr.length - 1] === file) {
-                            console.log("last element")
+                            //console.log("last element")
                             
                             let data = new FormData();
                             data.append("image", file);
     
-                            console.log("star consol");
-                            console.log({ fileArr, file, itemFiles, data });
-                            console.log("end consol");
+                            //console.log("star consol");
+                            //console.log({ fileArr, file, itemFiles, data });
+                            //console.log("end consol");
 
                             let p = fileAxios
                               .post(
@@ -217,7 +217,7 @@ const Index = ({ match }) => {
                                 data
                               )
                               .then((res) => {
-                                console.log(res.data);
+                                //console.log(res.data);
 
                                 Promise.all(ps).then(
                                   () => {
@@ -254,7 +254,7 @@ const Index = ({ match }) => {
                               data
                             )
                             .then((res) => {
-                              console.log(res.data);
+                              console.log(" ");
                             })
                             .catch((err) => {
                               console.log(err.response);

@@ -9,7 +9,7 @@ const ItemTableRow = (props) => {
   const handleInputChange = (e) => {
     props.setDynamicRows((prevState) => {
       const newTableData = [...prevState];
-      console.log(newTableData);
+      //console.log(newTableData);
 
       const rowIndex = findWithAttr(newTableData, "id", props.row.id);
 

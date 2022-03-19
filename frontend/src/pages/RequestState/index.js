@@ -42,7 +42,8 @@ const Index = () => {
       .then((res) => {
         setProposition(res.data);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => 
+      );
   };
 
   useEffect(() => {

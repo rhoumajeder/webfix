@@ -24,7 +24,7 @@ const getMinPrice = (record) => {
 
   let minPrice = 0;
   let prices = [];
-  console.log(record)
+  //console.log(record)
 
   try {
 
@@ -176,7 +176,7 @@ const TravelCard = (props) => {
                   >
                     {" "}
                     Min Prix:{" "}
-                    {console.log(record)}
+                    {/* {console.log(record)} */}
                     {/* {record.sub_records.length > 0 &&
                       getMinPrice(record.sub_records) + "€"}{"0 €"} */}
                         {record && record.min_price 

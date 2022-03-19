@@ -67,7 +67,7 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useContext(AuthContext);
-  console.log("here is the index ?;");
+  //console.log("here is the index ?;");
   const getUser = () => {
     setLoading(true);
     axiosInstance

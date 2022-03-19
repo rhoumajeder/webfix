@@ -92,7 +92,7 @@ const Index = () => {
         params: paramFilters,
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setRecords(res.data);
         setLoading(false);
       })
@@ -118,8 +118,8 @@ const Index = () => {
       .then((res) => {
         first_load = false;
          
-        console.log(paramFilters);
-        console.log(res.data);
+        //console.log(paramFilters);
+        //console.log(res.data);
         setRecords(res.data.results);
         set_number_of_items(res.data.count);
         setLoading(false);
@@ -145,7 +145,7 @@ const Index = () => {
       })
       .then((res) => {
 
-        console.log(res.data);
+        //console.log(res.data);
         setRecords(res.data.results);
         setLoading(false);
       })

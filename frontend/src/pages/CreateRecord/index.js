@@ -174,14 +174,14 @@ const Index = (props) => {
 
   const handleSelectChange = (item, target) => {
     setRecord({ ...record, [target.name]: item.value });
-    console.log(record);
+    //console.log(record);
   };
 
   const handleRadioChange = (event) => {
     setRecord({ ...record, [event.target.name]: event.target.value });
-    console.log(record);
-    console.log(event.target.name);
-    console.log(event.target.value);
+    //console.log(record);
+    //console.log(event.target.name);
+    //console.log(event.target.value);
   };
 
   const CategoryList = {
@@ -375,7 +375,7 @@ const Index = (props) => {
 
     let minPrice = 0;
     let prices = [];
-    console.log(record)
+    //console.log(record)
 
     try {
 
@@ -436,7 +436,7 @@ const Index = (props) => {
        
 
     } else {
-      console.log(subRecords)
+      //console.log(subRecords)
       const newCategories = [...record.categories];
       const index = newCategories.indexOf(event.target.name)
       if (index > -1) {
@@ -471,7 +471,7 @@ const Index = (props) => {
           newSubRecords.push(subRecord)
         }
       })
-      console.log(newSubRecords)
+      //console.log(newSubRecords)
       setSubRecords(newSubRecords)
     }
 
@@ -559,8 +559,8 @@ const Index = (props) => {
     validationSubRecords = newlist;
 
     record["min_price"] = getMinPrice(validationSubRecords) < 9999 ? getMinPrice(validationSubRecords) : 0;
-    console.log("validationSubRecords")
-    console.log(validationSubRecords);
+    //console.log("validationSubRecords")
+    //console.log(validationSubRecords);
     // alert(validationSubRecords.length);   
 
 
@@ -578,7 +578,7 @@ const Index = (props) => {
                 axiosInstance
                   .post(`create-record/`, record)
                   .then((res) => {
-                    console.log(res);
+                    //console.log(res);
                     if (res.data.id) {
                       const recordId = res.data.id;
                       let subRec = validationSubRecords.map((v) => ({
@@ -971,7 +971,7 @@ const Index = (props) => {
                 record.categories.map((data, index) => { 
                   if (data !== "Autres") {
                     const rows = subRecords.filter(subRecord => subRecord.category === data);
-                    console.log(rows)
+                    //console.log(rows)
 
                     return (
                       <Box component={"div"} key={index} className={"my-2"}>

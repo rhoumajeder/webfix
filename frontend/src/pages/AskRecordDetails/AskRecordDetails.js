@@ -108,8 +108,8 @@ const AskRecordDetails = () => {
     axiosInstance
       .get(`get-record/${id}/`)
       .then((res) => {
-        console.log(res.data);
-        console.log("f");
+        //console.log(res.data);
+        //console.log("f");
         setRecord(res.data);
         Setshare_on_fb_image((res.data.image_ask).slice(49));
         setLoading(false);

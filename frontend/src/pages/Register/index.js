@@ -51,7 +51,7 @@ const Index = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const gRecaptchaRoken = recaptchaRef.current.execute();
-    console.log(gRecaptchaRoken)
+   // console.log(gRecaptchaRoken)
 
 
 
@@ -62,7 +62,7 @@ const Index = () => {
           axiosInstance
             .post("auth/signup", formData)
             .then((signUpRes) => {
-              console.log(signUpRes.data);
+              //console.log(signUpRes.data);
 
               addToast("Registration Successful", { appearance: "success" });
 
@@ -72,7 +72,7 @@ const Index = () => {
                   password: formData.password,
                 })
                 .then((loginRes) => {
-                  console.log(loginRes.data);
+                  //console.log(loginRes.data);
                   localStorage.setItem("access_token", loginRes.data.access);
                   localStorage.setItem("refresh_token", loginRes.data.refresh);
                   axiosInstance.defaults.headers["Authorization"] =
