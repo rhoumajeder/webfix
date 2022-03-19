@@ -34,7 +34,7 @@ function NewFeedback() {
                                     {/* <img src={fash} alt="not found" width='25px' height='25px' /> */}
                                     <FaBolt size="35px" /> 
                                     <Typography variant="h5" component="div" style={{ fontWeight: 600 }} > 
-                                        Envoyer Vos Bien le plus vitess possible
+                                        Envoyer Vos Bien le plus vite possible
                                     </Typography>
                                     <Typography variant="body2">
                                     Vous Avez un colis ou un document urgent à envoyer ? Découvrez LelBled App, Notre service vous aide à trouver la personne idéale avec qui vous envoyer votre colis. Où que vous envoyer vos colis, trouvez l’annonce idéal parmi notre large choix de destinations à petits prix.
