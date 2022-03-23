@@ -50,7 +50,7 @@ const Index = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const gRecaptchaRoken = recaptchaRef.current.execute();
+    //const gRecaptchaRoken = recaptchaRef.current.execute();
    // console.log(gRecaptchaRoken)
 
 

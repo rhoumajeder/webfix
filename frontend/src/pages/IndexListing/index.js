@@ -116,7 +116,7 @@ const Index = () => {
         params: paramFilters,
       })
       .then((res) => {
-        first_load = false;
+        first_load = false;     
          
         //console.log(paramFilters);
         //console.log(res.data);
