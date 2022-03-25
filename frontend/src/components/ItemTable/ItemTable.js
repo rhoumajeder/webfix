@@ -62,12 +62,37 @@ const ItemTable = (props) => {
       });
     }
   };
+  const rename_catego=(param)=>{
+    switch(param) {
+      case 'Food':
+        return "Aliments"
+      case 'Medicaments':
+        return 'Médicaments'
+      case 'Small Electronics':
+        return 'High-Tech'
+      case 'Small Accessories':
+        return 'Accessoires'
+      case 'Vetements':
+        return 'Vêtements'
+      case 'Big Mechanical':
+        return 'Mécanique'
+      case 'Big Electronics':
+        return 'Electronique'
+      case 'Autres':
+        return 'Autres'
+      default:
+        return "Autres";
+    
+      }
+  
+  }
+
 
   return (
     <Paper className={`${props.className}`}>
       <EnhancedTableToolbar
         screen={screen}
-        title={props.title}
+        title={rename_catego(props.title)}
         // record={props.rows}
         // setRows={setRows}
       />

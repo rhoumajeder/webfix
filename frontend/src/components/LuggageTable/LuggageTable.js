@@ -85,6 +85,30 @@ const LuggageTable = (props) => {
       }) !== -1
     );
   };
+  const rename_catego=(param)=>{
+    switch(param) {
+      case 'Food':
+        return "Aliments"
+      case 'Medicaments':
+        return 'Médicaments'
+      case 'Small Electronics':
+        return 'High-Tech'
+      case 'Small Accessories':
+        return 'Accessoires'
+      case 'Vetements':
+        return 'Vêtements'
+      case 'Big Mechanical':
+        return 'Mécanique'
+      case 'Big Electronics':
+        return 'Electronique'
+      case 'Autres':
+        return 'Autres'
+      default:
+        return "Autres";
+    
+      }
+  
+  }
 
   const indexOfLastPage = page * rowsPerPage;
   const indexOfFirstPage = indexOfLastPage - rowsPerPage;
@@ -94,7 +118,7 @@ const LuggageTable = (props) => {
     <Paper className={`${props.className}`}>
       {props.hasTitle && (
         <EnhancedTableToolbar
-          title={props.title}
+          title={rename_catego(props.title)}
           screen={screen}
           record={props.rows}
         // setRows={setRows}
