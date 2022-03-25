@@ -192,7 +192,7 @@ const Index = (props) => {
         {
           id: 1,
           accepted: false,
-          name: "Food Solide",
+          name: "Aliments Solides",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -201,7 +201,7 @@ const Index = (props) => {
         {
           id: 2,
           accepted: false,
-          name: "Food Liquid",
+          name: "Aliments Liquides",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -231,7 +231,7 @@ const Index = (props) => {
         {
           id: 4,
           accepted: false,
-          name: "Portable",
+          name: "Téléphone Portable",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -240,7 +240,7 @@ const Index = (props) => {
         {
           id: 5,
           accepted: false,
-          name: "HeartBeat",
+          name: "Caméra",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -255,7 +255,7 @@ const Index = (props) => {
         {
           id: 6,
           accepted: false,
-          name: "Montre",
+          name: "Accessoires Beauté",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -264,7 +264,7 @@ const Index = (props) => {
         {
           id: 7,
           accepted: false,
-          name: "Braclet",
+          name: "Accessoires de Cuisine",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -288,7 +288,7 @@ const Index = (props) => {
         {
           id: 9,
           accepted: false,
-          name: "Robe",
+          name: "Robes",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -297,7 +297,7 @@ const Index = (props) => {
         {
           id: 10,
           accepted: false,
-          name: "Chaussure",
+          name: "Chaussures",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -312,7 +312,7 @@ const Index = (props) => {
         {
           id: 11,
           accepted: false,
-          name: "Moteur",
+          name: "Grosses Pièces Mécanique",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -321,7 +321,7 @@ const Index = (props) => {
         {
           id: 12,
           accepted: false,
-          name: "Trotinette",
+          name: "Petites Pièces Mécaniques",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -336,7 +336,7 @@ const Index = (props) => {
         {
           id: 13,
           accepted: false,
-          name: "Machine Cafe",
+          name: "Petites Pièces électronique",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
@@ -345,7 +345,7 @@ const Index = (props) => {
         {
           id: 14,
           accepted: false,
-          name: "Machine à Laver",
+          name: "Grosses Pièces électronique",
           max_quantity: 1,
           max_weight: 1,
           price: 1,
