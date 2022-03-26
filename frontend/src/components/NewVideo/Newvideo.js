@@ -20,7 +20,7 @@ function Newvideo() {
                 <Card className="px-2 py-5 shadow mb-5 bg-lightgray">
                     <div className='text-center'>
                         <h4 className='display-5'>Lelbled</h4>
-                        <YouTube videoId="-T_XPaY43YM" opts={opts} onReady={onReady} />
+                        <YouTube videoId="-ynJ8HBZj1XE" opts={opts} onReady={onReady} />
                     </div>
                 </Card>
             </Container>
