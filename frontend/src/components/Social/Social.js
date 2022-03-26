@@ -61,7 +61,7 @@ function Social() {
                             <div className="col-4">
                                 <div className="row">
                                     <div className="col">
-                                        <a href="#">
+                                        <a href="https://play.google.com/store/apps/details?id=com.lelbled">
                                             <img src={google} id='google' className='mt-1' alt="" />
                                         </a>
                                         <img src={arrow} className='mb-5' alt="" />

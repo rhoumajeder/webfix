@@ -92,7 +92,7 @@ function NewFooter() {
                         </a>
                     </div>
                     <div className='col-sm d-flex justify-content-start'>
-                        <a href="#" id='bannerS'>
+                        <a href="https://play.google.com/store/apps/details?id=com.lelbled" id='bannerS'>
                             <img src={google} className='mt-2 rounded-3' alt="" />
                         </a>
                     </div>
