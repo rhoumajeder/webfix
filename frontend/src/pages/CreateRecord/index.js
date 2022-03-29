@@ -646,7 +646,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Date Of Voyage:
+                    Date de voyage:
                   </Typography>
                   <MuiPickersUtilsProvider locale="FR" utils={MomentUtils}> 
                   <KeyboardDatePicker
@@ -681,7 +681,7 @@ const Index = (props) => {
                   </Typography>
                   <SelectBoxExtended
                     options={cities}
-                    placeholder={"Ville De Departure"}
+                    placeholder={"Départ"}
                     name={"city_arrival"}
                     onChange={handleSelectChange}
                   />
@@ -697,7 +697,7 @@ const Index = (props) => {
                   <SelectBoxExtended
                     options={cities}
                     name={"city_destination"}
-                    placeholder={"Ville De Destination"}
+                    placeholder={"Destination"}
                     onChange={handleSelectChange}
                   />
                 </Grid>

@@ -4,8 +4,19 @@ const cities = [
     value: "",
   },
   {
+
     label: "France",
     options: [
+      { value: "Paris, France", label: "Paris" },
+      { value: "Marseille, France", label: "Marseille" },
+      { value: "Lyon, France", label: "Lyon" },
+      { value: "Toulouse, France", label: "Toulouse" },
+      { value: "Nice, France", label: "Nice" },
+      { value: "Nantes, France", label: "Nantes" },
+      { value: "Montpellier, France", label: "Montpellier" },
+      { value: "Strasbourg, France", label: "Strasbourg" },
+      { value: "Bordeaux, France", label: "Bordeaux" },
+      { value: "Lille, France", label: "Lille" },
       { value: "Alsace, France", label: "Alsace" },
       { value: "Aquitaine, France", label: "Aquitaine" },
       { value: "Auvergne, France", label: "Auvergne" },
@@ -40,6 +51,18 @@ const cities = [
   {
     label: "Italy",
     options: [
+      { value: "Rome, Italy", label: "Rome" },
+      { value: "Milan, Italy", label: "Milan" },
+      { value: "Naples, Italy", label: "Naples" },
+      { value: "Turin, Italy", label: "Turin" },
+      { value: "Palermo, Italy", label: "Palermo" },
+      { value: "Genoa, Italy", label: "Genoa" },
+      { value: "Bologna, Italy", label: "Bologna" },
+      { value: "Florence, Italy", label: "Florence" },
+      { value: "Catania, Italy", label: "Catania" },
+      { value: "Bari, Italy", label: "Bari" },
+      { value: "Messina, Italy", label: "Messina" },
+      { value: "Verona, Italy", label: "Verona" },
       { value: "Abruzzo, Italy", label: "Abruzzo" },
       { value: "Basilicata, Italy", label: "Basilicata" },
       { value: "Calabria, Italy", label: "Calabria" },
@@ -65,9 +88,23 @@ const cities = [
   {
     label: "Allemagne",
     options: [
+      { value: "Berlin, Allemagne", label: "Berlin" },
+      { value: "Hambourg, Allemagne", label: "Hambourg" },
+      { value: "Munich, Allemagne", label: "Munich" },
+      { value: "Cologne, Allemagne", label: "Cologne" },
+      { value: "Francfort-sur-le-Main, Allemagne", label: "Francfort-sur-le-Main" },
+      { value: "Stuttgart, Allemagne", label: "Stuttgart" },
+      { value: "Düsseldorf, Allemagne", label: "Düsseldorf" },
+      { value: "Dortmund, Allemagne", label: "Dortmund" },
+      { value: "Essen, Allemagne", label: "Essen" },
+      { value: "Leipzig, Allemagne", label: "Leipzig" },
+      { value: "Brême, Allemagne", label: "Brême" },
+      { value: "Dresde, Allemagne", label: "Dresde" },
+      { value: "Hanovre, Allemagne", label: "Hanovre" },
+
       { value: "Baden-Württemberg, Allemagne", label: "Baden-Württemberg" },
       { value: "Bayern, Allemagne", label: "Bayern" },
-      { value: "Berlin, Allemagne", label: "Berlin" },
+      
       { value: "Brandenburg, Allemagne", label: "Brandenburg" },
       { value: "Bremen, Allemagne", label: "Bremen" },
       { value: "Hamburg, Allemagne", label: "Hamburg" },

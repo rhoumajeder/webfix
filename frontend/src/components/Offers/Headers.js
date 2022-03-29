@@ -151,7 +151,7 @@ export const HeaderSetupMeeting = ({
               gutterBottom
               className="fw-bold m-0 my-1"
             >
-              Date Of Meeting:
+              Date de rencontre:
             </Typography>
           </Grid>
           <Grid item sm={"auto"} xs={12}>

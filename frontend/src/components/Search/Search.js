@@ -210,7 +210,7 @@ const Search = (props) => {
                         checked={propose}
                       />
                     }
-                    label="Offres"
+                    label="Offres(Si vous cherchez des transporteurs)"
                   />
                   <FormControlLabel
                     variant="inline"
@@ -222,7 +222,7 @@ const Search = (props) => {
                         checked={ask}
                       />
                     }
-                    label="Demandes"
+                    label="Demandes(Si Vous voulez transporter des objets)"
                   />
                 </div>
               </FormControl>
@@ -233,7 +233,7 @@ const Search = (props) => {
                 options={cities}
                 label={"Ville De Départ"}
                 name={"city_arrival"}
-                placeholder={"Ville De Départ"}
+                placeholder={"Départ"}
                 onChange={handleSelectChange}
               />
             </Grid>
@@ -243,7 +243,7 @@ const Search = (props) => {
                 label={"Ville De Destination"}
                 options={cities}
                 name={"city_destination"}
-                placeholder={"Ville De Destination"}
+                placeholder={"Destination"}
                 onChange={handleSelectChange}
               />
             </Grid>

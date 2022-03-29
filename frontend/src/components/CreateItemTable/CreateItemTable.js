@@ -113,7 +113,7 @@ const CreateItemTable = (props) => {
         className={"d-flex flex-column align-items-end justify-content-end"}
       >
         <Button
-          color="primary"
+          color="secondary"
           variant={"contained"}
           className={"my-3 float-end"}
           onClick={addRow}

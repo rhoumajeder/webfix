@@ -185,8 +185,8 @@ const Index = () => {
             className="text-center pt-2 fw-bold"
             sx={{ display: "flex" }}
           >
-            Envoyez Vos&nbsp;
-            <ReactTextAnimation texts={texts} time={2500} />
+            Envoyez Vos&nbsp;(Colis/Documents/Accessoires)
+            {/* <ReactTextAnimation texts={texts} time={2500} /> */}
             {/* <TextTransition
               text={TEXTS[index % TEXTS.length]}
               springConfig={presets.wobbly}
@@ -199,14 +199,14 @@ const Index = () => {
             className="text-center fw-bold"
             sx={{ display: "flex" }}
           >
-            Economiser vos billets&nbsp;
+            Economisez vos billets&nbsp;
             <ReactTextAnimation texts={texts1} time={3000}/> 
             {/* <TextTransition
               text={TEXTS[newText % TEXTS.length]}
               springConfig={presets.wobbly}
             /> */}
             &nbsp;en important des&nbsp;
-            <ReactTextAnimation texts={texts2} time={2500}/> 
+            <ReactTextAnimation texts={texts2} time={3000}/> 
           </Typography>
           <Typography
             variant="subtitle2"

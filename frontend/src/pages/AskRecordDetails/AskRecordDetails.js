@@ -332,7 +332,7 @@ const AskRecordDetails = () => {
                       label={"Ville De Départ"}
                       name={"Proposed_city_arrival"}
                       // value={proposition.Proposed_city_arrival}
-                      placeholder={"Ville De Départ"}
+                      placeholder={"Départ"}
                       onChange={handleSelectChange}
                     />
                 </Grid>
@@ -343,7 +343,7 @@ const AskRecordDetails = () => {
                       options={cities}
                       name={"Proposed_city_destination"}
                       // value={proposition.Proposed_city_destination}
-                      placeholder={"Ville De Destination"}
+                      placeholder={"Destination"}
                       onChange={handleSelectChange}
                     />
                 </Grid>

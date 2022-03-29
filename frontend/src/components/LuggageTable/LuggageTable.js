@@ -272,7 +272,7 @@ const LuggageTable = (props) => {
                           classes: { input: "py-2 customize-inputField" },
                         }}
                         disabled={row.accepted ? false : true}
-                        placeholder={"Price"}
+                        placeholder={"Prix"}
                         defaultValue={row.price}
                         onChange={(event) => handleInputChange(event, row.id)}
                       />

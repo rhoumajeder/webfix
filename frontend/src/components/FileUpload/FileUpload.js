@@ -20,8 +20,8 @@ import { useToasts } from "react-toast-notifications";
 import findWithAttr from "../../helpers/findAttr";
 
 import Resizer from "react-image-file-resizer";
-
-
+import Button from "@material-ui/core/Button";
+ 
 
 
 
@@ -148,14 +148,25 @@ const FileUpload = (props) => {
           multiple
         />
         <label htmlFor={props.id}>
-          <IconButton
-            color="primary"
+          <Button
+            className="mx-2"
+            variant="contained"
+            color="secondary" 
             aria-label="upload picture"
             component="span"
           >
-            <PhotoCamera />
-          </IconButton>
-          <p>Select up to 3 images for your item</p>
+            <PhotoCamera /> Ajouter Des Photos
+          </Button>
+          {/* <Button
+                      className="mx-2"
+                      variant="contained"
+                      color="secondary"
+                      aria-label="menu"
+                      // startIcon={<RiAdvertisementFill />}
+                    >
+                      Ajouter Des Photos
+                    </Button> */}
+          <p>Ajouter 3 photos maximum</p>
         </label>
       </Grid>
       {files.map((file, index) => {

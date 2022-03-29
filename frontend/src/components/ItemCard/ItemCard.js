@@ -820,7 +820,7 @@ function Row(props) {
             inputProps={{ min: 0 }}
             InputLabelProps={{ shrink: false }}
             name={"price"}
-            placeholder={"Price"}
+            placeholder={"Prix"}
             defaultValue={row.price}
             onChange={changePriceHandler}
             style={{ width: "100px" }}

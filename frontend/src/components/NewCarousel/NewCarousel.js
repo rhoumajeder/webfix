@@ -136,7 +136,7 @@ function NewCarousel() {
                                             <div className="card wddth cardShadow p-3">
                                                 {/* <img class="img-fluid" alt="100%x280" src={fash} width="30" height="30" /> */}
                                                 <div className="card-body">
-                                                    <h4 className="card-title">Service Très sérieuse</h4>
+                                                    <h4 className="card-title">Service Très Sérieux</h4>
                                                     <p className="card-text">
                                                     Wousslitni kathiitii kemlé w fi assra3 wa9t, je recommande vivement ces services
                                                     </p>

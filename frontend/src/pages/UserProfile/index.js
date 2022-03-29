@@ -261,7 +261,7 @@ const Index = (props) => {
                                     <Tabs value={tab} onChange={handleChange}
                                         aria-label="user-tab-profile" textColor={'secondary'}
                                         variant={"scrollable"} scrollButtons="auto">
-                                        <Tab label="Mes Avis" id={`user-tab-${0}`} />
+                                        <Tab label="Les Avis" id={`user-tab-${0}`} />
                                     </Tabs>
                                 </Paper>
                                 <TabPanel value={tab} index={0}>

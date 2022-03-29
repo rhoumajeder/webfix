@@ -104,7 +104,7 @@ function index() {
               <Grid container sx={{ mb: 2 }}>
                 <MailOutlineIcon sx={{ mr: 1 }} />
                 <Typography sx={{ fontWeight: "bold" }}>
-                  ****@gmail.com
+                    contact@lelbled.com
                 </Typography>
               </Grid>
               <Grid container>

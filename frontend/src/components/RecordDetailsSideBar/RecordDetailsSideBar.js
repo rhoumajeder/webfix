@@ -97,7 +97,7 @@ const RecordDetailsSideBar = (props) => {
               </Grid>
             </React.Fragment>
           ) : null}
-          <Box component={"div"} className={"border-top border-2 py-3"}>
+          {/* <Box component={"div"} className={"border-top border-2 py-3"}>
             <LuggageCheck
               check={props.record.user.checked_phone}
               size={"h6"}
@@ -110,7 +110,7 @@ const RecordDetailsSideBar = (props) => {
               text="E-mail vérifié"
               className={"fw-medium"}
             />
-          </Box>
+          </Box> */}
 
           <Box component={"div"} className={"border-top border-2 py-3"}>
             <Typography
@@ -152,7 +152,7 @@ const RecordDetailsSideBar = (props) => {
               gutterBottom
               className={`m-0 me-1 fw-medium`}
             >
-              Avis:
+              Les Avis:
             </Typography>
             {props.record.user.received_feedback.length > 0 ? (
               props.record.user.received_feedback.filter((item, index) => index < 10).map((feedback) => {
