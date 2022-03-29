@@ -57,7 +57,7 @@ const Search = (props) => {
       max_volume: sliderMarks.findIndex(marks => marks.value === value) + 1
     })
     setVolume(e, value)
-  }
+  } 
   const classes = useStyles()
   const { propose, ask } = props.recordType;
   let defaultdatevalue = moment(new Date()).add(3, 'M').format("YYYY-MM-DD") // var futureMonth = moment(currentDate).add(1, 'M');
@@ -354,7 +354,7 @@ const Search = (props) => {
                       Max Volume: 
                       </div>
                       <div className="col-1 d-flex justify-content-start">
-                      <HelpButton />
+                      {/* <HelpButton /> */}
                       </div>
                     </div>
                       {/* <Typography
@@ -367,6 +367,7 @@ const Search = (props) => {
                       <Box
                         component={"div"}
                         className={"px-3 pb-5 position-relative"}
+                        style={{ marginLeft: "40px"}}
                       >
                         <Slider
                           step={null}

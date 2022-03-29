@@ -788,7 +788,7 @@ const Index = (props) => {
                     Max Volume: 
                     </div>
                     <div className="col-1 d-flex justify-content-start ">
-                    <HelpButton />
+                    {/* <HelpButton /> */}
                     </div>
                   </div>
                   {/* <Typography
@@ -800,16 +800,18 @@ const Index = (props) => {
                   </Typography> */}
                   <Box
                     component={"div"}
-                    className={"px-3 pb-5 position-relative"}
+                    className={"px-3 pb-5 position-relative"} 
+                    style={{ marginLeft: "40px"}}
                   >
                     <Slider
+                      
                       step={null}
                       valueLabelDisplay="off"
                       marks={marks}
                       defaultValue={marks[3].value}
                       name={"max_volume"}
                       value={marks[record.max_volume - 1].value}
-                      onChange={handleVolumeChange}
+                      onChange={handleVolumeChange} 
                     />
                   </Box>
                 </Grid>

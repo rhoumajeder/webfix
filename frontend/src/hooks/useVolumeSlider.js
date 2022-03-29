@@ -10,45 +10,64 @@ export const useVolumeSlider = (defaultValue) => {
     {
       value: 0,
       label: (
+        <Typography color={"textSecondary"}>  
         <img
-          src={require("../assets/slider/coke.jpg").default}
-          alt={"Coke"}
-          width={screen.width <= 480 ? 25 : 50}
-          height={screen.width <= 480 ? 25 : 50}
-        />
+        // src={require("../assets/slider/coke.jpg").default}
+        src={require("../assets/slider/v1p.png").default}
+        alt={"Coke"}
+        // width={screen.width <= 480 ? 25 : 50}
+        // height={screen.width <= 480 ? 25 : 50}
+        width={screen.width <= 480 ? 100 : 75}
+        height={screen.width <= 480 ? 100 : 75}
+        // style={{  marginLeft: "20%",}} 
+      ></img>Petit Colis</Typography>    
+
+     
+        
       ),
+      
     },
     {
       value: 25,
       label: (
+        <Typography color={"textSecondary"}>  
         <img
-          src={require("../assets/slider/bottle.jpg").default}
+          // src={require("../assets/slider/bottle.jpg").default}
+          src={require("../assets/slider/v2.jpg").default}
           alt={"Coke"}
-          width={screen.width <= 480 ? 50 : 75}
-          height={screen.width <= 480 ? 50 : 75}
-        />
+          // width={screen.width <= 480 ? 50 : 75}
+          // height={screen.width <= 480 ? 50 : 75}
+          width={screen.width <= 480 ? 100 : 100}
+          height={screen.width <= 480 ? 100 : 100} 
+          ></img>Moyen</Typography>  
       ),
     },
     {
       value: 50,
       label: (
+        <Typography color={"textSecondary"}>  
         <img
-          src={require("../assets/slider/gallon-small.jpg").default}
+          // src={require("../assets/slider/gallon-small.jpg").default}
+          src={require("../assets/slider/v3.jpg").default}
           alt={"Coke"}
-          width={screen.width <= 480 ? 75 : 100}
-          height={screen.width <= 480 ? 75 : 100}
-        />
+          // width={screen.width <= 480 ? 75 : 100}
+          // height={screen.width <= 480 ? 75 : 100}
+          width={screen.width <= 480 ? 100 : 100}
+          height={screen.width <= 480 ? 100 : 100}
+          ></img>Grand Colis</Typography>  
       ),
     },
     {
       value: 75,
       label: (
+        <Typography color={"textSecondary"}>  
         <img
-          src={require("../assets/slider/gallon-big.jpg").default}
+          // src={require("../assets/slider/gallon-big.jpg").default}
+          src={require("../assets/slider/v4.jpg").default}
           alt={"Coke"}
           width={screen.width <= 480 ? 100 : 125}
           height={screen.width <= 480 ? 100 : 125}
-        />
+          ></img>Très grand Colis</Typography>  
       ),
     },
     {
@@ -59,7 +78,7 @@ export const useVolumeSlider = (defaultValue) => {
           color={"textSecondary"}
         >
           {" "}
-          No Max{" "}
+            ....{" "}
         </Typography>
       ),
     },

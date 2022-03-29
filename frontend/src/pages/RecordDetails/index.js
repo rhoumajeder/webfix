@@ -385,10 +385,12 @@ const Index = ({ match }) => {
                     Max Volume: 
                     </div>
                     <div className="col-1 d-flex justify-content-start "> 
-                    <HelpButton />
+                    {/* <HelpButton /> */}
                     </div>
                   </div>
-                    <Box className="px-3 pb-5 mb-5">
+                    <Box className="px-3 pb-5 mb-5"
+                      style={{ marginLeft: "40px"}}>
+
                       <Slider
                         step={null}
                         valueLabelDisplay="off"
