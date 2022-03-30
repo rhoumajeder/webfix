@@ -6,7 +6,9 @@ import { useToasts } from "react-toast-notifications";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import * as yup from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
+import Header from "../../components/Header/Header";
 
+import Grid from '@material-ui/core/Grid';
 
 const Index = () => {
   const { addToast } = useToasts();
@@ -109,8 +111,31 @@ const Index = () => {
     });
   }, [formData]);
 
+  // return (
+  //   <AuthForm
+  //     type={"Register"}
+  //     onFormSubmit={handleSubmit}
+  //     setForm={setForm}
+  //     formData={formData}
+  //     isValid={isValid}
+  //     // captcha={<ReCAPTCHA
+  //     //   sitekey="6LdF_5IdAAAAALzAguYkwNu1qdj_CnQoUh0wQD9y"
+  //     //   ref={recaptchaRef}
+  //     //   size="invisible"
+  //     // />}
+  //   />
+  // );
+
   return (
-    <AuthForm
+    <React.Fragment>
+      <Header />
+      <Grid container > 
+      {/* spacing={2} */}
+        <Grid item md={2} sm={1} xs={1}>
+          {/* <RegisterForm {...props} /> */}
+        </Grid>
+        <Grid item md={8} sm={10} xs={10}>
+        <AuthForm
       type={"Register"}
       onFormSubmit={handleSubmit}
       setForm={setForm}
@@ -122,7 +147,15 @@ const Index = () => {
       //   size="invisible"
       // />}
     />
+        </Grid> 
+
+        <Grid item md={2} sm={1} xs={1} >
+          {/* <LoginForm {...props} /> */}
+        </Grid> 
+      </Grid>
+    </React.Fragment>
   );
+
 };
 
 export default Index;

@@ -22,7 +22,9 @@ import { ScreenContext } from "../../helpers/context";
 import { Link } from "react-router-dom";
 
 
+import ReactTextAnimation from "../../pages/IndexListing/ReactTextAnimation";
 
+import { RiAdvertisementFill, RiShoppingCartFill } from "react-icons/ri";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,6 +67,8 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
   const handleDateChange = (date) => {
     setForm({ ...formData, ["dob"]: moment(date).format("YYYY-MM-DD") });
   };
+  const texts2 = ["Documents", "Accessoires","Colis"];
+  const texts1 = ["d'avion", " de bateau"];
 
   return (
     <form onSubmit={onFormSubmit}>
@@ -78,24 +82,78 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
         <Grid item xs={12} md={10}>
           <Card className={"my-5"}>
             <CardContent>
+            
+          <Button
+            edge="start"
+            color="inherit"
+            aria-label="home"
+            className="mx-2"
+            size={"small"}
+            onClick={() => history.push("/home")}
+          >
+            <img
+              // src={require("../../assets/images/placeholder-logo.svg").default}
+              src={require("../../assets/images/logo-lelbled.svg").default} 
+              alt="Header Logo"
+              className={"w-100"}
+            />
+          </Button>
+
+          <Typography
+            variant="h5"
+            gutterBottom
+            className="text-center pt-2 fw-bold"
+            sx={{ display: "flex" }}
+          >
+            Avec Lelbled vous pouvez envoyer vos Documents le plus vite possible<br/>
+            Economisez vos billets en important des colis
+             
+            
+          </Typography>
+           
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            className="text-center pt-2"
+            variant="h5"
+          >
+            {" "}
+            Trouvez la bonne affaire parmi Un vaste choix d'annonces{" "}
+          </Typography>
+
+
               {type === "Login" && (
                 <Typography
-                  component={"h6"}
-                  variant={"h6"}
+                  // component={"h6"} 
+                  variant={"h4"} 
                   className={"fw-bold my-2"}
+                  style = {{ marginTop: "20px", marginBottom: "20px"  }}
+                  color="primary"
                 >
                   Se Connecter
                 </Typography>
               )}
               {type === "Register" && (
                 <Typography
-                  component={"h6"}
-                  variant={"h6"}
-                  className={"fw-bold my-2"}
+                variant={"h4"} 
+                className={"fw-bold my-2"}
+                style = {{ marginTop: "20px", marginBottom: "20px"  }}
+                color="primary"
                 >
                   Inscription
                 </Typography>
               )}
+              {type === "Register" ? (
+                
+                <Typography
+                variant="subtitle2"
+                color="textPrimary"
+                className="fw-bold my-2"
+                variant={"h6"} 
+              >
+                Choisir votre pseudo 
+              </Typography>
+              ) : null}
               {type === "Register" ? (
                 <TextField
                   required
@@ -112,6 +170,14 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                   fullWidth
                 />
               ) : null}
+              <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        className="fw-bold my-2"
+                        variant={"h6"}
+                      >
+                        Entrer votre Email
+                      </Typography>
               <TextField
                 required
                 id={`${type}_email`}
@@ -128,6 +194,14 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 margin="normal"
                 fullWidth
               />
+              <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        className="fw-bold my-2"
+                        variant={"h6"}
+                      >
+                        Entrer votre mot de passe
+                      </Typography>
 
               <TextField
                 required
@@ -148,6 +222,14 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
               />
               {type === "Register" && (
                 <React.Fragment>
+                  <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        className="fw-bold my-2"
+                        variant={"h6"}
+                      >
+                        Confirmer votre mot de passe
+                      </Typography>
                   <TextField
                     required
                     id={`${type}_password2`}
@@ -165,7 +247,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                     margin="normal"
                     fullWidth
                   />
-                  <TextField
+                  {/* <TextField
                     id={`${type}_phone_number`}
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}
@@ -178,7 +260,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                     onChange={handleChange}
                     margin="normal"
                     fullWidth
-                  />
+                  /> */}
                   {/* <TextField
                                         required
                                         id={"${type}_city"}
@@ -259,6 +341,22 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                   </Typography>
                 )}
               </Box>
+              {type === "Login" && (
+              <Box component="div" display={{ xs: "none", sm: "block" }}>
+                <Link to="/register" className="text-link">
+                
+                  <Button
+                    className="mx-2"
+                    variant="contained"
+                    color="secondary"
+                    aria-label="menu"
+                    
+                  >
+                    Créer un nouveau compte
+                  </Button>
+                </Link>
+              </Box>
+              )}
             </CardActions>
           </Card>
         </Grid>

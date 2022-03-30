@@ -344,7 +344,7 @@ const Header = () => {
                   style={{ color: "inherit", textDecoration: "inherit" }}
                   to="/login"
                 >
-                  Se Connecter / Inscription
+                  Se Connecter
                 </Link>
               </Button>
             </React.Fragment>
