@@ -46,7 +46,7 @@ urlpatterns = [
 #     path('create-feedback/<str:receiver_email>/',
     path('create-feedback/<str:id>/',
          views.create_feedback),
-    path('report-user/<str:receiver_email>/',
+    path('report-user/<str:id_receiver>/',
          views.report_user),
     path('getrecaptcha/', views.get_recaptcha),
      path('contactus/', views.contact_nous),

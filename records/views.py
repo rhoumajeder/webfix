@@ -858,11 +858,11 @@ def create_feedback(request, id):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def report_user(request, receiver_email):
-    receiver = get_object_or_404(CustomUser, email=receiver_email)
+def report_user(request, id_receiver):
+    receiver = get_object_or_404(CustomUser, id=id_receiver)
 
     if Report.objects.filter(writer=request.user, receiver=receiver).exists():
-        return Response("You have already left report for this user", status=status.HTTP_400_BAD_REQUEST)
+        return Response("Vous avez déja reporté cet utilisateur", status=status.HTTP_400_BAD_REQUEST)
 
     serializer = ReportSerializer(data=request.data)
 
