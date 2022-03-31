@@ -970,8 +970,8 @@ const Index = (props) => {
 
             <Box component={"div"} className={"shadow my-2"}>
               {record.categories.length > 0 &&
-                record.categories.map((data, index) => { 
-                  if (data !== "Autres") {
+                record.categories.map((data, index) => {  
+                  if (false) { // if (data !== "Autres") {  disable advanced form
                     const rows = subRecords.filter(subRecord => subRecord.category === data);
                     //console.log(rows)
 
@@ -1013,6 +1013,8 @@ const Index = (props) => {
             </Box>
           </CardContent>
         </Card>
+
+        
       </Grid>
     </Grid>
   );

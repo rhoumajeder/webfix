@@ -78,8 +78,7 @@ const FeedbackModal = (props) => {
       open={props.feedbackModalOpen}
       onClose={handleModal}
       aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+      aria-describedby="modal-modal-description">
 
 
       <Fade in={props.feedbackModalOpen}>
