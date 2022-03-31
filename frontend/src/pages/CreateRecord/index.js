@@ -12,6 +12,11 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle'
 
 import * as yup from "yup";
 import axiosInstance from "../../helpers/axios";
@@ -57,6 +62,8 @@ const Index = (props) => {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  
 
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -168,6 +175,15 @@ const Index = (props) => {
     { label: "Car", value: "Car", avatar: <FaCarSide className={"fs-6"} /> },
   ];
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleDateChange = (date) => {
     setRecord({ ...record, ["date"]: moment(date).format("YYYY-MM-DD") });
   };
@@ -1001,7 +1017,16 @@ const Index = (props) => {
               component={"div"}
               className={"d-flex align-items-center justify-content-end my-2"}
             >
-              <Button
+              <Button 
+                variant="outlined" 
+                onClick={handleClickOpen}
+                className="ms-auto my-2"
+                color={"primary"}
+                size="large">
+                  Valider
+              </Button>
+
+              {/* <Button
                 className="ms-auto my-2"
                 variant="outlined"
                 color={"primary"}
@@ -1009,11 +1034,39 @@ const Index = (props) => {
                 size="large"
               >
                 Valider
-              </Button>
+              </Button> */}
             </Box>
           </CardContent>
         </Card>
 
+
+        <div>
+      
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Etes-vous sûr de vouloir valider votre annonce? "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          En cliquant sur le bouton Valider, vous indiquez avoir pris connaissance et accepté les Conditions Générales d'Utilisation.
+          <a href="/cgu"  target="_blank" rel="noreferrer noopener">CGU</a> 
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Annuler</Button>
+          <Button onClick={handleClose && handleRecordSubmission} 
+            variant="contained" 
+           color={"secondary"} autoFocus> 
+            Confirmer
+          </Button> 
+        </DialogActions>
+      </Dialog>
+    </div>
         
       </Grid>
     </Grid>

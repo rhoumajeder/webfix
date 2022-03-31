@@ -12,6 +12,12 @@ import {
   Button,
 } from "@material-ui/core";
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle'
+
 import * as yup from "yup";
 
 import { KeyboardDatePicker } from "@material-ui/pickers";
@@ -19,6 +25,7 @@ import {MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import "moment/locale/fr";
 import "./index.css";
+
 
 import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
 
@@ -132,6 +139,16 @@ const CreateAskRecord = (props) => {
         .max(99, " Poids doit etre inférieur à 99kg"),
     })
   );
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleCheckboxChange = (e) => {
     if (e.target.name === "AddItems") {
       SetshowSubRecord(!showSubRecord)
@@ -506,13 +523,21 @@ const CreateAskRecord = (props) => {
                 </Grid>
               </Grid>
               { !showSubRecord &&
-                 <Button
-                 onClick={submitItems}
-                 color="primary"
-                 variant={"contained"}
-               >
-                 Valider
-               </Button>
+              //    <Button
+              //    onClick={submitItems}
+              //    color="primary"
+              //    variant={"contained"}
+              //  >
+              //    Valider
+              //  </Button>
+              <Button 
+              variant="outlined" 
+              onClick={handleClickOpen}
+              className="ms-auto my-2"
+              color={"primary"}
+              size="large">
+                Valider
+            </Button>
               }
              
 
@@ -538,6 +563,33 @@ const CreateAskRecord = (props) => {
 
           </CardContent>
         </Card>
+        <div>
+      
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Etes-vous sûr de vouloir valider votre annonce? "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          En cliquant sur le bouton Valider, vous indiquez avoir pris connaissance et accepté les Conditions Générales d'Utilisation.
+          <a href="/cgu"  target="_blank" rel="noreferrer noopener">CGU</a>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Annuler</Button>
+          <Button onClick={handleClose && submitItems} 
+            variant="contained" 
+           color={"secondary"} autoFocus> 
+            Confirmer
+          </Button> 
+        </DialogActions>
+      </Dialog>
+    </div>
       </Grid>
     </Grid>
   );
