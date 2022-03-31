@@ -10,6 +10,8 @@ import {
   Button,
 } from "@material-ui/core";
 import LoadingOverlay from 'react-loading-overlay';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarRateIcon from '@mui/icons-material/StarRate';
 
 import Rating from "@material-ui/lab/Rating";
 
@@ -28,7 +30,7 @@ const style = {
 };
 
 const FeedbackModal = (props) => {
-  const [feedback, setFeedback] = useState({ text: "je recommande vivemenet ", note: 3 });
+  const [feedback, setFeedback] = useState({ text: "je recommande vivement  ", note: 3 });
   const { addToast } = useToasts();
 
   const changeRating = (event, newValue) => {
@@ -90,7 +92,9 @@ const FeedbackModal = (props) => {
               name="simple-controlled"
               value={feedback.note}
               onChange={changeRating}
-              className="mb-3"
+              className="mb-3"  
+              emptyIcon={<StarBorderIcon fontSize="inherit"  />} 
+              icon={<StarRateIcon fontSize="inherit" style={{ color:"#FFD700"}} />}
             />
             <InputLabel htmlFor={"message"}>Message</InputLabel>
             <TextField

@@ -2,7 +2,9 @@ import React from "react";
 import { Avatar, Box, Typography, ButtonBase } from "@material-ui/core";
 import {Link} from 'react-router-dom';
 import Rating from "@material-ui/lab/Rating";
-
+// import Rating from '@mui/material/Rating';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import "./UserAvatar.css";
 
 const UserAvatar = (props) => {
@@ -13,13 +15,19 @@ const UserAvatar = (props) => {
     // props.user.received_feedback.forEach((feedback) => {
     //   totalRating += feedback.note;
     // });
+   if( totalRating != 0 && props.user.number_of_feedbacks != 0 ){
+    const averageRating = (totalRating/props.user.number_of_feedbacks).toFixed(1);
+    return averageRating;
+   } else {
+    return 3; 
+   }
    
-    const averageRating = (
     //  totalRating / props.user.received_feedback.length  number_of_feedbacks
-    totalRating /  props.user.number_of_feedbacks
-    ).toFixed(1); 
- 
-    return averageRating;  //here
+    // console.log("rje debug"); 
+    //   console.log(totalRating);
+    //   console.log(props.user.number_of_feedbacks);
+    //   console.log("rje debug end"); 
+    // return averageRating;  //here
   };
 
   return (
@@ -73,15 +81,23 @@ const UserAvatar = (props) => {
           } mt-2`}
         >
           <Rating
-            name="read-only"
+             name="read-only"
+            //name="simple-controlled"
             value={
               props.user.number_of_feedbacks > 0
                 ? Math.round(getAverageRating())
-                : 0
+                : 3
             }
+            
+
             readOnly
             size="medium"
-            className="m-0 me-1"
+            emptyIcon={<StarBorderIcon fontSize="inherit"  />} 
+              icon={<StarRateIcon fontSize="inherit" style={{ color:"#FFD700"}} />}
+            
+            
+            // className="m-0 me-1"
+            // color="red"
           />
           <Typography
             variant="subtitle2"
@@ -94,6 +110,7 @@ const UserAvatar = (props) => {
           </Typography>
         </Box>
       )}
+       
     </Box>
   );
 };

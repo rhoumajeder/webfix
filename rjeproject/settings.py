@@ -169,6 +169,9 @@ django_heroku.settings(locals())
 
 
 REST_FRAMEWORK = {
+     'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ), # we need it to hide django panel on user side
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
@@ -176,6 +179,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+ 
 
 
 AWS_S3_ACCESS_KEY_ID = 'AKIA2EUF2OOHLNMUS57O'
