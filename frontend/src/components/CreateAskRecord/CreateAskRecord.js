@@ -120,22 +120,24 @@ const CreateAskRecord = (props) => {
       name: yup
         .string()
         .required(" Champs objet ne doit pas etre vide")
-        .max(40, "Name can not be more than 40 characters"),
+        .max(40, "Objet doit etre inférieur à 40 characters"),
       price: yup
-        .number()
+        .number("Prix doit être un nombre entier")
         .required("Veuillez ajouter le prix")
-        .positive("Pris doit etre un nombre positive")
-        .max(999, "Price can not be more than $999"),
+        .positive("Prix doit être un nombre positive")
+        .integer("Prix doit être un nombre entier")
+        .max(999, "Prix can not be more than $999"),
       quantity: yup
-        .number()
+        .number("la quantité doit être un nombre entier")
         .required("Please add a quantity for selected sub-category")
         .positive("Quantité doit etre positive")
+        .integer("la quantité doit être un nombre entier")
         .max(99, "Quantity can not be more than 99"),
       weight: yup
-        .number()
-        .required("Please add a weight for selected sub-category")
+        .number("Poids doit être un nombre entier")
+        .required("Ajouter le poids")
         .positive("Poids Doit etre positive")
-        .integer()
+        .integer("Poids doit être un nombre entier")
         .max(99, " Poids doit etre inférieur à 99kg"),
     })
   );
@@ -170,7 +172,7 @@ const CreateAskRecord = (props) => {
   };
   const [isloading, setisLoading] = useState(false);
   const submitItems = async () => {
-
+    handleClose();
     // setAskRecord({ ...askRecord, ["ask_item_info"]: ["a","c"] });
 
     // let x = await props.recaptchaRef.current.executeAsync()
@@ -530,14 +532,23 @@ const CreateAskRecord = (props) => {
               //  >
               //    Valider
               //  </Button>
-              <Button 
-              variant="outlined" 
-              onClick={handleClickOpen}
-              className="ms-auto my-2"
-              color={"primary"}
-              size="large">
-                Valider
-            </Button>
+
+            //   <Button 
+            //   variant="outlined" 
+            //   onClick={handleClickOpen}
+            //   className="ms-auto my-2"
+            //   color={"primary"}
+            //   size="large">
+            //     Valider
+            // </Button>
+            <Button 
+            variant="outlined" 
+            onClick={handleClickOpen}
+            className="ms-auto my-2"
+            color={"primary"}
+            size="large">
+              Valider
+          </Button>
               }
              
 
@@ -551,7 +562,7 @@ const CreateAskRecord = (props) => {
                                 setRows={setRows}
                                 rows={rows}
                                 isloading={isloading}
-                                submitItems={submitItems}
+                                submitItems={handleClickOpen}
                                 priceRequired={true}
                               />
                             </Grid>

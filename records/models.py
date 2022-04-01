@@ -61,7 +61,8 @@ class SubRecord(models.Model):
 
     accepted = models.BooleanField()
 
-    price = models.PositiveIntegerField()
+    # price = models.PositiveIntegerField()
+    price = models.FloatField()
     max_quantity = models.PositiveIntegerField()
     max_weight = models.FloatField()
 
@@ -76,9 +77,15 @@ class AskRecordItem(models.Model):
     record = models.ForeignKey(
         Record, related_name="ask_items", on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=50)
+
     quantity = models.PositiveBigIntegerField()
-    weight = models.PositiveIntegerField()
-    price = models.PositiveIntegerField()
+   # weight = models.PositiveIntegerField() #models.FloatField()
+    weight = models.FloatField()
+    #price = models.PositiveIntegerField()
+    price = models.FloatField() 
+
+
+
     state = models.CharField(
         max_length=255, default="Accepted")
 
@@ -163,8 +170,9 @@ class PropositionItem(models.Model):
 
     name = models.CharField(max_length=50)
     quantity = models.PositiveBigIntegerField(null=True)
-    weight = models.PositiveIntegerField()
-    price = models.PositiveIntegerField(blank=True, null=True)
+
+    weight = models.FloatField(blank=True, null=True) 
+    price = models.FloatField(blank=True, null=True) 
 
     state = models.CharField(
         max_length=255, choices=STATE, default="Undefined")

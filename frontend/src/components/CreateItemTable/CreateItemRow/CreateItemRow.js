@@ -83,18 +83,36 @@ const CreateItemRow = (props) => {
         </TableCell>
 
         <TableCell className={"text-nowrap"} align="left">
-          <TextField
+
+        <TextField   pattern="[0-9]*"
             id={`weight-${props.row.name}-${props.index}`}
             size={"small"}
             variant="outlined"
             name="weight"
-            type={"number"}
+            // type={"number"}
             inputProps={{ min: 0 }}
+           
             style={{ minWidth: "100px" }}
-            placeholder={"Weight"}
+            placeholder={"Weight"}  
             defaultValue={props.row.weight}
             onChange={handleInputChange}
           />
+
+
+
+          {/* <TextField
+            id={`weight-${props.row.name}-${props.index}`}
+            size={"small"}
+            variant="outlined"
+            name="weight"
+            // type={"number"}
+            inputProps={{ min: 0 }}
+           
+            style={{ minWidth: "100px" }}
+            placeholder={"Weight"} 
+            defaultValue={props.row.weight}
+            onChange={handleInputChange}
+          /> */}
         </TableCell>
 
         {props.priceRequired ? (

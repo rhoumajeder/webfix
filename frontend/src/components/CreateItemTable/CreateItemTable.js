@@ -52,13 +52,28 @@ const CreateItemTable = (props) => {
       );
     }
     else {
-      return (<Button
-        onClick={props.submitItems}
-        color="primary"
-        variant={"contained"}
-      >
-        Valider
-      </Button>);
+      return (
+      
+      // <Button
+      //   onClick={props.submitItems}
+      //   color="primary"
+      //   variant={"contained"}
+      // >
+      //   Valider
+      // </Button>
+
+<Button 
+variant="outlined" 
+onClick={props.submitItems}
+className="ms-auto my-2"
+color={"primary"}
+size="large">
+  Valider
+</Button>
+      
+      
+      
+      );
     }
   }
 
