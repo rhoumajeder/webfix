@@ -400,6 +400,22 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         defaultValue={profile.intro}
                       />
                     </Grid>
+                    <Grid item xs={12} md={12}>
+                      <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        className="fw-bold my-2"
+                      >
+                        Pseudo
+                      </Typography>
+                      <TextField
+                        fullWidth
+                        name="username"
+                        variant="outlined"
+                        placeholder="Pseudo"
+                        defaultValue={profile.username}
+                      />
+                    </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography
                         variant="subtitle2"
@@ -425,7 +441,7 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                         Nom
                       </Typography>
                       <TextField
-                        required
+                        
                         fullWidth
                         name="last_name"
                         variant="outlined"

@@ -171,7 +171,9 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             instance.photo = compress(photo)
 
         instance.intro = validated_data.get('intro', instance.intro)
+        instance.username = validated_data.get('username', instance.username)
         instance.last_name = validated_data.get('last_name', instance.last_name)
+
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.note_feedback = validated_data.get('note_feedback', instance.note_feedback)
@@ -186,7 +188,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ["id", "intro", "last_name", "first_name", "phone_number", "address", "photo",
+        fields = ["id", "intro","username", "last_name", "first_name", "phone_number", "address", "photo",
             'dob', 'password', 'confirm_password', 'old_password',"note_feedback"]
         optional_fields = ["photo", 'password', 'confirm_password', 'old_password']
 

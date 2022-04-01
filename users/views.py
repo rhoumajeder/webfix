@@ -42,13 +42,13 @@ def get_user(request):
     print("he call me here for himself ********")
     serializer = UserSerializer_for_my_profil(user)
 
-    cache_key_get_user = str("get_user") + str(request.user.id)
-    if cache.get(cache_key_get_user) != None : 
-        return  Response(cache.get(cache_key_get_user), status=status.HTTP_200_OK)
+    # cache_key_get_user = str("get_user") + str(request.user.id)
+    # if cache.get(cache_key_get_user) != None : 
+    #     return  Response(cache.get(cache_key_get_user), status=status.HTTP_200_OK)
     
-    cached_response = {"user": serializer.data}
-    cache.get_or_set(cache_key_get_user, cached_response, 60 *15 )
-    return Response(cached_response)
+    # cached_response = {"user": serializer.data}
+    # cache.get_or_set(cache_key_get_user, cached_response, 60 *15 )
+    return Response( {"user": serializer.data})
 
 
 @api_view(['GET'])
@@ -110,8 +110,8 @@ def update_profile(request):
     serializer = UserUpdateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.update(request.user, serializer.validated_data)
-    cache_key_get_user = str("get_user") + str(request.user.id)
-    cache.delete(cache_key_get_user)
+    # cache_key_get_user = str("get_user") + str(request.user.id)
+    # cache.delete(cache_key_get_user)
     return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
 
 

@@ -161,7 +161,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                   name={"username"}
                   InputLabelProps={{ shrink: false }}
                   style={{ minWidth: "100px" }}
-                  placeholder={"Entrer Username"}
+                  placeholder={"Entrer votre pseudo"}
                   value={formData.username}
                   size={"small"}
                   variant="outlined"

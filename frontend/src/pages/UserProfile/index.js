@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Box, Paper, Card, CardContent, Container, Grid, IconButton, Tab, Tabs, Typography, makeStyles, ButtonBase } from "@material-ui/core";
+import { Box, Paper, Card, CardContent, Container, Grid, Button, Tab, Tabs, Typography, makeStyles, ButtonBase } from "@material-ui/core";
 import { GiCheckMark } from "react-icons/gi";
 import { BiEdit } from "react-icons/bi";
 import moment from 'moment';
@@ -106,26 +106,33 @@ const Index = (props) => {
                                                 {record.intro}
                                             </Typography>
                                         </Box>
+                                       
                                     </Box>  
                                 )}
                                 <Box className={'border-top border-2 py-3'}>
+                                {(!targetUserId || (targetUserId == authUser.id)) && (
+                                            <Grid item>
+                                                 {/* <IconButton */}
+                                                <Button
+                                                    size="small"
+                                                    onClick={() => setUserProfileModalOpen(true)}
+                                                    color="primary"
+                                                    variant="outlined" 
+                                                >
+                                                    <BiEdit/> 
+                                                    Editer mon profile 
+                                                </Button>
+                                            </Grid>
+                                        )}
                                     <Grid container direction="row" justify="space-between">
+                                   
                                         <Grid item>
                                             <Typography variant="h6" component="h6" gutterBottom
                                                 className={`m-0 me-1 fw-medium`}>
                                                 Contact Information
                                             </Typography>
                                         </Grid>
-                                        {(!targetUserId || (targetUserId == authUser.id)) && (
-                                            <Grid item>
-                                                <IconButton
-                                                    size="small"
-                                                    onClick={() => setUserProfileModalOpen(true)}
-                                                >
-                                                    <BiEdit />
-                                                </IconButton>
-                                            </Grid>
-                                        )}
+                                      
                                     </Grid>
                                     {(targetUserId == authUser.id) && <Box className="my-1">
                                         <Typography display="inline" variant="subtitle2" component="h6" color="textSecondary" gutterBottom
