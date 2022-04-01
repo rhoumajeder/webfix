@@ -18,11 +18,15 @@ import Button from '@material-ui/core/Button';
 import { useToasts } from "react-toast-notifications";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import { makeStyles } from '@material-ui/core';
-
+import uuid from "react-uuid";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 import UserAvatar from '../UserAvatar/UserAvatar';
 import axiosInstance from "../../helpers/axios";
 
+import Avatarupload from "./Avatarupload";
+import uploadPlaceholder from "../../assets/images/upload-placeholder.png";
+import Resizer from "react-image-file-resizer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,6 +104,9 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
   }, [profileImage])
 
   const handleProfilePicChange = (e) => {
+    
+    selectFile(e);
+    
     const files = e.target.files
 
     if (files.length > 0){
@@ -166,6 +173,78 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
       });
   }
 
+   
+  const [files, setFiles] = useState([1]);
+
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      1024,
+      768,
+      "JPEG",
+      70,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "file"
+    );
+  });
+
+
+  // Function called when user selects one or multiple files
+  const selectFile = async (e) => {
+    
+    // handleProfilePicChange(e);
+    
+
+    const newFiles = [...files];
+
+      let fileSize = e.target.files[0].size;
+      fileSize = Math.round(fileSize / 1024);
+
+      if (fileSize > 10000) {
+        addToast("Max image volume 10mb,compresser vos images https://imagecompressor.com/ ", {
+          appearance: "error",
+        });
+        return;
+      }
+
+   
+
+        try {
+        const file_c = e.target.files[0];
+        const image_c = await resizeFile(file_c);
+        if (typeof newFiles[0] === "number") {
+          newFiles[0] = {
+            file: image_c,
+            preview: URL.createObjectURL(e.target.files[0]), 
+          };
+         
+        }
+        } catch (err) {
+          
+        }
+
+
+  
+    
+   
+
+    setFiles(newFiles);
+    
+  };
+
+  // Delete a selected file
+  const deleteFile = (index) => { 
+    const newFiles = [...files];
+    newFiles[index] = index;
+    setFiles(newFiles);
+
+ 
+  };
+
   return (
     <Modal
       open={props.isModalOpen}
@@ -188,22 +267,9 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Grid container direction="row" justify="space-between">
-                        <Grid item>
-                          <input
-                            name="photo"
-                            type="file"
-                            accept="image/*"
-                            className="d-none"
-                            id="icon-button-file"
-                            onChange={handleProfilePicChange}
-                          />
-                          <label htmlFor="icon-button-file">
-                            <IconButton className="p-0" color="primary" aria-label="upload picture" component="span">
-                              <PhotoCamera />
-                            </IconButton>
-                          </label>
-                        </Grid>
-                        <Grid item>
+
+
+                      <Grid item>
                           <IconButton
                             component="span"
                             onClick={() => setModalOpen(false)}
@@ -213,16 +279,108 @@ const UserProfileModal = ({profile, setModalOpen, onSuccess, ...props}) => {
                             <AiOutlineCloseSquare />
                           </IconButton>
                         </Grid>
+
+
+
+                        <Grid item>
+                          <input
+                            name="photo"
+                            type="file"
+                            accept="image/*"
+                            className="d-none"
+                            id="icon-button-file"
+                            onChange={handleProfilePicChange} 
+                            onClick={() => deleteFile(0)}
+                          />
+                          <label htmlFor="icon-button-file">
+                            <IconButton className="p-0" color="primary" aria-label="upload picture" component="span">
+                              <PhotoCamera />  Ajouter une photo de profile
+                            </IconButton>
+                          </label>
+                        </Grid>
+
+
+  {/* start here */}
+                        <Grid container>
+
+
+      <Grid item xs={3}>
+        <input
+          onChange={selectFile }
+          accept="image/*"
+          style={{ display: "none" }}
+          id={props.id}
+          type="file"
+          multiple
+        />
+        {/* <label htmlFor={props.id}>
+          <Button
+            className="mx-2"
+            variant="contained"
+            color="secondary" 
+            aria-label="upload picture"
+            component="span"
+          >
+            <PhotoCamera /> Ajouter une photo de profile
+          </Button>
+        </label> */}
+      </Grid>
+      {files.map((file, index) => {
+        if (typeof file === "number") {
+          return (
+            <Grid item item xs={3}>
+              <Paper variant="outlined">
+                <img className="item-image" src={uploadPlaceholder} />
+              </Paper>
+            </Grid>
+          );
+        } else {
+          return (
+            <Grid item xs={3}>
+              <Paper variant="outlined" style={{ position: "relative" }}>
+                <HighlightOffIcon
+                  onClick={() => deleteFile(0)}
+                  color="error"
+                  style={{ position: "absolute", left: "70%", top: "10px" }}
+                />
+                <img className="item-image" src={file.preview} />
+              </Paper>
+            </Grid>
+          );
+        }
+      })}
+    </Grid>
+
+
+    {/* end here */}
+
+                    
+
+
                       </Grid>
                       <Box align="right">
                       </Box>
-                      <UserAvatar 
+
+                      {/* <Box margin={1}>
+                  
+              <Avataruploada  
+                rowId={props.index}
+                id={`fileUpload-${uuid()}`}
+                 
+                //onChange={props.handleProfilePicChange}
+                setDynamicRows={props.handleProfilePicChange}  
+                onChange={handleProfilePicChange}
+              />
+            </Box> */}
+
+
+                      {/* <UserAvatar 
                         profile={profilePic} 
                         name={profile.username} 
                         user={profile}
                         
-                        />
-                    </Grid>
+                        /> */}
+                    </Grid> 
                     <Grid item xs={12}>
                       <Typography
                         variant="subtitle2"
