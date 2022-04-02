@@ -184,7 +184,7 @@ const AskRecordDetails = () => {
   const handleConfirm = () => {
     handleModal();
     submitProposition();
-    alert(proposition);
+    //alert(proposition);
   };
   const handleX= () => { 
     setModalOpen(!modalOpen);
@@ -274,13 +274,13 @@ const AskRecordDetails = () => {
                         Supprimer
                       </Button>
                     </Grid>}
-              <Grid item>
+              <Grid item> 
                       <FacebookShareButton 
                             url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 
                             // url={"https://storage-test-rje.s3.amazonaws.com/images/name.jpg"} 
-                            quote={" this is a quand "}
-                            hashtag={"#this is htag"} 
-                            description={" this is description "}
+                            quote={"Offre Transport"}
+                            hashtag={"#LelBled.com"} 
+                            description={"Offre Transport Lelbled.com"} 
                             className="Demo__some-network__share-button"
                           >   
                             <FacebookIcon size={32} round /> Partager Sur FaceBook

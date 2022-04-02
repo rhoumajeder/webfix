@@ -234,10 +234,10 @@ const Index = () => {
       ) : (
         <CardListing filters={filters} records={records} recordType={recordType} number_of_items={number_of_items} get_page={get_page} />
       )}
-
+       <Newvideo />
       <Social />
       <NewFeedback />
-      <Newvideo />
+     
       <AdvServiceSec />
       <NewFooter />
     </Box>

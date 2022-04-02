@@ -647,7 +647,8 @@ def get_records_for_user(request): # we do not use this function , it's replaced
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_list_offers(request):
-    records = Record.objects.filter(user=request.user).order_by('-date')
+    records = Record.objects.filter(user=request.user, approved=True,
+        deleted=False).order_by('-date')
 
     paginator = PageNumberPagination()
     paginator.page_size = 5

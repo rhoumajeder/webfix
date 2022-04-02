@@ -24,7 +24,7 @@ import { TravelInformation } from "../TravelCard/TravelCard";
 
 const ChatPreview = (props) => {
   const modes = React.useContext(ModeOfTransportationContext);
-
+ 
   return (
     <React.Fragment>
       <ListItem
@@ -117,7 +117,13 @@ const ChatPreview = (props) => {
           <ListItemIcon>
             <Avatar
               alt={props.username}
-              src="https://material-ui.com/static/images/avatar/1.jpg"
+              
+              // src="https://material-ui.com/static/images/avatar/1.jpg"
+              src={
+                props.room.owner.photo
+                  ?  props.room.owner.photo 
+                  : require("../../assets/images/placeholder-avatar.png").default
+              }
             />
           </ListItemIcon>
           <ListItemText primary={props.username}></ListItemText>

@@ -37,17 +37,17 @@ const Index = () => {
       .required("Email is required"),
     password: yup
       .string()
-      .required("Password is required!")
-      .min(8, "Password must have at least 8 characters"),
+      .required("Mot de passe est obligatoire!")
+      .min(8, "Mot de passe de 8 caractere ou plus est obligatoire"),
     password2: yup
       .string()
       .required("Password confirmation is required")
-      .oneOf([yup.ref("password")], "Passwords must match"),
+      .oneOf([yup.ref("password")], "Veuillez saisir le meme mot de passe"),
     phone_number: yup
       .string()
       .notRequired()
       .nullable()
-      .matches(phoneRegExp, "Phone number is not valid"),
+      .matches(phoneRegExp, "Numéro de téléphone n'est pas correct"),
   });
 
   const handleSubmit = (e) => {

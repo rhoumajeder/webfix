@@ -111,7 +111,7 @@ const CreateAskRecord = (props) => {
     phone_number: yup
       .string()
       // .required("Phone number for records is required")
-      // .matches(phoneRegExp, "Phone number is not valid"),
+      .matches(phoneRegExp, "Phone number is not valid"),
   });
 
   // Validation schema for record item

@@ -41,14 +41,14 @@ module.exports = {
   },
   plugins: [
     new NodePolyfillPlugin(), 
-    new CompressionPlugin({
-      compressionOptions: {
-        numiterations: 15,
-      },
-      algorithm(input, compressionOptions, callback) { 
-        return zopfli.gzip(input, compressionOptions, callback);
-      },
-    }),
+    // new CompressionPlugin({
+    //   compressionOptions: {
+    //     numiterations: 15,
+    //   },
+    //   algorithm(input, compressionOptions, callback) { 
+    //     return zopfli.gzip(input, compressionOptions, callback);
+    //   },
+    // }),
   
   ],
 };

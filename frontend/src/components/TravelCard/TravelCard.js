@@ -301,9 +301,39 @@ const TravelCard = (props) => {
 export const TravelInformation = (props) => {
   return (
     <Box className="mt-1">
-      <Box className="d-flex align-items-center">
-        {props.departure && <CgShapeCircle className="text-success" />}
-        {props.destination && <CgShapeCircle className="text-danger" />}
+      <Box className="d-flex align-items-center">   
+           
+        {props.departure && 
+           <Typography
+           variant="subtitle1"
+           component="h6"
+           color="textSecondary"
+           gutterBottom
+           className="fw-bold m-0 my-2 px-3"
+         ><CgShapeCircle className="text-success" >   </CgShapeCircle>
+            Départ 
+         </Typography>
+      
+        }
+       
+        {props.destination && 
+        
+        
+        <Typography
+        variant="subtitle1"
+        component="h6"
+        color="textSecondary"
+        gutterBottom
+        className="fw-bold m-0 my-2 px-3"
+      ><CgShapeCircle className="text-danger" ></CgShapeCircle>
+         Destination 
+      </Typography>
+        
+        
+        
+        
+        
+        }
         <Typography
           variant="subtitle2"
           component="span"

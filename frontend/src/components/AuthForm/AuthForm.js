@@ -321,7 +321,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
               <Button
                 id={`${type}_btn_login`}
                 type={"submit"}
-                disabled={isValid !== true}
+                // disabled={isValid !== true}
                 color="primary"
                 fullWidth
                 className={"mb-3"}

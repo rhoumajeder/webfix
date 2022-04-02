@@ -534,9 +534,9 @@ const Index = ({ match }) => {
                     <Grid item>
                       <FacebookShareButton 
                             url={"https://storage-test-rje.s3.amazonaws.com/images/" + encodeURI(share_on_fb_image)} 
-                            quote={" this is a quand "}
-                            hashtag={"#this is htag"} 
-                            description={" this is description "}
+                            quote={"Offre Transport"}
+                            hashtag={"#LelBled"} 
+                            description={"Offre Transport Lelbled.com"} 
                             className="Demo__some-network__share-button"
                           >  
                             <FacebookIcon size={32} round /> Partager Sur Facebook
