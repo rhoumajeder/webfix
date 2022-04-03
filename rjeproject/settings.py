@@ -28,8 +28,8 @@ CAPTCHA = False
 SECRET_KEY = 'django-insecure-mo3_)7aertv6&%yd8ju$rr&$#l07-nc$6lkazort)(jexk^q!x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-SECURE_SSL_REDIRECT = False
+DEBUG = False
+SECURE_SSL_REDIRECT = True
 ALLOWED_HOSTS = ['https://rjeapp.herokuapp.com', 'rjeapp.herokuapp.com',
                  'rjeapptest.herokuapp.com', 'https://rjeapptest.herokuapp.com', "127.0.0.1",
                   "lelbled.com","www.lelbled.com","https://www.lelbled.com","http://www.lelbled.com"]
