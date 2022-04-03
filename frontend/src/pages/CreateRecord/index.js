@@ -118,7 +118,7 @@ const Index = (props) => {
     // .min(1, "Please select at least 1 category"),
     phone_number: yup
       .string() 
-      .matches(phoneRegExp, "numéro de téléphone est incorrect"),
+      // .matches(phoneRegExp, "numéro de téléphone est incorrect"),
   });
 
   let subRecordSchema = yup

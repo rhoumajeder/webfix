@@ -111,7 +111,7 @@ const CreateAskRecord = (props) => {
     phone_number: yup
       .string()
       // .required("Phone number for records is required")
-      .matches(phoneRegExp, "Phone number is not valid"),
+      // .matches(phoneRegExp, "Phone number est incorrect!"),
   });
 
   // Validation schema for record item
@@ -593,6 +593,7 @@ const CreateAskRecord = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Annuler</Button>
+          
           <Button onClick={handleClose && submitItems} 
             variant="contained" 
            color={"secondary"} autoFocus> 

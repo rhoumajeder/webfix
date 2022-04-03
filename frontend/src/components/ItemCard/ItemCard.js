@@ -39,6 +39,12 @@ import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
 import { CgShapeCircle } from "react-icons/cg";
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle' 
+
 import {
   HeaderDeliveryCode,
   HeaderSetupMeeting,
@@ -105,6 +111,17 @@ const ItemCard = (props) => {
   const [address, setAddress] = useState("");
   const [showImage, setShowImage] = useState(false);
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    // changePropositionState("Accepted");
+    setOpen(false);
+  };
 
   const modes = React.useContext(ModeOfTransportationContext);
 
@@ -416,11 +433,12 @@ const ItemCard = (props) => {
         );
       }
     }
+ 
   };
 
   // Change the state of a proposition
-  const changePropositionState = (state) => {
-    const data = { proposition_state: state };
+  const changePropositionState = (state) => { 
+    const data = { proposition_state: state , paid:true};
 
     axiosInstance
       .post(`update-proposition/${props.item.id}/`, data)
@@ -439,14 +457,43 @@ const ItemCard = (props) => {
             component={"div"}
             className={"d-flex align-items-center justify-content-end"}
           >
+             <div>
+      
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Etes-vous sûr de vouloir valider votre acceptation? "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          En cliquant sur le bouton Confirmer, vous indiquez avoir pris connaissance et accepté les Conditions Générales d'Utilisation
+          et vous accepter de payer en cash.
+          <a href="/cgu"  target="_blank" rel="noreferrer noopener">CGU</a>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Annuler</Button>
+          <Button onClick={() => changePropositionState("Accepted") } 
+            variant="contained" 
+           color={"secondary"} autoFocus> 
+            Confirmer
+          </Button> 
+        </DialogActions>
+      </Dialog>
+    </div>
             <Button
-              onClick={() => changePropositionState("Accepted")}
-              className="me-1 text-success border-success customize-inputButton"
+              // onClick={() => changePropositionState("Accepted")}  handleClickOpen
+              onClick={handleClickOpen}  
+               className="me-1 text-success border-success customize-inputButton"
               variant="outlined"
               size="small"
               disabled={props.disabled}
             >
-              Accept
+              Accepter
             </Button>
             <Button
               onClick={() => changePropositionState("Rejected")}
@@ -455,9 +502,9 @@ const ItemCard = (props) => {
               size="small"
               disabled={props.disabled}
             >
-              Refuser
+              Refuser 
             </Button>
-          </Box>
+          </Box> 
         );
       } else if (proposition.proposition_state === "Accepted") {
         return (

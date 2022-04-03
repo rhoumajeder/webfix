@@ -42,7 +42,7 @@ class Record(models.Model):
     disabled = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     approved = models.BooleanField(default=True)
-    phone_number = models.CharField(max_length=14, null=True,blank=True)
+    phone_number = models.CharField(max_length=30, null=True,blank=True)
 
     image_ask = models.ImageField(upload_to="images/",null=True,blank=True) 
     image_propose = models.ImageField(upload_to="images/",null=True,blank=True)
