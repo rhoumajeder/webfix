@@ -89,14 +89,14 @@ const Index = (props) => {
       cost_by_kg: yup
       .number()
       .typeError('Veuillez entrer le prix par kg (Nombre)')
-      .required("Veuillez entrer prix par kilo")
+      .required("Veuillez entrer prix de kilo")
       .positive("Max Poids doit etre strictement positive")
-      .min(1, "Prix par  kg ne peut pas etre inférieur à 1")
+      .min(1, "Prix de kg ne peut pas etre inférieur à 1")
       ,
 
     max_weight: yup
       .number()
-      .typeError('Veuillez entrer le prix par kg (Nombre)')
+      .typeError('Veuillez entrer le prix de kg (Nombre)')
       .required("Veuillez entrer le Max Poids")
       .positive("Max Poids doit etre strictement positive")
       .min(0.5, "Max Poids ne peut pas etre inférieur à 0.5 Kg")
@@ -787,7 +787,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Prix Par Kilo
+                    Prix de Kg
                   </Typography>
                   <TextField
                     id={`luggage-weight`}
