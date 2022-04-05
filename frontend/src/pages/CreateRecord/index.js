@@ -945,7 +945,7 @@ const Index = (props) => {
                       />
                     }
                     label="High-Tech"
-                  />
+                  /> 
                 </Grid>
                 <Grid item xs={"auto"} className="my-1">
                   <FormControlLabel

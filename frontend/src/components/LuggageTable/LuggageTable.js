@@ -93,6 +93,8 @@ const LuggageTable = (props) => {
         return 'Médicaments'
       case 'Small Electronics':
         return 'High-Tech'
+      case 'Small Electronic':
+          return 'High-Tech'
       case 'Small Accessories':
         return 'Accessoires'
       case 'Vetements':

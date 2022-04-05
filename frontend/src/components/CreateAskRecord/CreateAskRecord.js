@@ -487,7 +487,7 @@ const CreateAskRecord = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Poids de l’article
+                    Poids de l’article en Kg
                   </Typography>
                   <TextField
                     id={`luggage-weight`}
@@ -511,7 +511,7 @@ const CreateAskRecord = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Prix Proposé
+                    Prix Proposé en €
                   </Typography>
                   <TextField
                     id={`price_proposed`}
