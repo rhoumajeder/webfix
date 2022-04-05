@@ -175,11 +175,11 @@ const TravelCard = (props) => {
                     className="fw-bold m-0"
                   >
                     {" "}
-                    Min Prix:{" "}
+                    Prix/Kg:{" "}
                     {/* {console.log(record)} */}
                     {/* {record.sub_records.length > 0 &&
                       getMinPrice(record.sub_records) + "€"}{"0 €"} */}
-                        {record && record.min_price 
+                        {record && record.cost_by_kg 
                      + "€"}{" "}
                   </Typography> 
 
@@ -205,20 +205,21 @@ const TravelCard = (props) => {
                     className="fw-bold m-0"
                   >
                     {" "}
-                    Total Prix:{" "}
-                    {record && objectSum(record.ask_items, "price") + "€"}{" "}
+                    Prix:{" "}
+                    {/* {record && objectSum(record.ask_items, "price") + "€"}{" "} */}
+                    {record &&  record.price_proposed + "€"}{" "}
                   </Typography>
 
                   <Typography
                     variant="subtitle2"
                     color="textSecondary"
                     gutterBottom
-                    className="fw-bold m-0"
+                    className="fw-bold m-0" 
                   >
                     {" "}
-                    Total Poids:{" "}
-                    {record &&
-                      objectSum(record.ask_items, "weight") + "Kg"}{" "}
+                    Poids:{" "}
+                    {/* {record &&  objectSum(record.ask_items, "weight") + "Kg"}{" "} */}
+                    {record &&   record.weight_items  + "Kg"}{" "}
                   </Typography>
                 </Box>
               )}

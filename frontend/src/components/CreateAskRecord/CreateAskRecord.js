@@ -64,6 +64,8 @@ const CreateAskRecord = (props) => {
     city_destination: "",
     date: moment(new Date()).format("YYYY-MM-DD"),
     description: "",
+    weight_items:3,
+    price_proposed:10,
     type: "Ask",
     phone_number: "", 
     ask_item_info: []
@@ -104,10 +106,28 @@ const CreateAskRecord = (props) => {
         [yup.ref("city_destination")],
         "Veuillez vérifier Départ/Destination"
       ),
+      weight_items: yup
+      .number()
+      .typeError('Veuillez entrer poids de l article (Nombre)')
+      .required("Veuillez entre prix par kilo")
+      .positive("Max Poids doit etre strictement positive")
+     
+      ,
+
+      price_proposed: yup
+      
+      .number("Veuillez entrer le prix proposé")
+      .typeError('Veuillez entrer le prix proposé (Nombre)')
+      .required("Veuillez entrer prix par kilo")
+      .positive("Max Poids doit etre strictement positive")
+   
+      .min(1, "Prix par  kg ne peut pas etre inférieur à 1")
+      ,
+
     description: yup
       .string()
       .required("Veullez détailler ce que vous voulez envoyer")
-      .max(400, "Description doit etre inférieur à 400 "),
+      .max(1000, "Description doit etre inférieur à 1000 "),
     phone_number: yup
       .string()
       // .required("Phone number for records is required")
@@ -460,7 +480,61 @@ const CreateAskRecord = (props) => {
             </Box>
             <Box component={"div"} className={"my-2"}>
               <Grid container direction="row" alignItems="center" spacing={1}>
-                <Grid item xs={4} className="my-2">
+
+              <Grid item md={4} sm={4} xs={12} className="my-2">
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Poids de l’article
+                  </Typography>
+                  <TextField
+                    id={`luggage-weight`}
+                    size={"small"}
+                    variant="outlined"
+                    type={"number"}
+                    inputProps={{ min: 0.5, step: 0.5 }}
+                    fullWidth={true}
+                    name={"weight_items"}
+                    value={askRecord.weight_items}
+                    onChange={handleInputChange}
+                    InputLabelProps={{ shrink: false }}
+                    style={{ minWidth: "100px" }}
+                    placeholder={"1"}
+                  />
+                </Grid>
+
+               <Grid item md={4} sm={4} xs={12} className="my-2">
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Prix Proposé
+                  </Typography>
+                  <TextField
+                    id={`price_proposed`}
+                    size={"small"}
+                    variant="outlined"
+                    type={"number"}
+                    inputProps={{ min: 1, step: 0.5 }}
+                    fullWidth={true}
+                    name={"price_proposed"}
+                    value={askRecord.price_proposed}
+                    onChange={handleInputChange}
+                    InputLabelProps={{ shrink: false }}
+                    style={{ minWidth: "100px" }} 
+                    placeholder={"10"}
+
+                  />
+                </Grid>
+              
+              </Grid>
+            </Box>
+            <Box component={"div"} className={"my-2"}>
+              <Grid container direction="row" alignItems="center" spacing={1}>
+              <Grid item xs={4} className="my-2">
                   <Typography
                     variant={"subtitle2"}
                     color={"textPrimary"}
@@ -483,10 +557,6 @@ const CreateAskRecord = (props) => {
                     fullWidth
                   />
                 </Grid>
-              </Grid>
-            </Box>
-            <Box component={"div"} className={"my-2"}>
-              <Grid container direction="row" alignItems="center" spacing={1}>
                 <Grid item xs={12} className="my-2">
                   <Typography
                     variant={"subtitle2"}

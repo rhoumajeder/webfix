@@ -86,11 +86,20 @@ const Index = (props) => {
         [yup.ref("city_destination")],
         "Veuillez vérifier Départ/Destination"
       ),
+      cost_by_kg: yup
+      .number()
+      .typeError('Veuillez entrer le prix par kg (Nombre)')
+      .required("Veuillez entrer prix par kilo")
+      .positive("Max Poids doit etre strictement positive")
+      .min(1, "Prix par  kg ne peut pas etre inférieur à 1")
+      ,
+
     max_weight: yup
       .number()
-      .required("Please Entrer maximum poids autorisé")
+      .typeError('Veuillez entrer le prix par kg (Nombre)')
+      .required("Veuillez entrer le Max Poids")
       .positive("Max Poids doit etre strictement positive")
-      .min(1, "Max Poids ne peut pas etre inférieur à 1")
+      .min(0.5, "Max Poids ne peut pas etre inférieur à 0.5 Kg")
       .when("moyen_de_transport", {
         is: "Avion",
         then: yup.number().max(15, "Max Poids Pour Avion est 15kg"),
@@ -111,7 +120,7 @@ const Index = (props) => {
     description: yup
       .string()
       .required("Please enter a short description about the trip")
-      .max(400, "Description can not have more than 400 characters"),
+      .max(1000, "Description can not have more than 1000 characters"),
     categories: yup
       .array()
       .of(yup.string()),
@@ -153,6 +162,7 @@ const Index = (props) => {
     city_arrival: "",
     city_destination: "",
     max_weight: 1,
+    cost_by_kg:3,
     max_volume: 3,
     min_price: 0,
     description: " ",
@@ -761,10 +771,33 @@ const Index = (props) => {
                     size={"small"}
                     variant="outlined"
                     type={"number"}
-                    inputProps={{ min: 1 }}
+                    inputProps={{ min: 1, step: 0.5 }}
                     fullWidth={true}
                     name={"max_weight"}
                     value={record.max_weight}
+                    onChange={handleRecordChange}
+                    InputLabelProps={{ shrink: false }}
+                    style={{ minWidth: "100px" }}
+                    placeholder={"Max. Weight"}
+                  />
+                </Grid>
+                <Grid item md={4} sm={6} xs={12} className="my-2">
+                  <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Prix Par Kilo
+                  </Typography>
+                  <TextField
+                    id={`luggage-weight`}
+                    size={"small"}
+                    variant="outlined"
+                    type={"number"}
+                    inputProps={{ min: 1, step: 0.5 }}
+                    fullWidth={true}
+                    name={"cost_by_kg"}
+                    value={record.cost_by_kg}
                     onChange={handleRecordChange}
                     InputLabelProps={{ shrink: false }}
                     style={{ minWidth: "100px" }}

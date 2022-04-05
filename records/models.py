@@ -29,11 +29,18 @@ class Record(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     city_destination = models.CharField(max_length=50)
     city_arrival = models.CharField(max_length=50)
-    description = models.CharField(max_length=250,blank=True, null=True)
+    description = models.CharField(max_length=1050,blank=True, null=True)
     moyen_de_transport = models.CharField(
         max_length=50, choices=TRANSPORTS, blank=True, null=True)
     min_price = models.PositiveIntegerField(default=1, null=True)
-    max_weight = models.PositiveIntegerField(default=1,blank=True, null=True)
+    max_weight = models.DecimalField(default=1,blank=True, null=True,max_digits=5, decimal_places=1)
+    cost_by_kg = models.DecimalField(default=4,blank=True, null=True,max_digits=5, decimal_places=1)
+
+    weight_items = models.DecimalField(default=3,blank=True, null=True,max_digits=5, decimal_places=1)
+    price_proposed = models.DecimalField(default=10,blank=True, null=True,max_digits=5, decimal_places=1)
+
+
+
     max_volume = IntegerRangeField(
         min_value=1, max_value=5, blank=True, null=True)
     categories = models.JSONField(blank=True, null=True)
