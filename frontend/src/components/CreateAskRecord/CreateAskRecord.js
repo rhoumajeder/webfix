@@ -117,7 +117,7 @@ const CreateAskRecord = (props) => {
       price_proposed: yup
       
       .number("Veuillez entrer le prix proposé")
-      .typeError('Veuillez entrer le prix proposé (Nombre)')
+      .typeError('Veuillez entrer le prix proposé (Nombre)') 
       .required("Veuillez entrer prix de kg")
       .positive("Max Poids doit etre strictement positive")
    

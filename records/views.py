@@ -228,7 +228,7 @@ def create_record(request):
                     "depart":  data_treated["city_arrival"],
                     "destination":  data_treated["city_destination"],
                     "max_weight":  str(data_treated["max_weight"]),
-                    "min_price":  str(data_treated["min_price"]),
+                    "min_price":  str(data_treated["cost_by_kg"]),
                     "f":      True if "Food" in data_treated["categories"] else False,
                     "M":      True if "Medicaments" in data_treated["categories"] else False,
                     "SE":     True if "Small Electronics" in data_treated["categories"] else False,
@@ -252,8 +252,8 @@ def create_record(request):
                     "depart":  data_treated["city_arrival"],
                     "destination":  data_treated["city_destination"],
 
-                    "ask_total_weight":  str(data_treated["ask_total_weight"]),
-                    "ask_total_price":  str(data_treated["ask_total_price"]),
+                    "ask_total_weight":  str(data_treated["weight_items"]),
+                    "ask_total_price":  str(data_treated["price_proposed"]),
                     "ask_item_info" : data_treated["ask_item_info"], 
 
                     "name_image_url": username + "-img-Ask-share-on-fb-" + str(record_count_all),
