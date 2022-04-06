@@ -118,7 +118,7 @@ const CreateAskRecord = (props) => {
       
       .number("Veuillez entrer le prix proposé")
       .typeError('Veuillez entrer le prix proposé (Nombre)') 
-      .required("Veuillez entrer prix de kg")
+      .required("Veuillez entrer prix de kg") 
       .positive("Max Poids doit etre strictement positive")
    
       .min(1, "Prix par  kg ne peut pas etre inférieur à 1")
@@ -127,7 +127,7 @@ const CreateAskRecord = (props) => {
     description: yup
       .string()
       .required("Veullez détailler ce que vous voulez envoyer")
-      .max(1000, "Description doit etre inférieur à 1000 "),
+      .max(1000, "Description doit etre inférieur à 1000. "),
     phone_number: yup
       .string()
       // .required("Phone number for records is required")
