@@ -329,18 +329,6 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
               >
                 {type === "Register" ? "Inscription" : "Se Connecter"}
               </Button>
-              <Box component={"div"} className={"my-3"}>
-                {type === "Login" && (
-                  <Typography
-                    variant={"body1"}
-                    color={"textSecondary"}
-                    className={"fw-normal my-2"}
-                  >
-                    Mot de passe oublié?{" "}
-                    <Link to="/reset-password"> Cliquer ici </Link>
-                  </Typography>
-                )}
-              </Box>
               {type === "Login" && (
               <Box component="div" display={{ xs: "none", sm: "block" }}>
                 <Link to="/register" className="text-link">
@@ -357,6 +345,19 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 </Link>
               </Box>
               )}
+              <Box component={"div"} className={"my-3"}>
+                {type === "Login" && (
+                  <Typography
+                    variant={"body1"}
+                    color={"textSecondary"}
+                    className={"fw-normal my-2"}
+                  >
+                    Mot de passe oublié?{" "}
+                    <Link to="/reset-password"> Cliquer ici </Link>
+                  </Typography>
+                )}
+              </Box>
+   
             </CardActions>
           </Card>
         </Grid>
