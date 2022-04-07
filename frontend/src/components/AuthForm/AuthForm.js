@@ -330,7 +330,7 @@ const AuthForm = ({ setForm, onFormSubmit, type, formData, isValid, captcha }) =
                 {type === "Register" ? "Inscription" : "Se Connecter"}
               </Button>
               {type === "Login" && (
-              <Box component="div" display={{ xs: "none", sm: "block" }}>
+              <Box component="div" display={{ xs: "block", sm: "block" }}>
                 <Link to="/register" className="text-link">
                 
                   <Button
