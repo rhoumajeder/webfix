@@ -310,7 +310,7 @@ const Header = () => {
                     </Box>
                   </Link>
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                   onClick={handleClose}
                   className={"d-lg-none d-md-flex"}
                 >
@@ -320,7 +320,7 @@ const Header = () => {
                   >
                     <RiShoppingCartFill className="me-2 fs-5" /> Online Shop
                   </Box>
-                </MenuItem>
+                </MenuItem> */}
                 <Divider className="my-2" />
                 <MenuItem>
                   <Link to="/logout" className="text-link">
