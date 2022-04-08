@@ -349,8 +349,8 @@ const Search = (props) => {
                     </Grid>
                     <Grid item xs={12} className="mb-5">
 
-                    <div className='row'>
-                      <div className="col-2 d-flex justify-content-start font-3 mt-3"  style={{ width: "auto"}}>
+                    <div className='row' display={{ xs: "none" }}>  
+                      <div className="col-2 d-flex justify-content-start font-3 mt-3"  display={{ xs: "none" }} style={{ width: "auto"}}>
                       Max Volume: 
                       </div>
                       <div className="col-1 d-flex justify-content-start">
@@ -368,6 +368,7 @@ const Search = (props) => {
                         component={"div"}
                         className={"px-3 pb-5 position-relative"}
                         style={{ marginLeft: "40px"}}
+                        display={{ xs: "none" }}
                       >
                         <Slider
                           step={null}

@@ -168,8 +168,8 @@ const Header = () => {
 
   return (
     <AppBar position="sticky" className={"bg-white text-dark py-2"}>
-      <Toolbar variant="dense">
-        <Button
+      <Toolbar variant="dense"> 
+        <Button  display={{ xs: "none", sm: "block" }} 
           edge="start"
           color="inherit"
           aria-label="home"
@@ -183,8 +183,8 @@ const Header = () => {
             alt="Header Logo"
             className={"w-100"}
           />
-        </Button>
-        <Box component="div" display={{ xs: "none", sm: "block" }}>
+        </Button> 
+        <Box component="div" display={{ xs: "block", sm: "block" }}> 
           <Link to="/record-creation" className="text-link">
             <Button
               className="mx-2"

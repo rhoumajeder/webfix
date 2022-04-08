@@ -851,6 +851,7 @@ const Index = (props) => {
                     component={"div"}
                     className={"px-3 pb-5 position-relative"} 
                     style={{ marginLeft: "40px"}}
+                    display={{ xs: "none" }}
                   >
                     <Slider
                       

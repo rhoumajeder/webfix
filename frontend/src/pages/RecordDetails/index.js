@@ -389,7 +389,11 @@ const Index = ({ match }) => {
                     </div>
                   </div>
                     <Box className="px-3 pb-5 mb-5"
-                      style={{ marginLeft: "40px"}}>
+                      style={{ marginLeft: "40px"}}
+                      display={{ xs: "none" }}
+                      
+                      
+                      >
 
                       <Slider
                         step={null}
