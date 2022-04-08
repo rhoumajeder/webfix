@@ -390,7 +390,7 @@ const Index = ({ match }) => {
                   </div>
                     <Box className="px-3 pb-5 mb-5"
                       style={{ marginLeft: "40px"}}
-                      display={{ xs: "none" }}
+                      display={{ xs: "none", sm: "block" }}
                       
                       
                       >
