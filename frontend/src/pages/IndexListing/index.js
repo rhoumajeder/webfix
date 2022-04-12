@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Box, Container, Paper, makeStyles, ButtonBase } from "@material-ui/core";
-
+import {isMobile} from 'react-device-detect';
 import TextTransition, { presets } from "react-text-transition";
-
+import google from '../../components/Social/google.png';
+import arrow from '../../components/Social/arrow.png';
 import Header from "../../components/Header/Header";
 import Typography from "@material-ui/core/Typography";
 
@@ -67,8 +68,11 @@ const Index = () => {
   const texts2 = ["Documents", "Accessoires","Colis"];
   const texts1 = ["d'avion", " de bateau"];
 
+   
+
+
   // Record and loading state
-  const [records, setRecords] = useState([]);
+  const [records, setRecords] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [number_of_items, set_number_of_items] = useState(12);
 
@@ -162,6 +166,7 @@ const Index = () => {
 
   const [index, setIndex] = useState(0);
   const [newText, setnewText] = useState(0);
+  
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => setIndex((index) => index + 1), 5000);
@@ -176,6 +181,35 @@ const Index = () => {
   return (
     <Box component="div">
       <Header />
+
+      {isMobile ? (  //xs sm md lg xl //maxWidth: 1224 
+      
+      
+        <Container display={{ xs: "block", sm: "block", md: "none", lg: "none", xl: "none"}} container direction="row" justify="center" alignItems="center">
+          <Grid  item xs={8} className="my-2">
+            <Typography  
+                    variant="h6" 
+                    component="span"
+                    color="textSecondary" 
+                    gutterBottom
+                    className="fw-bold m-0" 
+                  >
+                    Installer L'application mobile LelBled, pour trouver des Transporteurs et envoyer des colis urgent.
+            </Typography> 
+            <div className="col" >
+              <a href="https://play.google.com/store/apps/details?id=com.lelbled">Cliquer ici 
+                  <img src={google} id='google' className='mt-1' alt="" />
+              </a>
+              
+            </div>
+
+
+          </Grid>
+        </Container>
+      
+      ) : (
+        <h1></h1>
+      )}
 
       <Box component={Paper} className={`page-header shadow pb-5 mb-5 ${classes.pageHeader}`}>
         <Box component={"div"}>
