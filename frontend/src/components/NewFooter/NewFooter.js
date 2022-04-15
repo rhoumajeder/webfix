@@ -37,7 +37,8 @@ function NewFooter() {
                             className='whatsapp'
                             style={{ fontSize: "40px", margin: 2 }}
 
-                        />{visible && <div>+44 115 791 0834</div>}</Button> 
+                        // />{visible && <div>+44 115 791 0834</div>}</Button> 
+                        /><div>+44 115 791 0834</div></Button> 
                          
                     {/* </Link> */}
                     {/* <Link to="/aa">

@@ -37,7 +37,8 @@ function Social() {
                             className='whatsapp'
                             style={{ fontSize: "120px", margin: 2 }}
 
-                        />{visible && <div>+44 115 791 0834</div>}</Button> 
+                        // />{visible && <div>+44 115 791 0834</div>}</Button> 
+                        /><div>+44 115 791 0834</div></Button> 
                                     {/* <Link to="/aa">
                                         <Twitter
                                             className='twitter'
