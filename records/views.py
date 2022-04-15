@@ -417,15 +417,25 @@ import time
 def get_all_records(request):
 
     start = time.time()
+    current_datetime = datetime.datetime.now()  
     records = Record.objects.filter(
         approved=True,
         deleted=False,
-    ).order_by('-date')[:100]
+        date__gte=current_datetime,
+    ).order_by('date')
     # ).order_by('-id') date
+    records_before_today = Record.objects.filter(
+        approved=True,
+        deleted=False,
+        date__lt=current_datetime,
+    ).order_by('-date')
+
+    # records.union(records2)
+    #records = list(records) + list(records2)  # merge querysets
     
     end = time.time()
     durantion = end - start 
-    print("***** time for records.object = " +  str(durantion))
+    
     # records = Record.objects.filter(
     #     approved=True,
     #     deleted=False
@@ -440,7 +450,7 @@ def get_all_records(request):
     records = record_filter.qs
     end = time.time()
     durantion = end - start
-    print("***** time for record_filter = " +  str(durantion))
+    
 
 
     if max_weight != "":
@@ -457,12 +467,15 @@ def get_all_records(request):
     # see the data in json is repeat itself to be filtred by the elimanted maybe the record details  repeated fields 
     start2 = time.time()
     serializer = RecordDetailSerializer_only_travel_card_for_index(records, many=True)
+    serializer1 = RecordDetailSerializer_only_travel_card_for_index(records_before_today, many=True)
+    result = serializer.data + serializer1.data
+    
     #print(serializer.data)
     end2 = time.time()
     durantion2 = end2 - start2
     print("***** time for serializer = " + str(durantion2))
     start1 = time.time()
-    res = Response(serializer.data, status=status.HTTP_200_OK)
+    res = Response(result, status=status.HTTP_200_OK)
     end1 = time.time()
     durantion1 = end1 - start1
     print("***** time for response = " + str(durantion1))
