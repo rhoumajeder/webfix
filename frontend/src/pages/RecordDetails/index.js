@@ -42,6 +42,8 @@ import Spinner from "../../components/Spinner/Spinner";
 
 import { AuthContext } from "../../context/auth";
 
+import Select from 'react-select'
+
 
 import { FacebookShareButton } from "react-share";
 import { FacebookIcon } from "react-share";
@@ -343,8 +345,51 @@ const Index = ({ match }) => {
                   user={record.user}
                   record={record}
                   hasShadow={true}
+                  InRecordDetails={true}
                 />
               ) : null}
+              <Grid container direction="row" alignItems="center" spacing={1}>
+
+            
+               { record && record.MultiDepart &&
+               <Grid item md={6} sm={6} xs={12} className="my-2">
+                 <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Ramassage:
+                  </Typography>
+               <Select
+                 value={record.MultiDepart}
+                 isMulti= {true}
+                 name={"MultiDepart"}
+                 placeholder={"Ramassage"}
+                 isDisabled={true}
+               />
+             </Grid>
+             
+              }
+                { record && record.MultiDest &&
+               <Grid item md={6} sm={6} xs={12} className="my-2">
+                 <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Livraison:
+                  </Typography>
+               <Select
+                 value={record.MultiDest}
+                 isMulti= {true}
+                 name={"MultiDest"}
+                 placeholder={"Livraison"}
+                 isDisabled={true}
+               />
+             </Grid>
+             
+              }
+              </Grid>
 
               <Card className={"shadow py-2 my-3"}>
                 <CardContent>
@@ -522,6 +567,9 @@ const Index = ({ match }) => {
                         </div>
                       );
                     })}
+
+
+                     
 
                   <Grid container direction="row" justify="space-between">
                     {(user.id === record.user.id) && <Grid item>

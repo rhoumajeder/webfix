@@ -12,7 +12,11 @@ import {
   Fab,
   Box,
   Grid,
+  Button,
+  ButtonBase,
+  
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import moment from "moment";
 
@@ -126,7 +130,39 @@ const ChatPreview = (props) => {
               }
             />
           </ListItemIcon>
-          <ListItemText primary={props.username}></ListItemText>
+          {/* <ListItemText primary={props.username}></ListItemText> */}
+           
+             
+          { props.username && (
+            // <ListItemText primary={props.username}>
+          <Link to={`/user-profile/${props.id}`}>
+            <ButtonBase>
+              {props.username ? props.username : "Unknown"}
+            </ButtonBase>
+          </Link> 
+          
+          // </ListItemText>
+          )
+         }  
+        {" "}
+        <ListItemText primary={" "}></ListItemText>
+
+          {props.room.record.type === "Propose" ? 
+              (
+              <Button variant="contained" color="primary" style={{ marginTop: "10px" }} >
+                <Link style={{ textDecoration: "inherit",  color: "inherit", }}
+                    to={`/record-details/${props.room.record.id}`}> Zoom </Link> 
+              </Button>
+              ) :
+              (
+                <Button variant="contained" color="primary" style={{ marginTop: "10px" }} >
+                <Link style={{ textDecoration: "inherit",  color: "inherit", }}
+                    to={`/ask-record-details/${props.room.record.id}`}> Zoom </Link>  
+              </Button>
+              )
+          }
+
+
         </div>
       </ListItem>
       <Divider />

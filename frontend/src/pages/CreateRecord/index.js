@@ -23,6 +23,7 @@ import axiosInstance from "../../helpers/axios";
 
 import Header from "../../components/Header/Header";
 import SelectBoxExtended from "../../components/SelectBoxExtended/SelectBoxExtended";
+import Select from 'react-select'
 import LuggageTable from "../../components/LuggageTable/LuggageTable";
 
 import { KeyboardDatePicker } from "@material-ui/pickers";
@@ -102,11 +103,11 @@ const Index = (props) => {
       .min(0.5, "Max Poids ne peut pas etre inférieur à 0.5 Kg")
       .when("moyen_de_transport", {
         is: "Avion",
-        then: yup.number().max(15, "Max Poids Pour Avion est 15kg"),
+        then: yup.number().max(20, "Max Poids Pour Avion est 20 kg"),
       })
       .when("moyen_de_transport", {
         is: "Car",
-        then: yup.number().max(50, "Max Poids Pour Voiture est 50kg"),
+        then: yup.number().max(100, "Max Poids Pour Voiture est 100kg"),
       }),
     max_volume: yup
       .number()
@@ -140,7 +141,7 @@ const Index = (props) => {
           .number()
           .required("Please add a price for selected sub-category")
           .positive("Price for items must be positive")
-          .max(999, "Price can not be more than $999"),
+          .max(999, "Tarif doit etre inférieur à 999 euro"),
         max_quantity: yup
           .number()
           .required("Please add a quantity for selected sub-category")
@@ -168,9 +169,32 @@ const Index = (props) => {
     description: " ",
     categories: [],
     categoriesv: ["Food", "Vetements", "Small Accessories", "Autres"],
+    MultiDepart:[],
+    MultiDest:[],
     type: "Propose", 
     phone_number:  ""
   };
+//  [...record.categoriesv, event.target.name]
+  const Multicities = [  {
+    label: "Toute la Tunisie",
+    value: "Toute la Tunisie",
+  }, { 
+    label: "Toute l'Algérie",
+    value: "Toute l'Algérie",
+  },{
+    label: "Tout le Maroc",
+    value: "Tout le Maroc",
+  },{
+    label: "Toute la France",
+    value: "Toute la France",
+  },{
+    label: "Toute l'Italie",
+    value: "Toute l'Italie",
+  },{
+    label: "Toute l'allemagne",
+    value: "Toute l'allemagne",
+  },...cities]
+
 
   const [record, setRecord] = React.useState(Records);
 
@@ -200,7 +224,7 @@ const Index = (props) => {
 
   const handleSelectChange = (item, target) => {
     setRecord({ ...record, [target.name]: item.value });
-    //console.log(record);
+    console.log(record);
   };
 
   const handleRadioChange = (event) => {
@@ -433,13 +457,49 @@ const Index = (props) => {
   }
 
   const [subRecords, setSubRecords] = React.useState([]);
-  const [categories, setCategories] = React.useState(CategoryList)
+  const [categories, setCategories] = React.useState(CategoryList);
 
+  // const [MultiDepart, SetMultiDepart] = React.useState([]);
+  // const [MultiDest, SetMultiDest] = React.useState([]); // MultiDepartCheckBox
 
+  const [MultiDepartCheckBox, SetMultiDepartCheckBox] = React.useState(false);
+  const [MultiDestCheckBox, SetMultiDestCheckBox] = React.useState(false);
 
+  // const handleSelectChange = (item, target) => {
+  //   setRecord({ ...record, [target.name]: item.value });
+  //   console.log(record);
+  // };
 
 
   // # create another categories which will be send to database , check every time if the default value have touched 
+ const HandleMultiDepartSelect = (item) => {
+  setRecord({ ...record, MultiDepart: item })
+ 
+ };
+
+ const HandleMultiDestSelect = (item) => {
+  setRecord({ ...record, MultiDest: item })
+  
+ };
+
+ const HandleMultiDepartCheckBox = (event) => {
+  if (event.target.checked) {
+    SetMultiDepartCheckBox(true);
+  }
+  else{
+    SetMultiDepartCheckBox(false);
+  }
+ };
+
+ const HandleMultiDestCheckBox = (event) => {
+  if (event.target.checked) {
+    SetMultiDestCheckBox(true);
+  }
+  else{
+    SetMultiDestCheckBox(false);
+  }
+ };
+
 
   const handleAvailableCategories = (event) => {
     if (event.target.checked) {
@@ -762,9 +822,9 @@ const Index = (props) => {
                   <Typography
                     variant={"subtitle2"}
                     color={"textPrimary"}
-                    className={"fw-bold my-2"}
-                  >
-                    Max Poids (kg):
+                    className={"fw-bold my-2"} 
+                  >{ record["moyen_de_transport"] === "Avion" ? " Maximum Kg:":"Minimum Kg:"}
+                    
                   </Typography>
                   <TextField
                     id={`luggage-weight`}
@@ -787,7 +847,7 @@ const Index = (props) => {
                     color={"textPrimary"}
                     className={"fw-bold my-2"}
                   >
-                    Prix de Kg
+                    Tarif de Kg
                   </Typography>
                   <TextField
                     id={`luggage-weight`}
@@ -894,6 +954,63 @@ const Index = (props) => {
                     placeholder={"Description"}
                   />
                 </Grid>
+                  {   record.moyen_de_transport === "Car"  && <Grid item xs={"auto"} className="my-1">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        checked={MultiDepartCheckBox}
+                        name="MultiDepart"
+                        onChange={HandleMultiDepartCheckBox} 
+                      />
+                    }
+                    label="Ramassage"
+                  />
+                </Grid>
+
+                  }
+                
+                  {  record.moyen_de_transport === "Car"  && MultiDepartCheckBox &&
+                     <Grid item md={4} sm={6} xs={12} className="my-2">
+                     <Select
+                       options={Multicities}
+                       isMulti= {true}
+                       name={"MultiDepart"}
+                       placeholder={"Ramassage"}
+                       onChange={HandleMultiDepartSelect} 
+                     />
+                   </Grid>
+
+                  }
+                {   record.moyen_de_transport === "Car"  && <Grid item xs={"auto"} className="my-1">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        checked={MultiDestCheckBox}
+                        name="MultiDepart"
+                        onChange={HandleMultiDestCheckBox} 
+                      />
+                    } 
+                    label="Livraison"
+                  />
+                </Grid>
+
+                  }
+                
+                  {  record.moyen_de_transport === "Car"  && MultiDestCheckBox &&
+                     <Grid item md={4} sm={6} xs={12} className="my-2">
+                     <Select
+                       options={Multicities}
+                       isMulti= {true}
+                       name={"MultiDest"}
+                       placeholder={"Livraison"}
+                       onChange={HandleMultiDestSelect} 
+                     />
+                   </Grid>
+
+                  }
+               
               </Grid>
             </Box>
 

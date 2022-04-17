@@ -57,6 +57,9 @@ class Record(models.Model):
     ask_total_weight = models.PositiveIntegerField(default=0, null=True)
     # ask_item_info = models.JSONField(blank=True, null=True)
 
+    MultiDepart = models.JSONField(blank=True, null=True)
+    MultiDest = models.JSONField(blank=True, null=True)
+
    
     def __str__(self):
         return f"From {self.city_arrival} to {self.city_destination} at {str(self.date)}"

@@ -196,6 +196,7 @@ const Chat = (props) => {
                     selected={room.id === currentRoom}
                     // username={room.user.username}
                     username={room.user.id == userid ? room.owner.username : room.user.username}
+                    id={room.user.id == userid ? room.owner.id : room.user.id}
                     room={room}
                     handleClick={changeCurrentRoom}
                   />
@@ -205,8 +206,9 @@ const Chat = (props) => {
                 return (
                   <ChatPreview
                     selected={room.id === currentRoom}
-                    // username={room.owner.username}
+                    // username={room.owner.username} 
                     username={room.user.id == userid ? room.owner.username : room.user.username}
+                    id={room.user.id == userid ? room.owner.id : room.user.id}
                     handleClick={changeCurrentRoom}
                     room={room}
                   />

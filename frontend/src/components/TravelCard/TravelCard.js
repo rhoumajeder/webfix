@@ -6,6 +6,7 @@ import { Box, CardActionArea, Typography } from "@material-ui/core";
 import PaginationExtended from "../PaginationExtended/PaginationExtended";
 import { CgShapeCircle } from "react-icons/cg";
 import { capitalize } from '@material-ui/core';
+import Select from 'react-select'
 
 import {
   ModeOfTransportationContext,
@@ -177,7 +178,7 @@ const TravelCard = (props) => {
                     className="fw-bold m-0"
                   >
                     {" "}
-                    Prix/Kg:{" "}
+                    Tarif/Kg:{" "} 
                     {/* {console.log(record)} */}
                     {/* {record.sub_records.length > 0 &&
                       getMinPrice(record.sub_records) + "€"}{"0 €"} */}
@@ -187,12 +188,14 @@ const TravelCard = (props) => {
 
                   <Typography
                     variant="subtitle2"
-                    color="textSecondary"
+                    color="textSecondary" 
                     gutterBottom
                     className="fw-bold m-0"
                   >
                     {" "}
-                    Max Poids: {record && record.max_weight + "Kg"}{" "}
+                    {record.moyen_de_transport === "Avion" ? " Maximum ":"Minimum "}
+                    {record && record.max_weight + "Kg"}{" "}  
+                    {/* Max Poids:  */}
                   </Typography>
                 </Box>
               ) : (
@@ -269,6 +272,8 @@ const TravelCard = (props) => {
                 </Box>
               )}
 
+             
+
               {props.itemTable && (
                 <Box className="mt-3">
                   <Grid container direction="row" spacing={2}>
@@ -295,9 +300,42 @@ const TravelCard = (props) => {
               {props.hasTable}
             </Box>
           )}
+           
         </CardContent>
+      
       </ConditionalWrapper>
+     
     </Card>
+    
+    
+  );
+};
+
+export const MultiDepartDest = (props) => {
+  return (
+    <Box className="mt-1">
+      <Box className="d-flex align-items-center">   
+      { props.InRecordDetails && record && record.MultiDepart &&
+               <Grid item md={4} sm={6} xs={12} className="my-2">
+                 <Typography
+                    variant={"subtitle2"}
+                    color={"textPrimary"}
+                    className={"fw-bold my-2"}
+                  >
+                    Ramassage:
+                  </Typography>
+               <Select
+                 value={record.MultiDepart}
+                 isMulti= {true}
+                 name={"MultiDepart"}
+                 placeholder={"Ramassage"}
+                 isDisabled={true}
+               />
+             </Grid>
+              }
+           
+      </Box>
+    </Box>
   );
 };
 
@@ -422,4 +460,5 @@ const TravelCardExtendedTables = ({ luggageTables }) => {
 };
 
 export default TravelCard;
-export { TravelCardExtendedTables };
+ 
+export { TravelCardExtendedTables }; 
